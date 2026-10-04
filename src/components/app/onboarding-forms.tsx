@@ -9,10 +9,11 @@ import {
   saveStep,
 } from "@/app/app/start/actions";
 import { SKIP, type SurveyQuestion } from "@/lib/app/mocks";
-import { termLabel } from "@/lib/app/terms";
+import { seasonLabel, termLabel } from "@/lib/app/terms";
 import {
   CONCENTRATIONS,
   COURSE_LOADS,
+  SEASONS,
   type ActionResult,
   type RecordCourse,
 } from "@/lib/app/types";
@@ -55,12 +56,13 @@ const CHECK = "size-4 flex-none accent-ink";
 export function ProgramForm({
   admissionTerm,
   concentrations,
-  termOptions,
+  yearOptions,
 }: {
   admissionTerm?: string;
   concentrations?: string[];
-  termOptions: string[];
+  yearOptions: number[];
 }) {
+  const [savedYear, savedSeason] = admissionTerm?.split("-") ?? [];
   const { formAction, errors, message } = useStepAction(
     saveStep.bind(null, "program"),
   );
@@ -74,33 +76,64 @@ export function ProgramForm({
         </p>
         <p className={HINT}>MyAdvisor covers the SFU BBA only for now.</p>
       </div>
-      <div className="flex flex-col gap-1.5">
-        <label htmlFor="admissionTerm" className={LABEL}>
+      <fieldset
+        className="flex flex-col gap-1.5"
+        aria-describedby="admission-hint"
+      >
+        <legend className={cn(LABEL, "mb-1.5")}>
           When were you admitted to the BBA?
-        </label>
-        <select
-          id="admissionTerm"
-          name="admissionTerm"
-          defaultValue={admissionTerm ?? ""}
-          required
-          aria-invalid={Boolean(errors.admissionTerm)}
-          aria-describedby="admissionTerm-hint admissionTerm-error"
-          className={FIELD}
-        >
-          <option value="" disabled>
-            Pick a term
-          </option>
-          {termOptions.map((t) => (
-            <option key={t} value={t}>
-              {termLabel(t)}
-            </option>
-          ))}
-        </select>
-        <p id="admissionTerm-hint" className={HINT}>
+        </legend>
+        <div className="grid grid-cols-2 gap-2 max-[420px]:grid-cols-1">
+          <label className="flex flex-col gap-1">
+            <span className="text-[12px] text-ink-muted">Season</span>
+            <select
+              name="admissionSeason"
+              defaultValue={savedSeason ?? ""}
+              required
+              aria-invalid={Boolean(errors.admissionSeason)}
+              aria-describedby="admissionSeason-error"
+              className={FIELD}
+            >
+              <option value="" disabled>
+                Pick a season
+              </option>
+              {SEASONS.map((s) => (
+                <option key={s} value={s}>
+                  {seasonLabel(s)}
+                </option>
+              ))}
+            </select>
+          </label>
+          <label className="flex flex-col gap-1">
+            <span className="text-[12px] text-ink-muted">Year</span>
+            <select
+              name="admissionYear"
+              defaultValue={savedYear ?? ""}
+              required
+              aria-invalid={Boolean(errors.admissionYear)}
+              aria-describedby="admissionYear-error"
+              className={FIELD}
+            >
+              <option value="" disabled>
+                Pick a year
+              </option>
+              {yearOptions.map((y) => (
+                <option key={y} value={y}>
+                  {y}
+                </option>
+              ))}
+            </select>
+          </label>
+        </div>
+        <p id="admission-hint" className={HINT}>
           Some requirements depend on when you were admitted.
         </p>
-        <FieldError id="admissionTerm-error" message={errors.admissionTerm} />
-      </div>
+        <FieldError
+          id="admissionSeason-error"
+          message={errors.admissionSeason}
+        />
+        <FieldError id="admissionYear-error" message={errors.admissionYear} />
+      </fieldset>
       <fieldset
         className="flex flex-col gap-2"
         aria-describedby="concentrations-hint concentrations-error"

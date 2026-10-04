@@ -7,6 +7,7 @@ import {
   parseAnswer,
   parseStep,
 } from "@/lib/app/onboarding";
+import { admissionYearOptions } from "@/lib/app/terms";
 import type { OnboardingDraft, RecordCourse } from "@/lib/app/types";
 
 const form = (entries: [string, string][]) => {
@@ -37,12 +38,13 @@ const full: OnboardingDraft = {
 };
 
 describe("parseStep", () => {
-  test("program: term and one or two concentrations", () => {
+  test("program: admission season and year, one or two concentrations", () => {
     expect(
       parseStep(
         "program",
         form([
-          ["admissionTerm", "2024-fall"],
+          ["admissionSeason", "fall"],
+          ["admissionYear", "2023"],
           ["concentrations", "Finance"],
           ["concentrations", "Marketing"],
         ]),
@@ -50,7 +52,7 @@ describe("parseStep", () => {
     ).toEqual({
       ok: true,
       data: {
-        admissionTerm: "2024-fall",
+        admissionTerm: "2023-fall",
         concentrations: ["Finance", "Marketing"],
       },
     });
@@ -61,8 +63,25 @@ describe("parseStep", () => {
     expect(r.ok).toBe(false);
     if (r.ok) return;
     expect(r.fieldErrors).toEqual({
-      admissionTerm: "Pick a term.",
+      admissionSeason: "Pick the season you were admitted.",
+      admissionYear: "Pick the year you were admitted.",
       concentrations: "Pick at least one concentration.",
+    });
+  });
+
+  test("program: a made-up season is refused", () => {
+    const r = parseStep(
+      "program",
+      form([
+        ["admissionSeason", "winter"],
+        ["admissionYear", "2023"],
+        ["concentrations", "Finance"],
+      ]),
+    );
+    expect(r.ok).toBe(false);
+    if (r.ok) return;
+    expect(r.fieldErrors).toEqual({
+      admissionSeason: "Pick the season you were admitted.",
     });
   });
 
@@ -70,7 +89,8 @@ describe("parseStep", () => {
     const r = parseStep(
       "program",
       form([
-        ["admissionTerm", "2024-fall"],
+        ["admissionSeason", "fall"],
+        ["admissionYear", "2024"],
         ["concentrations", "Basket Weaving"],
       ]),
     );
@@ -229,5 +249,14 @@ describe("draftToProfile", () => {
       ok: false,
       error: 'Finish "Your program" first.',
     });
+  });
+});
+
+describe("admission year options", () => {
+  test("this year back twelve years, newest first (2023 included)", () => {
+    const years = admissionYearOptions(new Date(2026, 9, 4));
+    expect(years[0]).toBe(2026);
+    expect(years.at(-1)).toBe(2014);
+    expect(years).toContain(2023);
   });
 });

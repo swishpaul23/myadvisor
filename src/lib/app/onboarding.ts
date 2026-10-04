@@ -3,6 +3,7 @@ import { MOCK_SURVEY_QUESTIONS, SKIP } from "./mocks";
 import {
   coursesSchema,
   profileSchema,
+  SEASONS,
   type ActionResult,
   type OnboardingDraft,
   type StudentProfile,
@@ -101,13 +102,31 @@ export function parseStep(
   form: FormData,
 ): ActionResult<Partial<OnboardingDraft>> {
   if (slug === "program") {
+    // Two answers, season and year, make the admission term ("2023-fall").
+    const season = str(form, "admissionSeason");
+    const year = str(form, "admissionYear");
+    const seasonOk = (SEASONS as readonly string[]).includes(season);
+    const yearOk = /^\d{4}$/.test(year);
     const result = programStep.safeParse({
-      admissionTerm: str(form, "admissionTerm"),
+      admissionTerm: seasonOk && yearOk ? `${year}-${season}` : "",
       concentrations: form.getAll("concentrations").map(String),
     });
-    return result.success
-      ? { ok: true, data: result.data }
-      : fail(result.error);
+    if (result.success) return { ok: true, data: result.data };
+    const errors = fieldErrors(result.error);
+    delete errors.admissionTerm; // reported per field below
+    return {
+      ok: false,
+      error: "Some answers need fixing. See the highlighted fields.",
+      fieldErrors: {
+        ...(seasonOk
+          ? {}
+          : { admissionSeason: "Pick the season you were admitted." }),
+        ...(yearOk
+          ? {}
+          : { admissionYear: "Pick the year you were admitted." }),
+        ...errors,
+      },
+    };
   }
   if (slug === "next-term") {
     const result = nextTermStep.safeParse({

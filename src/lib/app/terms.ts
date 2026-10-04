@@ -45,10 +45,15 @@ export function termsUpTo(from: string, count: number): string[] {
   return Array.from({ length: count }, (_, i) => fromIndex(end - i));
 }
 
-/** Admission terms a student can pick: the last eight years. */
-export function admissionTermOptions(today: Date): string[] {
-  return termsUpTo(termOf(today), 24);
+/** Admission years a student can pick: this year back twelve years, newest first. */
+export function admissionYearOptions(today: Date): number[] {
+  const year = today.getFullYear();
+  return Array.from({ length: 13 }, (_, i) => year - i);
 }
+
+/** "spring" -> "Spring". */
+export const seasonLabel = (season: string) =>
+  `${season.charAt(0).toUpperCase()}${season.slice(1)}`;
 
 /** Terms a student can plan: the next six after the current one. */
 export function planTermOptions(today: Date): string[] {

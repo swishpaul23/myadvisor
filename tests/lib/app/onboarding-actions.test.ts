@@ -49,7 +49,8 @@ describe("onboarding server actions", () => {
         "program",
         null,
         form([
-          ["admissionTerm", "2024-fall"],
+          ["admissionSeason", "fall"],
+          ["admissionYear", "2024"],
           ["concentrations", "Finance"],
         ]),
       ),
@@ -77,7 +78,8 @@ describe("onboarding server actions", () => {
       "program",
       null,
       form([
-        ["admissionTerm", "2024-fall"],
+        ["admissionSeason", "fall"],
+        ["admissionYear", "2024"],
         ["concentrations", "Finance"],
       ]),
     );

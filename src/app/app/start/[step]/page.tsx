@@ -19,7 +19,7 @@ import {
 } from "@/lib/app/onboarding";
 import { readState } from "@/lib/app/store";
 import {
-  admissionTermOptions,
+  admissionYearOptions,
   planTermOptions,
   recordTermOptions,
   termLabel,
@@ -65,7 +65,7 @@ export default async function StepPage({
         <ProgramForm
           admissionTerm={draft?.admissionTerm}
           concentrations={draft?.concentrations}
-          termOptions={admissionTermOptions(today)}
+          yearOptions={admissionYearOptions(today)}
         />
       )}
       {step === "next-term" && (
