@@ -1,5 +1,7 @@
 # myAdvisor
 
+Also read [README.md](README.md) (setup, and the team's product plan), [docs/user-flow.md](docs/user-flow.md) (proposed student journey) and [AGENTS.md](AGENTS.md) (shared agent rules, loaded below).
+
 ## 1. The architecture rule
 
 **Code computes every fact. The LLM only explains.** The rules engine (audit, prerequisite checks, plan validator, plan generator) is plain, deterministic TypeScript with unit tests. The chat model calls the engine through tools and explains the results with citations. It never states a requirement, prerequisite, or grade rule on its own. If the engine can't decide, the answer is "unknown, check with an advisor", never a guess.
