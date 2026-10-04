@@ -111,7 +111,13 @@ Grade order is A+ > A > … > D. A `P` satisfies the pass/fail courses BUS 203, 
 | `earned_units >= N` | the student's total earned units ≥ N (gate). Only used by an out-of-scope row today |
 | `level upper\|lower\|NNN`, `not allocated to designated breadth` | handled by level_min/max and section 4 |
 
-`designation` requires credit to be earned: the course must have a grade of C- or better (policy `wqbMinGrade`) to count for W/Q/B. `univ-wqb-grade` is reported as a `minimum grade` row over WQB-designated courses, with `have` = WQB courses below C-.
+`designation` requires credit to be earned: the course must have a grade of C- or better (policy `wqbMinGrade`) to count for W/Q/B.
+
+**Minimum grade rows (settled in Phase 1).**
+- **`group` rows** (`beedie-core-grade`): completed courses named by the selected groups' rows whose grade is below the minimum count as violations. The row is met when there are none.
+- **Designation rows** (`univ-wqb-grade`): informational. Courses below C- are listed in the notes as earning no W/Q/B credit, and the row stays met. A D in a W course doesn't fail the degree; the course just doesn't count for W.
+
+**GPA (settled in Phase 1).** GPAs count SFU attempts only. Transfer credit carries no SFU grade points.
 
 ## 4. Slot vs overlay, and matching
 
@@ -163,6 +169,8 @@ The file already has the grade points (A+ 4.33 … D 1.00, F/FD/N 0.00), that P 
 ## 6. Unknown, never a guess
 
 Each unknown carries a reason string. A row is `unknown` only if it isn't met without the indeterminate courses but could be met with them.
+
+That "could" is decided **per row, or per breadth bucket**. Only that row's slots may use the indeterminate courses; every other row uses definite courses only. Otherwise a row could be crowded out by another row's "what if".
 
 - **Course with no data** (not in courses.json, no `units`) → "no course data for X: units unknown". If units are given but the row needs designations: "designation of X unknown".
 - **Topics courses BUS 490–495** in concentration elective lists → "topics course: topic not recorded". The student input has no topic field.
