@@ -70,7 +70,7 @@ flowchart LR
 
 ## Live demo
 
-Deployed on Vercel: **<[your-vercel-url](https://myadvisor-rosy.vercel.app/)>**
+Deployed on Vercel: **[myadvisor-rosy.vercel.app](https://myadvisor-rosy.vercel.app/)**
 
 Open the site and choose **Try the sample student** to explore without uploading anything.
 
