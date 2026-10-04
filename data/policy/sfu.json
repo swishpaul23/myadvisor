@@ -93,6 +93,7 @@
     "source_url": "https://www.sfu.ca/students/calendar/2026/fall/programs/business/major/bachelor-of-business-administration.html",
     "status": "beta"
   },
+  "entryGpaExempt": ["BUS 300", "BUS 496"],
   "admission_gated_courses": {
     "courses": ["BUS 203", "BUS 300", "BUS 496"],
     "from_term": "2022-fall",

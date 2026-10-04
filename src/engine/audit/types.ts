@@ -37,6 +37,8 @@ export type Policy = {
   bus_gpa_subjects: { subjects: string[] };
   pass_fail_courses: { courses: string[] };
   admission_gated_courses: { courses: string[]; from_term: string };
+  /** BUS 300-499 courses the validator's entry GPA check skips (Stuart, 2026-10-04). */
+  entryGpaExempt: string[];
   restriction_programs: {
     entries: { text: string; program: string; admitted_from: string | null }[];
   };

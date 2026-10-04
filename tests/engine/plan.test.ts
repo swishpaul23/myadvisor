@@ -245,8 +245,8 @@ describe("entry GPA (BUS 300-499 needs the 2.30 SFU BUS GPA)", () => {
   test("unknown when the GPA can't be computed", () => {
     const none = student([took("BUS 203", "P", { term: "2025-fall" })]);
     expect(
-      only(none, plan(["2026-spring", ["BUS 300"]]), "ENTRY_GPA"),
-    ).toMatchObject([{ severity: "unknown", courseCode: "BUS 300" }]);
+      only(none, plan(["2026-spring", ["BUS 312"]]), "ENTRY_GPA"),
+    ).toMatchObject([{ severity: "unknown", courseCode: "BUS 312" }]);
   });
 });
 
@@ -280,5 +280,36 @@ describe("golden plan for the demo student (hand-computed expectation)", () => {
     expect(result.auditAfterPlan.summary.byStatus).toEqual(
       expectedGraduation.auditByStatus,
     );
+  });
+});
+
+describe("entry GPA exemption (policy entryGpaExempt: BUS 300, BUS 496)", () => {
+  test("a 2.10 BUS GPA: error for BUS 312, none for BUS 300 or BUS 496", () => {
+    // 7 x C (2.00) + 3 x C+ (2.33), all 3 units: 20.99 / 10 = 2.099 -> 2.10
+    const grades = ["C", "C", "C", "C", "C", "C", "C", "C+", "C+", "C+"];
+    const courses = [
+      "BUS 201",
+      "BUS 207",
+      "BUS 217W",
+      "BUS 232",
+      "BUS 237",
+      "BUS 240",
+      "BUS 251",
+      "BUS 254",
+      "BUS 272",
+      "BUS 275",
+    ];
+    const s = student(
+      courses.map((c, i) => took(c, grades[i]!, { term: "2025-fall" })),
+    );
+    const v = only(
+      s,
+      plan(["2026-spring", ["BUS 312", "BUS 300", "BUS 496"]]),
+      "ENTRY_GPA",
+    );
+    expect(v.map((x) => [x.severity, x.courseCode])).toEqual([
+      ["error", "BUS 312"],
+    ]);
+    expect(v[0]!.message).toMatch(/yours is 2\.1/);
   });
 });

@@ -92,21 +92,21 @@ type Violation = {
 };
 ```
 
-| Code                               | Severity        | When                                                                                                       |
-| ---------------------------------- | --------------- | ---------------------------------------------------------------------------------------------------------- |
-| `PREREQ_UNMET`                     | error           | the prereq tree is `unmet` without needsPermission                                                         |
-| `PREREQ_NEEDS_PERMISSION`          | warning         | the tree is `unmet` but needsPermission (e.g. "45 units or permission of the instructor")                  |
-| `PREREQ_UNKNOWN`                   | unknown         | the tree is `unknown`; message lists the reasons                                                           |
-| `COREQ_UNMET` / `COREQ_UNKNOWN`    | error / unknown | the coreq tree, with same-term courses counted                                                             |
-| `NOT_OFFERED_FUTURE_ONLY`          | warning         | see the offering rule                                                                                      |
-| `NOT_OFFERED_RECENTLY`             | warning         | "not offered in recent history, check the schedule"                                                        |
-| `NO_COURSE_DATA`                   | unknown         | the code isn't in courses.json, so prereqs, offerings and units are unknown                                |
-| `DUPLICATE_IN_PLAN`                | warning         | the same code is in two plan terms, or twice in one term                                                   |
-| `ALREADY_TAKEN`                    | warning         | the code is completed or in progress, unless a repeat is allowed                                           |
-| `UNIT_LOAD_HIGH` / `UNIT_LOAD_LOW` | warning         | a study term's units are above the max or below the min (policy)                                           |
-| `COURSES_IN_COOP_TERM`             | error           | a `coop` term lists any course                                                                             |
-| `ENTRY_GPA`                        | error / unknown | a 300- or 400-level BUS course while the SFU BUS GPA is below 2.30 (error), or can't be computed (unknown) |
-| `PLAN_TERM_ORDER`                  | error           | plan terms are out of order, duplicated, or not after the student's last term                              |
+| Code                               | Severity        | When                                                                                                                                 |
+| ---------------------------------- | --------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| `PREREQ_UNMET`                     | error           | the prereq tree is `unmet` without needsPermission                                                                                   |
+| `PREREQ_NEEDS_PERMISSION`          | warning         | the tree is `unmet` but needsPermission (e.g. "45 units or permission of the instructor")                                            |
+| `PREREQ_UNKNOWN`                   | unknown         | the tree is `unknown`; message lists the reasons                                                                                     |
+| `COREQ_UNMET` / `COREQ_UNKNOWN`    | error / unknown | the coreq tree, with same-term courses counted                                                                                       |
+| `NOT_OFFERED_FUTURE_ONLY`          | warning         | see the offering rule                                                                                                                |
+| `NOT_OFFERED_RECENTLY`             | warning         | "not offered in recent history, check the schedule"                                                                                  |
+| `NO_COURSE_DATA`                   | unknown         | the code isn't in courses.json, so prereqs, offerings and units are unknown                                                          |
+| `DUPLICATE_IN_PLAN`                | warning         | the same code is in two plan terms, or twice in one term                                                                             |
+| `ALREADY_TAKEN`                    | warning         | the code is completed or in progress, unless a repeat is allowed                                                                     |
+| `UNIT_LOAD_HIGH` / `UNIT_LOAD_LOW` | warning         | a study term's units are above the max or below the min (policy)                                                                     |
+| `COURSES_IN_COOP_TERM`             | error           | a `coop` term lists any course                                                                                                       |
+| `ENTRY_GPA`                        | error / unknown | a 300- or 400-level BUS course (not in `entryGpaExempt`) while the SFU BUS GPA is below 2.30 (error), or can't be computed (unknown) |
+| `PLAN_TERM_ORDER`                  | error           | plan terms are out of order, duplicated, or not after the student's last term                                                        |
 
 **Offering rule (study terms).** For a planned term `Y-season`, look at confirmed offerings in the same season in the two previous years (`Y-1`, `Y-2`), and in `Y` itself if it's confirmed. **ASSUMPTION:** "term kind" in the brief means the season (spring, summer or fall).
 
@@ -126,7 +126,7 @@ type Violation = {
 
 - The rule comes from `beedie-bus-gpa-entry` (2.30, `purpose entry_to_300_400_BUS`), using the audit's GPA for that row.
 - The GPA comes from completed grades only. Planned courses have no grades, so the GPA is the same for every plan term.
-- It applies to BUS courses numbered 300–499. **ASSUMPTION:** BUS 300 itself is included (OPEN-4).
+- It applies to BUS courses numbered 300–499, except the courses in policy `entryGpaExempt` (`BUS 300`, `BUS 496`; decided by Stuart 2026-10-04). Those get no `ENTRY_GPA` violation.
 - If the audit row is `unknown` (no graded BUS courses), the result is `ENTRY_GPA` with severity unknown.
 
 `sourceUrl`:
@@ -156,7 +156,7 @@ type PlanValidation = {
   - t is the graduation term if every applicable row is `met` or `in_progress` (here, "met if the plan is completed").
   - `unknown` rows block graduation. The first such t wins; if none, `null`.
   - **ASSUMPTION:** plan violations don't change this computation. The validator reports them separately, and an `error` violation makes the graduation term "not trustworthy" (flag `graduationAssumesValidPlan: true` in the output).
-- **Graduation term excluding unknown (added in Phase 1):** `graduationTermExcludingUnknown` is the first term where no row is `unmet`; `unknown` rows don't block it. Without it, `gpa-program` / `gpa-program-ud` (always `unknown`) would make every plan's graduation term null.
+- **Graduation term excluding unknown (added in Phase 1):** `graduationTermExcludingUnknown` is the first term where no row is `unmet`; `unknown` rows don't block it. (It was added when `gpa-program` / `gpa-program-ud` were always `unknown`; they are computed since 2026-10-04.)
 - **Blockers:** after the last term, every row with status `unmet` or `unknown`, from `auditAfterPlan`.
 - **Violation order:** term order, then course code. Term-level violations (no course, e.g. unit load) come last within their term.
 
@@ -165,7 +165,7 @@ type PlanValidation = {
 1. "Same term kind" means season (spring/summer/fall) here. Did you mean study vs co-op?
 2. Unit load min/max (9/18) are guesses. Need the SFU calendar values; also, does summer differ?
 3. Repeat policy: when may a completed course be retaken without a warning?
-4. Does the 2.30 entry GPA apply to BUS 300 itself, and to non-BBA courses cross-listed in BUS?
+4. ~~Does the 2.30 entry GPA apply to BUS 300 itself?~~ Decided: BUS 300 and BUS 496 are exempt (`entryGpaExempt`). Still open: non-BBA courses cross-listed in BUS?
 5. Restriction nodes such as "only open to approved business administration majors" appear on BUS 201, 300, 496 and more, and BUS 360W's whole prerequisite is `unknown`.
    - So every BBA plan will show `PREREQ_UNKNOWN` for these courses.
    - Should a student profile flag ("BBA major admitted 2024-fall") resolve the BBA-only restrictions? Or should prereq-overrides.csv rows be added for the core courses?

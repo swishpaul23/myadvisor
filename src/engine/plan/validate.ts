@@ -257,9 +257,15 @@ export function validatePlan(
         });
       }
 
-      // Entry GPA for BUS 300-499
+      // Entry GPA for BUS 300-499, except policy entryGpaExempt
       const { dept, number } = parseCode(code);
-      if (dept === "BUS" && number >= 300 && number <= 499 && entryRow) {
+      if (
+        dept === "BUS" &&
+        number >= 300 &&
+        number <= 499 &&
+        !catalog.policy.entryGpaExempt.includes(code) &&
+        entryRow
+      ) {
         const gpa = entryRow.progress.have;
         if (gpa === null || entryRow.status === "unknown") {
           add({

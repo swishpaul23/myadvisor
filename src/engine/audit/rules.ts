@@ -337,27 +337,25 @@ export function evaluateOverlay(
   });
 }
 
-/** `minimum GPA` over graded attempts passing the row's filters (grade check skipped). */
+/**
+ * `minimum GPA` over graded attempts passing the row's filters (grade check skipped).
+ * `programCourses`: codes matched to Lower core, Upper core and declared-concentration slot
+ * rows (BUS only), used by rows with the `program courses` filter. ASSUMPTION (Stuart,
+ * 2026-10-04): not yet confirmed against the calendar.
+ */
 export function evaluateGpa(
   row: RequirementRow,
   attempts: GpaAttempt[],
   ctx: EligibilityContext,
+  programCourses: ReadonlySet<string> = new Set(),
 ): RowEval & { gpa: number | null } {
   const need = row.n_or_units ?? 0;
-  if (row.filter.includes("program courses")) {
-    return {
-      ...evalOf({
-        have: null,
-        need,
-        unit: "gpa",
-        unknownReason: "program courses are not defined in the data (OPEN-5)",
-      }),
-      gpa: null,
-    };
-  }
+  const programOnly = row.filter.includes("program courses");
   const counted: GpaAttempt[] = [];
   for (const a of attempts) {
     if (a.institution !== "SFU") continue; // SFU GPA; transfer credit carries no SFU grade points
+    if (programOnly && (a.dept !== "BUS" || !programCourses.has(a.code)))
+      continue;
     const fact: CourseFact = {
       code: a.code,
       dept: a.dept,

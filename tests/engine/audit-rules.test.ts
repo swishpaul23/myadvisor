@@ -278,7 +278,7 @@ describe("GPA", () => {
   test("units unknown for a graded course -> unknown", () => {
     expect(gpa([took("ZZZ 101", "A")]).status).toBe("unknown");
   });
-  test("program courses -> unknown with the reason", () => {
+  test("program courses with no slot rows -> no program courses -> unknown", () => {
     const c = catalog(
       [
         row({
@@ -292,7 +292,7 @@ describe("GPA", () => {
     );
     const { results, unknowns } = audit(student([took("BUS 201", "A")]), c);
     expect(result(results, "p").status).toBe("unknown");
-    expect(unknowns[0]!.reason).toMatch(/program courses are not defined/);
+    expect(unknowns[0]!.reason).toMatch(/no graded courses yet/);
   });
 });
 
@@ -480,5 +480,64 @@ describe("unknown in slot pools is decided per row", () => {
     ).results;
     expect(result(r, "first").status).toBe("unknown");
     expect(result(r, "second").status).toBe("unknown");
+  });
+});
+
+describe("program GPA (Stuart's rule: BUS courses matched to core and declared-concentration slot rows)", () => {
+  const real = realCatalog();
+  const gpaOf = (
+    courses: ReturnType<typeof took>[],
+    concentrations = ["Finance"],
+  ) => {
+    const r = audit(
+      student(courses, { declaredConcentrations: concentrations }),
+      real,
+    ).results;
+    return { all: result(r, "gpa-program"), ud: result(r, "gpa-program-ud") };
+  };
+
+  test("no concentration courses yet: core BUS courses only", () => {
+    const g = gpaOf([took("BUS 201", "A"), took("BUS 237", "C")]);
+    expect(g.all).toMatchObject({ status: "met", progress: { have: 3 } }); // (4.00 + 2.00) / 2
+    expect(g.ud.status).toBe("unknown"); // no upper-division program course yet
+  });
+
+  test("a repeat uses the higher grade", () => {
+    expect(
+      gpaOf([took("BUS 201", "D"), took("BUS 201", "B")]).all.progress.have,
+    ).toBe(3);
+  });
+
+  test("P grades carry no points; only P courses -> unknown", () => {
+    expect(
+      gpaOf([took("BUS 203", "P"), took("BUS 201", "B")]).all.progress.have,
+    ).toBe(3);
+    expect(gpaOf([took("BUS 203", "P")]).all).toMatchObject({
+      status: "unknown",
+      progress: { have: null },
+    });
+  });
+
+  test("a course filling a core row and a concentration row counts once", () => {
+    // BUS 418 fills upper-global and finance-electives. Once: (4.00x3 + 2.00x3) / 6 = 3.00;
+    // twice would give 3.33.
+    const g = gpaOf([took("BUS 418", "A"), took("BUS 201", "C")]);
+    expect(g.all.progress.have).toBe(3);
+    expect(g.ud.progress.have).toBe(4); // BUS 418 only
+  });
+
+  test("non-BUS core courses and undeclared concentrations are excluded", () => {
+    // ECON 103 fills lower-microeconomics but is not BUS; BUS 313 belongs to Finance, not declared.
+    const g = gpaOf(
+      [took("ECON 103", "A"), took("BUS 313", "A"), took("BUS 201", "C")],
+      [],
+    );
+    expect(g.all.progress.have).toBe(2);
+  });
+
+  test("the rows say the rule is an unconfirmed assumption", () => {
+    expect(gpaOf([took("BUS 201", "B")]).all.notes.join(" ")).toMatch(
+      /ASSUMPTION: program courses/,
+    );
   });
 });

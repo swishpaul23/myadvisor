@@ -120,6 +120,21 @@ function evaluateTier(
   const breadthRows = applicable.filter((r) => breadthBucket(r) !== null);
   for (const [id, e] of solveBreadth(breadthRows, list, ctx)) evals.set(id, e);
 
+  // Program courses (ASSUMPTION, Stuart 2026-10-04): BUS courses matched to Lower core, Upper
+  // core and declared-concentration slot rows; a course used by two rows is one entry.
+  const programCourses = new Set<string>();
+  for (const row of slotRows) {
+    const inProgram =
+      row.group === "Lower core" ||
+      row.group === "Upper core" ||
+      (row.group === "Concentration" &&
+        row.concentration !== null &&
+        student.declaredConcentrations.includes(row.concentration));
+    if (!inProgram) continue;
+    for (const code of evals.get(row.req_id)!.used)
+      if (code.startsWith("BUS ")) programCourses.add(code);
+  }
+
   const attempts = gpaAttempts(student, catalog);
   for (const row of applicable) {
     if (evals.has(row.req_id)) continue;
@@ -129,7 +144,7 @@ function evaluateTier(
         evals.set(row.req_id, evaluateOverlay(row, list, ctx));
         break;
       case "minimum GPA":
-        evals.set(row.req_id, evaluateGpa(row, attempts, ctx));
+        evals.set(row.req_id, evaluateGpa(row, attempts, ctx, programCourses));
         break;
       case "minimum grade":
         evals.set(row.req_id, evaluateMinimumGrade(row, list, applicable, ctx));
@@ -193,6 +208,11 @@ function rowNotes(
   }
   const purpose = row.filter.find((t) => t.startsWith("purpose "));
   if (purpose) notes.push(`GPA ${purpose}.`);
+  if (row.filter.includes("program courses")) {
+    notes.push(
+      "ASSUMPTION: program courses = BUS courses used by Lower core, Upper core and declared-concentration rows (rule decided by Stuart, not yet confirmed against the calendar).",
+    );
+  }
   for (const code of used) {
     if (facts.get(code)?.grade === catalog.policy.transfer_credit.grade) {
       notes.push(

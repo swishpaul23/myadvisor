@@ -83,15 +83,11 @@ function filterTerm(
     return m[1]!.split("|").includes(fact.code) ? NO : YES;
   if ((m = /^earned_units >= (\S+)$/.exec(term)))
     return ctx.earnedUnits >= Number(m[1]) ? YES : NO;
-  if (term === "program courses")
-    return {
-      kind: "maybe",
-      reason: "program courses are not defined in the data",
-    };
-  // Handled elsewhere (rule evaluators, matching) or always true for this student.
+  // Handled elsewhere (program courses: evaluateGpa restricts to the matched program set) (rule evaluators, matching) or always true for this student.
   if (
     /^(purpose |group |from_reqs |within |level )/.test(term) ||
     term === "all courses" ||
+    term === "program courses" ||
     term === "degree first_bachelors" ||
     term === "not allocated to designated breadth"
   ) {

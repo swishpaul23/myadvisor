@@ -7,14 +7,14 @@ Docs: https://www.sfu.ca/outlines/help/api.html. robots.txt does not disallow `/
 
 Base: `https://www.sfu.ca/bin/wcm/course-outlines`. The path goes in the query string, with no key.
 
-| Level | URL | Sample file |
-|---|---|---|
-| Years | base, no query | `years.json` |
-| Terms | `?2026` | `terms-2026.json` |
-| Departments | `?2026/fall` | `depts-2026-fall.json` |
-| Courses | `?2026/fall/bus` | `courses-2026-fall-bus.json` |
-| Sections | `?2026/fall/bus/312` | `sections-2026-fall-bus-312.json` |
-| Outline | `?2026/fall/bus/312/d100` | `outline-2026-fall-bus-312-d100.json` |
+| Level       | URL                       | Sample file                           |
+| ----------- | ------------------------- | ------------------------------------- |
+| Years       | base, no query            | `years.json`                          |
+| Terms       | `?2026`                   | `terms-2026.json`                     |
+| Departments | `?2026/fall`              | `depts-2026-fall.json`                |
+| Courses     | `?2026/fall/bus`          | `courses-2026-fall-bus.json`          |
+| Sections    | `?2026/fall/bus/312`      | `sections-2026-fall-bus-312.json`     |
+| Outline     | `?2026/fall/bus/312/d100` | `outline-2026-fall-bus-312-d100.json` |
 
 - All responses are `application/json;charset=utf-8`; list levels return a JSON array.
 - `?current` works as a year (returns the current year's terms).
@@ -33,18 +33,18 @@ Base: `https://www.sfu.ca/bin/wcm/course-outlines`. The path goes in the query s
 
 ## Where the data we need lives (`info` in the outline)
 
-| Need | Field | Example |
-|---|---|---|
-| Title | `info.title` | `"Introduction to Finance"` |
-| Description | `info.description` | plain text |
-| Units | `info.units` | `"3"` (a string; BUS 360W is `"4"`) |
-| Prerequisites | `info.prerequisites` | free text, e.g. `"BUS 254 and (BUS 232 or ECON 233 or STAT 270 or STAT 271), both with a minimum grade of C- and 45 units; ..."` |
-| Corequisites | `info.corequisites` | free text, often `""` |
-| WQB designation | `info.designation` | `"Quantitative"`, `"Writing"`, `"Writing/Breadth-Humanities"`; `/`-separated |
-| Course identity | `info.dept`, `info.number` | `"BUS"`, `"312"` |
-| Level | `info.degreeLevel` | `"UGRD"` |
-| Term | `info.term` | `"Fall 2026"` |
-| Special topic | `info.specialTopic` | `""` unless a topics course |
+| Need            | Field                      | Example                                                                                                                          |
+| --------------- | -------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| Title           | `info.title`               | `"Introduction to Finance"`                                                                                                      |
+| Description     | `info.description`         | plain text                                                                                                                       |
+| Units           | `info.units`               | `"3"` (a string; BUS 360W is `"4"`)                                                                                              |
+| Prerequisites   | `info.prerequisites`       | free text, e.g. `"BUS 254 and (BUS 232 or ECON 233 or STAT 270 or STAT 271), both with a minimum grade of C- and 45 units; ..."` |
+| Corequisites    | `info.corequisites`        | free text, often `""`                                                                                                            |
+| WQB designation | `info.designation`         | `"Quantitative"`, `"Writing"`, `"Writing/Breadth-Humanities"`; `/`-separated                                                     |
+| Course identity | `info.dept`, `info.number` | `"BUS"`, `"312"`                                                                                                                 |
+| Level           | `info.degreeLevel`         | `"UGRD"`                                                                                                                         |
+| Term            | `info.term`                | `"Fall 2026"`                                                                                                                    |
+| Special topic   | `info.specialTopic`        | `""` unless a topics course                                                                                                      |
 
 Other fields: `section`, `classNumber`, `outlinePath`, `name` (`"BUS 312 D100"`), `deliveryMethod`, `notes`, `departmentalUgradNotes`, `registrarNotes` (HTML), `requiredReadingNotes`.
 

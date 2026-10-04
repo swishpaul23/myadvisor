@@ -6,23 +6,23 @@ Code computes every fact; the LLM only explains (CLAUDE.md §1). The audit engin
 
 ```ts
 type Student = {
-  admissionTerm: string;                  // "2024-fall"
-  declaredConcentrations: string[];       // one of the 9 names in schema.ts CONCENTRATIONS
+  admissionTerm: string; // "2024-fall"
+  declaredConcentrations: string[]; // one of the 9 names in schema.ts CONCENTRATIONS
   courses: StudentCourse[];
 };
 type StudentCourse = {
-  code: string;                           // "BUS 217W"
-  grade: string | null;                   // A+..D, F, FD, N, P, W, CR; null while in progress/planned
-  units?: number;                         // student-supplied; used only when courses.json has no units
-  term: string;                           // "2025-fall"
+  code: string; // "BUS 217W"
+  grade: string | null; // A+..D, F, FD, N, P, W, CR; null while in progress/planned
+  units?: number; // student-supplied; used only when courses.json has no units
+  term: string; // "2025-fall"
   institution: "SFU" | "transfer";
   status: "completed" | "in_progress" | "planned";
 };
 type Catalog = {
-  requirements: RequirementRow[];         // data/generated/requirements.json
-  courses: Course[];                      // data/generated/courses.json
-  unknownCourses: UnknownCourse[];        // data/generated/unknown-courses.json
-  policy: Policy;                         // data/policy/sfu.json (section 5)
+  requirements: RequirementRow[]; // data/generated/requirements.json
+  courses: Course[]; // data/generated/courses.json
+  unknownCourses: UnknownCourse[]; // data/generated/unknown-courses.json
+  policy: Policy; // data/policy/sfu.json (section 5)
 };
 type AuditOptions = { includePlanned?: boolean }; // default false
 ```
@@ -40,17 +40,26 @@ type AuditOptions = { includePlanned?: boolean }; // default false
 type ReqResult = {
   reqId: string;
   status: "met" | "unmet" | "in_progress" | "unknown" | "not_applicable";
-  progress: { have: number; need: number; unit: "courses" | "units" | "gpa" | "concentrations" | "violations" };
-  usedCourses: string[];   // codes that count toward this row
-  missing: string[];       // eligible codes not yet taken (slot rows) or a short description
-  notes: string[];         // shared courses, unchecked constraints, assumptions that applied
+  progress: {
+    have: number;
+    need: number;
+    unit: "courses" | "units" | "gpa" | "concentrations" | "violations";
+  };
+  usedCourses: string[]; // codes that count toward this row
+  missing: string[]; // eligible codes not yet taken (slot rows) or a short description
+  notes: string[]; // shared courses, unchecked constraints, assumptions that applied
   sourceUrl: string;
   dataStatus: "beta" | "verified" | "out-of-scope";
 };
 type AuditResult = {
-  results: ReqResult[];    // one per requirements.json row, in sheet order
-  summary: { byStatus: Record<Status, number>; earnedUnits: number; inProgressUnits: number;
-             gpas: Record<string, number | null>; declaredConcentrations: string[] };
+  results: ReqResult[]; // one per requirements.json row, in sheet order
+  summary: {
+    byStatus: Record<Status, number>;
+    earnedUnits: number;
+    inProgressUnits: number;
+    gpas: Record<string, number | null>;
+    declaredConcentrations: string[];
+  };
   unknowns: { reqId: string; reason: string }[];
 };
 ```
@@ -80,40 +89,41 @@ Grade order is A+ > A > … > D. A `P` satisfies the pass/fail courses BUS 203, 
 
 **Admission term (decided):** rows for BUS 203/300/496 (policy `admission_gated_courses`) apply to students admitted 2022-fall or later. Earlier admissions get `unknown` with the reason "different requirement set for this admission term".
 
-| Rule | Meaning | Kind |
-|---|---|---|
-| `one course` | 1 eligible course | slot |
-| `n courses` with a `courses` list | n distinct eligible courses | slot |
-| `n courses` without a list (filters only) | n distinct eligible courses, counted not consumed | overlay |
-| `all of` | every course in `courses` | slot |
-| `units from` | sum of units of eligible courses ≥ n | overlay |
-| `minimum GPA` | GPA over eligible graded attempts ≥ n (section 5) | overlay |
-| `minimum grade` | every course *used* by the rows the filter selects meets `min_grade`; `have` = violations | overlay |
-| `completed concentrations` | number of declared concentrations whose rows are all met ≥ n | derived |
-| `maximum breadth allocations per course` | each course sits in at most n breadth buckets (enforced by section 4) | constraint |
+| Rule                                      | Meaning                                                                                   | Kind       |
+| ----------------------------------------- | ----------------------------------------------------------------------------------------- | ---------- |
+| `one course`                              | 1 eligible course                                                                         | slot       |
+| `n courses` with a `courses` list         | n distinct eligible courses                                                               | slot       |
+| `n courses` without a list (filters only) | n distinct eligible courses, counted not consumed                                         | overlay    |
+| `all of`                                  | every course in `courses`                                                                 | slot       |
+| `units from`                              | sum of units of eligible courses ≥ n                                                      | overlay    |
+| `minimum GPA`                             | GPA over eligible graded attempts ≥ n (section 5)                                         | overlay    |
+| `minimum grade`                           | every course _used_ by the rows the filter selects meets `min_grade`; `have` = violations | overlay    |
+| `completed concentrations`                | number of declared concentrations whose rows are all met ≥ n                              | derived    |
+| `maximum breadth allocations per course`  | each course sits in at most n breadth buckets (enforced by section 4)                     | constraint |
 
-| Filter term | Meaning |
-|---|---|
-| `dept X` / `dept X,Y` / `dept not in X,Y` | department of the code in / not in the list |
-| `institution SFU` | attempt's institution is SFU |
-| `course_units >= N` | the course's units ≥ N |
-| `if institution SFU then course_units >= N` | transfer attempts pass; SFU attempts need units ≥ N |
-| `exclude A\|B` | code not in the list |
-| `subject outside major` / `subject in major` | department not in / in `policy.majorSubjects` |
-| `subject business` | **ASSUMPTION:** department is BUS (OPEN-6: BUEC?) |
-| `outside Beedie` | **ASSUMPTION:** department is not BUS and not BUEC (OPEN-7) |
-| `purpose graduation` / `purpose entry_to_300_400_BUS` | computed the same way; the purpose is copied to notes (the plan validator uses entry) |
-| `group X\|Y` | for `minimum grade`: the courses used by rows in those groups |
-| `from_reqs A\|B` | eligible codes = union of rows A and B's `courses` |
-| `program courses` | **unknown**: the data doesn't define which courses are "program courses" (OPEN-5) |
-| `all courses` | every graded attempt (cumulative GPA) |
-| `degree first_bachelors` | true (section 1 assumption) |
-| `earned_units >= N` | the student's total earned units ≥ N (gate). Only used by an out-of-scope row today |
-| `level upper\|lower\|NNN`, `not allocated to designated breadth` | handled by level_min/max and section 4 |
+| Filter term                                                      | Meaning                                                                                                                                                                                     |
+| ---------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `dept X` / `dept X,Y` / `dept not in X,Y`                        | department of the code in / not in the list                                                                                                                                                 |
+| `institution SFU`                                                | attempt's institution is SFU                                                                                                                                                                |
+| `course_units >= N`                                              | the course's units ≥ N                                                                                                                                                                      |
+| `if institution SFU then course_units >= N`                      | transfer attempts pass; SFU attempts need units ≥ N                                                                                                                                         |
+| `exclude A\|B`                                                   | code not in the list                                                                                                                                                                        |
+| `subject outside major` / `subject in major`                     | department not in / in `policy.majorSubjects`                                                                                                                                               |
+| `subject business`                                               | **ASSUMPTION:** department is BUS (OPEN-6: BUEC?)                                                                                                                                           |
+| `outside Beedie`                                                 | **ASSUMPTION:** department is not BUS and not BUEC (OPEN-7)                                                                                                                                 |
+| `purpose graduation` / `purpose entry_to_300_400_BUS`            | computed the same way; the purpose is copied to notes (the plan validator uses entry)                                                                                                       |
+| `group X\|Y`                                                     | for `minimum grade`: the courses used by rows in those groups                                                                                                                               |
+| `from_reqs A\|B`                                                 | eligible codes = union of rows A and B's `courses`                                                                                                                                          |
+| `program courses`                                                | the BUS courses matched to Lower core, Upper core and declared-concentration slot rows (section 5). **ASSUMPTION:** rule decided by Stuart, not yet confirmed against the calendar (OPEN-5) |
+| `all courses`                                                    | every graded attempt (cumulative GPA)                                                                                                                                                       |
+| `degree first_bachelors`                                         | true (section 1 assumption)                                                                                                                                                                 |
+| `earned_units >= N`                                              | the student's total earned units ≥ N (gate). Only used by an out-of-scope row today                                                                                                         |
+| `level upper\|lower\|NNN`, `not allocated to designated breadth` | handled by level_min/max and section 4                                                                                                                                                      |
 
 `designation` requires credit to be earned: the course must have a grade of C- or better (policy `wqbMinGrade`) to count for W/Q/B.
 
 **Minimum grade rows (settled in Phase 1).**
+
 - **`group` rows** (`beedie-core-grade`): completed courses named by the selected groups' rows whose grade is below the minimum count as violations. The row is met when there are none.
 - **Designation rows** (`univ-wqb-grade`): informational. Courses below C- are listed in the notes as earning no W/Q/B credit, and the row stays met. A D in a W course doesn't fail the degree; the course just doesn't count for W.
 
@@ -164,7 +174,14 @@ The file already has the grade points (A+ 4.33 … D 1.00, F/FD/N 0.00), that P 
 - `busGpaSubjects: ["BUS"]`: the BUS GPA counts BUS courses only (per Stuart).
 - `passingGrades` and the grade order used for `min_grade`.
 
-**GPA** = Σ(points × units) / Σ(units) over completed attempts with a letter grade (A+…F, FD, N). Excluded: P, W, CR, in-progress. For repeats, only the higher-grade attempt counts. If any counted attempt has no units, or the filter is `program courses`, the GPA is `unknown`. If there are no graded attempts, the GPA is `null`, and the row is `unknown` with the reason "no graded courses yet".
+**GPA** = Σ(points × units) / Σ(units) over completed attempts with a letter grade (A+…F, FD, N). Excluded: P, W, CR, in-progress. For repeats, only the higher-grade attempt counts. If any counted attempt has no units, the GPA is `unknown`. If there are no graded attempts, the GPA is `null`, and the row is `unknown` with the reason "no graded courses yet".
+
+**Program GPA (`gpa-program`, `gpa-program-ud`; decided by Stuart 2026-10-04). ASSUMPTION: not yet confirmed against the calendar; both rows stay `beta` and carry a note saying so.**
+
+- Program courses = the courses matched (section 4) to slot rows in groups Lower core, Upper core and Concentration (declared concentrations only), restricted to department BUS.
+- P-graded courses carry no points and are excluded (as in every GPA). Repeats use the higher grade. A course used by two rows (e.g. a core row and a concentration row) counts once.
+- `gpa-program` uses all program courses; `gpa-program-ud` uses those numbered 300 or above (its level_min).
+- The set is taken from the same tier's matching, so it only contains graded completed attempts when computing `have`.
 
 ## 6. Unknown, never a guess
 
@@ -174,7 +191,7 @@ That "could" is decided **per row, or per breadth bucket**. Only that row's slot
 
 - **Course with no data** (not in courses.json, no `units`) → "no course data for X: units unknown". If units are given but the row needs designations: "designation of X unknown".
 - **Topics courses BUS 490–495** in concentration elective lists → "topics course: topic not recorded". The student input has no topic field.
-- **Data we don't have** → `program courses` GPA rows; GPA attempts without units.
+- **Data we don't have** → GPA attempts without units.
 - **Out-of-scope rows** → `not_applicable` with the reason in notes, never `unknown`.
 - **Constraints only stated in `notes`** are not checked. The row's notes say so explicitly. Examples: "within last 60 degree units" (`upper-business-units`), "complete before 75th unit" (`upper-bus360w`), "applies to entrants Fall 2022 onward" (BUS 203/300/496).
 
@@ -190,7 +207,7 @@ That "could" is decided **per row, or per breadth bucket**. Only that row's slot
 2. May a course fill a core slot and a concentration slot (e.g. BUS 418 in `upper-global` and `finance-electives`)? Default: allowed, with notes. **Still OPEN** (advisor).
 3. ~~Subset rows~~: decided, `within <req_id>` (section 4).
 4. Concentration rows' blank `min_grade`: any passing grade, with a note. ASSUMPTION, to be verified against the calendar.
-5. "Program courses" for `gpa-program` / `gpa-program-ud`: decided, report `unknown` with the reason.
+5. "Program courses" for `gpa-program` / `gpa-program-ud`: decided by Stuart (2026-10-04), section 5. ASSUMPTION until confirmed against the calendar.
 6. Does `subject business` include BUEC?
 7. Does `outside Beedie` exclude BUEC?
 8. P only satisfies BUS 203/300/496 (decided). CR satisfies any minimum, with a note (default).
