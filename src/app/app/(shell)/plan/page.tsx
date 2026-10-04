@@ -13,6 +13,7 @@ import {
   boardFromPlan,
   fromSavedTerms,
   isPlanStale,
+  planBasis,
 } from "@/lib/app/plan-board";
 import { boardItemsFor, checkBoard } from "@/lib/app/plan-check";
 import { coopTermOptions, planTermOptions, termLabel } from "@/lib/app/terms";
@@ -85,6 +86,8 @@ export default async function PlanPage() {
         </EmptyPanel>
       ) : (
         <PlanBoard
+          // New plan settings or a new record: start from the recomputed plan.
+          key={planBasis(profile)}
           generated={generated}
           initial={initial}
           items={items}

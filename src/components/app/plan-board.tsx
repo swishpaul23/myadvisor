@@ -11,6 +11,7 @@ import {
   useSensors,
   type Announcements,
   type DragEndEvent,
+  type KeyboardCoordinateGetter,
 } from "@dnd-kit/core";
 import { CSS } from "@dnd-kit/utilities";
 import {
@@ -222,9 +223,12 @@ function TermCard({
   terms,
   items,
   check,
+  dragging,
   onMove,
 }: {
   term: BoardTerm;
+  /** A row of this card is being dragged: lift the card above its neighbours. */
+  dragging: boolean;
   title: string;
   terms: BoardTerm[];
   items: Record<string, BoardItem>;
@@ -247,6 +251,7 @@ function TermCard({
         "flex flex-col rounded-[12px] border border-line-soft p-4 text-[13px] shadow-[0_1px_2px_rgba(20,20,20,0.04)] backdrop-blur-md transition-colors motion-reduce:transition-none",
         coop ? "bg-surface-subtle/80" : "bg-white/80",
         isOver && "border-ink/40 bg-white",
+        dragging && "relative z-20",
       )}
     >
       <div className="flex items-start justify-between gap-3">
@@ -350,14 +355,37 @@ export function PlanBoard({
   const [error, setError] = useState<string | null>(null);
   const [announcement, setAnnouncement] = useState("");
   const [checking, setChecking] = useState(false);
+  const [activeId, setActiveId] = useState<string | null>(null);
   const [pending, startTransition] = useTransition();
   const request = useRef(0);
+  // Arrow keys jump a dragged row to the previous or next card, not 25 pixels at a time.
+  const jumpBetweenCards: KeyboardCoordinateGetter = (
+    event,
+    { context: { active, over, droppableRects } },
+  ) => {
+    const step =
+      event.code === "ArrowRight" || event.code === "ArrowDown"
+        ? 1
+        : event.code === "ArrowLeft" || event.code === "ArrowUp"
+          ? -1
+          : 0;
+    if (step === 0 || !active) return undefined;
+    event.preventDefault();
+    const order = terms.map((t) => t.termId);
+    const from =
+      over?.id ??
+      terms.find((t) => t.itemIds.includes(String(active.id)))?.termId;
+    const at = order.indexOf(String(from));
+    const next = order[Math.min(order.length - 1, Math.max(0, at + step))];
+    const rect = next ? droppableRects.get(next) : undefined;
+    return rect ? { x: rect.left + 16, y: rect.top + 48 } : undefined;
+  };
   const sensors = useSensors(
     useSensor(PointerSensor, { activationConstraint: { distance: 4 } }),
     useSensor(TouchSensor, {
       activationConstraint: { delay: 200, tolerance: 6 },
     }),
-    useSensor(KeyboardSensor),
+    useSensor(KeyboardSensor, { coordinateGetter: jumpBetweenCards }),
   );
   const titles = cardTitles(terms);
   const nameOf = (id: string) => items[id]?.code ?? items[id]?.label ?? id;
@@ -374,7 +402,9 @@ export function PlanBoard({
     if (mine !== request.current) return;
     setChecking(false);
     if (!result.ok) {
-      setError(result.error);
+      // Old flags belong to the old layout: drop them rather than show them on this one.
+      setCheck({ flags: {}, termProblems: {}, termNotes: {}, rules: {} });
+      setError(`${result.error} Rule checks are off until a move is checked.`);
       return;
     }
     setCheck(result.data);
@@ -395,12 +425,13 @@ export function PlanBoard({
   }
 
   function onDragEnd(e: DragEndEvent) {
+    setActiveId(null);
     if (e.over) move(String(e.active.id), String(e.over.id));
   }
 
   const announcements: Announcements = {
     onDragStart: ({ active }) =>
-      `Picked up ${nameOf(String(active.id))}. Use the arrow keys to move it to another term, space to drop, escape to cancel.`,
+      `Picked up ${nameOf(String(active.id))}. Arrow keys move it to the previous or next term, space drops it, escape cancels.`,
     onDragOver: ({ active, over }) =>
       over
         ? `${nameOf(String(active.id))} is over ${titles[String(over.id)]}.`
@@ -509,7 +540,7 @@ export function PlanBoard({
           <button
             type="button"
             onClick={save}
-            disabled={pending || (!dirty && saved !== null)}
+            disabled={pending || checking || (!dirty && saved !== null)}
             className={cn(BUTTON_BRAND, "h-9 text-[13px]")}
           >
             {pending ? "Saving…" : "Save plan"}
@@ -559,7 +590,9 @@ export function PlanBoard({
       <TooltipProvider delay={150}>
         <DndContext
           sensors={sensors}
+          onDragStart={(e) => setActiveId(String(e.active.id))}
           onDragEnd={onDragEnd}
+          onDragCancel={() => setActiveId(null)}
           accessibility={{ announcements }}
         >
           <ol className="grid grid-cols-3 gap-3 rounded-[16px] bg-surface-subtle/60 p-3 max-[1180px]:grid-cols-2 max-[640px]:grid-cols-1 max-[640px]:p-2">
@@ -571,6 +604,7 @@ export function PlanBoard({
                 terms={terms}
                 items={items}
                 check={check}
+                dragging={activeId !== null && t.itemIds.includes(activeId)}
                 onMove={move}
               />
             ))}
