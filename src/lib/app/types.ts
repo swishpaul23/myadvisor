@@ -130,11 +130,27 @@ export type PlanCourse = {
   closesGap: boolean;
 };
 
+/** One term of the multi-term plan. A co-op work term has no courses. */
+export type PlanTermView = {
+  termId: string;
+  kind: "study" | "coop";
+  courses: PlanCourse[];
+  /** Units including placeholder electives; null when a course's units are unknown. */
+  units: number | null;
+};
+
 export type Plan = {
+  /** The first term (the selected start term), shown as the next-term draft. */
   termId: string;
   courses: PlanCourse[];
   units: number | null;
   claims: Claim[];
+  /** Every term from the start term until the remaining requirements are planned. */
+  terms: PlanTermView[];
+  /** Neutral notes about the plan's settings (e.g. summer left out). Not errors. */
+  notes: string[];
+  /** The last planned term, when everything left could be planned; otherwise null. */
+  finishTerm: string | null;
 };
 
 /** Machine-readable error codes every app API route may return, with a plain message. */

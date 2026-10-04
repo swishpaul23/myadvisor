@@ -1,5 +1,9 @@
 import type { AuditResult, ReqResult, ReqStatus } from "@/engine/audit/types";
-import type { Suggestion } from "@/engine/plan/suggest";
+import type {
+  ElectiveSlot,
+  RemainingPlan,
+  SummerChoice,
+} from "@/engine/plan/remaining";
 import type { ViolationCode } from "@/engine/plan/types";
 import type { Course } from "@/lib/data/catalog";
 import type { RequirementRow } from "@/lib/data/schema";
@@ -9,6 +13,7 @@ import type {
   Gap,
   Plan,
   PlanCourse,
+  PlanTermView,
   Source,
   StudentProfile,
 } from "./types";
@@ -69,6 +74,20 @@ const LABELS: Record<string, string> = {
   "upper-400-courses": "400-level BUS courses",
   "upper-400-sfu": "400-level BUS course at SFU",
   "upper-business-units": "Upper-division BUS units",
+  "univ-total": "Total units",
+  "univ-upper": "Upper-division units",
+  "beedie-upper-total": "Upper-division units (Beedie)",
+  "beedie-nonbus": "Units outside Business",
+  "beedie-nonbus-electives-total": "Group A and B units",
+  "univ-writing": "Writing (W) units",
+  "univ-quant": "Quantitative (Q) units",
+  "univ-breadth-social": "Social Sciences breadth (B-Soc)",
+  "univ-breadth-humanities": "Humanities breadth (B-Hum)",
+  "univ-breadth-science": "Science breadth (B-Sci)",
+  "univ-breadth-additional": "Additional breadth",
+  "univ-breadth-total": "Breadth units",
+  "beedie-nonbus-group-a": "Group A course outside Business",
+  "beedie-nonbus-group-b": "Group B course (Indigenous perspective)",
 };
 
 /** What a row is part of, e.g. "Finance concentration" or "BBA upper-division core". */
@@ -349,9 +368,9 @@ export function requiredCourseClaim(
   };
 }
 
-/** Claims for a skipped candidate: a firm "no" is VERIFIED; "can't check" is UNRESOLVED. */
+/** A course no term could take: a firm "no" is VERIFIED; "can't check" is UNRESOLVED. */
 export function skippedClaim(
-  skipped: Suggestion["skipped"][number],
+  skipped: RemainingPlan["unscheduled"][number],
   row: RequirementRow | undefined,
 ): Claim {
   const scope = row ? scopeLabel(row) : "a requirement";
@@ -364,7 +383,7 @@ export function skippedClaim(
   }
   const why = skipped.reasons.map((r) => REASON_TEXT[r]).filter(Boolean);
   return {
-    text: `${skipped.code} isn't suggested yet: ${why.join("; ") || "the plan check found a problem"}.`,
+    text: `${skipped.code} couldn't be placed in any term: ${why.join("; ") || "the plan check found a problem"}.`,
     status: "verified",
     source: courseSource(skipped.code),
   };
@@ -376,113 +395,244 @@ const ORDER: Record<Claim["status"], number> = {
   unresolved: 2,
 };
 
-/** The suggested next term, ready to show, with every claim labelled. */
+/** What the plan was built from, beyond the profile (display only). */
+export type PlanContext = {
+  summer: SummerChoice;
+  /** The student wasn't sure about summer (or skipped the question): summer is left out. */
+  summerUnsure: boolean;
+  /** Units per study term the calendar allows (policy unit_load, an ASSUMPTION). */
+  unitLoad: Record<string, { min: number; max: number }>;
+  /** Units a placeholder elective is assumed to carry (policy unknown_course). */
+  electiveUnits: number;
+};
+
+const DESIGNATION_LABEL: Record<string, string> = {
+  W: "Writing (W)",
+  Q: "Quantitative (Q)",
+  "B-Soc": "Social Sciences breadth (B-Soc)",
+  "B-Hum": "Humanities breadth (B-Hum)",
+  "B-Sci": "Science breadth (B-Sci)",
+};
+const LEVEL_LABEL = {
+  "400": "400-level",
+  upper: "Upper-division",
+  lower: "Lower-division",
+} as const;
+
+/** A placeholder elective's name, from what it must be. */
+export function electiveLabel(
+  slot: ElectiveSlot,
+  rowById: Map<string, RequirementRow>,
+): string {
+  const list = slot.fromList ? rowById.get(slot.fromList) : undefined;
+  if (list) return rowLabel(list);
+  const level = slot.level ? LEVEL_LABEL[slot.level] : null;
+  if (slot.designation) {
+    const kind = DESIGNATION_LABEL[slot.designation] ?? slot.designation;
+    const qualifier = [
+      level?.toLowerCase(),
+      slot.business === true ? "BUS" : null,
+    ]
+      .filter(Boolean)
+      .join(" ");
+    return `${kind} course${qualifier ? `, ${qualifier}` : ""}${slot.business === false ? ", outside Business" : ""}`;
+  }
+  if (slot.business === true) return `${level ? `${level} ` : ""}BUS elective`;
+  const outside = slot.business === false ? " outside Business" : "";
+  if (level) return `${level} elective${outside}`;
+  return outside ? "Elective outside Business" : "Open elective";
+}
+
+const unitsOrNull = (list: (number | null)[]) =>
+  list.reduce<number | null>(
+    (n, u) => (n === null || u === null ? null : n + u),
+    0,
+  );
+
+/**
+ * The multi-term plan, ready to show: every term from the start term, the first term as the
+ * next-term draft, and every claim labelled. Display only: the planner and validator decide.
+ */
 export function presentPlan(
-  suggestion: Suggestion,
+  remaining: RemainingPlan,
   rows: RequirementRow[],
   audit: AuditResult,
   profile: StudentProfile,
   courses: Course[],
+  context: PlanContext,
 ): Plan {
   const rowById = new Map(rows.map((r) => [r.req_id, r]));
   const resultById = new Map(audit.results.map((r) => [r.reqId, r]));
   const unitsOf = new Map(courses.map((c) => [c.code, c.units]));
-  const term = termLabel(suggestion.termId);
-  const season = suggestion.termId.split("-")[1]!;
+  const labelOf = (id: string) => {
+    const row = rowById.get(id);
+    return row ? rowLabel(row) : id;
+  };
 
-  const planCourses: PlanCourse[] = suggestion.courses.map(
-    ({ code, reqIds }) => {
-      const row = rowById.get(reqIds[0]!);
+  const terms: PlanTermView[] = remaining.terms.map((t) => {
+    const items = t.items.map((item): PlanCourse => {
+      if (item.kind === "course") {
+        const row = rowById.get(item.reqIds[0]!);
+        return {
+          code: item.code,
+          label: item.code,
+          note: item.choice
+            ? `One option for ${row ? rowLabel(row) : "a requirement"} · you can swap it`
+            : row
+              ? `Closes gap · ${scopeLabel(row)}`
+              : "Closes gap",
+          units: unitsOf.get(item.code) ?? null,
+          closesGap: !item.choice,
+        };
+      }
+      const toward = item.reqIds.slice(0, 2).map(labelOf).join(", ");
       return {
-        code,
-        label: code,
-        note: row ? `Closes gap · ${scopeLabel(row)}` : "Closes gap",
-        units: unitsOf.get(code) ?? null,
-        closesGap: true,
+        code: null,
+        label: electiveLabel(item.slot, rowById),
+        note: toward ? `Your choice · counts toward ${toward}` : "Your choice",
+        units: context.electiveUnits,
+        closesGap: false,
       };
-    },
-  );
-  if (suggestion.openSlots > 0) {
-    planCourses.push({
-      code: null,
-      label:
-        suggestion.openSlots === 1
-          ? "Open elective"
-          : `${suggestion.openSlots} × open electives`,
-      note: "Your choice",
-      units: null,
-      closesGap: false,
     });
-  }
+    return {
+      termId: t.id,
+      kind: t.kind,
+      courses: items,
+      units: t.kind === "coop" ? 0 : unitsOrNull(items.map((c) => c.units)),
+    };
+  });
+  const first = terms[0];
+  const start = profile.planTerm;
+  const finishTerm =
+    remaining.unscheduled.length === 0 && remaining.notPlannable.length === 0
+      ? ([...terms].reverse().find((t) => t.kind === "study")?.termId ?? null)
+      : null;
 
+  // ---- claims ----
   const claims: Claim[] = [];
-  for (const { code, reqIds } of suggestion.courses) {
-    const row = rowById.get(reqIds[0]!);
+  const named = remaining.terms.flatMap((t) =>
+    t.items.flatMap((i) => (i.kind === "course" ? [i] : [])),
+  );
+  for (const item of named.filter((i) => !i.choice)) {
+    const row = rowById.get(item.reqIds[0]!);
     if (row)
       claims.push(
-        requiredCourseClaim(code, row, resultById.get(row.req_id), profile),
+        requiredCourseClaim(
+          item.code,
+          row,
+          resultById.get(row.req_id),
+          profile,
+        ),
       );
   }
-  if (suggestion.courses.length > 0) {
+  const prereqProblems = remaining.validation.violations.filter(
+    (v) => v.code === "PREREQ_UNMET" || v.code === "COREQ_UNMET",
+  );
+  if (named.length > 0 && prereqProblems.length === 0) {
     claims.push({
-      text: `Prerequisites for ${suggestion.courses.map((c) => c.code).join(", ")} are met by your record.`,
+      text: "Each course comes after the courses it needs: prerequisites are checked term by term.",
       status: "verified",
-      source: courseSource(suggestion.courses[0]!.code),
+      source: courseSource(named[0]!.code),
     });
   }
-  const choices = rows.filter(
-    (r) =>
-      !isSingleCourse(r) &&
-      (r.rule === "one course" || r.rule === "n courses") &&
-      r.courses.length > 0 &&
-      resultById.get(r.req_id)?.status === "unmet",
-  );
+  const unchecked = [
+    ...new Set(
+      remaining.validation.violations
+        .filter((v) => v.courseCode && CANNOT_CHECK.includes(v.code))
+        .map((v) => v.courseCode!),
+    ),
+  ];
+  for (const code of unchecked) {
+    claims.push({
+      text: `${code}: its prerequisites can't be checked automatically. Check with an advisor.`,
+      status: "unresolved",
+      source: courseSource(code),
+    });
+  }
+  const choices = named.filter((i) => i.choice);
   if (choices.length > 0) {
     claims.push({
-      text: `Still to choose: ${choices.map(rowLabel).join(", ")}. These have several options, so they're left to you.`,
-      status: "verified",
-      source: source(choices[0]!.source_url),
+      text: `${listCodes(choices.map((c) => c.code))} ${choices.length === 1 ? "is" : "are"} picked from a list of options; you can swap ${choices.length === 1 ? "it" : "them"} for another option.`,
+      status: "assumption",
+      source: source(
+        rowById.get(choices[0]!.reqIds[0]!)?.source_url ?? CALENDAR,
+      ),
     });
   }
-  for (const s of suggestion.skipped)
-    claims.push(skippedClaim(s, rowById.get(s.reqIds[0]!)));
-
-  const inProgress = profile.courses.filter((c) => c.status === "in_progress");
-  if (inProgress.length > 0) {
+  const electives = terms.flatMap((t) =>
+    t.courses.filter((c) => c.code === null),
+  );
+  if (electives.length > 0) {
     claims.push({
-      text: `Your in-progress courses (${listCodes(inProgress.map((c) => c.code))}) are assumed passed before ${term}.`,
+      text: `${electives.length} ${electives.length === 1 ? "elective is a placeholder" : "electives are placeholders"} for requirements that count units, levels or designations, ${context.electiveUnits} units each.`,
       status: "assumption",
     });
   }
-  if (suggestion.courses.length > 0) {
+  for (const u of remaining.unscheduled)
+    claims.push(skippedClaim(u, rowById.get(u.reqIds[0]!)));
+  if (remaining.notPlannable.length > 0) {
+    const ids = remaining.notPlannable.map((n) => n.reqId);
     claims.push({
-      text: `Offerings are estimated from past ${season} terms; the ${term} timetable isn't confirmed.`,
+      text: `Adding courses can't settle ${ids.length === 1 ? "this" : "these"}: ${ids.slice(0, 4).map(labelOf).join(", ")}${ids.length > 4 ? ` +${ids.length - 4}` : ""}. Check with an advisor.`,
+      status: "unresolved",
+      source: source(rowById.get(ids[0]!)?.source_url ?? CALENDAR),
+    });
+  }
+  const inProgress = profile.courses.filter((c) => c.status === "in_progress");
+  if (inProgress.length > 0) {
+    claims.push({
+      text: `Your in-progress courses (${listCodes(inProgress.map((c) => c.code))}) are assumed passed before ${termLabel(start)}.`,
+      status: "assumption",
+    });
+  }
+  if (named.length > 0) {
+    claims.push({
+      text: "Offerings are estimated from past terms of the same season; no future timetable is confirmed.",
       status: "assumption",
     });
   }
   claims.push({
-    text: `${profile.courseLoad} courses is the load you chose.`,
+    text: `${profile.courseLoad} courses per term is the load you chose${context.summer === "some" ? " (up to 2 in summer)" : ""}.`,
     status: "assumption",
   });
-  for (const v of suggestion.validation.violations) {
-    if (v.code === "UNIT_LOAD_LOW" || v.code === "UNIT_LOAD_HIGH")
-      claims.push({
-        text: `${v.message.replace(/\s*\(ASSUMPTION[^)]*\)/, "")} (unit limits not yet confirmed against the calendar).`.replace(
-          ". (",
-          " (",
-        ),
-        status: "assumption",
-      });
+  const light: string[] = [];
+  const heavy: string[] = [];
+  for (const t of terms) {
+    const load = context.unitLoad[t.termId.split("-")[1]!];
+    if (t.kind !== "study" || t.units === null || !load) continue;
+    if (t.units < load.min) light.push(termLabel(t.termId));
+    if (t.units > load.max) heavy.push(termLabel(t.termId));
   }
+  const limits = Object.values(context.unitLoad)[0];
+  if (light.length > 0 && limits)
+    claims.push({
+      text: `${light.join(", ")} ${light.length === 1 ? "is" : "are"} below the ${limits.min}-unit minimum (unit limits not yet confirmed against the calendar).`,
+      status: "assumption",
+    });
+  if (heavy.length > 0 && limits)
+    claims.push({
+      text: `${heavy.join(", ")} ${heavy.length === 1 ? "is" : "are"} above the ${limits.max}-unit maximum (unit limits not yet confirmed against the calendar).`,
+      status: "assumption",
+    });
   claims.push({
     text: "Seats and timetable fit aren't checked yet.",
     status: "unresolved",
   });
 
+  // ---- neutral notes about the settings ----
+  const notes: string[] = [];
+  if (context.summerUnsure)
+    notes.push(
+      "Summer terms are left out because you weren't sure about summer courses. Choose a summer option in Plan settings to include them.",
+    );
+
   return {
-    termId: suggestion.termId,
-    courses: planCourses,
-    units: suggestion.validation.terms[0]?.units ?? null,
+    termId: first?.termId ?? start,
+    courses: first?.courses ?? [],
+    units: first?.units ?? null,
     claims: claims.sort((a, b) => ORDER[a.status] - ORDER[b.status]),
+    terms,
+    notes,
+    finishTerm,
   };
 }

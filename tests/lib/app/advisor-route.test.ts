@@ -56,6 +56,9 @@ vi.mock("@/lib/app/degree", async () => {
               courses: [],
               units: null,
               claims: [],
+              terms: [],
+              notes: [],
+              finishTerm: null,
             },
           }
         : null;

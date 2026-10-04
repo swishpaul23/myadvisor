@@ -47,6 +47,35 @@ describe("updatePlanSettings", () => {
     expect(revalidatePath).toHaveBeenCalledWith("/app", "layout");
   });
 
+  test("a summer choice is saved as the summer answer", async () => {
+    const result = await updatePlanSettings(
+      null,
+      form([
+        ["planTerm", "2027-spring"],
+        ["courseLoad", "4"],
+        ["summer", "some"],
+      ]),
+    );
+    expect(result).toEqual({ ok: true, data: undefined });
+    expect(stored.profile?.surveyAnswers).toEqual({ summer: "some" });
+  });
+
+  test("an unknown summer choice is refused", async () => {
+    const result = await updatePlanSettings(
+      null,
+      form([
+        ["planTerm", "2027-spring"],
+        ["courseLoad", "4"],
+        ["summer", "always"],
+      ]),
+    );
+    expect(result).toMatchObject({
+      ok: false,
+      fieldErrors: { summer: "Pick a summer option." },
+    });
+    expect(stored.profile).toEqual(SAMPLE_PROFILE);
+  });
+
   test("invalid input is refused with field errors", async () => {
     const result = await updatePlanSettings(
       null,

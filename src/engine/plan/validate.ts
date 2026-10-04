@@ -35,11 +35,20 @@ function courseUrl(code: string): string {
   return `https://www.sfu.ca/students/calendar/2026/fall/courses/${dept}/${number}.html`;
 }
 
+export type ValidateOptions = {
+  /** Audit the plan term by term for the graduation term (default true). The planner
+   * turns it off while it checks one candidate course at a time. */
+  graduation?: boolean;
+  /** The student's current audit, when the caller already has it. */
+  currentAudit?: AuditResult;
+};
+
 export function validatePlan(
   student: Student,
   plan: Plan,
   catalog: PlanCatalog,
   declarations: Declarations = {},
+  options: ValidateOptions = {},
 ): PlanValidation {
   const policy = catalog.policy;
   const courseData = new Map(catalog.courses.map((c) => [c.code, c]));
@@ -98,7 +107,7 @@ export function validatePlan(
   const lastStudentTerm = history.length > 0 ? Math.max(...history) : -Infinity;
 
   // Entry GPA (beedie-bus-gpa-entry), from completed grades: the same for every plan term.
-  const currentAudit = audit(student, catalog);
+  const currentAudit = options.currentAudit ?? audit(student, catalog);
   const entryRow = currentAudit.results.find(
     (r) => r.reqId === "beedie-bus-gpa-entry",
   );
@@ -353,6 +362,7 @@ export function validatePlan(
   let graduationTermExcludingUnknown: string | null = null;
   let auditAfterPlan: AuditResult = currentAudit;
   plan.terms.forEach((term, i) => {
+    if (options.graduation === false) return;
     const result = audit(plannedThrough(i), catalog, { includePlanned: true });
     const applicable = result.results.filter(
       (r) => r.status !== "not_applicable",

@@ -105,29 +105,26 @@ const term2 = [named("AAA 201", ["p2"]), elective];
 const term3 = [named("AAA 301", ["p3"]), elective];
 
 describe("planRemaining: synthetic catalog (hand-worked)", () => {
-  test.fails(
-    "multi-term plan covers all remaining requirements in prerequisite order",
-    () => {
-      const p = planRemaining(s, synthetic, {
-        startTerm: "2026-spring",
-        courseLoad: 2,
-        summer: "none",
-        coopTerms: [],
-      });
-      expect(p.terms).toEqual([
-        study("2026-spring", term1),
-        study("2026-fall", term2),
-        study("2027-spring", term3),
-      ]);
-      expect(p.unscheduled).toEqual([]);
-      expect(p.notPlannable).toEqual([]);
-      expect(
-        p.validation.violations.filter((v) => v.code === "PREREQ_UNMET"),
-      ).toEqual([]);
-    },
-  );
+  test("multi-term plan covers all remaining requirements in prerequisite order", () => {
+    const p = planRemaining(s, synthetic, {
+      startTerm: "2026-spring",
+      courseLoad: 2,
+      summer: "none",
+      coopTerms: [],
+    });
+    expect(p.terms).toEqual([
+      study("2026-spring", term1),
+      study("2026-fall", term2),
+      study("2027-spring", term3),
+    ]);
+    expect(p.unscheduled).toEqual([]);
+    expect(p.notPlannable).toEqual([]);
+    expect(
+      p.validation.violations.filter((v) => v.code === "PREREQ_UNMET"),
+    ).toEqual([]);
+  });
 
-  test.fails("summer is skipped when summer isn't selected", () => {
+  test("summer is skipped when summer isn't selected", () => {
     const without = planRemaining(s, synthetic, {
       startTerm: "2026-spring",
       courseLoad: 2,
@@ -153,7 +150,7 @@ describe("planRemaining: synthetic catalog (hand-worked)", () => {
     ]);
   });
 
-  test.fails("an 8-month Fall + Spring co-op leaves both terms empty", () => {
+  test("an 8-month Fall + Spring co-op leaves both terms empty", () => {
     const p = planRemaining(s, synthetic, {
       startTerm: "2026-spring",
       courseLoad: 2,
@@ -170,7 +167,7 @@ describe("planRemaining: synthetic catalog (hand-worked)", () => {
     ]);
   });
 
-  test.fails("Summer + Fall + Spring work terms chain", () => {
+  test("Summer + Fall + Spring work terms chain", () => {
     const p = planRemaining(s, synthetic, {
       startTerm: "2026-spring",
       courseLoad: 2,
@@ -201,44 +198,35 @@ describe("planRemaining: demo student from 2027-spring (real data)", () => {
   // demo-student.expected.ts): BUS 373, BUS 478, BUS 496, BUS 313, BUS 315.
   // BUS 410 needs BUS 315 in an earlier term (tests/engine/plan.test.ts); BUS 478 needs
   // BUS 374 or BUS 381 (tests/engine/fixtures/suggest.expected.ts).
-  test.fails(
-    "every remaining required course is planned, prerequisites first",
-    () => {
-      const p = planRemaining(demoStudent, real, {
-        startTerm: "2027-spring",
-        courseLoad: 4,
-        summer: "none",
-        coopTerms: [],
-      });
-      const termOf = new Map<string, number>();
-      p.terms.forEach((t, i) => {
-        for (const item of t.items)
-          if (item.kind === "course") termOf.set(item.code, i);
-      });
-      for (const code of [
-        "BUS 373",
-        "BUS 478",
-        "BUS 496",
-        "BUS 313",
-        "BUS 315",
-      ])
-        expect(termOf.has(code), code).toBe(true);
-      if (termOf.has("BUS 410"))
-        expect(termOf.get("BUS 410")!).toBeGreaterThan(termOf.get("BUS 315")!);
-      const orgOrHr = Math.min(
-        termOf.get("BUS 374") ?? Infinity,
-        termOf.get("BUS 381") ?? Infinity,
-      );
-      expect(termOf.get("BUS 478")!).toBeGreaterThan(orgOrHr);
-      expect(p.terms[0]!.id).toBe("2027-spring");
-      expect(p.terms.some((t) => t.id.endsWith("-summer"))).toBe(false);
-      expect(p.terms.every((t) => t.items.length <= 4)).toBe(true);
-      expect(p.unscheduled).toEqual([]);
-      expect(
-        p.validation.violations.filter(
-          (v) => v.code === "PREREQ_UNMET" || v.code === "COREQ_UNMET",
-        ),
-      ).toEqual([]);
-    },
-  );
+  test("every remaining required course is planned, prerequisites first", () => {
+    const p = planRemaining(demoStudent, real, {
+      startTerm: "2027-spring",
+      courseLoad: 4,
+      summer: "none",
+      coopTerms: [],
+    });
+    const termOf = new Map<string, number>();
+    p.terms.forEach((t, i) => {
+      for (const item of t.items)
+        if (item.kind === "course") termOf.set(item.code, i);
+    });
+    for (const code of ["BUS 373", "BUS 478", "BUS 496", "BUS 313", "BUS 315"])
+      expect(termOf.has(code), code).toBe(true);
+    if (termOf.has("BUS 410"))
+      expect(termOf.get("BUS 410")!).toBeGreaterThan(termOf.get("BUS 315")!);
+    const orgOrHr = Math.min(
+      termOf.get("BUS 374") ?? Infinity,
+      termOf.get("BUS 381") ?? Infinity,
+    );
+    expect(termOf.get("BUS 478")!).toBeGreaterThan(orgOrHr);
+    expect(p.terms[0]!.id).toBe("2027-spring");
+    expect(p.terms.some((t) => t.id.endsWith("-summer"))).toBe(false);
+    expect(p.terms.every((t) => t.items.length <= 4)).toBe(true);
+    expect(p.unscheduled).toEqual([]);
+    expect(
+      p.validation.violations.filter(
+        (v) => v.code === "PREREQ_UNMET" || v.code === "COREQ_UNMET",
+      ),
+    ).toEqual([]);
+  });
 });

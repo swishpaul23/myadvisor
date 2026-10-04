@@ -2,9 +2,9 @@ import "server-only";
 import { cache } from "react";
 import { audit } from "@/engine/audit";
 import type { AuditResult } from "@/engine/audit/types";
-import { suggestNextTerm, type Suggestion } from "@/engine/plan/suggest";
+import { planRemaining, type RemainingPlan } from "@/engine/plan/remaining";
 import { loadReferenceData, type DataSource } from "@/lib/data/source";
-import { toEngineStudent } from "./engine-input";
+import { summerChoice, toEngineStudent, toPlanOptions } from "./engine-input";
 import {
   buildChecklist,
   buildGaps,
@@ -21,7 +21,7 @@ import { readState } from "./store";
 import type { Gap, Plan, Source, StudentProfile } from "./types";
 
 // Everything the signed-in screens show, computed once per request: the stored profile ->
-// the rules engine (audit + next-term suggestion) -> presentation. The engine decides; this
+// the rules engine (audit + multi-term plan) -> presentation. The engine decides; this
 // only wires it up.
 
 export type DegreeView = {
@@ -31,7 +31,8 @@ export type DegreeView = {
   gaps: Gap[];
   units: UnitsSummary;
   record: RecordSummary;
-  suggestion: Suggestion;
+  /** The planner's result: every term from the start term. */
+  remaining: RemainingPlan;
   plan: Plan;
   /** Calendar pages behind every requirement and claim shown. */
   sources: Source[];
@@ -48,16 +49,19 @@ export const getDegreeView = cache(async (): Promise<DegreeView | null> => {
   const data = await loadReferenceData();
   const student = toEngineStudent(profile);
   const result = audit(student, data);
-  const suggestion = suggestNextTerm(student, data, {
-    termId: profile.planTerm,
-    courseLoad: profile.courseLoad,
-  });
+  const remaining = planRemaining(student, data, toPlanOptions(profile));
   const plan = presentPlan(
-    suggestion,
+    remaining,
     data.requirements,
     result,
     profile,
     data.courses,
+    {
+      summer: summerChoice(profile).summer,
+      summerUnsure: summerChoice(profile).unsure,
+      unitLoad: data.policy.unit_load,
+      electiveUnits: data.policy.unknown_course.units,
+    },
   );
   const shown = new Set(
     result.results
@@ -71,7 +75,7 @@ export const getDegreeView = cache(async (): Promise<DegreeView | null> => {
     gaps: buildGaps(data.requirements, result),
     units: unitsSummary(result),
     record: recordSummary(profile, result, data.courses),
-    suggestion,
+    remaining,
     plan,
     sources: uniqueSources([
       ...data.requirements
