@@ -20,8 +20,8 @@ Names only; never commit values. Locally they go in `.env`; in production, in th
 The app needs:
 
 - `AUTH_SECRET`
-- `AUTH_GOOGLE_ID`
-- `AUTH_GOOGLE_SECRET`
+- `GCP_AUTH_CLIENT_ID` (Google OAuth client ID)
+- `GCP_AUTH_ID_SECRET` (Google OAuth client secret)
 - `GOOGLE_GENERATIVE_AI_API_KEY`
 
 Optional for the app:
@@ -49,8 +49,8 @@ Sign-in is Google via Auth.js (next-auth v5), with sessions in a signed cookie (
    - Authorized redirect URI: `http://localhost:3000/api/auth/callback/google`
    - When deployed, add `https://<your-domain>` and `https://<your-domain>/api/auth/callback/google` as well.
 3. Put the values in `.env` (never commit them):
-   - `AUTH_GOOGLE_ID`: the client ID
-   - `AUTH_GOOGLE_SECRET`: the client secret
+   - `GCP_AUTH_CLIENT_ID`: the client ID
+   - `GCP_AUTH_ID_SECRET`: the client secret
    - `AUTH_SECRET`: run `npx auth secret` to generate one
 4. Restart `npm run dev`, open http://localhost:3000 and click **Log in**. After signing in you land on `/app`.
 
