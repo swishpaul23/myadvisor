@@ -171,6 +171,9 @@ export type ApiErrorCode =
   | "upload_unavailable"
   | "unreadable"
   | "advisor_unavailable"
+  | "voice_unavailable"
+  | "no_speech"
+  | "voice_error"
   | "server_error";
 export type ApiError = { ok: false; error: ApiErrorCode; message: string };
 
@@ -191,6 +194,9 @@ export type TranscriptResult =
 /** POST /api/advisor: an explanation grounded in the engine's results, with its sources. */
 export type AdvisorReply =
   { ok: true; answer: string; sources: Source[] } | ApiError;
+
+/** POST /api/advisor/transcribe: what the student said, as text for the advisor. */
+export type TranscribeReply = { ok: true; text: string } | ApiError;
 
 /** A server action result: ok, or a plain-language error with per-field messages. */
 export type ActionResult<T = undefined> =
