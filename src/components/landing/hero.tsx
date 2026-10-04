@@ -67,11 +67,11 @@ export function Hero() {
       >
         <div
           aria-hidden="true"
-          className="flex flex-1 justify-center overflow-hidden rounded-[20px] bg-[#1C1C1E] py-10 max-[900px]:px-4 max-[900px]:py-5"
+          className={`flex flex-1 justify-center overflow-hidden rounded-[20px] bg-[#1C1C1E] py-10 max-[900px]:px-4 max-[900px]:py-5 ${styles.frame}`}
         >
           <div
             id="product-preview-window"
-            className="mx-4 flex w-full max-w-[840px] overflow-hidden rounded-[12px] bg-white text-left shadow-[0_-1px_0_rgba(255,255,255,0.06)]"
+            className={`mx-4 flex w-full max-w-[840px] overflow-hidden rounded-[12px] bg-white text-left shadow-[0_-1px_0_rgba(255,255,255,0.06)] ${styles.window}`}
           >
             <div className="box-content flex w-[184px] flex-none flex-col gap-0.5 border-r border-line-soft bg-surface-subtle px-3 py-[18px] text-[13px] max-[900px]:hidden">
               <div className="flex items-center gap-2 px-2 pt-0.5 pb-4 font-semibold">
@@ -107,7 +107,10 @@ export function Hero() {
             </div>
 
             <div className="flex min-w-0 flex-1 flex-col gap-4 px-7 py-6">
-              <div className="flex items-start justify-between gap-4">
+              <div
+                data-reveal=""
+                className={`flex items-start justify-between gap-4 ${styles.reveal}`}
+              >
                 <div>
                   <div className="text-[12px] text-ink-muted">
                     BBA · Finance · Fall 2026 requirements
@@ -127,7 +130,10 @@ export function Hero() {
                 }
               />
               <RequirementList />
-              <div className="grid grid-cols-2 gap-3 max-[900px]:grid-cols-1">
+              <div
+                data-reveal=""
+                className={`grid grid-cols-2 gap-3 max-[900px]:grid-cols-1 ${styles.stagger}`}
+              >
                 <NextTermDraftCard />
                 <WhyThisPlanCard />
               </div>
@@ -138,11 +144,11 @@ export function Hero() {
         </div>
 
         <GapCard
-          className={`${FLOATING_CARD} top-26 right-16`}
+          className={`${FLOATING_CARD} top-26 right-16 ${styles.floatGap}`}
           aria-hidden="true"
         />
         <VoiceReplyCard
-          className={`${FLOATING_CARD} top-61 left-16`}
+          className={`${FLOATING_CARD} top-61 left-16 ${styles.floatVoice}`}
           aria-hidden="true"
         />
       </div>

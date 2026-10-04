@@ -1,9 +1,12 @@
-import type { ComponentProps, ReactNode } from "react";
+import type { ComponentProps, CSSProperties, ReactNode } from "react";
 import { cn } from "@/lib/utils";
+import { motionDelay } from "./motion";
+import styles from "./motion.module.css";
 
 /*
  * Pieces of the hero's product preview. Everything here is illustrative sample data for a
- * fictional student, not engine output.
+ * fictional student, not engine output. `data-reveal` and the motion classes only animate;
+ * see scroll-reveal.tsx.
  */
 
 type RequirementStatus = "complete" | "gap" | "progress";
@@ -45,14 +48,24 @@ export function UnitsProgressCard({
   value: ReactNode;
 }) {
   return (
-    <div className="rounded-[12px] border border-line-soft p-4">
+    <div
+      data-reveal=""
+      className={cn(
+        "rounded-[12px] border border-line-soft p-4",
+        styles.reveal,
+      )}
+      style={motionDelay(80)}
+    >
       <div className="flex justify-between text-[13px]">
         <span className="text-ink-body">{label}</span>
         <span className="font-mono">{value}</span>
       </div>
       <div className="mt-2.5 flex h-2 overflow-hidden rounded-full bg-[#EFEEEA]">
-        <div className="w-[65%] bg-ink" />
-        <div className="w-[10%] bg-[repeating-linear-gradient(45deg,#9A9994_0_3px,#EFEEEA_3px_6px)]" />
+        {/* 75% wrapper so the fill animation ends where the bar does: 65% + 10% of the track. */}
+        <div className={cn("flex w-[75%]", styles.fill)}>
+          <div className="w-[calc(100%*65/75)] bg-ink" />
+          <div className="w-[calc(100%*10/75)] bg-[repeating-linear-gradient(45deg,#9A9994_0_3px,#EFEEEA_3px_6px)]" />
+        </div>
       </div>
       <div className="mt-2 flex gap-4 text-[11px] text-ink-muted">
         <span>■ Completed</span>
@@ -107,14 +120,24 @@ function BookIcon({ size }: { size: number }) {
 function StatusIcon({ status }: { status: RequirementStatus }) {
   if (status === "complete") {
     return (
-      <span className="inline-flex size-5 flex-none items-center justify-center rounded-full bg-ink text-white">
+      <span
+        className={cn(
+          "inline-flex size-5 flex-none items-center justify-center rounded-full bg-ink text-white",
+          styles.pop,
+        )}
+      >
         <CheckIcon size={12} strokeWidth={3} />
       </span>
     );
   }
   if (status === "gap") {
     return (
-      <span className="size-5 flex-none rounded-full border-2 border-brand" />
+      <span
+        className={cn(
+          "size-5 flex-none rounded-full border-2 border-brand",
+          styles.ping,
+        )}
+      />
     );
   }
   return (
@@ -125,13 +148,21 @@ function StatusIcon({ status }: { status: RequirementStatus }) {
 /** Requirement status rows. */
 export function RequirementList() {
   return (
-    <div className="flex flex-col rounded-[12px] border border-line-soft text-[13px]">
+    <div
+      data-reveal=""
+      className={cn(
+        "flex flex-col rounded-[12px] border border-line-soft text-[13px]",
+        styles.reveal,
+        styles.stagger,
+      )}
+      style={motionDelay(160)}
+    >
       {SAMPLE_REQUIREMENTS.map((req) => (
         <div
           key={req.label}
           className={cn(
             "flex items-center gap-3 border-b border-line-soft px-4 py-3 last:border-b-0",
-            req.status === "gap" && "bg-brand-wash",
+            req.status === "gap" && cn("bg-brand-wash", styles.sweep),
           )}
         >
           <StatusIcon status={req.status} />
@@ -225,7 +256,7 @@ export function VoiceReplyCard({ className, ...props }: ComponentProps<"div">) {
             <path d="M7 5v14l12-7z" />
           </svg>
         </span>
-        <span className="flex h-6 items-center gap-[3px]">
+        <span className={cn("flex h-6 items-center gap-[3px]", styles.wave)}>
           {WAVEFORM.map((bar, i) => (
             <span
               key={i}
@@ -233,7 +264,7 @@ export function VoiceReplyCard({ className, ...props }: ComponentProps<"div">) {
                 "w-[3px] rounded-[2px]",
                 bar.played ? "bg-ink" : "bg-[#C9C8C3]",
               )}
-              style={{ height: bar.height }}
+              style={{ height: bar.height, "--i": i } as CSSProperties}
             />
           ))}
         </span>
@@ -353,17 +384,27 @@ const RECORD_TOTALS: readonly { label: string; value: string; unit: string }[] =
 /** Confirmed record totals, keeping completed, in-progress and transfer apart. */
 export function AcademicRecordCard() {
   return (
-    <div className={cn(PANEL, "p-4")}>
+    <div data-reveal="" className={cn(PANEL, "p-4", styles.reveal)}>
       <div className="flex items-center justify-between gap-3">
         <span className={PANEL_TITLE}>Academic record</span>
         <span className="inline-flex items-center gap-1.5 text-[12px] text-ink-body">
-          <span className="inline-flex size-4 items-center justify-center rounded-full bg-ink text-white">
+          <span
+            className={cn(
+              "inline-flex size-4 items-center justify-center rounded-full bg-ink text-white",
+              styles.pop,
+            )}
+          >
             <CheckIcon size={10} strokeWidth={3} />
           </span>
           Reviewed and confirmed
         </span>
       </div>
-      <div className="mt-3.5 grid grid-cols-3 gap-3 max-[900px]:grid-cols-1">
+      <div
+        className={cn(
+          "mt-3.5 grid grid-cols-3 gap-3 max-[900px]:grid-cols-1",
+          styles.stagger,
+        )}
+      >
         {RECORD_TOTALS.map((total) => (
           <div
             key={total.label}
@@ -392,7 +433,7 @@ const SOURCES_USED = [
 /** Calendar pages the advice cites. Static rows, not links. */
 export function SourcesUsedList() {
   return (
-    <div className={PANEL}>
+    <div data-reveal="" className={cn(PANEL, styles.reveal, styles.stagger)}>
       <div className="flex items-center justify-between border-b border-line-soft px-4 py-3.5">
         <span className={PANEL_TITLE}>Sources used</span>
         <span className="text-[12px] text-ink-muted">3 calendar pages</span>
