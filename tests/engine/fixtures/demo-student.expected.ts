@@ -37,11 +37,12 @@ export type ExpectedRow = {
 export const expectedSummary = {
   earnedUnits: 61,
   inProgressUnits: 13,
+  // gpa-program and gpa-program-ud moved from unknown to met (2026-10-04).
   byStatus: {
-    met: 40,
+    met: 42,
     in_progress: 5,
     unmet: 18,
-    unknown: 2,
+    unknown: 0,
     not_applicable: 31,
   },
 };
@@ -110,8 +111,12 @@ export const expectedRows: Record<string, ExpectedRow> = {
   "gpa-cum": { status: "met", have: 3.12, need: 2 },
   "gpa-cum-ud": { status: "met", have: 3, need: 2 },
   "gpa-ud-bus": { status: "met", have: 3, need: 2 },
-  "gpa-program": { status: "unknown", have: null, need: 2 }, // "program courses" undefined
-  "gpa-program-ud": { status: "unknown", have: null, need: 2 },
+  // Program courses (Stuart's rule, 2026-10-04): courses matched to Lower core, Upper core and
+  // declared-concentration slot rows, BUS only, P excluded. Here: BUS 201 B, 217W A-, 237 B,
+  // 240 B+, 251 B, 254 B, 272 B-, 275 A, 232 C+, 207 B+, 303 B (BUS 203, 300 are P; no
+  // Finance course yet) -> 34.33 / 11 = 3.1209 -> 3.12. Upper division: BUS 303 B -> 3.00.
+  "gpa-program": { status: "met", have: 3.12, need: 2 },
+  "gpa-program-ud": { status: "met", have: 3, need: 2 },
   "beedie-core-grade": { status: "met", have: 0, need: 0 }, // no core course below C- (P ok on BUS 203/300)
   // Non-BUS/BUEC: ECON 103 4, MATH 157 3, ENGL 112W 3, ECON 105 4, GEOG 100 3, INDG 101 3, HIST 135 3, CMNS 110 3
   "beedie-nonbus": { status: "unmet", have: 26, need: 36 },

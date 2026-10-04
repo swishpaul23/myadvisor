@@ -38,8 +38,10 @@ import type { Severity, ViolationCode } from "@/engine/plan/types";
 //   after 2027-spring: 92 units < 120; after 2027-summer / 2027-fall: 101 < 120;
 //   after 2028-spring: 123 units; 54 upper; 41 non-BUS; B-Sci (BPK 140, GEOG 104);
 //   Finance (313, 315, electives 410/412/414/418/419); BUS 373, 374, 346, 478, 496;
-//   3+ BUS 400-level at SFU -> every row met except gpa-program and gpa-program-ud (unknown).
-//   Strict graduation term: none (two unknown rows). Excluding unknown: 2028-spring.
+//   3+ BUS 400-level at SFU -> every row met. (Before 2026-10-04 gpa-program and
+//   gpa-program-ud were unknown and blocked the strict term; with the program-courses rule
+//   they are met from completed grades: 3.12 and 3.00.)
+//   Strict graduation term: 2028-spring. Excluding unknown: 2028-spring.
 
 export type ExpectedViolation = {
   severity: Severity;
@@ -83,20 +85,18 @@ export const expectedTerms = [
 ];
 
 export const expectedGraduation = {
-  graduationTerm: null,
+  graduationTerm: "2028-spring" as string | null,
   graduationTermExcludingUnknown: "2028-spring",
   graduationAssumesValidPlan: true, // the plan has an error (BUS 410)
-  graduationBlockers: [
-    { reqId: "gpa-program", status: "unknown" as ReqStatus },
-    { reqId: "gpa-program-ud", status: "unknown" as ReqStatus },
-  ],
-  // Completed courses unchanged: the same 40 rows met as in the demo audit; every other
-  // applicable row is met only with planned courses (in_progress); 2 unknown; 31 n/a.
+  graduationBlockers: [] as { reqId: string; status: ReqStatus }[],
+  // Completed courses unchanged: the same 42 rows met as in the demo audit (40 + the two
+  // program GPAs); every other applicable row is met only with planned courses
+  // (in_progress); 31 n/a.
   auditByStatus: {
-    met: 40,
+    met: 42,
     in_progress: 23,
     unmet: 0,
-    unknown: 2,
+    unknown: 0,
     not_applicable: 31,
   },
 };
