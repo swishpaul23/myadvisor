@@ -23,7 +23,7 @@ export function readElevenLabsVoiceId(): string | undefined {
   return id ? id : undefined;
 }
 
-/** What the Advisor page may show: the mic needs the key, the speaker also needs a voice. */
+/** Voice capabilities: recording needs the key, read-aloud also needs a voice. */
 export function voiceAvailability(): { listen: boolean; speak: boolean } {
   const listen = Boolean(readElevenLabsApiKey());
   return { listen, speak: listen && Boolean(readElevenLabsVoiceId()) };

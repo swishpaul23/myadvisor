@@ -47,7 +47,7 @@ export function AdvisorChat({
   intro: string;
   starters: string[];
   available: boolean;
-  /** listen: the mic can be shown. speak: answers can be read aloud. */
+  /** listen: voice input is configured. speak: answers can be read aloud. */
   voice: { listen: boolean; speak: boolean };
 }) {
   const [messages, setMessages] = useState<Message[]>([
@@ -58,6 +58,7 @@ export function AdvisorChat({
   const [error, setError] = useState<string | null>(null);
   const endRef = useRef<HTMLDivElement>(null);
   const inputId = useId();
+  const voiceHelpId = useId();
   const [voiceError, setVoiceError] = useState<string | null>(null);
   const [speakerOn, setSpeakerOn] = useState(true);
   const speakerOnRef = useRef(speakerOn);
@@ -67,7 +68,12 @@ export function AdvisorChat({
     onText: (text) => void ask(text, { keepDraft: true }),
     onError: setVoiceError,
   });
-  const showMic = voice.listen && recorder.supported;
+  const canUseMic = voice.listen && recorder.supported;
+  const voiceUnavailableReason = !voice.listen
+    ? "Voice isn't configured on this deployment. Type your question instead."
+    : !recorder.supported
+      ? "Voice recording isn't supported in this browser. Type your question instead."
+      : null;
   const voiceBusy = recorder.state !== "idle";
 
   useEffect(() => {
@@ -233,19 +239,19 @@ export function AdvisorChat({
               className={cn(FIELD, "h-auto min-h-[64px] resize-y py-2.5")}
             />
             <div className="flex gap-2 max-[640px]:[&>*]:flex-1">
-              {showMic && (
-                <MicButton
-                  state={recorder.state}
-                  seconds={recorder.seconds}
-                  disabled={pending}
-                  onStart={() => {
-                    setVoiceError(null);
-                    speaker.stop();
-                    void recorder.start();
-                  }}
-                  onStop={recorder.stop}
-                />
-              )}
+              <MicButton
+                state={recorder.state}
+                seconds={recorder.seconds}
+                disabled={pending || !canUseMic}
+                describedBy={voiceUnavailableReason ? voiceHelpId : undefined}
+                title={voiceUnavailableReason ?? undefined}
+                onStart={() => {
+                  setVoiceError(null);
+                  speaker.stop();
+                  void recorder.start();
+                }}
+                onStop={recorder.stop}
+              />
               <button
                 type="submit"
                 disabled={pending || !draft.trim() || voiceBusy}
@@ -255,7 +261,12 @@ export function AdvisorChat({
               </button>
             </div>
           </form>
-          {(showMic || voice.speak) && (
+          {voiceUnavailableReason && (
+            <p id={voiceHelpId} className={HINT}>
+              {voiceUnavailableReason}
+            </p>
+          )}
+          {(canUseMic || voice.speak) && (
             <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-1">
               <p className={HINT}>{VOICE_NOTICE}</p>
               {voice.speak && (
