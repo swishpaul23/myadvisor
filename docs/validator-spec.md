@@ -48,13 +48,13 @@ evaluate(node, ctx, mode: "prereq" | "coreq"): { truth: Truth; needsPermission: 
 
 **Course availability for a `course` node:**
 
-| Source | Counts? |
-|---|---|
-| Completed, grade meets `minGrade` | `met` |
-| Completed, grade below `minGrade`, and no later attempt in `earlier` | `unmet` |
-| In progress, or planned in an earlier term | `met`, note "assumes a grade of at least X" (**ASSUMPTION**: planned courses pass with the required grade) |
-| In the same term, and `concurrentOk` is true or `mode` is coreq | `met`, note "taken concurrently" |
-| Otherwise | `unmet` |
+| Source                                                               | Counts?                                                                                                    |
+| -------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| Completed, grade meets `minGrade`                                    | `met`                                                                                                      |
+| Completed, grade below `minGrade`, and no later attempt in `earlier` | `unmet`                                                                                                    |
+| In progress, or planned in an earlier term                           | `met`, note "assumes a grade of at least X" (**ASSUMPTION**: planned courses pass with the required grade) |
+| In the same term, and `concurrentOk` is true or `mode` is coreq      | `met`, note "taken concurrently"                                                                           |
+| Otherwise                                                            | `unmet`                                                                                                    |
 
 **Node rules:**
 
@@ -69,7 +69,11 @@ evaluate(node, ctx, mode: "prereq" | "coreq"): { truth: Truth; needsPermission: 
   - **ASSUMPTION:** any passing grade counts.
   - Without both subject and level: `unknown`.
 - `permission`: `unmet` with `needsPermission = true` (it can be waived; never `met`).
-- `restriction`, `unknown`: `unknown`, with the text as the reason.
+- `restriction`: looked up by **exact text** in policy `restriction_programs` (decided).
+  - Found: `met` if `student.program` matches and `admissionTerm` ≥ `admitted_from`; otherwise `unmet`.
+  - Not found: `unknown`.
+  - The BUS 201 and BUS 202 texts are left out of the table on purpose: they also require a Business Foundation Pathway, which the student data doesn't record.
+- `unknown`: `unknown`, with the text as the reason.
 - `alt_group` inside `any`: removed before evaluating, with the note "alternative route exists for <group>". If every child of an `any` is an alt_group, the result is `unknown` ("only alternative-route groups").
 - `external`: `met` or `unmet` from `declarations.external[text]`. With no answer: `unknown`, reason "needs your answer: <text>".
 
@@ -78,25 +82,31 @@ evaluate(node, ctx, mode: "prereq" | "coreq"): { truth: Truth; needsPermission: 
 ## 3. Violations
 
 ```ts
-type Violation = { severity: "error" | "warning" | "unknown"; code: string; courseCode: string | null;
-                   termId: string; message: string; sourceUrl: string | null };
+type Violation = {
+  severity: "error" | "warning" | "unknown";
+  code: string;
+  courseCode: string | null;
+  termId: string;
+  message: string;
+  sourceUrl: string | null;
+};
 ```
 
-| Code | Severity | When |
-|---|---|---|
-| `PREREQ_UNMET` | error | the prereq tree is `unmet` without needsPermission |
-| `PREREQ_NEEDS_PERMISSION` | warning | the tree is `unmet` but needsPermission (e.g. "45 units or permission of the instructor") |
-| `PREREQ_UNKNOWN` | unknown | the tree is `unknown`; message lists the reasons |
-| `COREQ_UNMET` / `COREQ_UNKNOWN` | error / unknown | the coreq tree, with same-term courses counted |
-| `NOT_OFFERED_FUTURE_ONLY` | warning | see the offering rule |
-| `NOT_OFFERED_RECENTLY` | warning | "not offered in recent history, check the schedule" |
-| `NO_COURSE_DATA` | unknown | the code isn't in courses.json, so prereqs, offerings and units are unknown |
-| `DUPLICATE_IN_PLAN` | warning | the same code is in two plan terms, or twice in one term |
-| `ALREADY_TAKEN` | warning | the code is completed or in progress, unless a repeat is allowed |
-| `UNIT_LOAD_HIGH` / `UNIT_LOAD_LOW` | warning | a study term's units are above the max or below the min (policy) |
-| `COURSES_IN_COOP_TERM` | error | a `coop` term lists any course |
-| `ENTRY_GPA` | error / unknown | a 300- or 400-level BUS course while the SFU BUS GPA is below 2.30 (error), or can't be computed (unknown) |
-| `PLAN_TERM_ORDER` | error | plan terms are out of order, duplicated, or not after the student's last term |
+| Code                               | Severity        | When                                                                                                       |
+| ---------------------------------- | --------------- | ---------------------------------------------------------------------------------------------------------- |
+| `PREREQ_UNMET`                     | error           | the prereq tree is `unmet` without needsPermission                                                         |
+| `PREREQ_NEEDS_PERMISSION`          | warning         | the tree is `unmet` but needsPermission (e.g. "45 units or permission of the instructor")                  |
+| `PREREQ_UNKNOWN`                   | unknown         | the tree is `unknown`; message lists the reasons                                                           |
+| `COREQ_UNMET` / `COREQ_UNKNOWN`    | error / unknown | the coreq tree, with same-term courses counted                                                             |
+| `NOT_OFFERED_FUTURE_ONLY`          | warning         | see the offering rule                                                                                      |
+| `NOT_OFFERED_RECENTLY`             | warning         | "not offered in recent history, check the schedule"                                                        |
+| `NO_COURSE_DATA`                   | unknown         | the code isn't in courses.json, so prereqs, offerings and units are unknown                                |
+| `DUPLICATE_IN_PLAN`                | warning         | the same code is in two plan terms, or twice in one term                                                   |
+| `ALREADY_TAKEN`                    | warning         | the code is completed or in progress, unless a repeat is allowed                                           |
+| `UNIT_LOAD_HIGH` / `UNIT_LOAD_LOW` | warning         | a study term's units are above the max or below the min (policy)                                           |
+| `COURSES_IN_COOP_TERM`             | error           | a `coop` term lists any course                                                                             |
+| `ENTRY_GPA`                        | error / unknown | a 300- or 400-level BUS course while the SFU BUS GPA is below 2.30 (error), or can't be computed (unknown) |
+| `PLAN_TERM_ORDER`                  | error           | plan terms are out of order, duplicated, or not after the student's last term                              |
 
 **Offering rule (study terms).** For a planned term `Y-season`, look at confirmed offerings in the same season in the two previous years (`Y-1`, `Y-2`), and in `Y` itself if it's confirmed. **ASSUMPTION:** "term kind" in the brief means the season (spring, summer or fall).
 
@@ -109,7 +119,7 @@ type Violation = { severity: "error" | "warning" | "unknown"; code: string; cour
 
 **Unit load.** Add to `data/policy/sfu.json`:
 
-- `unit_load: { min: 9, max: 18, status: "beta" }`, marked **ASSUMPTION, to verify against the SFU calendar**. 9 is a guess at "full-time", 18 a guess at the normal maximum.
+- `unit_load` per season (`spring`, `summer`, `fall`), each `{ min: 9, max: 18 }`, marked **ASSUMPTION, to verify against the SFU calendar** (decided). Summer uses the same values for now. Load violations are warnings until the values are verified.
 - Units come from courses.json. A course with unknown units makes the term total unknown, so no load warning is raised; the course already has `NO_COURSE_DATA`.
 
 **Entry GPA.**
@@ -129,7 +139,7 @@ type Violation = { severity: "error" | "warning" | "unknown"; code: string; cour
 
 ```ts
 type PlanValidation = {
-  violations: Violation[];                      // sorted by term, then course, then code
+  violations: Violation[]; // sorted by term, then course, then code
   terms: { id: string; units: number | null; cumulativeUnits: number | null }[];
   graduationTerm: string | null;
   graduationBlockers: { reqId: string; status: ReqStatus }[]; // rows not met after the whole plan
@@ -146,7 +156,9 @@ type PlanValidation = {
   - t is the graduation term if every applicable row is `met` or `in_progress` (here, "met if the plan is completed").
   - `unknown` rows block graduation. The first such t wins; if none, `null`.
   - **ASSUMPTION:** plan violations don't change this computation. The validator reports them separately, and an `error` violation makes the graduation term "not trustworthy" (flag `graduationAssumesValidPlan: true` in the output).
+- **Graduation term excluding unknown (added in Phase 1):** `graduationTermExcludingUnknown` is the first term where no row is `unmet`; `unknown` rows don't block it. Without it, `gpa-program` / `gpa-program-ud` (always `unknown`) would make every plan's graduation term null.
 - **Blockers:** after the last term, every row with status `unmet` or `unknown`, from `auditAfterPlan`.
+- **Violation order:** term order, then course code. Term-level violations (no course, e.g. unit load) come last within their term.
 
 ## 5. Open questions
 
