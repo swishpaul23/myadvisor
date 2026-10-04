@@ -256,6 +256,38 @@ export const requirementRowSchema = requirementFields
   })
   .transform((row) => row as RequirementRow);
 
+/**
+ * A requirement row after parsing, as stored in data/generated/requirements.json and the
+ * Snowflake `requirements` table. Used to check rows read back from either store.
+ */
+export const requirementRecordSchema = z
+  .object({
+    req_id: z.string().regex(/^\S+$/),
+    program: z.enum(PROGRAMS),
+    concentration: z.enum(CONCENTRATIONS).nullable(),
+    catalog_term: z.literal("2026-fall"),
+    group: z.enum(GROUPS),
+    rule: z.string(),
+    n_or_units: z.number().nonnegative().nullable(),
+    courses: z.array(z.string().regex(COURSE_CODE)),
+    level_min: z.number().int().nullable(),
+    level_max: z.number().int().nullable(),
+    designation: z.array(z.enum(DESIGNATIONS)),
+    filter: z.array(z.string()),
+    min_grade: z.enum(MIN_GRADES).nullable(),
+    notes: z.string(),
+    source_url: z.string().regex(/^https?:\/\/\S+$/),
+    status: z.enum(STATUSES),
+    verified_by: z.string(),
+  })
+  .refine(
+    (row) =>
+      row.status === "out-of-scope" ||
+      (RULES as readonly string[]).includes(row.rule),
+    { path: ["rule"], message: "unknown rule for an in-scope row" },
+  )
+  .transform((row) => row as RequirementRow);
+
 type ParsedRow = Omit<z.output<typeof requirementFields>, "rule" | "status">;
 
 // In-scope rows have a known rule; out-of-scope rows keep whatever the sheet says

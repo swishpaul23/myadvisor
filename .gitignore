@@ -52,3 +52,9 @@ tests/private/*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Snowflake key-pair auth (never commit)
+rsa_key.p8
+rsa_key.pub
+.env
+snowflake.log
