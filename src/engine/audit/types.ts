@@ -8,7 +8,7 @@ export type CourseStatus = "completed" | "in_progress" | "planned";
 
 export type StudentCourse = {
   code: string;
-  /** A+..D, F, FD, N, P, W, CR; null while in progress or planned. */
+  /** A+..D, F, FD, N, P, W, DE, CR; null while in progress or planned. */
   grade: string | null;
   /** Student-supplied units, used only when courses.json has no units for the code. */
   units?: number;

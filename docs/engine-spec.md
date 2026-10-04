@@ -83,7 +83,7 @@ A row is `not_applicable` when its status is `out-of-scope` (skipped, reason in 
 - every filter term holds;
 - its grade meets `min_grade`.
 
-Grade order is A+ > A > … > D. A `P` satisfies the pass/fail courses BUS 203, BUS 300 and BUS 496 (policy `pass_fail_courses`, decided) and no other letter minimum. **ASSUMPTION:** CR (transfer) meets any minimum, with a note "transfer credit: grade not known".
+Grade order is A+ > A > … > D. A `P` (pass) meets any minimum, including letter minimums such as C- (decided by Stuart, 2026-10-04; no ASSUMPTION note). CR (transfer credit) also meets any minimum, with a note "transfer credit: grade not known". P and CR earn units and carry no grade points. F, FD, N, W and DE meet no minimum and earn nothing.
 
 **ASSUMPTION (OPEN-4, decided as the default, to be verified against the calendar):** a blank `min_grade` (all concentration rows) means any passing grade (D or better, P, CR). The row gets a note that C- may apply if the course is also a prerequisite.
 
@@ -210,7 +210,7 @@ That "could" is decided **per row, or per breadth bucket**. Only that row's slot
 5. "Program courses" for `gpa-program` / `gpa-program-ud`: decided by Stuart (2026-10-04), section 5. ASSUMPTION until confirmed against the calendar.
 6. Does `subject business` include BUEC?
 7. Does `outside Beedie` exclude BUEC?
-8. P only satisfies BUS 203/300/496 (decided). CR satisfies any minimum, with a note (default).
+8. P and CR satisfy any minimum, including C- rows and prerequisites (decided by Stuart, 2026-10-04). CR keeps its note.
 9. BUS 203/300/496 for admissions before 2022-fall: decided, `unknown` with the reason "different requirement set for this admission term".
 10. "Within last 60 degree units" for `upper-business-units`: check it by term order in v1, or leave it as note-only? Default: note-only.
 11. The data/sources checklist says 2.30 for "overall SFU BUS GPA" and the sheet has `beedie-bus-gpa-*` at 2.3: confirm which BUS courses count (BUS only, per section 5).

@@ -24,7 +24,7 @@ export const courseCodeSchema = z
   );
 
 export const GRADES = [
-  "A+", "A", "A-", "B+", "B", "B-", "C+", "C", "C-", "D", "F", "FD", "N", "P", "W", "CR",
+  "A+", "A", "A-", "B+", "B", "B-", "C+", "C", "C-", "D", "F", "FD", "N", "P", "W", "DE", "CR",
 ] as const; // prettier-ignore
 
 export const RECORD_STATUSES = ["completed", "in_progress"] as const;

@@ -41,9 +41,9 @@ evaluate(node, ctx, mode: "prereq" | "coreq"): { truth: Truth; needsPermission: 
 **Grade comparison** uses the audit's `meetsMinimum` (`src/engine/audit/grades.ts`) unchanged:
 
 - Letter order is A+ > A > A- > … > C- > D. A grade meets a minimum if it is at least as good.
-- `P` meets a minimum only on the pass/fail courses BUS 203, 300 and 496.
-- Transfer `CR` meets any minimum (**ASSUMPTION** from the audit spec), with a note.
-- F, FD, N and W never meet a minimum.
+- `P` meets any minimum, including a letter minimum such as C- (decided by Stuart, 2026-10-04).
+- Transfer `CR` meets any minimum, with a note.
+- F, FD, N, W and DE never meet a minimum.
 - A null minimum means any grade that earns units.
 
 **Course availability for a `course` node:**

@@ -26,7 +26,7 @@ const resultOf = (r: ReturnType<typeof audit>, id: string) =>
   r.results.find((x) => x.reqId === id)!;
 
 describe("P and CR", () => {
-  test.fails("P satisfies a prerequisite with a minimum grade", () => {
+  test("P satisfies a prerequisite with a minimum grade", () => {
     // BUS 272 is not a pass/fail course; the prerequisite asks for C-.
     const r = evaluateNode(
       { type: "course", code: "BUS 272", minGrade: "C-", concurrentOk: false },
@@ -37,7 +37,7 @@ describe("P and CR", () => {
     expect(r.notes).toEqual([]);
   });
 
-  test.fails("BUS 237 and BUS 272 (Fall 2023, P) show complete", () => {
+  test("BUS 237 and BUS 272 (Fall 2023, P) show complete", () => {
     // lower-bus237 and lower-bus272 are "one course" rows with a C- minimum. BUS 237 and
     // BUS 272 are 3 units each in courses.json, so 6 units are earned.
     const s = student(
@@ -68,7 +68,7 @@ describe("P and CR", () => {
     expect(r.summary.gpas["beedie-bus-gpa-graduation"]).toBeNull();
   });
 
-  test.fails("repeats: the best passing attempt counts, units once", () => {
+  test("repeats: the best passing attempt counts, units once", () => {
     // BUS 232: F (2023-fall), then B (2024-spring) -> lower-stats met with BUS 232.
     // BUS 251: W (2023-fall), then P (2024-spring) -> lower-bus251 met.
     // Units: BUS 232 3 + BUS 251 3 = 6 (each counted once).

@@ -71,7 +71,7 @@
       "P",
       "CR"
     ],
-    "text": "Letter grades from best to worst; grades that earn units (D or better, P, transfer CR). F, FD, N and W earn none.",
+    "text": "Letter grades from best to worst; grades that earn units (D or better, P, transfer CR). F, FD, N, W and DE earn none.",
     "source_url": "https://www.sfu.ca/students/calendar/2026/fall/fees-and-regulations/grading-policy/grading-systems-and-policies.html",
     "status": "beta"
   },
@@ -89,7 +89,7 @@
   },
   "pass_fail_courses": {
     "courses": ["BUS 203", "BUS 300", "BUS 496"],
-    "text": "Pass/fail courses: a P grade satisfies their requirement. A P satisfies no other letter-grade minimum (Stuart, 2026-10-04).",
+    "text": "Pass/fail courses (P is their passing grade). A P on any course counts as completed: it meets every minimum grade, including letter minimums such as C- on requirements and prerequisites, earns units and is left out of GPA (Stuart, 2026-10-04).",
     "source_url": "https://www.sfu.ca/students/calendar/2026/fall/programs/business/major/bachelor-of-business-administration.html",
     "status": "beta"
   },
