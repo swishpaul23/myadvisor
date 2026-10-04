@@ -1,5 +1,7 @@
 import type { Student } from "@/engine/audit/types";
+import { defaultCoopTerms } from "@/engine/plan/coop";
 import type { RemainingOptions, SummerChoice } from "@/engine/plan/remaining";
+import { termIndex } from "./terms";
 import type { StudentProfile } from "./types";
 
 // The only bridge from the app's profile to the rules engine's input. Survey answers never
@@ -32,12 +34,34 @@ export function summerChoice(profile: StudentProfile): {
   return { summer: "none", unsure: answer !== "no" };
 }
 
+/**
+ * Co-op work terms for the plan: the student's picks from the start term on, or, when they
+ * are doing co-op but picked none, the default placement (engine/plan/coop.ts).
+ */
+export function coopTerms(profile: StudentProfile): {
+  terms: string[];
+  isDefault: boolean;
+} {
+  if (!profile.coop.doing) return { terms: [], isDefault: false };
+  if (profile.coop.workTerms.length === 0)
+    return {
+      terms: defaultCoopTerms(profile.planTerm, summerChoice(profile).summer),
+      isDefault: true,
+    };
+  return {
+    terms: profile.coop.workTerms.filter(
+      (t) => termIndex(t) >= termIndex(profile.planTerm),
+    ),
+    isDefault: false,
+  };
+}
+
 /** The multi-term planner's options from the profile. */
 export function toPlanOptions(profile: StudentProfile): RemainingOptions {
   return {
     startTerm: profile.planTerm,
     courseLoad: profile.courseLoad,
     summer: summerChoice(profile).summer,
-    coopTerms: [],
+    coopTerms: coopTerms(profile).terms,
   };
 }

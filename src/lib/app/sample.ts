@@ -45,6 +45,7 @@ export const SAMPLE_PROFILE: StudentProfile = {
   concentrations: ["Finance"],
   planTerm: "2027-spring",
   courseLoad: 4,
+  coop: { doing: false, workTerms: [] },
   courses: [
     ...completed.map(
       ([code, term, grade, institution = "SFU"]): RecordCourse => ({

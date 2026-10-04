@@ -404,6 +404,8 @@ export type PlanContext = {
   unitLoad: Record<string, { min: number; max: number }>;
   /** Units a placeholder elective is assumed to carry (policy unknown_course). */
   electiveUnits: number;
+  /** Co-op work terms in the plan; isDefault when the student picked none. */
+  coop: { doing: boolean; terms: string[]; isDefault: boolean };
 };
 
 const DESIGNATION_LABEL: Record<string, string> = {
@@ -614,6 +616,11 @@ export function presentPlan(
       text: `${heavy.join(", ")} ${heavy.length === 1 ? "is" : "are"} above the ${limits.max}-unit maximum (unit limits not yet confirmed against the calendar).`,
       status: "assumption",
     });
+  if (context.coop.isDefault)
+    claims.push({
+      text: "The default co-op placement starts after at least one study term; the SFU calendar's co-op timing rules aren't checked.",
+      status: "assumption",
+    });
   claims.push({
     text: "Seats and timetable fit aren't checked yet.",
     status: "unresolved",
@@ -621,6 +628,16 @@ export function presentPlan(
 
   // ---- neutral notes about the settings ----
   const notes: string[] = [];
+  const { coop } = context;
+  if (coop.doing && coop.isDefault) {
+    const [fall, spring, third] = coop.terms.map(termLabel);
+    notes.push(
+      `Co-op work terms are a default: an 8-month placement (${fall} + ${spring}) and ${third}. Pick your own in Plan settings.`,
+    );
+  } else if (coop.doing && coop.terms.length < 3)
+    notes.push(
+      `Co-op has 3 work terms; you've picked ${coop.terms.length}. Add the others in Plan settings when you know them.`,
+    );
   if (context.summerUnsure)
     notes.push(
       "Summer terms are left out because you weren't sure about summer courses. Choose a summer option in Plan settings to include them.",

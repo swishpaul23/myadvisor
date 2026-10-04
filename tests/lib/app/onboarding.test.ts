@@ -119,6 +119,77 @@ describe("parseStep", () => {
     );
   });
 
+  test("next-term: co-op with work terms (sorted, consecutive allowed)", () => {
+    const r = parseStep(
+      "next-term",
+      form([
+        ["planTerm", "2027-spring"],
+        ["courseLoad", "4"],
+        ["coop", "yes"],
+        ["coopTerms", "2028-spring"],
+        ["coopTerms", "2027-fall"],
+      ]),
+    );
+    expect(r).toEqual({
+      ok: true,
+      data: {
+        planTerm: "2027-spring",
+        courseLoad: 4,
+        coop: { doing: true, workTerms: ["2027-fall", "2028-spring"] },
+      },
+    });
+  });
+
+  test("next-term: no co-op answer, or 'no', means no co-op and no work terms", () => {
+    for (const extra of [
+      [],
+      [
+        ["coop", "no"],
+        ["coopTerms", "2027-fall"],
+      ],
+    ]) {
+      const r = parseStep(
+        "next-term",
+        form([
+          ["planTerm", "2027-spring"],
+          ["courseLoad", "4"],
+          ...(extra as [string, string][]),
+        ]),
+      );
+      expect(r.ok && r.data.coop).toEqual({ doing: false, workTerms: [] });
+    }
+  });
+
+  test("next-term: at most 3 work terms, none before the start term", () => {
+    const many = parseStep(
+      "next-term",
+      form([
+        ["planTerm", "2027-spring"],
+        ["courseLoad", "4"],
+        ["coop", "yes"],
+        ["coopTerms", "2027-summer"],
+        ["coopTerms", "2027-fall"],
+        ["coopTerms", "2028-spring"],
+        ["coopTerms", "2028-summer"],
+      ]),
+    );
+    expect(many.ok === false && many.fieldErrors?.coopTerms).toBe(
+      "Pick up to 3 work terms.",
+    );
+    const early = parseStep(
+      "next-term",
+      form([
+        ["planTerm", "2027-spring"],
+        ["courseLoad", "4"],
+        ["coop", "yes"],
+        ["coopTerms", "2026-fall"],
+      ]),
+    );
+    expect(early.ok === false && early.fieldErrors?.coopTerms).toBe(
+      "Work terms start from your plan's start term.",
+    );
+  });
+
   test("courses: normalises codes and resets confirmation", () => {
     const r = parseStep(
       "courses",

@@ -10,7 +10,7 @@ import type { ActionResult } from "@/lib/app/types";
 const SUMMER = ["full", "some", "no", "unsure"];
 
 /**
- * My plan: change the start term, the course load and summer terms. The plan is recomputed
+ * My plan: change the start term, the course load, summer terms and co-op. The plan is recomputed
  * by the rules engine on the next render; nothing else in the profile changes.
  */
 export async function updatePlanSettings(

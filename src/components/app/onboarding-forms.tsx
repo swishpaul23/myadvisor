@@ -15,6 +15,7 @@ import {
   COURSE_LOADS,
   SEASONS,
   type ActionResult,
+  type Coop,
   type RecordCourse,
 } from "@/lib/app/types";
 import { cn } from "@/lib/utils";
@@ -166,14 +167,93 @@ export function ProgramForm({
   );
 }
 
+/**
+ * "Are you doing co-op?" and the work terms (up to 3). Posts `coop` (yes/no) and
+ * `coopTerms`. Back-to-back terms are fine; none picked means the default placement.
+ */
+export function CoopFields({
+  coop,
+  termOptions,
+  error,
+}: {
+  coop?: Coop;
+  termOptions: string[];
+  error?: string;
+}) {
+  const picked = coop?.workTerms ?? [];
+  const terms = [
+    ...picked.filter((t) => !termOptions.includes(t)),
+    ...termOptions,
+  ];
+  return (
+    <fieldset
+      className="flex flex-col gap-2"
+      aria-describedby="coop-hint coopTerms-error"
+    >
+      <legend className={cn(LABEL, "mb-1.5")}>Are you doing co-op?</legend>
+      <div className="grid grid-cols-2 gap-2">
+        <label className={CHOICE}>
+          <input
+            type="radio"
+            name="coop"
+            value="yes"
+            defaultChecked={coop?.doing === true}
+            className={CHECK}
+          />
+          Yes
+        </label>
+        <label className={CHOICE}>
+          <input
+            type="radio"
+            name="coop"
+            value="no"
+            defaultChecked={coop?.doing !== true}
+            className={CHECK}
+          />
+          No
+        </label>
+      </div>
+      <p className={cn(LABEL, "mt-2")}>
+        Work terms, if you know them (up to 3)
+      </p>
+      <div className="grid grid-cols-3 gap-2 max-[560px]:grid-cols-2">
+        {terms.map((t) => (
+          <label key={t} className={cn(CHOICE, "py-2.5")}>
+            <input
+              type="checkbox"
+              name="coopTerms"
+              value={t}
+              defaultChecked={picked.includes(t)}
+              aria-invalid={Boolean(error)}
+              className={CHECK}
+            />
+            {termLabel(t)}
+          </label>
+        ))}
+      </div>
+      <p id="coop-hint" className={HINT}>
+        Back-to-back work terms are fine: Fall + Spring is an 8-month placement,
+        and Summer can come before it. Work terms are planned with no courses.
+        Leave them blank and we&apos;ll plan a default you can change: Fall +
+        Spring, plus one more work term.
+      </p>
+      <FieldError id="coopTerms-error" message={error} />
+    </fieldset>
+  );
+}
+
 export function NextTermForm({
   planTerm,
   courseLoad,
+  coop,
   termOptions,
+  coopOptions,
 }: {
   planTerm?: string;
   courseLoad?: number;
+  coop?: Coop;
   termOptions: string[];
+  coopOptions: string[];
 }) {
   const { formAction, errors, message } = useStepAction(
     saveStep.bind(null, "next-term"),
@@ -183,7 +263,7 @@ export function NextTermForm({
       <FormError message={message} />
       <div className="flex flex-col gap-1.5">
         <label htmlFor="planTerm" className={LABEL}>
-          Which term do you want to plan?
+          Which term should your plan start from?
         </label>
         <select
           id="planTerm"
@@ -207,7 +287,7 @@ export function NextTermForm({
         aria-describedby="courseLoad-error"
       >
         <legend className={cn(LABEL, "mb-1.5")}>
-          How many courses do you want to take that term?
+          How many courses do you want to take each term?
         </legend>
         <div className="grid grid-cols-5 gap-2 max-[480px]:grid-cols-3">
           {COURSE_LOADS.map((n) => (
@@ -229,6 +309,11 @@ export function NextTermForm({
         </p>
         <FieldError id="courseLoad-error" message={errors.courseLoad} />
       </fieldset>
+      <CoopFields
+        coop={coop}
+        termOptions={coopOptions}
+        error={errors.coopTerms}
+      />
       <Actions
         back="/app/start/program"
         submit={<SubmitButton>Continue</SubmitButton>}

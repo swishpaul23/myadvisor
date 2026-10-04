@@ -20,6 +20,7 @@ import {
 import { readState } from "@/lib/app/store";
 import {
   admissionYearOptions,
+  coopTermOptions,
   planTermOptions,
   recordTermOptions,
   termLabel,
@@ -31,7 +32,8 @@ export const metadata = { title: "Get started · MyAdvisor" };
 
 const INTRO: Record<(typeof STEPS)[number]["slug"], string> = {
   program: "Your program and concentration decide which requirements apply.",
-  "next-term": "Tell us which term to plan and how full you'd like it.",
+  "next-term":
+    "Tell us where your plan starts, how full each term should be, and whether you're doing co-op.",
   courses: "Add every course you've completed or are taking now.",
   questions: "Three quick questions so the advisor knows what matters to you.",
   review: "Check everything once more. Your progress is worked out from this.",
@@ -72,7 +74,9 @@ export default async function StepPage({
         <NextTermForm
           planTerm={draft?.planTerm}
           courseLoad={draft?.courseLoad}
+          coop={draft?.coop}
           termOptions={planTermOptions(today)}
+          coopOptions={coopTermOptions(today)}
         />
       )}
       {step === "courses" && (
@@ -138,8 +142,17 @@ function Review({ draft }: { draft: OnboardingDraft }) {
     [
       "Planning",
       draft.planTerm
-        ? `${termLabel(draft.planTerm)} · ${draft.courseLoad} courses`
+        ? `From ${termLabel(draft.planTerm)} · ${draft.courseLoad} courses per term`
         : "—",
+      "next-term",
+    ],
+    [
+      "Co-op",
+      !draft.coop?.doing
+        ? "No"
+        : draft.coop.workTerms.length > 0
+          ? `Yes · ${draft.coop.workTerms.map(termLabel).join(", ")}`
+          : "Yes · default placement",
       "next-term",
     ],
     [

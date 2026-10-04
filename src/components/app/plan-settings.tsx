@@ -3,9 +3,10 @@
 import { useActionState } from "react";
 import { updatePlanSettings } from "@/app/app/(shell)/plan/actions";
 import { termLabel } from "@/lib/app/terms";
-import { COURSE_LOADS } from "@/lib/app/types";
+import { COURSE_LOADS, type Coop } from "@/lib/app/types";
 import { cn } from "@/lib/utils";
 import { FieldError, FormError, SubmitButton } from "./form-parts";
+import { CoopFields } from "./onboarding-forms";
 import { BUTTON_SECONDARY, FIELD, LABEL, PANEL, PANEL_TITLE } from "./styles";
 
 const SUMMER_OPTIONS = [
@@ -15,18 +16,22 @@ const SUMMER_OPTIONS = [
   ["unsure", "Not sure yet (left out)"],
 ] as const;
 
-/** Change the start term, course load and summer terms; the engine recomputes the plan. */
+/** Change the start term, course load, summer and co-op; the engine recomputes the plan. */
 export function PlanSettings({
   planTerm,
   courseLoad,
   summer,
+  coop,
   termOptions,
+  coopOptions,
 }: {
   planTerm: string;
   courseLoad: number;
   /** The summer answer (full, some, no, unsure, skip), if any. */
   summer?: string;
+  coop: Coop;
   termOptions: string[];
+  coopOptions: string[];
 }) {
   const [state, formAction] = useActionState(updatePlanSettings, null);
   const errors = state && !state.ok ? (state.fieldErrors ?? {}) : {};
@@ -102,6 +107,21 @@ export function PlanSettings({
       <FieldError id="planTerm-error" message={errors.planTerm} />
       <FieldError id="courseLoad-error" message={errors.courseLoad} />
       <FieldError id="summer-error" message={errors.summer} />
+      <details
+        className="rounded-[10px] border border-line-soft px-3.5 py-3"
+        open={Boolean(errors.coopTerms)}
+      >
+        <summary className="cursor-pointer text-[13px] font-medium">
+          Co-op {coop.doing ? "· yes" : "· no"}
+        </summary>
+        <div className="mt-3">
+          <CoopFields
+            coop={coop}
+            termOptions={coopOptions}
+            error={errors.coopTerms}
+          />
+        </div>
+      </details>
       {state?.ok && (
         <p role="status" className="text-[12px] text-ink-muted">
           Plan updated.

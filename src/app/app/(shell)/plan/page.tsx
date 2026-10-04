@@ -9,7 +9,7 @@ import { PlanSettings } from "@/components/app/plan-settings";
 import { EmptyPanel } from "@/components/app/states";
 import { FOCUS, HINT, KICKER, SCREEN_TITLE } from "@/components/app/styles";
 import { getDegreeView } from "@/lib/app/degree";
-import { planTermOptions, termLabel } from "@/lib/app/terms";
+import { coopTermOptions, planTermOptions, termLabel } from "@/lib/app/terms";
 import { cn } from "@/lib/utils";
 
 export const metadata = { title: "My plan · MyAdvisor" };
@@ -56,7 +56,9 @@ export default async function PlanPage() {
         planTerm={profile.planTerm}
         courseLoad={profile.courseLoad}
         summer={profile.surveyAnswers.summer}
+        coop={profile.coop}
         termOptions={planTermOptions(new Date())}
+        coopOptions={coopTermOptions(new Date())}
       />
       {plan.terms.length === 0 ? (
         <EmptyPanel title="Nothing left to plan">

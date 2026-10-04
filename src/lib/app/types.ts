@@ -64,6 +64,13 @@ export const COURSE_LOADS = [2, 3, 4, 5, 6] as const;
 export const ORIGINS = ["sample", "transcript", "manual"] as const;
 export type Origin = (typeof ORIGINS)[number];
 
+/** Co-op: whether the student is doing it, and the work terms they picked (up to 3). */
+export const coopSchema = z.object({
+  doing: z.boolean(),
+  workTerms: z.array(termSchema).max(3, "Pick up to 3 work terms."),
+});
+export type Coop = z.infer<typeof coopSchema>;
+
 export const profileSchema = z.object({
   /** Only the BBA is supported. */
   program: z.literal("BBA"),
@@ -78,6 +85,8 @@ export const profileSchema = z.object({
     .int()
     .min(COURSE_LOADS[0], "Pick a course load.")
     .max(COURSE_LOADS[COURSE_LOADS.length - 1]!, "Pick a course load."),
+  /** Profiles saved before co-op was asked have no co-op. */
+  coop: coopSchema.default({ doing: false, workTerms: [] }),
   courses: coursesSchema,
   origin: z.enum(ORIGINS),
   /** The student reviewed the course list and confirmed it. */

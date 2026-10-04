@@ -60,6 +60,11 @@ export function planTermOptions(today: Date): string[] {
   return termsAfter(termOf(today), 6);
 }
 
+/** Terms a student can pick as co-op work terms: the next twelve after the current one. */
+export function coopTermOptions(today: Date): string[] {
+  return termsAfter(termOf(today), 12);
+}
+
 /** Terms a course on the record can be from: twelve years back to now. */
 export function recordTermOptions(today: Date): string[] {
   return termsUpTo(termOf(today), 36);

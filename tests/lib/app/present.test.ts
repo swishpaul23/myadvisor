@@ -269,6 +269,7 @@ describe("presentPlan: a hand-built multi-term plan for the sample student", () 
     summerUnsure: true,
     unitLoad: catalog.policy.unit_load,
     electiveUnits: 3,
+    coop: { doing: false, terms: [], isDefault: false },
   };
   const plan = presentPlan(
     remaining,
@@ -413,6 +414,71 @@ describe("presentPlan: a hand-built multi-term plan for the sample student", () 
     );
     expect(p.notes).toEqual([]);
     expect(p.finishTerm).toBeNull();
+  });
+});
+
+describe("presentPlan: co-op notes", () => {
+  const empty: RemainingPlan = {
+    terms: [{ id: "2027-spring", kind: "study", items: [] }],
+    unscheduled: [],
+    notPlannable: [],
+    plan: { terms: [] },
+    validation: {
+      violations: [],
+      terms: [],
+      graduationTerm: null,
+      graduationTermExcludingUnknown: null,
+      graduationAssumesValidPlan: false,
+      graduationBlockers: [],
+      auditAfterPlan: result,
+    },
+  };
+  const base = {
+    summer: "none" as const,
+    summerUnsure: false,
+    unitLoad: catalog.policy.unit_load,
+    electiveUnits: 3,
+  };
+  const present = (coop: {
+    doing: boolean;
+    terms: string[];
+    isDefault: boolean;
+  }) =>
+    presentPlan(
+      empty,
+      catalog.requirements,
+      result,
+      SAMPLE_PROFILE,
+      catalog.courses,
+      { ...base, coop },
+    );
+
+  test("the default placement is said to be a default the student can change", () => {
+    const p = present({
+      doing: true,
+      terms: ["2027-fall", "2028-spring", "2029-spring"],
+      isDefault: true,
+    });
+    expect(p.notes).toEqual([
+      "Co-op work terms are a default: an 8-month placement (Fall 2027 + Spring 2028) and Spring 2029. Pick your own in Plan settings.",
+    ]);
+    expect(p.claims).toContainEqual({
+      text: "The default co-op placement starts after at least one study term; the SFU calendar's co-op timing rules aren't checked.",
+      status: "assumption",
+    });
+  });
+
+  test("fewer than 3 picked work terms: a neutral reminder", () => {
+    const p = present({ doing: true, terms: ["2027-fall"], isDefault: false });
+    expect(p.notes).toEqual([
+      "Co-op has 3 work terms; you've picked 1. Add the others in Plan settings when you know them.",
+    ]);
+  });
+
+  test("no co-op: no co-op notes", () => {
+    expect(
+      present({ doing: false, terms: [], isDefault: false }).notes,
+    ).toEqual([]);
   });
 });
 

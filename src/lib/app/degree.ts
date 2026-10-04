@@ -4,7 +4,12 @@ import { audit } from "@/engine/audit";
 import type { AuditResult } from "@/engine/audit/types";
 import { planRemaining, type RemainingPlan } from "@/engine/plan/remaining";
 import { loadReferenceData, type DataSource } from "@/lib/data/source";
-import { summerChoice, toEngineStudent, toPlanOptions } from "./engine-input";
+import {
+  coopTerms,
+  summerChoice,
+  toEngineStudent,
+  toPlanOptions,
+} from "./engine-input";
 import {
   buildChecklist,
   buildGaps,
@@ -61,6 +66,7 @@ export const getDegreeView = cache(async (): Promise<DegreeView | null> => {
       summerUnsure: summerChoice(profile).unsure,
       unitLoad: data.policy.unit_load,
       electiveUnits: data.policy.unknown_course.units,
+      coop: { doing: profile.coop.doing, ...coopTerms(profile) },
     },
   );
   const shown = new Set(

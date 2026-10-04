@@ -44,6 +44,7 @@ const plan = presentPlan(
     summerUnsure: true,
     unitLoad: catalog.policy.unit_load,
     electiveUnits: 3,
+    coop: { doing: false, terms: [], isDefault: false },
   },
 );
 const facts = {
