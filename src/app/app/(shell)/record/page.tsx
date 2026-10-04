@@ -178,6 +178,7 @@ export default async function RecordPage() {
       )}
       <RecordUpload
         current={profile.courses}
+        sample={profile.origin === "sample"}
         termOptions={recordTermOptions(new Date())}
         available={Boolean(readGoogleGenerativeAiApiKey())}
       />

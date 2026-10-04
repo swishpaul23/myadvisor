@@ -148,18 +148,21 @@ function ChangeList({ changes }: { changes: CourseChange[] }) {
 
 function Compare({
   current,
+  sample,
   rows,
   onBack,
   onDone,
   onErrors,
 }: {
   current: RecordCourse[];
+  /** The record is the sample student's: replacing it is the sensible default. */
+  sample: boolean;
   rows: RecordCourse[];
   onBack: () => void;
   onDone: () => void;
   onErrors: (errors: Record<string, string>) => void;
 }) {
-  const [mode, setMode] = useState<MergeMode>("merge");
+  const [mode, setMode] = useState<MergeMode>(sample ? "replace" : "merge");
   const diff = diffRecord(current, rows);
   const [state, formAction] = useActionState(
     async (prev: ActionResult | null, form: FormData) => {
@@ -209,6 +212,12 @@ function Compare({
         />
       </div>
 
+      {sample && (
+        <p className="rounded-[10px] border border-brand/30 bg-brand-wash px-3.5 py-2.5 text-[13px] text-brand">
+          Your record is the sample student&apos;s. Replace it with your
+          transcript so your progress isn&apos;t mixed with sample courses.
+        </p>
+      )}
       <fieldset className="flex flex-col gap-2">
         <legend className="mb-1.5 text-[13px] font-medium">
           How should these courses go on your record?
@@ -270,10 +279,12 @@ function Compare({
 /** "Upload transcript" on Academic record: read, review, compare, then merge or replace. */
 export function RecordUpload({
   current,
+  sample,
   termOptions,
   available,
 }: {
   current: RecordCourse[];
+  sample: boolean;
   termOptions: string[];
   /** False when the Gemini key is missing: upload is unavailable. */
   available: boolean;
@@ -394,6 +405,7 @@ export function RecordUpload({
       {step.kind === "compare" && (
         <Compare
           current={current}
+          sample={sample}
           rows={step.rows}
           onBack={() =>
             setStep({

@@ -3,7 +3,8 @@ import type { RecordCourse } from "./types";
 // Merging a newly uploaded transcript into the student's course list (Academic record).
 // Pure and client-safe: the review screen shows the diff, the server action applies it.
 // Courses match on code + term. When a code has exactly one attempt on the record and one on
-// the transcript, in different terms, it is the same course with its term corrected.
+// the transcript, in different terms but otherwise identical (status and grade), it is the
+// same course with its term corrected; with a different grade it is a new attempt (a retake).
 
 export type MergeMode = "merge" | "replace";
 
@@ -78,7 +79,12 @@ export function diffRecord(
       count(incoming, u.code) === 1
     ) {
       const only = current.find((c) => c.code === u.code)!;
-      if (!matched.has(only)) before = only;
+      if (
+        !matched.has(only) &&
+        only.status === u.status &&
+        only.grade === u.grade
+      )
+        before = only;
     }
     if (!before) {
       diff.added.push(u);

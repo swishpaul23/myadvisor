@@ -83,7 +83,11 @@ export async function importTranscript(
         ...state.profile,
         courses,
         recordConfirmed: true,
-        origin: "transcript",
+        // Sample courses merged with an upload are still partly sample data: keep the tag.
+        origin:
+          mode === "merge" && state.profile.origin === "sample"
+            ? "sample"
+            : "transcript",
       },
     });
   } catch (err) {

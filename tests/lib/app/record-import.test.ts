@@ -57,7 +57,7 @@ const form = (
 beforeEach(() => {
   stored = {
     version: 1,
-    profile: { ...SAMPLE_PROFILE, courses: current },
+    profile: { ...SAMPLE_PROFILE, courses: current, origin: "manual" },
     draft: null,
   };
 });
@@ -78,6 +78,18 @@ describe("importTranscript", () => {
       origin: "transcript",
       recordConfirmed: true,
     });
+  });
+
+  test("merging into the sample record keeps it marked as sample data", async () => {
+    stored = {
+      version: 1,
+      profile: { ...SAMPLE_PROFILE, courses: current, origin: "sample" },
+      draft: null,
+    };
+    await importTranscript(null, form(uploaded));
+    expect(stored.profile?.origin).toBe("sample");
+    await importTranscript(null, form(uploaded, { mode: "replace" }));
+    expect(stored.profile?.origin).toBe("transcript");
   });
 
   test("replace deletes courses only when the student chose it", async () => {

@@ -78,6 +78,19 @@ describe("diffRecord", () => {
     expect(retake.added).toEqual([c("ECON 103", "2025-fall", "A")]);
   });
 
+  test("a retake with a different grade in a later term is a new attempt, not a term change", () => {
+    const failed = [c("MATH 157", "2024-fall", "F")];
+    const diff = diffRecord(failed, [c("MATH 157", "2025-spring", "B")]);
+    expect(diff.added).toEqual([c("MATH 157", "2025-spring", "B")]);
+    expect(diff.changed).toEqual([]);
+    expect(
+      applyMerge(failed, [c("MATH 157", "2025-spring", "B")], "merge"),
+    ).toEqual([
+      c("MATH 157", "2024-fall", "F"),
+      c("MATH 157", "2025-spring", "B"),
+    ]);
+  });
+
   test("a duplicate row on the transcript counts once", () => {
     const diff = diffRecord(current, [
       c("BUS 343", "2026-fall", "B"),
