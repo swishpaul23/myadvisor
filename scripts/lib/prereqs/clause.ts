@@ -5,6 +5,7 @@ import {
   course,
   group,
   hasUnits,
+  isTextNode,
   markConcurrent,
   unknown,
 } from "./nodes";
@@ -47,7 +48,7 @@ function hasUngradedCourse(node: PrereqNode): boolean {
 function trailingOnlyGrade(nodes: PrereqNode[]): boolean {
   const last = nodes[nodes.length - 1];
   if (!last || nodes.length < 2) return false;
-  const lastHasCourse = last.type !== "units" && last.type !== "unknown";
+  const lastHasCourse = last.type !== "units" && !isTextNode(last);
   return (
     lastHasCourse &&
     fullyGraded(last) &&
@@ -55,8 +56,9 @@ function trailingOnlyGrade(nodes: PrereqNode[]): boolean {
   );
 }
 
+/** Any text-carrying node (unknown, count, permission, restriction). */
 function containsUnknown(node: PrereqNode): boolean {
-  if (node.type === "unknown") return true;
+  if (isTextNode(node)) return true;
   if (node.type === "all" || node.type === "any")
     return node.of.some(containsUnknown);
   return false;

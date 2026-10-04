@@ -194,6 +194,23 @@ export function parsePrerequisites(
   }
   coreq = coreq ?? null;
 
+  return {
+    code,
+    prereq,
+    coreq,
+    ...statusOf(prereq, coreq),
+    source: "parsed",
+    raw: prerequisitesText ?? "",
+    raw_coreq: corequisitesText?.trim() ? corequisitesText : null,
+    advisory: parts.advisory,
+  };
+}
+
+/** status and unparsed_fragments from the trees; shared with overrides. */
+export function statusOf(
+  prereq: PrereqNode | null,
+  coreq: PrereqNode | null,
+): Pick<PrereqRecord, "status" | "unparsed_fragments"> {
   const fragments = [...unknownTexts(prereq), ...unknownTexts(coreq)];
   const known = countKnown(prereq) + countKnown(coreq);
   const status: PrereqRecord["status"] =
@@ -204,15 +221,5 @@ export function parsePrerequisites(
         : known === 0
           ? "unparsed"
           : "partial";
-
-  return {
-    code,
-    prereq,
-    coreq,
-    status,
-    raw: prerequisitesText ?? "",
-    raw_coreq: corequisitesText?.trim() ? corequisitesText : null,
-    advisory: parts.advisory,
-    unparsed_fragments: fragments,
-  };
+  return { status, unparsed_fragments: fragments };
 }

@@ -32,6 +32,21 @@ const units = (
   ...extra,
 });
 const q = (text: string): PrereqNode => ({ type: "unknown", text });
+const restriction = (text: string): PrereqNode => ({
+  type: "restriction",
+  text,
+});
+const permission = (
+  who: "instructor" | "department" | "co-op coordinator",
+  text: string,
+): PrereqNode => ({ type: "permission", who, text });
+const count = (n: number, level: number, text: string): PrereqNode => ({
+  type: "count",
+  n,
+  subject: "ENGL",
+  level,
+  text,
+});
 const parse = (pre: string | null, co: string | null = null) => {
   const record = parsePrerequisites("TEST 100", pre, co);
   expect(prereqRecordSchema.safeParse(record).success).toBe(true);
@@ -133,7 +148,7 @@ describe("grades", () => {
     );
     expect(r.prereq).toEqual(
       all(
-        q(
+        restriction(
           "This course is only open to approved business administration majors admitted to the faculty in Fall 2022 and onward",
         ),
         any(c("BUS 100", "P"), c("BUS 203", "P")),
@@ -141,7 +156,8 @@ describe("grades", () => {
         units(45),
       ),
     );
-    expect(r.status).toBe("partial");
+    // A restriction is recognized text, not an unknown, so the parse is complete.
+    expect(r.status).toBe("parsed");
     expect(r.advisory).toEqual(["Recommendation to take with BUS 360W"]);
   });
 
@@ -215,7 +231,9 @@ describe("and/or precedence and parentheses", () => {
         c("BUS 341", "C-"),
         c("BUS 340", "C-", true),
         units(60),
-        q("The course is only open to students in the business minor program"),
+        restriction(
+          "The course is only open to students in the business minor program",
+        ),
       ),
     );
   });
@@ -400,7 +418,7 @@ describe("units with courses", () => {
   test("units or words (ENGL 202)", () => {
     expect(
       parse("12 units or one 100-division English course.").prereq,
-    ).toEqual(any(units(12), q("one 100-division English course")));
+    ).toEqual(any(units(12), count(1, 100, "one 100-division English course")));
   });
 });
 
@@ -417,7 +435,7 @@ describe("permission, admission, and other rules", () => {
           any(c("INDG 101"), c("FNST 101")),
           any(c("INDG 201W"), c("FNST 201W"), c("INDG 250")),
         ),
-        q("permission of the instructor"),
+        permission("instructor", "permission of the instructor"),
       ),
     );
   });
@@ -430,7 +448,7 @@ describe("permission, admission, and other rules", () => {
     ).toEqual(
       all(
         c("MATH 336"),
-        q("permission of the co-op co-ordinator"),
+        permission("co-op coordinator", "permission of the co-op co-ordinator"),
         q("students must apply at least one term in advance"),
       ),
     );
@@ -446,16 +464,21 @@ describe("permission, admission, and other rules", () => {
     );
   });
 
-  test.each([
-    [
-      "To be determined by the instructor subject to approval by the department chair.",
-    ], // ECON 383
-    ["Enrolled in the philosophy honours program."], // PHIL 479
-    ["Reserved for English honours, major, joint major and minor students."], // ENGL 418W
-  ])("text that is only a rule is unparsed: %j", (text) => {
-    const r = parse(text);
+  test("text that matches no pattern is unparsed (ECON 383)", () => {
+    const text =
+      "To be determined by the instructor subject to approval by the department chair";
+    const r = parse(`${text}.`);
     expect(r.status).toBe("unparsed");
-    expect(r.prereq).toEqual(q(text.replace(/\.$/, "")));
+    expect(r.prereq).toEqual(q(text));
+  });
+
+  test.each([
+    ["Enrolled in the philosophy honours program"], // PHIL 479
+    ["Reserved for English honours, major, joint major and minor students"], // ENGL 418W
+  ])("program/admission restriction: %j", (text) => {
+    const r = parse(`${text}.`);
+    expect(r.prereq).toEqual(restriction(text));
+    expect(r.unparsed_fragments).toEqual([]);
   });
 
   test("CGPA and substitution sentences stay verbatim (ECON 402)", () => {
@@ -508,8 +531,13 @@ describe("corequisites and concurrency", () => {
     const r = parse(
       "This course is only open to approved business administration majors admitted to the faculty through the Business Foundation Pathways - High School Pathway. Corequisite: BUS 203 with a P grade.",
     );
+    expect(r.prereq).toEqual(
+      restriction(
+        "This course is only open to approved business administration majors admitted to the faculty through the Business Foundation Pathways - High School Pathway",
+      ),
+    );
     expect(r.coreq).toEqual(c("BUS 203", "P", true));
-    expect(r.status).toBe("partial");
+    expect(r.status).toBe("parsed");
   });
 
   test("'may be taken concurrently' marks the courses (ECON 233)", () => {
@@ -617,9 +645,9 @@ describe("lexer", () => {
 
 describe("report", () => {
   const records = [
-    parse("45 units or permission of the department."),
-    parse("45 units or permission of the department."),
-    parse("Enrolled in the philosophy honours program."),
+    parse("45 units or permission of the undergraduate chair."),
+    parse("45 units or permission of the undergraduate chair."),
+    parse("Admission is by permission of the Instructor and Director."),
     parse("CMPT 120 and XYZ 101."),
   ];
 
@@ -640,7 +668,7 @@ describe("report", () => {
   test("most common fragments first", () => {
     expect(topFragments(records, 1)).toEqual([
       {
-        text: "permission of the department",
+        text: "permission of the undergraduate chair",
         count: 2,
         pattern: "permission or approval",
       },

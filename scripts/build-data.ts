@@ -39,6 +39,8 @@ import {
 import { prereqsFileSchema } from "@/lib/data/prereqs";
 import { courseReferencesFromRequirementsCsv } from "./lib/outlines/requirements";
 import { parsePrerequisites } from "./lib/prereqs";
+import { walk } from "./lib/prereqs/nodes";
+import { applyOverrides, parseOverridesCsv } from "./lib/prereqs/overrides";
 import { codesWithoutData, topFragments } from "./lib/prereqs/report";
 import { validateRequirementsCsv } from "./validate-requirements";
 
@@ -51,7 +53,9 @@ const OUT = {
   unknown: "data/generated/unknown-courses.json",
   prereqs: "data/generated/prereqs.json",
   prereqsReview: "data/generated/prereqs-review.json",
+  prereqsReviewRequirements: "data/generated/prereqs-review-requirements.json",
 };
+const PREREQ_OVERRIDES_CSV = "data/sheets/prereq-overrides.csv";
 
 type Manifest = {
   terms: { term: string; future: boolean }[];
@@ -191,9 +195,42 @@ for (const [dept, codes] of unknownByDept) {
 
 // ---------- prerequisites ----------
 
-const prereqs = courses.map((c) =>
+const parsedPrereqs = courses.map((c) =>
   parsePrerequisites(c.code, c.prerequisites_text, c.corequisites_text),
 );
+
+// Manual overrides (data/sheets/prereq-overrides.csv) replace the parsed prerequisite tree.
+const overrideCsv = parseOverridesCsv(
+  readFileSync(PREREQ_OVERRIDES_CSV, "utf8"),
+);
+errors.push(...overrideCsv.errors);
+const overridden = applyOverrides(
+  parsedPrereqs,
+  overrideCsv.rows,
+  new Set(courses.map((c) => c.code)),
+);
+errors.push(...overridden.errors);
+const prereqs = overridden.records;
+console.log(
+  `\nPrerequisite overrides applied: ${prereqs.filter((r) => r.source === "override").length}`,
+);
+
+const nodeKinds: Record<string, number> = {};
+for (const r of prereqs) {
+  for (const tree of [r.prereq, r.coreq]) {
+    walk(tree, (n) => {
+      if (
+        n.type === "count" ||
+        n.type === "permission" ||
+        n.type === "restriction"
+      ) {
+        nodeKinds[n.type] = (nodeKinds[n.type] ?? 0) + 1;
+      }
+    });
+  }
+}
+printCounts("Typed text nodes (count / permission / restriction)", nodeKinds);
+
 const prereqCounts: Record<string, number> = {};
 for (const r of prereqs)
   prereqCounts[r.status] = (prereqCounts[r.status] ?? 0) + 1;
@@ -225,15 +262,34 @@ for (const [code, citedBy] of Object.entries(missingCodes)) {
   console.log(`  ${code.padEnd(10)} cited by ${citedBy.join(", ")}`);
 }
 
-const review = prereqs
-  .filter((r) => r.status === "partial" || r.status === "unparsed")
-  .map(({ code, status, raw, raw_coreq, unparsed_fragments }) => ({
-    code,
-    status,
-    raw,
-    raw_coreq,
-    unparsed_fragments,
-  }));
+const toReview = (records: typeof prereqs) =>
+  records
+    .filter((r) => r.status === "partial" || r.status === "unparsed")
+    .map(({ code, status, raw, raw_coreq, unparsed_fragments }) => ({
+      code,
+      status,
+      raw,
+      raw_coreq,
+      unparsed_fragments,
+    }));
+const review = toReview(prereqs);
+
+// Courses named in requirements.csv only.
+const requirementCourses = prereqs.filter((r) => r.code in refs);
+const reqCounts: Record<string, number> = {};
+for (const r of requirementCourses)
+  reqCounts[r.status] = (reqCounts[r.status] ?? 0) + 1;
+console.log(
+  `\nCourses named in requirements.csv: ${Object.keys(refs).length} (${requirementCourses.length} with course data, ${unknown.length} offering unknown)`,
+);
+printCounts("  Prerequisite status (courses with data)", reqCounts);
+const requirementReview = toReview(requirementCourses);
+console.log(`\n  Partial or unparsed (${requirementReview.length}):`);
+for (const r of requirementReview) {
+  console.log(
+    `    ${r.code.padEnd(9)} [${r.status}] ${r.raw}${r.raw_coreq ? ` | Corequisite text: ${r.raw_coreq}` : ""}`,
+  );
+}
 
 // ---------- validate and write ----------
 
@@ -267,6 +323,7 @@ write(OUT.offerings, offerings);
 write(OUT.unknown, unknown);
 write(OUT.prereqs, prereqs);
 write(OUT.prereqsReview, review);
+write(OUT.prereqsReviewRequirements, requirementReview);
 console.log(
   `\nOK: wrote ${requirements.rows.length} requirements, ${courses.length} courses, ${Object.keys(offerings).length} offerings, ${unknown.length} unknown courses, ${prereqs.length} prerequisite records (${review.length} to review) to data/generated/`,
 );

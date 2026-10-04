@@ -1,10 +1,20 @@
 import type { PrereqNode } from "@/lib/data/prereqs";
+import { classifyFragment } from "./fragments";
 import type { Grade } from "./lexer";
 
-export const unknown = (text: string): PrereqNode => ({
-  type: "unknown",
-  text: text.trim(),
-});
+/** A fragment the grammar doesn't parse: a typed count/permission/restriction node for
+ * an exact pattern (fragments.ts), otherwise an unknown node with the text verbatim. */
+export const unknown = (text: string): PrereqNode => classifyFragment(text);
+
+/** Nodes that carry text instead of structure (anything but course/units/all/any). */
+export function isTextNode(node: PrereqNode): boolean {
+  return (
+    node.type === "unknown" ||
+    node.type === "count" ||
+    node.type === "permission" ||
+    node.type === "restriction"
+  );
+}
 
 export function course(code: string, concurrentOk = false): PrereqNode {
   return { type: "course", code, minGrade: null, concurrentOk };
@@ -60,7 +70,8 @@ export function unknownTexts(node: PrereqNode | null): string[] {
 export function countKnown(node: PrereqNode | null): number {
   let n = 0;
   walk(node, (x) => {
-    if (x.type === "course" || x.type === "units") n++;
+    // Everything recognized: all leaves except unknown.
+    if (x.type !== "unknown" && x.type !== "all" && x.type !== "any") n++;
   });
   return n;
 }

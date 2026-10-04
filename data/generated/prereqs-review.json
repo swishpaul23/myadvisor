@@ -1,32 +1,5 @@
 [
   {
-    "code": "BUS 201",
-    "status": "partial",
-    "raw": "This course is only open to approved business administration majors admitted to the faculty through the Business Foundation Pathways - High School Pathway. Corequisite: BUS 203 with a P grade.",
-    "raw_coreq": null,
-    "unparsed_fragments": [
-      "This course is only open to approved business administration majors admitted to the faculty through the Business Foundation Pathways - High School Pathway"
-    ]
-  },
-  {
-    "code": "BUS 202",
-    "status": "partial",
-    "raw": "This course is only open to approved business administration majors, joint majors, or second degree students admitted to the faculty through the Business Foundation Pathways - Transfer Pathway. Corequisite: BUS 203 with a P grade.",
-    "raw_coreq": null,
-    "unparsed_fragments": [
-      "This course is only open to approved business administration majors, joint majors, or second degree students admitted to the faculty through the Business Foundation Pathways - Transfer Pathway"
-    ]
-  },
-  {
-    "code": "BUS 203",
-    "status": "partial",
-    "raw": "This course is only open to approved business administration majors admitted to the faculty through the BBA major - highschool or transfer stream in Fall 2022 and onward. Corequisite: BUS 201 or BUS 202, with a minimum grade of C-.",
-    "raw_coreq": null,
-    "unparsed_fragments": [
-      "This course is only open to approved business administration majors admitted to the faculty through the BBA major - highschool or transfer stream in Fall 2022 and onward"
-    ]
-  },
-  {
     "code": "BUS 217W",
     "status": "partial",
     "raw": "BUS 201 with a minimum grade of C- and 15 units; OR 45 units and corequisite: BUS 202; OR business administration joint major, joint honours, or double degree students with 45 units; OR data science students with 15 units; OR actuarial science students with 15 units.",
@@ -35,15 +8,6 @@
       "business administration joint major, joint honours, or double degree students with 45 units",
       "data science students with 15 units",
       "actuarial science students with 15 units"
-    ]
-  },
-  {
-    "code": "BUS 300",
-    "status": "partial",
-    "raw": "This course is only open to approved business administration majors admitted to the faculty in Fall 2022 and onward. BUS 100 or BUS 203, with a P grade and BUS 217W with a minimum grade of C-; 45 units. Recommendation to take with BUS 360W.",
-    "raw_coreq": null,
-    "unparsed_fragments": [
-      "This course is only open to approved business administration majors admitted to the faculty in Fall 2022 and onward"
     ]
   },
   {
@@ -89,16 +53,6 @@
     "raw_coreq": null,
     "unparsed_fragments": [
       "actuarial science students with STAT 285 and BUS 312, both with a minimum grade of C- and 45 units"
-    ]
-  },
-  {
-    "code": "BUS 318",
-    "status": "partial",
-    "raw": "BUS 312 with a minimum grade of C-, 45 units, and permission of the instructor. This course is only open to students selected for the BEAM program.",
-    "raw_coreq": null,
-    "unparsed_fragments": [
-      "permission of the instructor",
-      "This course is only open to students selected for the BEAM program"
     ]
   },
   {
@@ -189,15 +143,6 @@
     "raw_coreq": null,
     "unparsed_fragments": [
       "business administration minor students admitted Fall 2025 - onwards with BUS 272 with a minimum grade of C- and 45 units"
-    ]
-  },
-  {
-    "code": "BUS 401",
-    "status": "partial",
-    "raw": "BUS 311 (or BUS 254 and BUS 312), BUS 341, and corequisite BUS 340, all with a minimum grade of C-; 60 units. The course is only open to students in the business minor program.",
-    "raw_coreq": null,
-    "unparsed_fragments": [
-      "The course is only open to students in the business minor program"
     ]
   },
   {
@@ -347,15 +292,6 @@
     ]
   },
   {
-    "code": "BUS 496",
-    "status": "partial",
-    "raw": "This course is only open to approved business administration majors admitted to the faculty in Fall 2022 and onward, BUS 300 with a P grade and BUS 360W with a minimum grade of C-; 95 units.",
-    "raw_coreq": null,
-    "unparsed_fragments": [
-      "This course is only open to approved business administration majors admitted to the faculty in Fall 2022 and onward"
-    ]
-  },
-  {
     "code": "BUS 498",
     "status": "partial",
     "raw": "Permission of the faculty and BUS 360W with a minimum grade of C-; 60 units.",
@@ -393,15 +329,6 @@
     ]
   },
   {
-    "code": "ECON 331",
-    "status": "partial",
-    "raw": "ECON 103 with a minimum grade of C- OR ECON 113 with a minimum grade of B-; MATH 150, MATH 151, MATH 154, or MATH 157, with a minimum grade of C-; 45 units or permission of the department.",
-    "raw_coreq": null,
-    "unparsed_fragments": [
-      "permission of the department"
-    ]
-  },
-  {
     "code": "ECON 333",
     "status": "partial",
     "raw": "ECON 103 with a minimum grade of C- or ECON 113 with a minimum grade of B-; ECON 233, BUS (or BUEC) 232, STAT 270, or STAT 271, with a minimum grade of C-; MATH 150, MATH 151, MATH 154, or MATH 157, with a minimum grade of C-; 45 units. Students with a minimum grade of A- in ECON 233, BUS (or BUEC) 232, STAT 270, or STAT 271 can take ECON 333 after 30 units. Students seeking permission to enroll based on their ECON 233, BUS (or BUEC) 232, STAT 270, or STAT 271 grade must contact the undergraduate advisor in economics.",
@@ -418,24 +345,6 @@
     "raw_coreq": null,
     "unparsed_fragments": [
       "three units of ECON or SDA 100, with a minimum grade of C-"
-    ]
-  },
-  {
-    "code": "ECON 342",
-    "status": "partial",
-    "raw": "ECON 103 with a minimum grade of C- or ECON 113 with a minimum grade of B-; ECON 105 with a minimum grade of C- or ECON 115 with a minimum grade of B-; 45 units or permission of the department.",
-    "raw_coreq": null,
-    "unparsed_fragments": [
-      "permission of the department"
-    ]
-  },
-  {
-    "code": "ECON 345",
-    "status": "partial",
-    "raw": "ECON 103 with a minimum grade of C- or ECON 113 with a minimum grade of B-; ECON 105 with a minimum grade of C- or ECON 115 with a minimum grade of B-; 45 units or permission of the department.",
-    "raw_coreq": null,
-    "unparsed_fragments": [
-      "permission of the department"
     ]
   },
   {
@@ -540,202 +449,12 @@
     ]
   },
   {
-    "code": "ENGL 202",
-    "status": "partial",
-    "raw": "12 units or one 100-division English course.",
-    "raw_coreq": null,
-    "unparsed_fragments": [
-      "one 100-division English course"
-    ]
-  },
-  {
-    "code": "ENGL 204",
-    "status": "partial",
-    "raw": "12 units or one 100-division English course.",
-    "raw_coreq": null,
-    "unparsed_fragments": [
-      "one 100-division English course"
-    ]
-  },
-  {
-    "code": "ENGL 209",
-    "status": "partial",
-    "raw": "12 units or one 100-division English course.",
-    "raw_coreq": null,
-    "unparsed_fragments": [
-      "one 100-division English course"
-    ]
-  },
-  {
-    "code": "ENGL 210",
-    "status": "partial",
-    "raw": "12 units or one 100-division English course.",
-    "raw_coreq": null,
-    "unparsed_fragments": [
-      "one 100-division English course"
-    ]
-  },
-  {
-    "code": "ENGL 211",
-    "status": "partial",
-    "raw": "12 units or one 100-division English course.",
-    "raw_coreq": null,
-    "unparsed_fragments": [
-      "one 100-division English course"
-    ]
-  },
-  {
-    "code": "ENGL 213",
-    "status": "partial",
-    "raw": "12 units or one 100-division English course.",
-    "raw_coreq": null,
-    "unparsed_fragments": [
-      "one 100-division English course"
-    ]
-  },
-  {
-    "code": "ENGL 214",
-    "status": "partial",
-    "raw": "12 units or one 100-division English course.",
-    "raw_coreq": null,
-    "unparsed_fragments": [
-      "one 100-division English course"
-    ]
-  },
-  {
-    "code": "ENGL 234",
-    "status": "partial",
-    "raw": "12 units or one 100-division English course.",
-    "raw_coreq": null,
-    "unparsed_fragments": [
-      "one 100-division English course"
-    ]
-  },
-  {
-    "code": "ENGL 300",
-    "status": "partial",
-    "raw": "30 units or two 200-division English courses.",
-    "raw_coreq": null,
-    "unparsed_fragments": [
-      "two 200-division English courses"
-    ]
-  },
-  {
-    "code": "ENGL 304",
-    "status": "partial",
-    "raw": "30 units or two 200-division English courses.",
-    "raw_coreq": null,
-    "unparsed_fragments": [
-      "two 200-division English courses"
-    ]
-  },
-  {
-    "code": "ENGL 310",
-    "status": "partial",
-    "raw": "30 units or two 200-division English courses.",
-    "raw_coreq": null,
-    "unparsed_fragments": [
-      "two 200-division English courses"
-    ]
-  },
-  {
-    "code": "ENGL 312",
-    "status": "partial",
-    "raw": "30 units or two 200-division English courses.",
-    "raw_coreq": null,
-    "unparsed_fragments": [
-      "two 200-division English courses"
-    ]
-  },
-  {
-    "code": "ENGL 320",
-    "status": "partial",
-    "raw": "30 units or two 200-division English courses.",
-    "raw_coreq": null,
-    "unparsed_fragments": [
-      "two 200-division English courses"
-    ]
-  },
-  {
-    "code": "ENGL 330",
-    "status": "partial",
-    "raw": "30 units or two 200-division English courses.",
-    "raw_coreq": null,
-    "unparsed_fragments": [
-      "two 200-division English courses"
-    ]
-  },
-  {
-    "code": "ENGL 345",
-    "status": "partial",
-    "raw": "30 units or two 200-division English courses.",
-    "raw_coreq": null,
-    "unparsed_fragments": [
-      "two 200-division English courses"
-    ]
-  },
-  {
-    "code": "ENGL 355",
-    "status": "partial",
-    "raw": "30 units or two 200-division English courses.",
-    "raw_coreq": null,
-    "unparsed_fragments": [
-      "two 200-division English courses"
-    ]
-  },
-  {
-    "code": "ENGL 360",
-    "status": "partial",
-    "raw": "30 units or two 200-division English courses.",
-    "raw_coreq": null,
-    "unparsed_fragments": [
-      "two 200-division English courses"
-    ]
-  },
-  {
     "code": "ENGL 361",
     "status": "partial",
     "raw": "30 units or two 200-division English courses. Students in the Global Asia Program Minor may enroll with permission of the instructor.",
     "raw_coreq": null,
     "unparsed_fragments": [
-      "two 200-division English courses",
       "Students in the Global Asia Program Minor may enroll with permission of the instructor"
-    ]
-  },
-  {
-    "code": "ENGL 362",
-    "status": "partial",
-    "raw": "30 units or two 200-division English courses.",
-    "raw_coreq": null,
-    "unparsed_fragments": [
-      "two 200-division English courses"
-    ]
-  },
-  {
-    "code": "ENGL 363",
-    "status": "partial",
-    "raw": "30 units or two 200-division English courses.",
-    "raw_coreq": null,
-    "unparsed_fragments": [
-      "two 200-division English courses"
-    ]
-  },
-  {
-    "code": "ENGL 364",
-    "status": "partial",
-    "raw": "30 units or two 200-division English courses. Recommended: ENGL 216.",
-    "raw_coreq": null,
-    "unparsed_fragments": [
-      "two 200-division English courses"
-    ]
-  },
-  {
-    "code": "ENGL 371",
-    "status": "partial",
-    "raw": "30 units or two 200-division English courses. Recommended: One of English 199, 199W, or 214.",
-    "raw_coreq": null,
-    "unparsed_fragments": [
-      "two 200-division English courses"
     ]
   },
   {
@@ -744,7 +463,6 @@
     "raw": "30 units; or two 200-division English courses; or formal declaration in the creative writing minor and ENGL 272.",
     "raw_coreq": null,
     "unparsed_fragments": [
-      "two 200-division English courses",
       "formal declaration in the creative writing minor and ENGL 272"
     ]
   },
@@ -754,62 +472,7 @@
     "raw": "30 units; or two 200-division English courses; or formal declaration in the creative writing minor and ENGL 272.",
     "raw_coreq": null,
     "unparsed_fragments": [
-      "two 200-division English courses",
       "formal declaration in the creative writing minor and ENGL 272"
-    ]
-  },
-  {
-    "code": "ENGL 375",
-    "status": "partial",
-    "raw": "30 units or two 200-division English courses. Recommended: One of English 199, 199W, or 214.",
-    "raw_coreq": null,
-    "unparsed_fragments": [
-      "two 200-division English courses"
-    ]
-  },
-  {
-    "code": "ENGL 376",
-    "status": "partial",
-    "raw": "30 units or two 200-division English courses.",
-    "raw_coreq": null,
-    "unparsed_fragments": [
-      "two 200-division English courses"
-    ]
-  },
-  {
-    "code": "ENGL 383",
-    "status": "partial",
-    "raw": "30 units or two 200-division English courses.",
-    "raw_coreq": null,
-    "unparsed_fragments": [
-      "two 200-division English courses"
-    ]
-  },
-  {
-    "code": "ENGL 385",
-    "status": "partial",
-    "raw": "30 units or two 200-division English courses.",
-    "raw_coreq": null,
-    "unparsed_fragments": [
-      "two 200-division English courses"
-    ]
-  },
-  {
-    "code": "ENGL 387",
-    "status": "partial",
-    "raw": "30 units or two 200-division English courses.",
-    "raw_coreq": null,
-    "unparsed_fragments": [
-      "two 200-division English courses"
-    ]
-  },
-  {
-    "code": "ENGL 397",
-    "status": "partial",
-    "raw": "30 units or two 200-division English courses.",
-    "raw_coreq": null,
-    "unparsed_fragments": [
-      "two 200-division English courses"
     ]
   },
   {
@@ -818,168 +481,37 @@
     "raw": "30 units or two 200-division English courses. English majors, minors, extended minors, joint majors, and honours may take this course with permission of the instructor. This course may be counted towards general degree requirements, but not for credit towards an English major, minor, extended minor, joint major or honours.",
     "raw_coreq": null,
     "unparsed_fragments": [
-      "two 200-division English courses",
       "English majors, minors, extended minors, joint majors, and honours may take this course with permission of the instructor",
       "This course may be counted towards general degree requirements, but not for credit towards an English major, minor, extended minor, joint major or honours"
     ]
   },
   {
-    "code": "ENGL 411W",
-    "status": "partial",
-    "raw": "45 units or two 300-division English courses.",
-    "raw_coreq": null,
-    "unparsed_fragments": [
-      "two 300-division English courses"
-    ]
-  },
-  {
-    "code": "ENGL 413W",
-    "status": "partial",
-    "raw": "45 units or two 300-division English courses.",
-    "raw_coreq": null,
-    "unparsed_fragments": [
-      "two 300-division English courses"
-    ]
-  },
-  {
-    "code": "ENGL 414W",
-    "status": "partial",
-    "raw": "45 units or two 300-division English courses.",
-    "raw_coreq": null,
-    "unparsed_fragments": [
-      "two 300-division English courses"
-    ]
-  },
-  {
-    "code": "ENGL 415W",
-    "status": "partial",
-    "raw": "45 units or two 300-division English courses.",
-    "raw_coreq": null,
-    "unparsed_fragments": [
-      "two 300-division English courses"
-    ]
-  },
-  {
-    "code": "ENGL 417W",
-    "status": "partial",
-    "raw": "45 units or two 300-division English courses.",
-    "raw_coreq": null,
-    "unparsed_fragments": [
-      "two 300-division English courses"
-    ]
-  },
-  {
-    "code": "ENGL 418W",
-    "status": "unparsed",
-    "raw": "Reserved for English honours, major, joint major and minor students.",
-    "raw_coreq": null,
-    "unparsed_fragments": [
-      "Reserved for English honours, major, joint major and minor students"
-    ]
-  },
-  {
-    "code": "ENGL 431W",
-    "status": "partial",
-    "raw": "45 units or two 300-division English courses. Strongly recommended: At least one Indigenous studies course.",
-    "raw_coreq": null,
-    "unparsed_fragments": [
-      "two 300-division English courses"
-    ]
-  },
-  {
-    "code": "ENGL 432W",
-    "status": "partial",
-    "raw": "45 units or two 300-division English courses.",
-    "raw_coreq": null,
-    "unparsed_fragments": [
-      "two 300-division English courses"
-    ]
-  },
-  {
-    "code": "ENGL 433W",
-    "status": "partial",
-    "raw": "45 units or two 300-division English courses.",
-    "raw_coreq": null,
-    "unparsed_fragments": [
-      "two 300-division English courses"
-    ]
-  },
-  {
-    "code": "ENGL 437W",
-    "status": "partial",
-    "raw": "45 units or two 300-division English courses.",
-    "raw_coreq": null,
-    "unparsed_fragments": [
-      "two 300-division English courses"
-    ]
-  },
-  {
-    "code": "ENGL 443W",
-    "status": "partial",
-    "raw": "45 units or two 300-division English courses.",
-    "raw_coreq": null,
-    "unparsed_fragments": [
-      "two 300-division English courses"
-    ]
-  },
-  {
     "code": "ENGL 470W",
-    "status": "unparsed",
+    "status": "partial",
     "raw": "45 units including at least one upper division English course, or permission of instructor. Reserved for English honours, major, joint major and minor students.",
     "raw_coreq": null,
     "unparsed_fragments": [
-      "45 units including at least one upper division English course",
-      "permission of instructor",
-      "Reserved for English honours, major, joint major and minor students"
-    ]
-  },
-  {
-    "code": "ENGL 474W",
-    "status": "partial",
-    "raw": "45 units or two 300-division English courses.",
-    "raw_coreq": null,
-    "unparsed_fragments": [
-      "two 300-division English courses"
-    ]
-  },
-  {
-    "code": "ENGL 475W",
-    "status": "partial",
-    "raw": "45 units. Strongly recommended: ENGL 214 or 375. Reserved for English honours, major, joint major and minor students.",
-    "raw_coreq": null,
-    "unparsed_fragments": [
-      "Reserved for English honours, major, joint major and minor students"
+      "45 units including at least one upper division English course"
     ]
   },
   {
     "code": "ENGL 490",
-    "status": "unparsed",
+    "status": "partial",
     "raw": "Two 100-division English courses, two 200-division English courses and two 300-division English courses. Reserved for English honours, major, joint major and minor students. Admission is by permission of the instructor and the department.",
     "raw_coreq": null,
     "unparsed_fragments": [
       "Two 100-division English courses, two 200-division English courses and two 300-division English courses",
-      "Reserved for English honours, major, joint major and minor students",
       "Admission is by permission of the instructor and the department"
     ]
   },
   {
     "code": "ENGL 491",
-    "status": "unparsed",
+    "status": "partial",
     "raw": "Two 100-division English courses, two 200-division English courses and two 300-division English courses. Reserved for English honours, major, joint major and minor students. Admission is by permission of the instructor and the department.",
     "raw_coreq": null,
     "unparsed_fragments": [
       "Two 100-division English courses, two 200-division English courses and two 300-division English courses",
-      "Reserved for English honours, major, joint major and minor students",
       "Admission is by permission of the instructor and the department"
-    ]
-  },
-  {
-    "code": "ENGL 493W",
-    "status": "partial",
-    "raw": "45 units or two 300-division English courses.",
-    "raw_coreq": null,
-    "unparsed_fragments": [
-      "two 300-division English courses"
     ]
   },
   {
@@ -1013,12 +545,11 @@
   },
   {
     "code": "INDG 301",
-    "status": "unparsed",
+    "status": "partial",
     "raw": "One of INDG (or FNST) 101 or 201W and 111, or permission of the instructor.",
     "raw_coreq": null,
     "unparsed_fragments": [
-      "One of INDG (or FNST) 101 or 201W and 111",
-      "permission of the instructor"
+      "One of INDG (or FNST) 101 or 201W and 111"
     ]
   },
   {
@@ -1031,60 +562,6 @@
     ]
   },
   {
-    "code": "INDG 353",
-    "status": "partial",
-    "raw": "45 units or permission of the instructor.",
-    "raw_coreq": null,
-    "unparsed_fragments": [
-      "permission of the instructor"
-    ]
-  },
-  {
-    "code": "INDG 353W",
-    "status": "partial",
-    "raw": "45 units or permission of the instructor.",
-    "raw_coreq": null,
-    "unparsed_fragments": [
-      "permission of the instructor"
-    ]
-  },
-  {
-    "code": "INDG 401",
-    "status": "partial",
-    "raw": "45 units, INDG (or FNST) 101 and one of INDG (or FNST) 201W or 250, or permission of the instructor.",
-    "raw_coreq": null,
-    "unparsed_fragments": [
-      "permission of the instructor"
-    ]
-  },
-  {
-    "code": "INDG 402W",
-    "status": "partial",
-    "raw": "60 units and one of INDG (or FNST) 101 or 201W, or permission of the instructor.",
-    "raw_coreq": null,
-    "unparsed_fragments": [
-      "permission of the instructor"
-    ]
-  },
-  {
-    "code": "INDG 403",
-    "status": "partial",
-    "raw": "45 units and one of INDG (or FNST) 101 or 201W, or permission of the instructor.",
-    "raw_coreq": null,
-    "unparsed_fragments": [
-      "permission of the instructor"
-    ]
-  },
-  {
-    "code": "INDG 419",
-    "status": "partial",
-    "raw": "INDG (or FNST) 101 or 201W, or CRIM 101, or permission of the instructor.",
-    "raw_coreq": null,
-    "unparsed_fragments": [
-      "permission of the instructor"
-    ]
-  },
-  {
     "code": "INDG 422",
     "status": "unparsed",
     "raw": "Will vary according to the topic.",
@@ -1094,30 +571,11 @@
     ]
   },
   {
-    "code": "INDG 429",
-    "status": "partial",
-    "raw": "INDG (or FNST) 101 or 201W, or CRIM 101, or permission of instructor.",
-    "raw_coreq": null,
-    "unparsed_fragments": [
-      "permission of instructor"
-    ]
-  },
-  {
-    "code": "INDG 433",
-    "status": "partial",
-    "raw": "45 units and one of INDG (or FNST) 101 or 201W, or permission of the instructor.",
-    "raw_coreq": null,
-    "unparsed_fragments": [
-      "permission of the instructor"
-    ]
-  },
-  {
     "code": "INDG 435",
     "status": "partial",
     "raw": "INDG 101 or INDG 201W, and permission of the instructor. Students must successfully complete a Criminal Record Check.",
     "raw_coreq": null,
     "unparsed_fragments": [
-      "permission of the instructor",
       "Students must successfully complete a Criminal Record Check"
     ]
   },
@@ -1140,15 +598,6 @@
       "15 units of INDG (or FNST) courses",
       "permission of an instructor and department approval",
       "Varies depending on topic"
-    ]
-  },
-  {
-    "code": "INDG 462",
-    "status": "partial",
-    "raw": "60 units including INDG (or FNST) 101 or INDG (or FNST) 201W or permission of the instructor.",
-    "raw_coreq": null,
-    "unparsed_fragments": [
-      "permission of the instructor"
     ]
   },
   {
@@ -1332,17 +781,7 @@
     "raw": "MATH 336 and permission of the co-op co-ordinator; students must apply at least one term in advance.",
     "raw_coreq": null,
     "unparsed_fragments": [
-      "permission of the co-op co-ordinator",
       "students must apply at least one term in advance"
-    ]
-  },
-  {
-    "code": "MATH 338",
-    "status": "partial",
-    "raw": "MATH 340 or 332, with a minimum grade of C- or permission of the instructor.",
-    "raw_coreq": null,
-    "unparsed_fragments": [
-      "permission of the instructor"
     ]
   },
   {
@@ -1356,22 +795,20 @@
   },
   {
     "code": "MATH 380W",
-    "status": "unparsed",
+    "status": "partial",
     "raw": "Six units of mathematics at the 300-division or higher, or permission of the instructor. Students are strongly advised to have completed both MATH 242 and MATH 251 or equivalent.",
     "raw_coreq": null,
     "unparsed_fragments": [
-      "Six units of mathematics at the 300-division or higher",
-      "permission of the instructor"
+      "Six units of mathematics at the 300-division or higher"
     ]
   },
   {
     "code": "MATH 381W",
-    "status": "unparsed",
+    "status": "partial",
     "raw": "Six units of mathematics at the 300-division or higher, or permission of the instructor. Students are strongly advised to have completed both MATH 242 and MATH 251 or equivalent.",
     "raw_coreq": null,
     "unparsed_fragments": [
-      "Six units of mathematics at the 300-division or higher",
-      "permission of the instructor"
+      "Six units of mathematics at the 300-division or higher"
     ]
   },
   {
@@ -1398,7 +835,6 @@
     "raw": "MATH 337 and permission of the co-op co-ordinator; students must apply at least one term in advance.",
     "raw_coreq": null,
     "unparsed_fragments": [
-      "permission of the co-op co-ordinator",
       "students must apply at least one term in advance"
     ]
   },
@@ -1408,7 +844,6 @@
     "raw": "MATH 436 and permission of the co-op co-ordinator; students must apply at least one term in advance.",
     "raw_coreq": null,
     "unparsed_fragments": [
-      "permission of the co-op co-ordinator",
       "students must apply at least one term in advance"
     ]
   },
@@ -1436,8 +871,7 @@
     "raw": "MACM 201 with a grade of at least B. At least one of MACM 201, MATH 240, MATH 242, MATH 251, MATH 252 with a grade of at least A, or both of MACM 203, MACM 204 with a grade of at least A. Or permission of the instructor.",
     "raw_coreq": null,
     "unparsed_fragments": [
-      "At least one of MACM 201, MATH 240, MATH 242, MATH 251, MATH 252 with a grade of at least A, or both of MACM 203, MACM 204 with a grade of at least A",
-      "permission of the instructor"
+      "At least one of MACM 201, MATH 240, MATH 242, MATH 251, MATH 252 with a grade of at least A, or both of MACM 203, MACM 204 with a grade of at least A"
     ]
   },
   {
@@ -1446,7 +880,6 @@
     "raw": "MATH 437 and permission of the co-op co-ordinator. Students must apply at least one term in advance.",
     "raw_coreq": null,
     "unparsed_fragments": [
-      "permission of the co-op co-ordinator",
       "Students must apply at least one term in advance"
     ]
   },
@@ -1558,17 +991,7 @@
     "raw": "15 upper division PHIL units or permission from the instructor. Students not in a philosophy major, philosophy honours, or joint major program can take PHIL 467W only with special permission from the instructor.",
     "raw_coreq": null,
     "unparsed_fragments": [
-      "permission from the instructor",
       "Students not in a philosophy major, philosophy honours, or joint major program can take PHIL 467W only with special permission from the instructor"
-    ]
-  },
-  {
-    "code": "PHIL 479",
-    "status": "unparsed",
-    "raw": "Enrolled in the philosophy honours program.",
-    "raw_coreq": null,
-    "unparsed_fragments": [
-      "Enrolled in the philosophy honours program"
     ]
   },
   {
@@ -1581,15 +1004,6 @@
     ]
   },
   {
-    "code": "REM 355",
-    "status": "partial",
-    "raw": "45 units or permission of instructor.",
-    "raw_coreq": null,
-    "unparsed_fragments": [
-      "permission of instructor"
-    ]
-  },
-  {
     "code": "STAT 180",
     "status": "partial",
     "raw": "Enrollment in the Statistics or Actuarial Science major or honours program, or STAT 270 with a minimum grade of C-.",
@@ -1599,31 +1013,12 @@
     ]
   },
   {
-    "code": "STAT 240",
-    "status": "partial",
-    "raw": "One of STAT 201, STAT 203, STAT 205, STAT 270, BUS 232, or ECON 233, and one of CMPT 102, CMPT 120, CMPT 125, CMPT 128, CMPT 129, CMPT 130, all with a minimum grade of C- or permission of the instructor. STAT 260 is also recommended.",
-    "raw_coreq": null,
-    "unparsed_fragments": [
-      "permission of the instructor"
-    ]
-  },
-  {
-    "code": "STAT 260",
-    "status": "partial",
-    "raw": "One of STAT 201, STAT 203, STAT 205, STAT 270, BUS 232, ECON 233, or POL 201, with a grade of at least C- or permission of the instructor.",
-    "raw_coreq": null,
-    "unparsed_fragments": [
-      "permission of the instructor"
-    ]
-  },
-  {
     "code": "STAT 300W",
     "status": "partial",
     "raw": "Admission to the major or honours programs in statistics; STAT 350 with a minimum grade of C- or permission of the instructor; prior completion of a lower division W course.",
     "raw_coreq": null,
     "unparsed_fragments": [
       "Admission to the major or honours programs in statistics",
-      "permission of the instructor",
       "prior completion of a lower division W course"
     ]
   },
@@ -1770,39 +1165,11 @@
   },
   {
     "code": "WL 301W",
-    "status": "unparsed",
+    "status": "partial",
     "raw": "45 units including nine units in world literature; or 30 units, including nine units in world literature, for students enrolled in the SFU-Exeter accelerated law dual degree program.",
     "raw_coreq": null,
     "unparsed_fragments": [
-      "45 units including nine units in world literature",
-      "30 units, including nine units in world literature, for students enrolled in the SFU-Exeter accelerated law dual degree program"
-    ]
-  },
-  {
-    "code": "WL 303",
-    "status": "partial",
-    "raw": "45 units; or 30 units for students enrolled in the SFU-Exeter accelerated law dual degree program.",
-    "raw_coreq": null,
-    "unparsed_fragments": [
-      "30 units for students enrolled in the SFU-Exeter accelerated law dual degree program"
-    ]
-  },
-  {
-    "code": "WL 304",
-    "status": "partial",
-    "raw": "45 units; or 30 units for students enrolled in the SFU-Exeter accelerated law dual degree program.",
-    "raw_coreq": null,
-    "unparsed_fragments": [
-      "30 units for students enrolled in the SFU-Exeter accelerated law dual degree program"
-    ]
-  },
-  {
-    "code": "WL 308",
-    "status": "partial",
-    "raw": "45 units; or 30 units for students enrolled in the SFU-Exeter accelerated law dual degree program.",
-    "raw_coreq": null,
-    "unparsed_fragments": [
-      "30 units for students enrolled in the SFU-Exeter accelerated law dual degree program"
+      "45 units including nine units in world literature"
     ]
   },
   {
@@ -1812,15 +1179,6 @@
     "raw_coreq": null,
     "unparsed_fragments": [
       "Admission is by permission of the Instructor and Director"
-    ]
-  },
-  {
-    "code": "WL 360",
-    "status": "partial",
-    "raw": "45 units or permission of the department.",
-    "raw_coreq": null,
-    "unparsed_fragments": [
-      "permission of the department"
     ]
   },
   {
@@ -1870,23 +1228,21 @@
   },
   {
     "code": "WL 480",
-    "status": "unparsed",
+    "status": "partial",
     "raw": "Lower division and language requirements for the World Literature major plus 12 units of upper division requirements including WL 300. Open only to students who have been accepted into the World Literature honours program. Admission is by permission of the Instructor and the Department.",
     "raw_coreq": null,
     "unparsed_fragments": [
       "Lower division and language requirements for the World Literature major plus 12 units of upper division requirements including WL 300",
-      "Open only to students who have been accepted into the World Literature honours program",
       "Admission is by permission of the Instructor and the Department"
     ]
   },
   {
     "code": "WL 490",
-    "status": "unparsed",
+    "status": "partial",
     "raw": "Lower division and language requirements for the World Literature major plus 12 units of upper division requirements including WL 300. Open only to students who have been accepted into the World Literature honours program. Admission is by permission of the Instructor and the Department.",
     "raw_coreq": null,
     "unparsed_fragments": [
       "Lower division and language requirements for the World Literature major plus 12 units of upper division requirements including WL 300",
-      "Open only to students who have been accepted into the World Literature honours program",
       "Admission is by permission of the Instructor and the Department"
     ]
   }
