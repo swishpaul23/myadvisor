@@ -7,6 +7,7 @@ import type { Student } from "@/engine/audit/types";
 // Units and designations below are what data/generated/courses.json says (2026-10-04).
 
 export const demoStudent: Student = {
+  program: "BBA",
   admissionTerm: "2024-fall",
   declaredConcentrations: ["Finance"],
   courses: [

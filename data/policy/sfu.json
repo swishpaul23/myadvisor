@@ -99,5 +99,30 @@
     "text": "Required for BBA entrants admitted Fall 2022 onward. Earlier admissions: different requirement set; the audit reports these rows as unknown (Stuart, 2026-10-04).",
     "source_url": "https://www.sfu.ca/students/calendar/2026/fall/programs/business/major/bachelor-of-business-administration.html",
     "status": "beta"
+  },
+  "restriction_programs": {
+    "entries": [
+      {
+        "text": "This course is only open to approved business administration majors admitted to the faculty in Fall 2022 and onward",
+        "program": "BBA",
+        "admitted_from": "2022-fall"
+      },
+      {
+        "text": "This course is only open to approved business administration majors admitted to the faculty through the BBA major - highschool or transfer stream in Fall 2022 and onward",
+        "program": "BBA",
+        "admitted_from": "2022-fall"
+      }
+    ],
+    "text": "Exact prerequisite restriction texts (prereqs.json) resolved from student.program and admissionTerm; exact string match only. Not listed on purpose: the BUS 201 and BUS 202 texts, which also require a Business Foundation Pathway the student data doesn't record. Any text not listed stays unknown (Stuart, 2026-10-04).",
+    "source_url": "https://www.sfu.ca/students/calendar/2026/fall/programs/business/major/bachelor-of-business-administration.html",
+    "status": "beta"
+  },
+  "unit_load": {
+    "spring": { "min": 9, "max": 18 },
+    "summer": { "min": 9, "max": 18 },
+    "fall": { "min": 9, "max": 18 },
+    "text": "ASSUMPTION - verify against the calendar: units per study term, min 9 (full time) and max 18. Summer uses the same values for now. Violations are warnings until verified (Stuart, 2026-10-04).",
+    "source_url": "https://www.sfu.ca/students/calendar/2026/fall/fees-and-regulations.html",
+    "status": "beta"
   }
 }

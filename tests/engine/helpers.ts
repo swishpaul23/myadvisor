@@ -99,6 +99,7 @@ export function student(
   extra: Partial<Student> = {},
 ): Student {
   return {
+    program: "BBA",
     admissionTerm: "2024-fall",
     declaredConcentrations: [],
     courses,

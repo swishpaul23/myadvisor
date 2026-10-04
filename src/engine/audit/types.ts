@@ -18,6 +18,9 @@ export type StudentCourse = {
 };
 
 export type Student = {
+  /** Program the student is admitted to, e.g. "BBA". Resolves exact restriction texts
+   * listed in policy restriction_programs. */
+  program: string;
   /** "2024-fall" */
   admissionTerm: string;
   declaredConcentrations: string[];
@@ -34,6 +37,10 @@ export type Policy = {
   bus_gpa_subjects: { subjects: string[] };
   pass_fail_courses: { courses: string[] };
   admission_gated_courses: { courses: string[]; from_term: string };
+  restriction_programs: {
+    entries: { text: string; program: string; admitted_from: string | null }[];
+  };
+  unit_load: Record<"spring" | "summer" | "fall", { min: number; max: number }>;
 };
 
 export type Catalog = {
