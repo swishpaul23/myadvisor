@@ -1,3 +1,77 @@
+# MyAdvisor
+(Hackathon Project)
+StormHacks 2026 academic advisor for degree progress, course choice, and next-semester planning. Students ask by text or voice and see the reasoning and sources behind the advice.
+
+**Read [README.md](README.md) before making changes.** It is the product and implementation plan. [docs/user-flow.md](docs/user-flow.md) is the proposed student journey.
+
+**Status: planning and initial scaffolding. The advisor is not built yet.** Planned features, integrations, and tracks are not implemented unless README lists them as present. Do not describe or build as if accounts, transcripts, audits, plans, Gemini, ElevenLabs, Snowflake, or deployment already exist.
+
+## Scope
+
+First version: **Simon Fraser University Bachelor of Business Administration**, **Fall 2026** requirements. Demo student: **Finance**.
+
+[Requirements.csv](Requirements.csv) also covers Accounting, Innovation and Entrepreneurship, Human Resource Management, International Business, Management Information Systems, Marketing, Operations Management, and Strategic Analysis (91 source-referenced rules: BBA core, concentrations, Beedie, and university/WQB). It is a curated starting point, not an executable rules engine. Do not use it for advice until rule encoding, exceptions, import, and tests are agreed. Prerequisites need separate curation.
+
+Other universities, degrees, and requirement terms are out of scope until each has verified sources and rules.
+
+## What is in the repo
+
+| Present | Not built |
+| --- | --- |
+| Next.js 16, React 19, TypeScript, Tailwind CSS 4, shadcn/Base UI. Homepage `src/app/page.tsx` is still starter content. | Auth, database, transcript processing, degree audit, planner, Gemini, ElevenLabs, Snowflake, private file storage, deployment, .tech domain. |
+
+Scripts: `npm ci`, `npm run dev` (http://localhost:3000), `npm run lint`, `npm run build`, `npm run start`. There is no test script yet.
+
+## Architecture
+
+```text
+Student → Next.js → authenticated backend orchestrator
+  → Snowflake Postgres (profiles, confirmed attempts, requirements, plans, conversations)
+  → private transcript storage
+  → requirements and prerequisite evaluator
+  → official-source retrieval (public SFU calendar; Cortex Search REST is only a proposal)
+  → Gemini API (explanations)
+  → ElevenLabs API (voice)
+```
+
+- **Gemini is the main LLM.** The handwritten sketch’s Claude label is superseded. No model version is selected yet.
+- **Snowflake Postgres is the application database**, reached with a PostgreSQL client over SSL through the backend. A Snowflake AI/search REST call is a separate service. Postgres use alone does not satisfy the Snowflake REST API track, and Cortex Search does not index these Postgres tables automatically.
+- Backend framework and host are undecided. FastAPI on AWS Lambda is an option in the team sketch, not a decision.
+- API keys, database access, and storage credentials stay on the server. Never commit secrets or put them in client bundles. Environment variable names are not defined yet; add them only when an integration is implemented, and document them then.
+
+## Advising rules
+
+- **Compute academic rules in code.** Credit totals, prerequisites, and requirement allocation come from an evaluator. Gemini explains those results; it does not decide them.
+- **Use confirmed records.** Extraction is a proposal until the student reviews course codes, credits, grades, and terms. Completed, in-progress, and transfer coursework stay distinct. In-progress courses do not count as completed.
+- **Preserve exceptions.** P-graded courses, transfer equivalencies, selected-topics courses, residency, and WQB allocation need explicit handling. Do not treat recognition of a course as approval of a transfer equivalency.
+- **Show evidence.** Cite the applicable calendar source. Separate verified facts from assumptions and unresolved items. If calendar coverage is missing, do not claim a complete audit.
+- **Reconcile updates.** A replacement transcript must not duplicate course attempts. Recheck affected plans and show what changed.
+- **Scope data to its owner.** Records, files, plans, and conversation context belong to that account.
+- **A recommendation is not enrolment.** Do not imply section availability, seats, or timetable fit until live offering data exists. Saving a plan does not enrol the student.
+- Requirement term, admission pathway, and concentration are confirmed profile fields, not guesses from the student’s year.
+- Application login is the initial proposal. Do not label sign-in as SFU SSO unless that integration exists. An SFU email is not access to a university record. Demo data must be a clearly labelled sample, never presented as someone’s uploaded transcript.
+
+Navigation, once built: **Overview**, **Advisor**, **My plan**, **Academic record**. Text and voice share one conversation and academic context. Keep a readable answer beside audio, and keep text usable if voice fails.
+
+## Build order
+
+1. Accounts, profile persistence, and resumable onboarding.
+2. Snowflake Postgres, then a validated import of academic rules.
+3. Transcript or manual entry, extraction review, and confirmed coursework.
+4. Deterministic degree progress and prerequisite checks.
+5. Gemini advising with relevant source retrieval.
+6. Editable planner and persistent saved plans.
+7. ElevenLabs voice, the qualifying Snowflake API feature, and the .tech deployment.
+8. End-to-end check and track submission materials.
+
+Demo: a Finance student uploads a synthetic transcript, corrects an extraction issue, sees a gap, asks for a manageable next-term plan, edits a recommendation, hears the explanation, and saves the plan. Reload shows the same saved plan.
+
+## Decisions still open
+
+Do not lock these in without an explicit decision: auth provider and SFU SSO, backend framework and hosting, private file storage, Gemini model, ElevenLabs voice and interaction mode, Snowflake instance and the qualifying REST feature, evaluator schema and exception handling, live offerings and graduation estimates, .tech domain and deployment.
+
+If a product, status, or architecture decision changes, update [README.md](README.md) and keep this file aligned with it.
+
 <!-- BEGIN:nextjs-agent-rules -->
 
 # This is NOT the Next.js you know

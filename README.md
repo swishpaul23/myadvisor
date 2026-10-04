@@ -1,6 +1,6 @@
 # MyAdvisor
 
-An academic advisor app being built for [StormHacks 2026](https://stormhacks2026.devpost.com/).
+An academic advisor app being built for [StormHacks 2026](https://stormhacks2026.devpost.com/). (Hackathon Project)
 
 MyAdvisor will help students understand their degree progress, choose courses, and plan their next semester using their confirmed academic record and official university requirements. Students will be able to ask questions through text or voice and see the reasoning and sources behind the advice.
 
@@ -14,7 +14,8 @@ We want students to answer three questions in one place:
 
 - Where do I stand in my degree?
 - What can I take next, and why?
-- How would a different course load or course choice change my plan?
+- How would a different course load or course choice change my plan? 
+- and much more features
 
 ## Initial scope
 
@@ -44,16 +45,17 @@ flowchart TD
     B --> C[Upload transcript or enter courses]
     C --> D[Review and confirm coursework]
     D --> E[View degree progress]
-    E --> F[Ask advisor by text or voice]
-    F --> G[Review and edit semester plan]
-    G --> H[Save plan]
-    H --> E
+    E --> E[Standard questions part of the UI]
+    F --> F[Ask advisor by text or voice]
+    G --> G[Review and edit semester plan]
+    H --> H[Save plan]
+    I --> F
 ```
 
-1. **Sign in and set up a profile.** Confirm the university, program, concentration, applicable requirement term, admission pathway, target semester and preferred course load.
+1. **Sign in and set up a profile.** Confirm the university, program, concentration, applicable requirement term, admission pathway, target semester and preferred course load. 
 2. **Add an academic record.** Upload a transcript PDF or enter courses manually.
 3. **Review extracted information.** Correct course codes, credits, grades and terms before confirming the record. Completed, in-progress and transfer coursework remain distinct.
-4. **See degree progress.** Review completed requirements, remaining gaps and unresolved items. Open a requirement to inspect the matching courses and its official source.
+4. **See degree progress.** Review completed requirements, remaining gaps and unresolved items. Open a requirement to inspect the matching courses and its official source. Then Standard questions by UI
 5. **Ask for advice.** Ask questions such as “What should I take next term?”, “Can I take this course?” or “What changes if I take fewer courses?”
 6. **Build and save a plan.** Review suggested courses, understand eligibility and warnings, make changes, and explicitly save the semester plan.
 
@@ -73,7 +75,7 @@ Returning students will go to their overview or resume unfinished setup. The pro
 | What-if comparisons | Explore different course loads or course sequences with visible assumptions. |
 | History | Reopen saved plans and conversations; recheck plans when the confirmed record changes. |
 
-Later features may include institution-specific GPA scenarios, graduation estimates, sourced deadlines, calendar export, co-op and scholarship guidance, and a summary to bring to a human advisor. These follow the first working transcript-to-plan journey.
+Later features may include institution-specific GPA scenarios, graduation estimates, sourced deadlines, calendar export, co-op and scholarship guidance, and a summary to bring to a human advisor. These follow the first working transcript-to-plan journey. and much more
 
 ## Technology choices
 
