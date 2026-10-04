@@ -74,7 +74,8 @@ Yes for course-level fields. BUS 312 D100 and D200 (2026 fall) differ only in `s
   - A course can be on a term's course list but its section list 404s: BUS 296 in 2025 summer and BUS 396 in 2026 spring (both directed studies). Recorded as not offered.
   - BUS 450 (Innovation Consulting) appears only in 2027 spring, so its outline comes from that future term (`ran: []` in the manifest).
 - **Found by the full run (2026-10-03, 8 whole departments + requirements-listed courses, 457 courses):**
-  - Three more unexpected outline fields, dropped and not saved: top-level `recommendedText`, and `info.requirements`, `info.shortNote`. Which courses carry them was not recorded (a resumed run then overwrote the manifest's list; the manifest now keeps earlier reports). Pending decision: classify them, then `--refresh` the affected outlines if any should be kept. `recommendedText` looks like textbooks (would be dropped anyway); `info.requirements` and `info.shortNote` may be course-level.
+  - Three more unexpected outline fields, dropped and not saved: top-level `recommendedText`, and `info.requirements`, `info.shortNote`. Which courses carry them was not recorded (a resumed run then overwrote the manifest's list; the manifest now keeps earlier reports). Decision (Stuart, 2026-10-04): keep `info.requirements` and `info.shortNote` (scrubbed like other text); keep dropping `recommendedText` (textbooks). All 457 outlines were re-fetched with `npm run data:fetch -- --refresh-outlines`.
+  - What they contain (after the re-fetch): `info.requirements` on 35 outlines, `info.shortNote` on 7, all strings. They are **section-level instructor text, not program or course requirements**: attendance and Canvas expectations, AI and Turnitin policies, public-health delivery notices, book lists (ENGL 204, INDG 250), grading notes (INDG 462), and occasionally a prerequisite-like line (LBST 101: "LBST 100 or 101 is a prerequisite"). The engine and chat must not treat `requirements_text` or `short_note` as requirements or prerequisites; the calendar and `prerequisites` remain the source.
   - `info.designation` is not a clean list. Distinct values (count): `"N/A"` 277, `"Quantitative"` 60, `"Writing"` 35, `"Breadth-Social Sciences"` 23, `"Breadth-Humanities"` 21, `"Writing/Breadth-Humanities"` 12, `"Breadth-Humanities/Social Sciences"` 10, `"Writing/Quantitative"` 5, `"Quantitative/Breadth-Soc"` 4, `"Breadth-Science"` 3, `"Writing/Breadth-Social Sci"` 3, `""` 1, `"Breadth-Hum/Social Sci/Science"` 1, `"Breadth-Social Sci/Science"` 1, `"Quantitative/Breadth-Science"` 1. B-Sci appears as `Breadth-Science`, and abbreviated as `Science` after another breadth. B-Soc appears as `Breadth-Social Sciences`, `Breadth-Soc`, `Social Sciences`, and `Social Sci`. Splitting on `/` alone is not enough: `"Breadth-Hum/Social Sci/Science"` means B-Hum, B-Soc, and B-Sci. Any later mapping to W/Q/B-Soc/B-Hum/B-Sci needs an explicit table of these strings.
   - One transient network failure (ENGL 330 sections, 2025 spring: "fetch failed" after 3 retries). A resumed run fetched it; 0 failures remain.
   - `fetched_at` in the manifest is the UTC date.
@@ -89,15 +90,26 @@ Implemented in `scripts/lib/outlines/strip.ts`; tested in `tests/scripts/outline
 **Removed from every outline before it is written:**
 
 - Top-level `instructor` (name, commonName, firstName, lastName, email, phone, office, officeHours, profileUrl, roleCode): people.
-- Top-level `grades` (grading scheme), `requiredText` (textbooks), `courseSchedule` (class schedule), `examSchedule` (exam schedule).
+- Top-level `grades` (grading scheme), `requiredText` and `recommendedText` (textbooks), `courseSchedule` (class schedule), `examSchedule` (exam schedule).
 - `info.gradingNotes` (grading), `info.requiredReadingNotes` and `info.materials` (textbooks and materials).
 - `info.courseDetails` and `info.educationalGoals`: one instructor's syllabus for one section, not course-level data, and free text that can mention people.
 - Any key not in the lists above (top-level or in `info`): dropped and reported as unexpected in the run summary and `_manifest.json`, so a human can decide.
 
-**Kept (`info` only):** `title`, `units`, `prerequisites`, `corequisites`, `designation`, `description`, `dept`, `number`, `degreeLevel`, `deliveryMethod`, `notes`, `departmentalUgradNotes`, `registrarNotes`, `specialTopic`, `type`, plus where it came from: `term`, `section`, `name`, `classNumber`, `outlinePath`. Values are stored exactly as returned (`designation` is not mapped to W/Q/B), except:
+**Kept (`info` only):** `title`, `units`, `prerequisites`, `corequisites`, `designation`, `description`, `dept`, `number`, `degreeLevel`, `deliveryMethod`, `notes`, `departmentalUgradNotes`, `registrarNotes`, `specialTopic`, `type`, `requirements`, `shortNote`, plus where it came from: `term`, `section`, `name`, `classNumber`, `outlinePath`. Values are stored exactly as returned (`designation` is not mapped to W/Q/B), except:
 
-- Emails in kept text become `[email removed]`, phone numbers `[phone removed]`.
+- Emails in kept text become `[email removed]`, phone numbers `[phone removed]`. This applies to every kept string, including strings nested inside arrays or objects.
 - The section's instructor names (full name, first, last, common name), if they appear in kept text, become `[name removed]`. Matching is case-sensitive and whole-word, so "will" survives an instructor named Will.
+
+## Section lists are not committed
+
+`{number}.sections.json` files are a local cache (gitignored since 2026-10-04). What the app needs from them is kept in git: `_manifest.json` records, per course, the section types (`LEC`, `TUT`, ...) for every term with at least one section (`courses[code].sections`), and `npm run data:build` turns that into `data/generated/offerings.json`. On a fresh clone the section files are absent, so a non-dry `npm run data:fetch` re-requests them (about 1,600 requests); `npm run data:build` does not need them.
+
+## Generated course data (`npm run data:build`)
+
+- `data/generated/courses.json`: one record per outline with `title`, `units` (number, or null when the outline has no units field), `level` (hundreds of the course number), `department`, raw `prerequisites_text`, `corequisites_text`, `requirements_text` (`info.requirements`), `short_note` (`info.shortNote`), `description`, `designations`, `designation_raw`, `source_term`. Schema: `src/lib/data/catalog.ts`.
+- `designations` come from the explicit table in `scripts/lib/designations.ts`: `"N/A"` and `""` mean none; `Writing` W; `Quantitative` Q; `Breadth-Social Sciences` / `Breadth-Soc` / `Breadth-Social Sci` B-Soc; `Breadth-Humanities` / `Breadth-Hum` B-Hum; `Breadth-Science` B-Sci. After a `Breadth-...` part, the abbreviations `Social Sciences`, `Social Sci`, `Humanities`, and `Science` name further breadths (`"Breadth-Hum/Social Sci/Science"` is B-Hum, B-Soc, B-Sci). Any other string fails the build.
+- `data/generated/offerings.json`: `{ "BUS 303": { "2025-fall": ["LEC"], ..., "future": { "2027-spring": ["LEC"] } } }`. A term is listed only if the course had at least one section of any type; scheduled terms after the last fetched past term sit under `future`.
+- `data/generated/unknown-courses.json`: requirements.csv courses with no outline in the fetched terms ("offering unknown"), with the req_ids that name them. The build fails if a requirements.csv course is neither in `courses.json` nor reported as without data by the fetch manifest.
 
 ## Courses we don't have data for
 

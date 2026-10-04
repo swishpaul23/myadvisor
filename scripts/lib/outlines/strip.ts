@@ -24,6 +24,8 @@ export const KEPT_INFO_FIELDS = [
   "name",
   "classNumber",
   "outlinePath",
+  "requirements", // first seen in the full run, 2026-10-03; kept per Stuart
+  "shortNote", // first seen in the full run, 2026-10-03; kept per Stuart
 ] as const;
 
 /** `info` fields seen in samples and dropped on purpose. */
@@ -42,6 +44,7 @@ export const DROPPED_TOP_LEVEL = [
   "requiredText",
   "courseSchedule",
   "examSchedule", // first seen in the BUS-only run, 2026-10-03
+  "recommendedText", // textbooks; first seen in the full run, 2026-10-03
 ] as const;
 
 export type StrippedOutline = { info: Record<string, unknown> };
@@ -97,6 +100,18 @@ export function scrubText(text: string, names: readonly string[]): string {
   return out;
 }
 
+/** scrubText applied to every string, including inside arrays and objects. */
+function scrubValue(value: unknown, names: readonly string[]): unknown {
+  if (typeof value === "string") return scrubText(value, names);
+  if (Array.isArray(value)) return value.map((v) => scrubValue(v, names));
+  if (typeof value === "object" && value !== null) {
+    return Object.fromEntries(
+      Object.entries(value).map(([k, v]) => [k, scrubValue(v, names)]),
+    );
+  }
+  return value;
+}
+
 export function stripOutline(outline: Record<string, unknown>): StripResult {
   const unknownKeys: string[] = [];
   for (const key of Object.keys(outline)) {
@@ -113,7 +128,7 @@ export function stripOutline(outline: Record<string, unknown>): StripResult {
   const kept: Record<string, unknown> = {};
   for (const [key, value] of Object.entries(info)) {
     if ((KEPT_INFO_FIELDS as readonly string[]).includes(key)) {
-      kept[key] = typeof value === "string" ? scrubText(value, names) : value;
+      kept[key] = scrubValue(value, names);
     } else if (!(DROPPED_INFO_FIELDS as readonly string[]).includes(key)) {
       unknownKeys.push(`info.${key}`);
     }

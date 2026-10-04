@@ -233,6 +233,26 @@ describe("stripOutline", () => {
     expect(result.outline.info).toEqual({ dept: "BUS" });
   });
 
+  test("keeps requirements and shortNote, scrubbed; drops recommendedText", () => {
+    const result = stripOutline({
+      info: {
+        dept: "BUS",
+        requirements: "Ask Quintessa Vandermolen at qv@example.sfu.ca.",
+        shortNote: ["Call 778-555-0142", { who: "Quintessa Vandermolen" }],
+      },
+      instructor: [{ firstName: "Quintessa", lastName: "Vandermolen" }],
+      recommendedText: [{ details: "Some textbook" }],
+    });
+    expect(result.unknownKeys).toEqual([]);
+    expect(result.outline).toEqual({
+      info: {
+        dept: "BUS",
+        requirements: "Ask [name removed] at [email removed].",
+        shortNote: ["Call [phone removed]", { who: "[name removed]" }],
+      },
+    });
+  });
+
   test("does not remove ordinary words that match a first name", () => {
     const result = stripOutline({
       info: { description: "Students will learn." },

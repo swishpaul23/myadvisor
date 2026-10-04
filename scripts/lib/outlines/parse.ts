@@ -81,6 +81,11 @@ export function splitCourseCode(code: string): {
   return { dept: match[1]!.toLowerCase(), number: match[2]!.toLowerCase() };
 }
 
+/** Distinct section types in a section list, sorted, e.g. ["LEC", "TUT"]. */
+export function sectionTypes(sections: SectionListItem[]): string[] {
+  return [...new Set(sections.map((s) => s.sectionCode))].sort();
+}
+
 /**
  * Sections to try for the course outline, best first: lectures (LEC) that students
  * enrol in (classType "e"), then any other enrolment section.

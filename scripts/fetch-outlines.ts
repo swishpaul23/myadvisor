@@ -7,6 +7,7 @@
  * Flags:
  *   --dry-run                 fetch only robots.txt and list levels; print request count and time
  *   --refresh                 re-fetch files that already exist
+ *   --refresh-outlines        re-fetch outlines only (lists and section files on disk are reused)
  *   --depts BUS,ECON          fetch these departments whole instead of the config defaults
  *   --depts +CMPT,+GEOG       fetch these whole in addition to the defaults
  *   --no-from-requirements    don't add the course codes listed in data/sheets/requirements.csv
@@ -40,6 +41,7 @@ import {
   parseSections,
   parseTerms,
   parseYears,
+  sectionTypes,
   splitCourseCode,
   type SectionListItem,
 } from "./lib/outlines/parse";
@@ -83,6 +85,8 @@ type CourseRecord = {
   /** From the course lists; null if no list gave one (the outline has info.title). */
   title: string | null;
   ran: string[];
+  /** Section types (LEC, TUT, ...) per term with at least one section, future terms included. */
+  sections: Record<string, string[]>;
   outline: string | null;
 };
 type Manifest = {
@@ -122,6 +126,7 @@ function readArgs() {
     options: {
       "dry-run": { type: "boolean", default: false },
       refresh: { type: "boolean", default: false },
+      "refresh-outlines": { type: "boolean", default: false },
       "from-requirements": { type: "boolean", default: true },
       depts: { type: "string" },
       terms: { type: "string" },
@@ -151,6 +156,7 @@ function readArgs() {
   return {
     dryRun: values["dry-run"],
     refresh: values.refresh,
+    refreshOutlines: values.refresh || values["refresh-outlines"],
     fromRequirements: values["from-requirements"],
     wholeDepts,
     terms: values.terms?.split(",").map((t) => parseTerm(t)),
@@ -340,7 +346,7 @@ async function main() {
     let outlines = 0;
     for (const { dept, number } of courses.values()) {
       const has = terms.some((t) => exists(outlinePath(t.term, dept, number)));
-      if (args.refresh || !has) outlines++;
+      if (args.refreshOutlines || !has) outlines++;
     }
     const listRequests = client.stats.requests;
     const total = listRequests + sections + outlines;
@@ -370,6 +376,7 @@ async function main() {
     { dept: string; number: string; terms: ScopedTerm[] }
   >();
   const sectionsOf = new Map<string, SectionListItem[]>(); // key: code@term
+  const sectionTypesOf: Record<string, Record<string, string[]>> = {}; // code -> term -> types
   const universe = new Map<string, Set<string>>(); // dept -> numbers seen in any term
   for (const [key, courses] of offered) {
     const dept = key.split("/")[2]!;
@@ -409,7 +416,12 @@ async function main() {
         }
         if (json !== undefined) {
           ranHere.add(c.number);
-          sectionsOf.set(`${code}@${termKey(t.term)}`, parseSections(json));
+          const sections = parseSections(json);
+          sectionsOf.set(`${code}@${termKey(t.term)}`, sections);
+          if (sections.length > 0) {
+            (sectionTypesOf[code] ??= {})[termKey(t.term)] =
+              sectionTypes(sections);
+          }
           if (!ran.has(code))
             ran.set(code, { dept, number: c.number, terms: [] });
           ran.get(code)!.terms.push(t);
@@ -435,6 +447,7 @@ async function main() {
     const record: CourseRecord = {
       title: titles.get(code) ?? null,
       ran: course.terms.filter((t) => !t.future).map((t) => termKey(t.term)),
+      sections: sectionTypesOf[code] ?? {},
       outline: null,
     };
     courseRecords[code] = record;
@@ -443,7 +456,7 @@ async function main() {
       .reverse()
       .map((t) => outlinePath(t.term, course.dept, course.number))
       .find((rel) => exists(rel));
-    if (existing && !args.refresh) {
+    if (existing && !args.refreshOutlines) {
       record.outline = existing;
       filesSkipped++;
       const designation = (
