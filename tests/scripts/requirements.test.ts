@@ -4,6 +4,7 @@ import {
   REQUIREMENTS_COLUMNS,
   RULES,
   findUnknownFilterTerms,
+  fromReqsIds,
   requirementRowSchema,
 } from "@/lib/data/schema";
 import { validateRequirementsCsv } from "../../scripts/validate-requirements";
@@ -165,6 +166,10 @@ describe("findUnknownFilterTerms", () => {
         "level lower",
         "level 400",
         "not allocated to designated breadth",
+        "group Lower core|Upper core",
+        "group Beedie",
+        "from_reqs test-group-a|test-group-b",
+        "from_reqs test-group-a",
       ]),
     ).toEqual([]);
   });
@@ -176,8 +181,18 @@ describe("findUnknownFilterTerms", () => {
       "degree second_bachelors",
       "purpose admission",
       "dept bus",
+      "group Core",
+      "group Lower core|",
+      "from_reqs",
+      "from_reqs a b",
     ];
     expect(findUnknownFilterTerms(unknown)).toEqual(unknown);
+  });
+
+  test("fromReqsIds lists every named req_id", () => {
+    expect(
+      fromReqsIds(["dept BUS", "from_reqs test-group-a|test-group-b"]),
+    ).toEqual(["test-group-a", "test-group-b"]);
   });
 });
 
@@ -223,6 +238,32 @@ describe("validateRequirementsCsv", () => {
       { sheetRow: 2, reqId: "test-upper-bus", term: "SFU business courses" },
     ]);
     expect(result.counts.concentration).toEqual({ "(all)": 1 });
+  });
+
+  test("accepts from_reqs naming rows anywhere in the sheet", () => {
+    const result = validateRequirementsCsv(
+      toCsv([
+        { ...goodRow, req_id: "test-total", filter: "from_reqs test-group-a" },
+        { ...goodRow, req_id: "test-group-a" },
+      ]),
+    );
+    expect(result.errors).toEqual([]);
+  });
+
+  test("rejects from_reqs naming a missing req_id", () => {
+    const result = validateRequirementsCsv(
+      toCsv([
+        {
+          ...goodRow,
+          req_id: "test-total",
+          filter: "from_reqs test-group-a|test-missing",
+        },
+        { ...goodRow, req_id: "test-group-a" },
+      ]),
+    );
+    expect(result.errors).toEqual([
+      'sheet row 2 (req_id test-total): filter: from_reqs names unknown req_id "test-missing"',
+    ]);
   });
 
   test("skips rule and filter checks on out-of-scope rows", () => {

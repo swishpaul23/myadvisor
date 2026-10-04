@@ -72,9 +72,16 @@ export const MIN_GRADES = [
 
 const COURSE_CODE = /^[A-Z]{2,5} \d{3}[A-Z]?$/;
 
+const GROUP_NAME = `(${GROUPS.join("|")})`;
+const FROM_REQS = /^from_reqs ([^\s|;]+(\|[^\s|;]+)*)$/;
+
 // Allowed `filter` terms on in-scope rows. Anything else is reported by build-data,
 // never guessed at. Out-of-scope rows are not checked.
 const FILTER_TERM_PATTERNS = [
+  // Restricts the rule to requirement rows in these `group` values.
+  new RegExp(`^group ${GROUP_NAME}(\\|${GROUP_NAME})*$`),
+  // Course list is the union of these rows' course lists; build-data checks each ID exists.
+  FROM_REQS,
   /^dept [A-Z]{2,5}(,[A-Z]{2,5})*$/,
   /^dept not in [A-Z]{2,5}(,[A-Z]{2,5})*$/,
   /^subject business$/,
@@ -105,6 +112,11 @@ export function findUnknownFilterTerms(terms: readonly string[]): string[] {
   return terms.filter(
     (term) => !FILTER_TERM_PATTERNS.some((pattern) => pattern.test(term)),
   );
+}
+
+// The req_ids named by any `from_reqs` terms, in order.
+export function fromReqsIds(terms: readonly string[]): string[] {
+  return terms.flatMap((term) => FROM_REQS.exec(term)?.[1]?.split("|") ?? []);
 }
 
 const text = z.string().trim();

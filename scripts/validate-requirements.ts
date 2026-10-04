@@ -2,6 +2,7 @@ import Papa from "papaparse";
 import {
   REQUIREMENTS_COLUMNS,
   findUnknownFilterTerms,
+  fromReqsIds,
   requirementRowSchema,
   splitFilterTerms,
   type RequirementRow,
@@ -62,6 +63,7 @@ export function validateRequirementsCsv(
   }
 
   const firstRowOfId = new Map<string, number>();
+  const fromReqsRefs: { where: string; id: string }[] = [];
 
   parsed.data.forEach((record, index) => {
     const sheetRow = index + 2;
@@ -78,8 +80,12 @@ export function validateRequirementsCsv(
 
     // Out-of-scope rows are skipped by the engine, so their filters are not checked.
     if (raw.status.trim() !== "out-of-scope") {
-      for (const term of findUnknownFilterTerms(splitFilterTerms(raw.filter))) {
+      const terms = splitFilterTerms(raw.filter);
+      for (const term of findUnknownFilterTerms(terms)) {
         unknownFilterTerms.push({ sheetRow, reqId, term });
+      }
+      for (const id of fromReqsIds(terms)) {
+        fromReqsRefs.push({ where, id });
       }
     }
 
@@ -102,6 +108,13 @@ export function validateRequirementsCsv(
       }
     }
   });
+
+  // Checked after the loop so a from_reqs term may name a row further down the sheet.
+  for (const { where, id } of fromReqsRefs) {
+    if (!firstRowOfId.has(id)) {
+      errors.push(`${where}: filter: from_reqs names unknown req_id "${id}"`);
+    }
+  }
 
   return { rows, errors, unknownFilterTerms, counts };
 }

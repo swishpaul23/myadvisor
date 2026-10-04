@@ -714,7 +714,8 @@
       "level_max": null,
       "designation": [],
       "filter": [
-        "SFU business courses",
+        "dept BUS",
+        "institution SFU",
         "purpose entry_to_300_400_BUS"
       ],
       "min_grade": null,
@@ -736,7 +737,8 @@
       "level_max": null,
       "designation": [],
       "filter": [
-        "SFU business courses",
+        "dept BUS",
+        "institution SFU",
         "purpose graduation"
       ],
       "min_grade": null,
@@ -867,7 +869,7 @@
       "level_max": null,
       "designation": [],
       "filter": [
-        "lower requirements OR business core OR business prerequisite"
+        "group Lower core|Upper core"
       ],
       "min_grade": "C-",
       "notes": "P-graded BUS 203, BUS 300 and BUS 496 use their specific pass requirements.",
@@ -928,7 +930,7 @@
       "level_max": null,
       "designation": [],
       "filter": [
-        "eligible Group A OR Group B",
+        "from_reqs beedie-nonbus-group-a|beedie-nonbus-group-b",
         "outside Beedie"
       ],
       "min_grade": null,
