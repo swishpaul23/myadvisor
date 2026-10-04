@@ -28,6 +28,8 @@ Optional for the app:
 
 - `DATA_SOURCE` (`json` by default, or `snowflake`)
 - `SNOWFLAKE_TIMEOUT_MS`
+- `ELEVENLABS_API_KEY` (Advisor voice; without it the mic and read-aloud are hidden and text chat still works)
+- `ELEVENLABS_VOICE_ID` (the voice that reads answers aloud; without it only the mic is shown)
 - `AUTH_URL`, `AUTH_TRUST_HOST` (not needed on Vercel)
 - With `DATA_SOURCE=snowflake` only: `SNOWFLAKE_ACCOUNT`, `SNOWFLAKE_USER`, `SNOWFLAKE_ROLE`, `SNOWFLAKE_WAREHOUSE`, `SNOWFLAKE_DATABASE`, `SNOWFLAKE_SCHEMA`, `SNOWFLAKE_PRIVATE_KEY_PATH`
 
@@ -139,7 +141,7 @@ Later features may include institution-specific GPA scenarios, graduation estima
 | Frontend | Next.js 16, React 19, TypeScript, Tailwind CSS 4, shadcn/Base UI | Present in the scaffold; application screens still need implementation. |
 | Main LLM | Gemini through the Vercel AI SDK (`ai`, `@ai-sdk/google`) | Model `gemini-2.5-flash`. Calls stay in server route handlers or `src/lib/ai/google.ts`. The browser never sees the key. |
 | Application database | Snowflake Postgres | Selected for profiles, confirmed course attempts, requirements, plans and conversation history. Instance, schema and connection are pending. |
-| Voice | ElevenLabs API | Selected for spoken advising; voice choice and input/output integration are pending. |
+| Voice | ElevenLabs API | Push-to-talk in the Advisor: Scribe (`scribe_v2`) speech-to-text and `eleven_flash_v2_5` text-to-speech, called server-side from `/api/advisor/transcribe` and `/api/advisor/speak`. Clips up to 60 s / 4 MB; audio and transcripts are never stored or logged. |
 | Backend | Authenticated API/orchestrator | Planned. FastAPI on AWS Lambda is an option in the team sketch; framework and deployment are not final. |
 | Transcript files | Private object storage | Planned. Storage provider and retention policy are pending. |
 | Source retrieval | Calendar retrieval, with Snowflake Cortex Search REST API as a proposed option | Search service, source ingestion and track fit still need confirmation. |
@@ -240,7 +242,7 @@ Put the Gemini key in `.env.local` for local calls:
 GOOGLE_GENERATIVE_AI_API_KEY=your-google-ai-api-key
 ```
 
-Get the key at [Google AI Studio](https://aistudio.google.com/apikey). The name must not start with `NEXT_PUBLIC_`. Routes read it per request, so a production build does not need the key. Other integrations (Postgres, ElevenLabs, auth, private storage, Snowflake REST) still need their own server-side settings when those features are implemented.
+Get the key at [Google AI Studio](https://aistudio.google.com/apikey). The name must not start with `NEXT_PUBLIC_`. Routes read it per request, so a production build does not need the key. ElevenLabs voice reads `ELEVENLABS_API_KEY` and `ELEVENLABS_VOICE_ID` the same way. Other integrations (Postgres, private storage, Snowflake REST) still need their own server-side settings when those features are implemented.
 
 Keep credentials out of source control and browser bundles. Use environment configuration for local development and the deployment platform’s secret storage when hosting the app.
 
@@ -261,7 +263,7 @@ The intended demo follows a Finance student who uploads a synthetic transcript, 
 
 - Whether official SFU SSO is available. (Authentication provider decided: Google sign-in via Auth.js (decided by Stuart, 2026-10-04); see [Auth setup](#auth-setup).)
 - Backend framework, hosting and private file storage.
-- ElevenLabs voice and voice interaction mode. Gemini model is `gemini-2.5-flash` through the Vercel AI SDK.
+- ElevenLabs voice choice (`ELEVENLABS_VOICE_ID`); the interaction mode is push-to-talk. Gemini model is `gemini-2.5-flash` through the Vercel AI SDK.
 - Snowflake account/instance access and the qualifying Snowflake REST feature.
 - Requirement evaluator format, prerequisite coverage and exception handling.
 - Live course-offering data and the limits of graduation estimates.
