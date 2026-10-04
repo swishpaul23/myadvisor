@@ -15,7 +15,7 @@ const SHEEN =
 export function UploadTranscriptLink() {
   return (
     <a
-      href="#"
+      href="/app/start/upload"
       className={cn(
         BASE,
         SHEEN,
@@ -54,7 +54,7 @@ export function SampleStudentLink({
   tone?: keyof typeof SAMPLE_TONES;
 }) {
   return (
-    <a href="#" className={cn(BASE, "border", SAMPLE_TONES[tone])}>
+    <a href="/app/start/sample" className={cn(BASE, "border", SAMPLE_TONES[tone])}>
       Try the sample student
     </a>
   );
