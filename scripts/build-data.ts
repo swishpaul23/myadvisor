@@ -9,7 +9,11 @@
  *   offerings.json (section types per term; future terms kept apart), and
  *   unknown-courses.json (requirements.csv courses with no outline: "offering unknown").
  * - Cross-check: every requirements.csv course is in courses.json or unknown-courses.json.
- * Any error exits 1 and writes nothing. Prerequisite text stays raw (not parsed).
+ * - prereqs.json: prerequisite/corequisite text parsed by scripts/lib/prereqs/ (anything
+ *   unclear kept verbatim as unknown nodes); prereqs-review.json lists partial/unparsed
+ *   courses. Reports status counts, common unknown fragments, and prerequisite codes we
+ *   have no course data for.
+ * Any error exits 1 and writes nothing.
  *
  * Still to come:
  * - Read the other CSVs and data/policy/sfu.json.
@@ -32,7 +36,10 @@ import {
   termKey,
   type ManifestCourse,
 } from "./lib/catalog";
+import { prereqsFileSchema } from "@/lib/data/prereqs";
 import { courseReferencesFromRequirementsCsv } from "./lib/outlines/requirements";
+import { parsePrerequisites } from "./lib/prereqs";
+import { codesWithoutData, topFragments } from "./lib/prereqs/report";
 import { validateRequirementsCsv } from "./validate-requirements";
 
 const REQUIREMENTS_CSV = "data/sheets/requirements.csv";
@@ -42,6 +49,8 @@ const OUT = {
   courses: "data/generated/courses.json",
   offerings: "data/generated/offerings.json",
   unknown: "data/generated/unknown-courses.json",
+  prereqs: "data/generated/prereqs.json",
+  prereqsReview: "data/generated/prereqs-review.json",
 };
 
 type Manifest = {
@@ -180,12 +189,59 @@ for (const [dept, codes] of unknownByDept) {
   );
 }
 
+// ---------- prerequisites ----------
+
+const prereqs = courses.map((c) =>
+  parsePrerequisites(c.code, c.prerequisites_text, c.corequisites_text),
+);
+const prereqCounts: Record<string, number> = {};
+for (const r of prereqs)
+  prereqCounts[r.status] = (prereqCounts[r.status] ?? 0) + 1;
+printCounts("Prerequisites by status", prereqCounts);
+
+const top = topFragments(prereqs, 20);
+const byPattern = new Map<string, typeof top>();
+for (const f of top)
+  byPattern.set(f.pattern, [...(byPattern.get(f.pattern) ?? []), f]);
+console.log(`\n20 most common unknown fragments, by pattern:`);
+for (const [pattern, fragments] of byPattern) {
+  console.log(`  ${pattern}:`);
+  for (const f of fragments)
+    console.log(
+      `    ${String(f.count).padStart(3)}  ${JSON.stringify(f.text)}`,
+    );
+}
+
+// Cross-check (report only): codes in parsed nodes that we have no data for.
+const knownCodes = new Set([
+  ...courses.map((c) => c.code),
+  ...unknown.map((u) => u.code),
+]);
+const missingCodes = codesWithoutData(prereqs, knownCodes);
+console.log(
+  `\nPrerequisite course codes not in courses.json or unknown-courses.json: ${Object.keys(missingCodes).length}`,
+);
+for (const [code, citedBy] of Object.entries(missingCodes)) {
+  console.log(`  ${code.padEnd(10)} cited by ${citedBy.join(", ")}`);
+}
+
+const review = prereqs
+  .filter((r) => r.status === "partial" || r.status === "unparsed")
+  .map(({ code, status, raw, raw_coreq, unparsed_fragments }) => ({
+    code,
+    status,
+    raw,
+    raw_coreq,
+    unparsed_fragments,
+  }));
+
 // ---------- validate and write ----------
 
 for (const [name, schema, value] of [
   ["courses.json", coursesFileSchema, courses],
   ["offerings.json", offeringsFileSchema, offerings],
   ["unknown-courses.json", unknownCoursesFileSchema, unknown],
+  ["prereqs.json", prereqsFileSchema, prereqs],
 ] as const) {
   const result = schema.safeParse(value);
   if (!result.success) {
@@ -209,6 +265,8 @@ write(OUT.requirements, { source: csvPath, requirements: requirements.rows });
 write(OUT.courses, courses);
 write(OUT.offerings, offerings);
 write(OUT.unknown, unknown);
+write(OUT.prereqs, prereqs);
+write(OUT.prereqsReview, review);
 console.log(
-  `\nOK: wrote ${requirements.rows.length} requirements, ${courses.length} courses, ${Object.keys(offerings).length} offerings, ${unknown.length} unknown courses to data/generated/`,
+  `\nOK: wrote ${requirements.rows.length} requirements, ${courses.length} courses, ${Object.keys(offerings).length} offerings, ${unknown.length} unknown courses, ${prereqs.length} prerequisite records (${review.length} to review) to data/generated/`,
 );

@@ -68,6 +68,9 @@ Schema: `src/lib/data/schema.ts` (zod). `npm run data:build` fails with sheet ro
 `data/sheets/prereq-overrides.csv`: `course_code,override_text,reason,source_url` (prerequisite text the parser can't handle).
 There is no courses CSV: course data comes from the SFU Course Outlines API.
 
+**Prerequisites** (`data/generated/prereqs.json`, parsed deterministically by `scripts/lib/prereqs/`, schema `src/lib/data/prereqs.ts`): per course, `prereq` and `coreq` trees of `course` (code, `minGrade`, `concurrentOk`), `all`, `any`, `units`, and `unknown` nodes, plus `status` (`parsed | partial | unparsed | none`). Text the parser can't map exactly is an `unknown` node holding the original words; `advisory` holds recommendations, which are never requirements. `data/generated/prereqs-review.json` lists every partial or unparsed course for a human to check.
+**Engine rule: an `unknown` node means "cannot verify, check with an advisor".** If a course's trees contain any unknown node, the engine must not report the prerequisite as met or not met; it reports "cannot verify, check with an advisor" (it may show which parsed parts are satisfied). An unknown can be an extra requirement or an alternative path, so neither answer is safe.
+
 **Rule for every row:** copy what the calendar says, include its URL, and write "unsure" in `notes` rather than guess.
 
 ## 7. Database
