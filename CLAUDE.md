@@ -10,7 +10,7 @@ myAdvisor is a degree planner for SFU Beedie BBA students, built at a 24-hour ha
 
 ## 3. Scope
 
-- In: Beedie BBA major and all 9 concentrations (Accounting, Innovation & Entrepreneurship, Finance, Human Resource Management, International Business, Management Information Systems, Marketing, Operations Management, Strategic Analysis), on the SFU Fall 2026 calendar (`catalog_term` = `2026-fall`). Finance is the demo program. The demo student is fictional.
+- In: Beedie BBA major and all 9 concentrations (Accounting, Innovation and Entrepreneurship, Finance, Human Resource Management, International Business, Management Information Systems, Marketing, Operations Management, Strategic Analysis), on the SFU Fall 2026 calendar (`catalog_term` = `2026-fall`). Finance is the demo program. The demo student is fictional.
 - Cut: login, saved plans beyond the demo, other programs or calendars, joint majors, honours, other faculties.
 
 ## 4. Folder map
@@ -50,15 +50,16 @@ tests/golden/        teammate's test questions as expected-answer cases
 `req_id,program,concentration,catalog_term,group,rule,n_or_units,courses,level_min,level_max,designation,filter,min_grade,notes,source_url,status,verified_by`
 
 - `req_id`: unique and stable; never renamed once code or tests depend on it. Used for audit output, links between rows, chat citations, and golden tests.
-- `program`: `BBA`, or `*` for university-wide rules. `concentration`: blank means all concentrations.
+- `program`: `BBA`, or `*` for university-wide rules.
+- `concentration`: blank (applies to all concentrations) or exactly one of `Accounting`, `Finance`, `Human Resource Management`, `Innovation and Entrepreneurship`, `International Business`, `Management Information Systems`, `Marketing`, `Operations Management`, `Strategic Analysis`.
 - `group`: `Lower core | Upper core | Concentration | Beedie | University`
-- `rule`: `one course | choose N | all of | units from | courses from | gpa`
+- `rule` (in-scope rows): `one course | n courses | all of | units from | minimum GPA | minimum grade | completed concentrations | maximum breadth allocations per course`
 - `courses`: comma-separated list inside quotes, e.g. `"BUS 312,BUS 315"`.
 - `level_min` / `level_max`: integers, a course-number range (upper division = 300 to 499, lower = 100 to 299). Blank means no level restriction.
 - `designation`: blank, or one or more of `W`, `Q`, `B-Soc`, `B-Hum`, `B-Sci` joined with `|`. A course counts only if it carries one of these.
-- `filter`: semicolon-separated leftovers only. Allowed terms so far: `dept X`, `institution SFU`, `course_units >= N`, `exclude CODE|CODE`, `subject outside major`, `subject in major`, `degree first_bachelors`. Anything else is reported by `data:build`, never guessed at.
+- `filter` (in-scope rows): semicolon-separated leftovers only. Allowed terms so far: `dept X` or `dept X,Y`, `dept not in X,Y`, `subject business`, `subject outside major`, `subject in major`, `outside Beedie`, `institution SFU`, `course_units >= N`, `earned_units >= N`, `exclude CODE|CODE|...`, `purpose graduation`, `purpose entry_to_300_400_BUS`, `degree first_bachelors`, `program courses`, `all courses`, `if institution SFU then course_units >= N`. Also accepted as already handled: `level upper|lower|NNN` and `not allocated to designated breadth`. Anything else is reported by `data:build`, never guessed at or rewritten.
 - `min_grade`: blank, a letter grade (`A+` to `D`), or `P`.
-- `status`: `beta | verified | out-of-scope`. Everything starts `beta`; only Stuart marks rows `verified`. Rows with status `out-of-scope` are skipped by the engine.
+- `status`: `beta | verified | out-of-scope`. Everything starts `beta`; only Stuart marks rows `verified`. Rows with status `out-of-scope` are skipped by the engine; `data:build` skips their `rule` and `filter` checks (any string allowed) but checks every other column.
 - `verified_by`: a person's name; blank until a human checks the row. Required when `verified`, must be blank when `beta`.
 
 Schema: `src/lib/data/schema.ts` (zod). `npm run data:build` fails with sheet row and `req_id` on any bad value or duplicate `req_id`, and writes `data/generated/requirements.json`.

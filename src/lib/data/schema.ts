@@ -31,13 +31,27 @@ export const GROUPS = [
   "Beedie",
   "University",
 ] as const;
+export const CONCENTRATIONS = [
+  "Accounting",
+  "Finance",
+  "Human Resource Management",
+  "Innovation and Entrepreneurship",
+  "International Business",
+  "Management Information Systems",
+  "Marketing",
+  "Operations Management",
+  "Strategic Analysis",
+] as const;
+// Rule types for in-scope rows. Out-of-scope rows may use any string.
 export const RULES = [
   "one course",
-  "choose N",
+  "n courses",
   "all of",
   "units from",
-  "courses from",
-  "gpa",
+  "minimum GPA",
+  "minimum grade",
+  "completed concentrations",
+  "maximum breadth allocations per course",
 ] as const;
 export const DESIGNATIONS = ["W", "Q", "B-Soc", "B-Hum", "B-Sci"] as const;
 export const STATUSES = ["beta", "verified", "out-of-scope"] as const;
@@ -58,15 +72,26 @@ export const MIN_GRADES = [
 
 const COURSE_CODE = /^[A-Z]{2,5} \d{3}[A-Z]?$/;
 
-// Allowed `filter` terms. Anything else is reported by build-data, never guessed at.
+// Allowed `filter` terms on in-scope rows. Anything else is reported by build-data,
+// never guessed at. Out-of-scope rows are not checked.
 const FILTER_TERM_PATTERNS = [
-  /^dept [A-Z]{2,5}$/,
-  /^institution SFU$/,
-  /^course_units >= \d+(\.\d+)?$/,
-  /^exclude [A-Z]{2,5} \d{3}[A-Z]?(\|[A-Z]{2,5} \d{3}[A-Z]?)*$/,
+  /^dept [A-Z]{2,5}(,[A-Z]{2,5})*$/,
+  /^dept not in [A-Z]{2,5}(,[A-Z]{2,5})*$/,
+  /^subject business$/,
   /^subject outside major$/,
   /^subject in major$/,
+  /^outside Beedie$/,
+  /^institution SFU$/,
+  /^course_units >= \d+(\.\d+)?$/,
+  /^earned_units >= \d+(\.\d+)?$/,
+  /^exclude [A-Z]{2,5} \d{3}[A-Z]?(\|[A-Z]{2,5} \d{3}[A-Z]?)*$/,
+  /^purpose (graduation|entry_to_300_400_BUS)$/,
   /^degree first_bachelors$/,
+  /^(program|all) courses$/,
+  /^if institution SFU then course_units >= \d+(\.\d+)?$/,
+  // Level text duplicated from level_min/level_max, and breadth allocation, are handled.
+  /^level (upper|lower|\d{3})$/,
+  /^not allocated to designated breadth$/,
 ];
 
 export function splitFilterTerms(filter: string): string[] {
@@ -143,27 +168,42 @@ const designationList = text.transform((s, ctx) => {
 const blankOr = <T extends readonly [string, ...string[]]>(values: T) =>
   text.pipe(z.union([z.literal(""), z.enum(values)]));
 
-export const requirementRowSchema = z
-  .object({
-    req_id: text.regex(/^\S+$/, "must be non-empty with no spaces"),
-    program: text.pipe(z.enum(PROGRAMS)),
-    concentration: text,
-    catalog_term: text.pipe(z.literal("2026-fall")),
-    group: text.pipe(z.enum(GROUPS)),
-    rule: text.pipe(z.enum(RULES)),
-    n_or_units: optionalNumber,
-    courses: courseList,
-    level_min: optionalLevel,
-    level_max: optionalLevel,
-    designation: designationList,
-    filter: text.transform(splitFilterTerms),
-    min_grade: blankOr(MIN_GRADES).transform((g) => (g === "" ? null : g)),
-    notes: text,
-    source_url: text.regex(/^https?:\/\/\S+$/, "must be an http(s) URL"),
-    status: text.pipe(z.enum(STATUSES)),
-    verified_by: text,
-  })
+const requirementFields = z.object({
+  req_id: text.regex(/^\S+$/, "must be non-empty with no spaces"),
+  program: text.pipe(z.enum(PROGRAMS)),
+  // Blank (null) means the row applies to all concentrations.
+  concentration: blankOr(CONCENTRATIONS).transform((c) =>
+    c === "" ? null : c,
+  ),
+  catalog_term: text.pipe(z.literal("2026-fall")),
+  group: text.pipe(z.enum(GROUPS)),
+  // Checked against RULES below, only for in-scope rows.
+  rule: text,
+  n_or_units: optionalNumber,
+  courses: courseList,
+  level_min: optionalLevel,
+  level_max: optionalLevel,
+  designation: designationList,
+  filter: text.transform(splitFilterTerms),
+  min_grade: blankOr(MIN_GRADES).transform((g) => (g === "" ? null : g)),
+  notes: text,
+  source_url: text.regex(/^https?:\/\/\S+$/, "must be an http(s) URL"),
+  status: text.pipe(z.enum(STATUSES)),
+  verified_by: text,
+});
+
+export const requirementRowSchema = requirementFields
   .superRefine((row, ctx) => {
+    if (
+      row.status !== "out-of-scope" &&
+      !(RULES as readonly string[]).includes(row.rule)
+    ) {
+      ctx.addIssue({
+        code: "custom",
+        path: ["rule"],
+        message: `"${row.rule}" is not one of ${RULES.map((r) => `"${r}"`).join(", ")}`,
+      });
+    }
     if (
       row.level_min !== null &&
       row.level_max !== null &&
@@ -189,6 +229,15 @@ export const requirementRowSchema = z
         message: `must be blank until a human verifies the row, got "${row.verified_by}"`,
       });
     }
-  });
+  })
+  .transform((row) => row as RequirementRow);
 
-export type RequirementRow = z.output<typeof requirementRowSchema>;
+type ParsedRow = Omit<z.output<typeof requirementFields>, "rule" | "status">;
+
+// In-scope rows have a known rule; out-of-scope rows keep whatever the sheet says
+// and are skipped by the engine.
+export type RequirementRow = ParsedRow &
+  (
+    | { status: "beta" | "verified"; rule: (typeof RULES)[number] }
+    | { status: "out-of-scope"; rule: string }
+  );

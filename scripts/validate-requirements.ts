@@ -76,8 +76,11 @@ export function validateRequirementsCsv(
     increment(counts.group, raw.group.trim() || "(blank)");
     increment(counts.concentration, raw.concentration.trim() || "(all)");
 
-    for (const term of findUnknownFilterTerms(splitFilterTerms(raw.filter))) {
-      unknownFilterTerms.push({ sheetRow, reqId, term });
+    // Out-of-scope rows are skipped by the engine, so their filters are not checked.
+    if (raw.status.trim() !== "out-of-scope") {
+      for (const term of findUnknownFilterTerms(splitFilterTerms(raw.filter))) {
+        unknownFilterTerms.push({ sheetRow, reqId, term });
+      }
     }
 
     const firstRow = firstRowOfId.get(reqId);

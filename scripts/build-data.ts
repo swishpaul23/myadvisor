@@ -39,11 +39,18 @@ printCounts("By status", counts.status);
 printCounts("By group", counts.group);
 printCounts("By concentration", counts.concentration);
 
-console.log(
-  `\nFilter terms not in the allowed list: ${unknownFilterTerms.length}`,
-);
+const rowsByTerm = new Map<string, string[]>();
 for (const { sheetRow, reqId, term } of unknownFilterTerms) {
-  console.log(`  sheet row ${sheetRow} (req_id ${reqId}): ${term}`);
+  const rows = rowsByTerm.get(term) ?? [];
+  rows.push(`${reqId} (sheet row ${sheetRow})`);
+  rowsByTerm.set(term, rows);
+}
+console.log(
+  `\nFilter terms not in the allowed list (in-scope rows): ${rowsByTerm.size} distinct, ${unknownFilterTerms.length} uses`,
+);
+for (const [term, rows] of rowsByTerm) {
+  console.log(`  "${term}"`);
+  for (const row of rows) console.log(`      ${row}`);
 }
 
 if (errors.length > 0) {

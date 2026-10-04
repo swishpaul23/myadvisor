@@ -1,6 +1,8 @@
 import { describe, expect, test } from "vitest";
 import {
+  CONCENTRATIONS,
   REQUIREMENTS_COLUMNS,
+  RULES,
   findUnknownFilterTerms,
   requirementRowSchema,
 } from "@/lib/data/schema";
@@ -46,6 +48,7 @@ describe("requirementRowSchema", () => {
     const result = parse({});
     expect(result.success).toBe(true);
     expect(result.data).toMatchObject({
+      concentration: null,
       n_or_units: 6,
       courses: ["BUS 312", "BUS 217W"],
       level_min: 300,
@@ -87,8 +90,38 @@ describe("requirementRowSchema", () => {
     },
   );
 
-  test("accepts out-of-scope status", () => {
-    expect(parse({ status: "out-of-scope" }).success).toBe(true);
+  test.each(RULES)("accepts rule %s", (rule) => {
+    expect(parse({ rule }).success).toBe(true);
+  });
+
+  test.each(["choose N", "courses from", "gpa", "declare concentrations", ""])(
+    "rejects rule %j on an in-scope row",
+    (rule) => {
+      expect(parse({ rule }).success).toBe(false);
+    },
+  );
+
+  test.each(CONCENTRATIONS)("accepts concentration %s", (concentration) => {
+    expect(parse({ concentration }).data?.concentration).toBe(concentration);
+  });
+
+  test.each(["Innovation & Entrepreneurship", "finance", "Economics"])(
+    "rejects concentration %s",
+    (concentration) => {
+      expect(parse({ concentration }).success).toBe(false);
+    },
+  );
+
+  test("out-of-scope rows may use any rule", () => {
+    const result = parse({ status: "out-of-scope", rule: "minimum fraction" });
+    expect(result.success).toBe(true);
+    expect(result.data?.rule).toBe("minimum fraction");
+  });
+
+  test("out-of-scope rows still get every other check", () => {
+    expect(
+      parse({ status: "out-of-scope", rule: "x", designation: "B" }).success,
+    ).toBe(false);
   });
 
   test("verified needs a verifier; beta must not have one", () => {
@@ -112,28 +145,39 @@ describe("findUnknownFilterTerms", () => {
     expect(
       findUnknownFilterTerms([
         "dept BUS",
-        "institution SFU",
-        "course_units >= 3",
-        "exclude BUS 425|BUS 478|BUS 496",
+        "dept BUS,BUEC",
+        "dept not in BUS,BUEC",
+        "subject business",
         "subject outside major",
         "subject in major",
+        "outside Beedie",
+        "institution SFU",
+        "course_units >= 3",
+        "earned_units >= 45",
+        "exclude BUS 425|BUS 478|BUS 496",
+        "purpose graduation",
+        "purpose entry_to_300_400_BUS",
         "degree first_bachelors",
+        "program courses",
+        "all courses",
+        "if institution SFU then course_units >= 3",
+        "level upper",
+        "level lower",
+        "level 400",
+        "not allocated to designated breadth",
       ]),
     ).toEqual([]);
   });
 
   test("reports anything else", () => {
-    expect(
-      findUnknownFilterTerms([
-        "level upper",
-        "dept not in BUS,BUEC",
-        "exclude practicum,BUS 478",
-      ]),
-    ).toEqual([
-      "level upper",
-      "dept not in BUS,BUEC",
+    const unknown = [
+      "SFU business courses",
       "exclude practicum,BUS 478",
-    ]);
+      "degree second_bachelors",
+      "purpose admission",
+      "dept bus",
+    ];
+    expect(findUnknownFilterTerms(unknown)).toEqual(unknown);
   });
 });
 
@@ -173,11 +217,27 @@ describe("validateRequirementsCsv", () => {
 
   test("collects unknown filter terms and counts", () => {
     const result = validateRequirementsCsv(
-      toCsv([{ ...goodRow, filter: "level upper; dept BUS" }]),
+      toCsv([{ ...goodRow, filter: "SFU business courses; dept BUS" }]),
     );
     expect(result.unknownFilterTerms).toEqual([
-      { sheetRow: 2, reqId: "test-upper-bus", term: "level upper" },
+      { sheetRow: 2, reqId: "test-upper-bus", term: "SFU business courses" },
     ]);
     expect(result.counts.concentration).toEqual({ "(all)": 1 });
+  });
+
+  test("skips rule and filter checks on out-of-scope rows", () => {
+    const result = validateRequirementsCsv(
+      toCsv([
+        {
+          ...goodRow,
+          status: "out-of-scope",
+          rule: "minimum fraction",
+          filter: "denominator program_total_units",
+        },
+      ]),
+    );
+    expect(result.errors).toEqual([]);
+    expect(result.unknownFilterTerms).toEqual([]);
+    expect(result.rows[0]?.status).toBe("out-of-scope");
   });
 });

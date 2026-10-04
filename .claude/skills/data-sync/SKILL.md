@@ -10,9 +10,9 @@ disable-model-invocation: true
 2. Run `npm run data:build`. If it fails validation, report every error (file, row, reason) and stop. Do not edit the CSVs to make it pass.
 3. Report:
    - how many requirement rows and how many courses loaded (per program and concentration if the output gives it)
-   - rows with `status` = `beta`, and rows with `status` = `out-of-scope` (skipped by the engine)
+   - rows with `status` = `beta`, and rows with `status` = `out-of-scope` (skipped by the engine; their `rule` and `filter` are not validated)
    - rows with "unsure" in `notes`
    - rows with no `source_url`
-   - every `filter` term not in the allowed list (the build prints them); never guess what they mean
+   - every `filter` term on an in-scope row that is not in the allowed list, grouped by term with its `req_id`s (the build prints them). Never guess what they mean, and never delete or rewrite them; ask Stuart whether to add a pattern.
 4. Show what changed since the last build: `git diff --stat data/generated/`, then summarize added, removed, and changed requirements and courses in plain language.
 5. Do not commit. Do not run `data:fetch` or `db:migrate`; they touch the network and the database, so ask Stuart first.
