@@ -1,8 +1,5 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import { Suspense } from "react";
-import { DataSourceBadge } from "@/components/data-source-badge";
-import { Badge } from "@/components/ui/badge";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -27,14 +24,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="flex min-h-full flex-col">
-        {children}
-        <div className="fixed top-3 right-3 z-50">
-          <Suspense fallback={<Badge variant="outline">Data: loading…</Badge>}>
-            <DataSourceBadge />
-          </Suspense>
-        </div>
-      </body>
+      <body className="flex min-h-full flex-col">{children}</body>
     </html>
   );
 }
