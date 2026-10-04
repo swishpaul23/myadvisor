@@ -1,4 +1,6 @@
 import { SampleStudentLink, UploadTranscriptLink } from "./cta-links";
+import { motionDelay } from "./motion";
+import styles from "./motion.module.css";
 import {
   AcademicRecordCard,
   GapCard,
@@ -29,16 +31,28 @@ export function Hero() {
     >
       <div className="mx-auto flex w-full max-w-[1200px] flex-none flex-col items-center px-6 pt-20 text-center">
         <h1 className="max-w-[860px] text-[length:clamp(40px,5.4vw,76px)] leading-[1.03] font-semibold tracking-[-0.04em] text-balance">
-          Plan your degree,
-          <br />
-          <span className="text-brand">term by term.</span>
+          <span className={`block ${styles.introBlur}`} style={motionDelay(60)}>
+            Plan your degree,
+          </span>
+          <span
+            className={`block text-brand ${styles.introBlur}`}
+            style={motionDelay(170)}
+          >
+            term by term.
+          </span>
         </h1>
-        <p className="mt-5 max-w-[640px] text-[18px] leading-[1.6] text-balance text-ink-body">
+        <p
+          className={`mt-5 max-w-[640px] text-[18px] leading-[1.6] text-balance text-ink-body ${styles.introRise}`}
+          style={motionDelay(320)}
+        >
           Upload your transcript, see exactly where you stand in your degree,
           and get a next-term plan by text or voice. Every answer shows its
           sources.
         </p>
-        <div className="mt-8 flex flex-wrap justify-center gap-3">
+        <div
+          className={`mt-8 flex flex-wrap justify-center gap-3 ${styles.introRise}`}
+          style={motionDelay(420)}
+        >
           <UploadTranscriptLink />
           <SampleStudentLink />
         </div>
@@ -48,7 +62,8 @@ export function Hero() {
         id="product-preview"
         role="img"
         aria-label="Preview of the MyAdvisor Overview screen with sample data for a fictional BBA Finance student: degree progress and requirement status, a BUS 313 requirement gap with its SFU Calendar source, a voice reply from the advisor, a draft next-term plan with its verified facts, assumptions and unresolved items, the confirmed academic record, and the SFU Calendar pages used as sources."
-        className="relative mx-auto mt-12 flex w-full max-w-[1200px] flex-none px-6 pb-30"
+        className={`relative mx-auto mt-12 flex w-full max-w-[1200px] flex-none px-6 pb-30 ${styles.introFrame}`}
+        style={motionDelay(520)}
       >
         <div
           aria-hidden="true"

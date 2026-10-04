@@ -1,0 +1,96 @@
+/*
+ * Landing page motion. Every rule that moves something sits inside
+ * `prefers-reduced-motion: no-preference`, so reduced-motion visitors get the resting layout.
+ * Resting states are the unanimated markup: CSS only offsets elements while an animation
+ * runs, and `both` fill keeps the end state equal to the static design.
+ * Easing: cubic-bezier(0.2, 0.7, 0.2, 1) throughout.
+ */
+
+/* ---------- Hero load-in ---------- */
+
+@media (prefers-reduced-motion: no-preference) {
+  .introFade,
+  .introRise,
+  .introBlur,
+  .introFrame {
+    animation-duration: 800ms;
+    animation-timing-function: cubic-bezier(0.2, 0.7, 0.2, 1);
+    animation-delay: var(--motion-delay, 0ms);
+    animation-fill-mode: both;
+  }
+
+  .introFade {
+    animation-name: fade-in;
+    animation-duration: 600ms;
+  }
+
+  .introRise {
+    animation-name: rise-in;
+  }
+
+  /* Headline lines rise out of a soft blur. */
+  .introBlur {
+    animation-name: rise-in-blur;
+    animation-duration: 900ms;
+  }
+
+  .introFrame {
+    animation-name: frame-in;
+    animation-duration: 1100ms;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+}
+
+@keyframes rise-in-blur {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+    filter: blur(8px);
+  }
+}
+
+@keyframes frame-in {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+}
+
+/* ---------- Header: gains a translucent, blurred background once the page scrolls ---------- */
+
+@supports (animation-timeline: scroll()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .header {
+      animation-name: header-solidify;
+      animation-duration: auto;
+      animation-timing-function: linear;
+      animation-fill-mode: both;
+      animation-timeline: scroll(root block);
+      animation-range: 0px 96px;
+    }
+  }
+}
+
+@keyframes header-solidify {
+  from {
+    background-color: rgb(241 241 239 / 1);
+    box-shadow: 0 1px 0 rgb(20 20 20 / 0);
+  }
+  to {
+    background-color: rgb(241 241 239 / 0.78);
+    box-shadow: 0 1px 0 rgb(20 20 20 / 0.08);
+    backdrop-filter: blur(14px) saturate(1.5);
+  }
+}
