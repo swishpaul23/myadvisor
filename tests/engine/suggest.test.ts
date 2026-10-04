@@ -113,12 +113,17 @@ describe("suggestNextTerm: synthetic catalog (hand-computed)", () => {
     "AAA 201",
     "AAA 301",
   ];
-  const fall = { "2025-fall": ["LEC"], future: {} };
+  // Cast as the real data is: an object literal can't satisfy the index signature and `future`.
+  const fall = {
+    "2025-fall": ["LEC"],
+    future: {},
+  } as unknown as CourseOfferings;
+  const spring = {
+    "2025-spring": ["LEC"],
+    future: {},
+  } as unknown as CourseOfferings;
   const offerings: Record<string, CourseOfferings> = Object.fromEntries(
-    codes.map((c) => [
-      c,
-      c === "AAA 301" ? { "2025-spring": ["LEC"], future: {} } : fall,
-    ]),
+    codes.map((c) => [c, c === "AAA 301" ? spring : fall]),
   );
   const record = (
     code: string,
