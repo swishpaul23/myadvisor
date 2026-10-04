@@ -42,7 +42,7 @@ Requirement terms should be confirmed, not guessed from the student's current ye
 
 ## Authentication choice
 
-The sketch mentions SFU login. For the first build, propose application sign-in with email. Label a university connection as SFU SSO only once that integration exists. An SFU email address alone does not establish access to a student's university record.
+The sketch mentions SFU login. For the first build: Google sign-in via Auth.js (decided by Stuart, 2026-10-04). (Earlier proposal: application sign-in with email.) Label a university connection as SFU SSO only once that integration exists. An SFU email address alone does not establish access to a student's university record.
 
 Use a separate, clearly labelled sample student for the demo. A sample record must never appear as an uploaded personal transcript.
 
@@ -133,7 +133,7 @@ Infrastructure choices are provisional. The note labels the LLM as Claude; the e
 
 ## Team decisions before screen implementation
 
-- Confirm application email login versus an available official SFU SSO integration.
+- Confirm whether an official SFU SSO integration is available. (Google sign-in via Auth.js (decided by Stuart, 2026-10-04).)
 - Confirm Gemini versus the sketch's Claude label.
 - Confirm the demo student's requirement term, admission pathway and transcript fixture.
 - Agree on approved rule/filter encoding, prerequisite data and source coverage before presenting course eligibility as validated.
