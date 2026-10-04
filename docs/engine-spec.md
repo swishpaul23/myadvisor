@@ -189,7 +189,7 @@ Each unknown carries a reason string. A row is `unknown` only if it isn't met wi
 
 That "could" is decided **per row, or per breadth bucket**. Only that row's slots may use the indeterminate courses; every other row uses definite courses only. Otherwise a row could be crowded out by another row's "what if".
 
-- **Course with no data** (not in courses.json, no `units`) → "no course data for X: units unknown". If units are given but the row needs designations: "designation of X unknown".
+- **Course with no data** (not in courses.json, e.g. PSYC 100): elective credit, not unknown (Stuart, 2026-10-04). It earns the student-supplied units, else 3 (policy `unknown_course`, ASSUMPTION), has no W/Q/B designation, is left out of the Business GPA rows (`dept BUS`, `program courses`), and is listed in `summary.electiveCredit`.
 - **Topics courses BUS 490–495** in concentration elective lists → "topics course: topic not recorded". The student input has no topic field.
 - **Data we don't have** → GPA attempts without units.
 - **Out-of-scope rows** → `not_applicable` with the reason in notes, never `unknown`.

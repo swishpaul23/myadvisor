@@ -12,10 +12,14 @@ export type CourseFact = {
   number: number;
   /** Hundreds of the number: BUS 217W -> 200. */
   level: number;
-  /** courses.json units, else student-supplied, else null (unknown). */
+  /** courses.json units, else student-supplied, else the elective default (policy
+   * unknown_course) for a course outside the course data; null if courses.json has the
+   * course without units. */
   units: number | null;
-  /** courses.json designations; null when the course isn't in courses.json (unknown). */
+  /** courses.json designations; none for a course outside the course data (elective credit). */
   designations: string[] | null;
+  /** In courses.json. A course outside it is elective credit (Stuart, 2026-10-04). */
+  known: boolean;
   /** Best completed grade; null for a pending course. */
   grade: string | null;
   institution: "SFU" | "transfer";
@@ -34,15 +38,22 @@ export function catalogIndex(catalog: Catalog): Map<string, Course> {
   return new Map(catalog.courses.map((c) => [c.code, c]));
 }
 
-function unitsFor(
+/**
+ * courses.json units, else the student's own, else (for a course outside the course data)
+ * the elective default from policy unknown_course; null only when courses.json lists the
+ * course without units.
+ */
+export function unitsFor(
   code: string,
   attempts: StudentCourse[],
   index: Map<string, Course>,
+  policy: Policy,
 ): number | null {
   const known = index.get(code)?.units;
   if (known !== undefined && known !== null) return known;
   const supplied = attempts.find((a) => a.units !== undefined)?.units;
-  return supplied ?? null;
+  if (supplied !== undefined) return supplied;
+  return index.has(code) ? null : policy.unknown_course.units;
 }
 
 export function buildFacts(
@@ -92,8 +103,9 @@ export function buildFacts(
       dept,
       number,
       level: Math.floor(number / 100) * 100,
-      units: unitsFor(code, attempts, index),
-      designations: course ? course.designations : null,
+      units: unitsFor(code, attempts, index, policy),
+      designations: course ? course.designations : [],
+      known: course !== undefined,
       grade,
       institution: source.institution,
       pending,
@@ -110,6 +122,8 @@ export type GpaAttempt = {
   units: number | null;
   points: number;
   institution: "SFU" | "transfer";
+  /** In courses.json; a course outside it is left out of the Business GPA. */
+  known: boolean;
 };
 
 /**
@@ -136,9 +150,10 @@ export function gpaAttempts(student: Student, catalog: Catalog): GpaAttempt[] {
         code: attempt.code,
         dept,
         number,
-        units: unitsFor(attempt.code, attempts, index),
+        units: unitsFor(attempt.code, attempts, index, policy),
         points,
         institution: attempt.institution,
+        known: index.has(attempt.code),
       };
     })
     .sort((a, b) => a.code.localeCompare(b.code));

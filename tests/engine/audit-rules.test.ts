@@ -275,8 +275,12 @@ describe("GPA", () => {
       progress: { have: null },
     });
   });
-  test("units unknown for a graded course -> unknown", () => {
-    expect(gpa([took("ZZZ 101", "A")]).status).toBe("unknown");
+  test("a graded course outside the course data counts as a 3-unit elective", () => {
+    // Elective credit (Stuart, 2026-10-04): ZZZ 101 A, 3 units by default -> GPA 4.00.
+    expect(gpa([took("ZZZ 101", "A")])).toMatchObject({
+      status: "met",
+      progress: { have: 4 },
+    });
   });
   test("program courses with no slot rows -> no program courses -> unknown", () => {
     const c = catalog(
@@ -390,19 +394,25 @@ describe("breadth buckets", () => {
 describe("unknown, not_applicable, admission term", () => {
   const real = realCatalog();
 
-  test("course with no data needed for a designation row -> unknown", () => {
-    // PSYC 106 has no course data (designation unknown); student gave 3 units.
+  test("course with no data: elective credit, no designation", () => {
+    // PSYC 106 has no course data: elective credit with the 3 units the student gave and no
+    // W/Q/B designation (Stuart, 2026-10-04), so it can't fill B-Sci.
     const r = audit(
       student([took("BPK 140", "B"), took("PSYC 106", "A", { units: 3 })]),
       real,
     );
     // Group A needs no designation, so PSYC 106 counts there.
     expect(result(r.results, "beedie-nonbus-group-a").progress.have).toBe(6);
-    // B-Sci: BPK 140 alone is 1 course / 3 units; with PSYC 106 it could be 2 / 6.
+    // B-Sci: BPK 140 alone is 1 course / 3 units of 2 / 6: plainly unmet, not unknown.
     const sci = result(r.results, "univ-breadth-science");
-    expect(sci.status).toBe("unknown");
-    expect(sci.notes.join(" ")).toMatch(/designation of PSYC 106 unknown/);
-    expect(r.unknowns.map((u) => u.reqId)).toContain("univ-breadth-science");
+    expect(sci.status).toBe("unmet");
+    expect(sci.progress.have).toBe(3);
+    expect(r.unknowns.map((u) => u.reqId)).not.toContain(
+      "univ-breadth-science",
+    );
+    expect(r.summary.electiveCredit).toEqual([
+      { code: "PSYC 106", units: 3, unitsAssumed: false },
+    ]);
   });
 
   test("a BUS 49x topics course needed by finance-electives -> unknown", () => {

@@ -36,6 +36,8 @@ export type Policy = {
   major_subjects: { subjects: string[] };
   bus_gpa_subjects: { subjects: string[] };
   pass_fail_courses: { courses: string[] };
+  /** Courses outside the course data: elective credit with these units by default. */
+  unknown_course: { units: number };
   admission_gated_courses: { courses: string[]; from_term: string };
   /** BUS 300-499 courses the validator's entry GPA check skips (Stuart, 2026-10-04). */
   entryGpaExempt: string[];
@@ -86,6 +88,8 @@ export type AuditResult = {
     /** GPA by row id for every minimum-GPA row; null when unknown or no graded courses. */
     gpas: Record<string, number | null>;
     declaredConcentrations: string[];
+    /** Courses on the record that aren't in the course data, counted as elective credit. */
+    electiveCredit: { code: string; units: number; unitsAssumed: boolean }[];
   };
   unknowns: { reqId: string; reason: string }[];
 };

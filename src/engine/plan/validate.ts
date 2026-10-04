@@ -52,11 +52,15 @@ export function validatePlan(
     v: Omit<Violation, "sourceUrl"> & { sourceUrl?: string | null },
   ) => violations.push({ sourceUrl: null, ...v });
 
+  // A course on the record outside the course data is elective credit (policy
+  // unknown_course); a planned course without course data stays unknown (NO_COURSE_DATA).
   const unitsOf = (code: string): number | null =>
     courseData.get(code)?.units ??
     student.courses.find((c) => c.code === code && c.units !== undefined)
       ?.units ??
-    null;
+    (!courseData.has(code) && student.courses.some((c) => c.code === code)
+      ? policy.unknown_course.units
+      : null);
 
   // ---- history: completed (best attempt) and in progress ----
   const completed = new Map<string, string>();

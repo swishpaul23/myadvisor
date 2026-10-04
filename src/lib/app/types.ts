@@ -156,6 +156,8 @@ export type TranscriptResult =
       courses: RecordCourse[];
       /** Row index -> what to double-check. */
       flags: Record<number, string>;
+      /** Row index -> a neutral note (e.g. elective credit). */
+      notes: Record<number, string>;
       cgpa: number | null;
       standing: string | null;
     }

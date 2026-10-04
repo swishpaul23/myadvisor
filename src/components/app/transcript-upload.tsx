@@ -161,6 +161,7 @@ function Review({
         termOptions={termOptions}
         errors={errors}
         flags={result.flags}
+        notes={result.notes}
       />
       <label className="flex cursor-pointer items-start gap-3 rounded-[10px] border border-line-soft px-3.5 py-3 text-[14px] has-[:checked]:border-ink has-[:checked]:bg-surface-subtle has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-ink">
         <input

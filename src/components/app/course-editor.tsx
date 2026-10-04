@@ -53,19 +53,22 @@ const CELL_LABEL = "text-[12px] text-ink-muted md:sr-only";
 
 /**
  * Editable course list. Posts its rows as JSON in a hidden input named `name`.
- * `errors` uses the server's keys ("courses.2.grade"); `flags` marks rows to double-check.
+ * `errors` uses the server's keys ("courses.2.grade"); `flags` marks rows to double-check;
+ * `notes` are neutral (e.g. elective credit) and need no fix.
  */
 export function CourseEditor({
   initial,
   termOptions,
   errors = {},
   flags = {},
+  notes = {},
   name = "courses",
 }: {
   initial: RecordCourse[];
   termOptions: string[];
   errors?: Record<string, string>;
   flags?: Record<number, string>;
+  notes?: Record<number, string>;
   name?: string;
 }) {
   const [rows, setRows] = useState<Row[]>(() => initial.map(toRow));
@@ -236,8 +239,11 @@ export function CourseEditor({
                       Remove<span className="sr-only"> course {i + 1}</span>
                     </button>
                   </fieldset>
-                  {(flags[i] || rowErrors.length > 0) && (
+                  {(flags[i] || notes[i] || rowErrors.length > 0) && (
                     <div className="mt-1.5 flex flex-col gap-0.5 px-1">
+                      {notes[i] && !flags[i] && (
+                        <p className={HINT}>{notes[i]}</p>
+                      )}
                       {flags[i] && (
                         <p className="text-[12px] text-brand">{flags[i]}</p>
                       )}

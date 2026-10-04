@@ -93,6 +93,11 @@
     "source_url": "https://www.sfu.ca/students/calendar/2026/fall/programs/business/major/bachelor-of-business-administration.html",
     "status": "beta"
   },
+  "unknown_course": {
+    "units": 3,
+    "text": "A course that isn't in MyAdvisor's course data (another faculty, an elective) counts as elective credit: it earns units, has no W/Q/B designation, and is left out of the Business GPA. Units come from the student's record, else 3 (ASSUMPTION: typical SFU course units) (Stuart, 2026-10-04).",
+    "status": "beta"
+  },
   "entryGpaExempt": ["BUS 300", "BUS 496"],
   "admission_gated_courses": {
     "courses": ["BUS 203", "BUS 300", "BUS 496"],

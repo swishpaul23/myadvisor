@@ -351,11 +351,14 @@ export function evaluateGpa(
 ): RowEval & { gpa: number | null } {
   const need = row.n_or_units ?? 0;
   const programOnly = row.filter.includes("program courses");
+  // Business GPA rows leave out courses outside the course data (elective credit).
+  const business = programOnly || row.filter.includes("dept BUS");
   const counted: GpaAttempt[] = [];
   for (const a of attempts) {
     if (a.institution !== "SFU") continue; // SFU GPA; transfer credit carries no SFU grade points
     if (programOnly && (a.dept !== "BUS" || !programCourses.has(a.code)))
       continue;
+    if (business && !a.known) continue;
     const fact: CourseFact = {
       code: a.code,
       dept: a.dept,
@@ -363,6 +366,7 @@ export function evaluateGpa(
       level: Math.floor(a.number / 100) * 100,
       units: a.units,
       designations: null,
+      known: a.known,
       grade: null,
       institution: a.institution,
       pending: true, // skip the grade check: every letter grade counts toward GPA

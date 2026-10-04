@@ -24,11 +24,14 @@ function CourseTable({
   title,
   courses,
   unitsOf,
+  elective,
   empty,
 }: {
   title: string;
   courses: RecordCourse[];
   unitsOf: (c: RecordCourse) => number | null;
+  /** Codes outside the course data, counted as elective credit. */
+  elective: ReadonlySet<string>;
   empty: string;
 }) {
   return (
@@ -68,6 +71,11 @@ function CourseTable({
                 >
                   <th scope="row" className="px-4 py-2.5 font-medium">
                     {c.code}
+                    {elective.has(c.code) && (
+                      <span className="block text-[12px] font-normal text-ink-muted">
+                        Elective credit · not in MyAdvisor&apos;s course data
+                      </span>
+                    )}
                   </th>
                   <td className="px-4 py-2.5 text-ink-body">
                     {termLabel(c.term)}
@@ -92,8 +100,13 @@ function CourseTable({
 export default async function RecordPage() {
   const view = await getDegreeView();
   if (!view) return null; // the layout redirects to onboarding
-  const { profile, record, catalogUnits } = view;
-  const unitsOf = (c: RecordCourse) => catalogUnits[c.code] ?? c.units ?? null;
+  const { profile, record, catalogUnits, audit } = view;
+  const electiveUnits = new Map(
+    audit.summary.electiveCredit.map((e) => [e.code, e.units]),
+  );
+  const elective = new Set(electiveUnits.keys());
+  const unitsOf = (c: RecordCourse) =>
+    catalogUnits[c.code] ?? c.units ?? electiveUnits.get(c.code) ?? null;
   const byTerm = (a: RecordCourse, b: RecordCourse) =>
     termIndex(a.term) - termIndex(b.term) || a.code.localeCompare(b.code);
   const sorted = [...profile.courses].sort(byTerm);
@@ -122,12 +135,14 @@ export default async function RecordPage() {
               (c) => c.status === "completed" && c.institution === "SFU",
             )}
             unitsOf={unitsOf}
+            elective={elective}
             empty="No completed SFU courses."
           />
           <CourseTable
             title="In progress"
             courses={sorted.filter((c) => c.status === "in_progress")}
             unitsOf={unitsOf}
+            elective={elective}
             empty="No courses in progress."
           />
           <CourseTable
@@ -136,6 +151,7 @@ export default async function RecordPage() {
               (c) => c.status === "completed" && c.institution === "transfer",
             )}
             unitsOf={unitsOf}
+            elective={elective}
             empty="No transfer credit."
           />
         </>

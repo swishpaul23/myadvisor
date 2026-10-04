@@ -110,7 +110,7 @@ describe("P and CR", () => {
 });
 
 describe("courses outside MyAdvisor's course data", () => {
-  test.fails(
+  test(
     "unknown course (PSYC 100) is accepted as elective credit, excluded from Business GPA",
     () => {
       // PSYC 100 is not in courses.json. It counts as a 3-unit elective (no units given),
