@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Suspense } from "react";
+import { SignOutButton } from "@/components/auth/sign-out-button";
 import { DataSourceBadge } from "@/components/data-source-badge";
 import { Badge } from "@/components/ui/badge";
 import "./globals.css";
@@ -31,6 +32,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <div className="fixed top-3 right-3 z-50">
           <Suspense fallback={<Badge variant="outline">Data: loading…</Badge>}>
             <DataSourceBadge />
+          </Suspense>
+          <Suspense fallback={null}>
+            <SignOutButton />
           </Suspense>
         </div>
       </body>

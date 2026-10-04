@@ -13,7 +13,8 @@ myAdvisor is a degree planner for SFU Beedie BBA students, built at a 24-hour ha
 ## 3. Scope
 
 - In: Beedie BBA major and all 9 concentrations (Accounting, Innovation and Entrepreneurship, Finance, Human Resource Management, International Business, Management Information Systems, Marketing, Operations Management, Strategic Analysis), on the SFU Fall 2026 calendar (`catalog_term` = `2026-fall`). Finance is the demo program. The demo student is fictional.
-- Cut: login, saved plans beyond the demo, other programs or calendars, joint majors, honours, other faculties.
+- Sign-in: Google via Auth.js (next-auth v5), JWT sessions, no database adapter; see README "Auth setup". Decided by Stuart, 2026-10-04.
+- Cut: SFU SSO, saved plans beyond the demo, other programs or calendars, joint majors, honours, other faculties.
 
 ## 4. Folder map
 
