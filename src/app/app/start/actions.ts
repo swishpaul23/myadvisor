@@ -7,8 +7,6 @@ import {
   parseAnswer,
   parseStep,
   stepIndex,
-  STEPS,
-  type StepSlug,
 } from "@/lib/app/onboarding";
 import { MOCK_SURVEY_QUESTIONS } from "@/lib/app/mocks";
 import { SAMPLE_PROFILE } from "@/lib/app/sample";
@@ -31,10 +29,11 @@ async function save(state: AppState): Promise<ActionResult<never> | null> {
   }
 }
 
-const nextSlug = (slug: StepSlug) =>
-  STEPS[Math.min(stepIndex(slug) + 1, STEPS.length - 1)]!.slug;
-
-/** Program, next-term and courses steps. */
+/**
+ * Program, next-term and courses steps. Each continues at the first step still to do, so
+ * a course list already entered (e.g. from a transcript) isn't asked for again, and an
+ * edit made from the review step goes back to review.
+ */
 export async function saveStep(
   slug: "program" | "next-term" | "courses",
   _prev: ActionResult | null,
@@ -50,13 +49,13 @@ export async function saveStep(
   draft.step = Math.max(draft.step, stepIndex(slug) + 1);
   const failed = await save({ ...state, draft });
   if (failed) return failed;
-  redirect(`/app/start/${nextSlug(slug)}`);
+  redirect(`/app/start/${firstOpenStep(draft)}`);
 }
 
 /**
- * Transcript review: the student fixed any rows and ticked "Reviewed and confirmed". The
- * courses replace the draft's list (same validation as manual entry) and onboarding
- * continues at the first unfinished step.
+ * Transcript review: the student fixed any rows. The courses replace the draft's list
+ * (same validation as manual entry; this stands in for the courses step) and onboarding
+ * continues at the first unfinished step. The list is confirmed once, at review.
  */
 export async function saveTranscriptReview(
   _prev: ActionResult | null,
@@ -64,19 +63,11 @@ export async function saveTranscriptReview(
 ): Promise<ActionResult> {
   const parsed = parseStep("courses", form);
   if (!parsed.ok) return parsed;
-  if (form.get("confirm") !== "on") {
-    return {
-      ok: false,
-      error: "Check each course, then tick “Reviewed and confirmed”.",
-      fieldErrors: { confirm: "Confirm you've checked every course." },
-    };
-  }
   const state = await readState();
   const draft = {
     ...(state.draft ?? { step: 0 }),
     ...parsed.data,
     origin: "transcript" as const,
-    recordConfirmed: true,
   };
   draft.step = Math.max(draft.step, stepIndex("courses") + 1);
   const failed = await save({ ...state, draft });

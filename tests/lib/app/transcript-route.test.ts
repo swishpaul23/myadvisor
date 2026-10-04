@@ -95,7 +95,7 @@ describe("POST /api/transcript", () => {
     expect((await post(pdf())).status).toBe(422);
   });
 
-  test("success -> normalised rows with flags", async () => {
+  test("success -> normalised rows, with an elective-credit note", async () => {
     gemini.mockResolvedValue({
       courses: [
         {
@@ -125,6 +125,8 @@ describe("POST /api/transcript", () => {
     const body = await res.json();
     expect(body.ok).toBe(true);
     expect(body.courses[0]).toMatchObject({ code: "BUS 201", grade: "B" });
-    expect(Object.keys(body.flags)).toEqual(["1"]);
+    // CMPT 120 is outside the course data: elective credit, a note, not a flag.
+    expect(body.flags).toEqual({});
+    expect(Object.keys(body.notes)).toEqual(["1"]);
   });
 });

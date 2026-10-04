@@ -104,8 +104,13 @@ export function buildAdvisorPrompt(
       ? gaps.map((g) => `- ${g.label}: ${g.detail}${cite(g.source)}`)
       : ["- none"]),
     "",
-    `NEXT-TERM PLAN, ${termLabel(plan.termId)} (a plan, not enrolment)`,
-    ...plan.courses.map((c) => `- ${c.label}: ${c.note}`),
+    `PLAN BY TERM, from ${termLabel(plan.termId)} (a plan, not enrolment)`,
+    ...plan.terms.map((t) =>
+      t.kind === "coop"
+        ? `- ${termLabel(t.termId)}: co-op work term, no courses`
+        : `- ${termLabel(t.termId)}: ${t.courses.map((c) => (c.code ? `${c.code} (${c.note})` : c.label)).join("; ")}`,
+    ),
+    ...plan.notes.map((n) => `- Note: ${n}`),
     "Why this plan:",
     ...plan.claims.map(
       (c) => `- ${c.status.toUpperCase()}: ${c.text}${cite(c.source)}`,

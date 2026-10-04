@@ -6,7 +6,7 @@ import { saveTranscriptReview } from "@/app/app/start/actions";
 import type { TranscriptResult } from "@/lib/app/types";
 import { cn } from "@/lib/utils";
 import { CourseEditor } from "./course-editor";
-import { FieldError, FormError, SubmitButton } from "./form-parts";
+import { FormError, SubmitButton } from "./form-parts";
 import { BUTTON_BRAND, BUTTON_SECONDARY, FOCUS, HINT, LABEL } from "./styles";
 
 type Phase =
@@ -145,7 +145,8 @@ function Review({
         {flagged > 0
           ? `${flagged} ${flagged === 1 ? "row needs" : "rows need"} a check (highlighted). `
           : ""}
-        Fix anything that doesn&apos;t match your transcript before confirming.
+        Fix anything that doesn&apos;t match your transcript. You&apos;ll
+        confirm the whole list once, at the end.
         {(result.cgpa !== null || result.standing) && (
           <span className="mt-1 block text-ink-muted">
             Also printed on your transcript:
@@ -161,29 +162,14 @@ function Review({
         termOptions={termOptions}
         errors={errors}
         flags={result.flags}
+        notes={result.notes}
       />
-      <label className="flex cursor-pointer items-start gap-3 rounded-[10px] border border-line-soft px-3.5 py-3 text-[14px] has-[:checked]:border-ink has-[:checked]:bg-surface-subtle has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-ink">
-        <input
-          type="checkbox"
-          name="confirm"
-          className="mt-0.5 size-4 flex-none accent-ink"
-          aria-invalid={Boolean(errors.confirm)}
-          aria-describedby="confirm-error"
-        />
-        <span>
-          <span className="font-medium">Reviewed and confirmed</span>
-          <span className={cn(HINT, "mt-0.5 block")}>
-            Every course, term and grade above matches my transcript.
-          </span>
-        </span>
-      </label>
-      <FieldError id="confirm-error" message={errors.confirm} />
       <div className="flex flex-wrap items-center justify-between gap-3 border-t border-line-soft pt-5">
         <Link href="/app/start/upload" className={BUTTON_SECONDARY}>
           Upload a different file
         </Link>
         <SubmitButton pendingLabel="Saving…" className={BUTTON_BRAND}>
-          Save my courses
+          Continue
         </SubmitButton>
       </div>
     </form>

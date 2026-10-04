@@ -35,11 +35,20 @@ function courseUrl(code: string): string {
   return `https://www.sfu.ca/students/calendar/2026/fall/courses/${dept}/${number}.html`;
 }
 
+export type ValidateOptions = {
+  /** Audit the plan term by term for the graduation term (default true). The planner
+   * turns it off while it checks one candidate course at a time. */
+  graduation?: boolean;
+  /** The student's current audit, when the caller already has it. */
+  currentAudit?: AuditResult;
+};
+
 export function validatePlan(
   student: Student,
   plan: Plan,
   catalog: PlanCatalog,
   declarations: Declarations = {},
+  options: ValidateOptions = {},
 ): PlanValidation {
   const policy = catalog.policy;
   const courseData = new Map(catalog.courses.map((c) => [c.code, c]));
@@ -52,11 +61,15 @@ export function validatePlan(
     v: Omit<Violation, "sourceUrl"> & { sourceUrl?: string | null },
   ) => violations.push({ sourceUrl: null, ...v });
 
+  // A course on the record outside the course data is elective credit (policy
+  // unknown_course); a planned course without course data stays unknown (NO_COURSE_DATA).
   const unitsOf = (code: string): number | null =>
     courseData.get(code)?.units ??
     student.courses.find((c) => c.code === code && c.units !== undefined)
       ?.units ??
-    null;
+    (!courseData.has(code) && student.courses.some((c) => c.code === code)
+      ? policy.unknown_course.units
+      : null);
 
   // ---- history: completed (best attempt) and in progress ----
   const completed = new Map<string, string>();
@@ -94,7 +107,7 @@ export function validatePlan(
   const lastStudentTerm = history.length > 0 ? Math.max(...history) : -Infinity;
 
   // Entry GPA (beedie-bus-gpa-entry), from completed grades: the same for every plan term.
-  const currentAudit = audit(student, catalog);
+  const currentAudit = options.currentAudit ?? audit(student, catalog);
   const entryRow = currentAudit.results.find(
     (r) => r.reqId === "beedie-bus-gpa-entry",
   );
@@ -349,6 +362,7 @@ export function validatePlan(
   let graduationTermExcludingUnknown: string | null = null;
   let auditAfterPlan: AuditResult = currentAudit;
   plan.terms.forEach((term, i) => {
+    if (options.graduation === false) return;
     const result = audit(plannedThrough(i), catalog, { includePlanned: true });
     const applicable = result.results.filter(
       (r) => r.status !== "not_applicable",

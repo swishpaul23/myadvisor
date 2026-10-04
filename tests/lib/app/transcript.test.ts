@@ -89,10 +89,22 @@ describe("normalizeExtraction", () => {
     expect(r.courses.map((c) => c.grade)).toEqual(["CR", "CR"]);
   });
 
+  test("a course outside MyAdvisor's data is elective credit: a neutral note, no flag", () => {
+    const r = normalizeExtraction(
+      extraction([row({ code: "PSYC 100", units: 3 })]),
+      known,
+    );
+    expect(r.flags).toEqual({});
+    expect(r.notes).toEqual({
+      0: "Not in MyAdvisor's course data, so it counts as elective credit.",
+    });
+    expect(r.courses[0]).toMatchObject({ code: "PSYC 100", units: 3 });
+  });
+
   test("rows to double-check are flagged, never dropped", () => {
     const r = normalizeExtraction(
       extraction([
-        row({ code: "CMPT 120" }), // real SFU course, not in MyAdvisor's data
+        row({ code: "CMPT 120" }), // real SFU course, not in MyAdvisor's data: no flag
         row({ term: "Fall term" }),
         row({ grade: null }),
         row({ grade: "AU" }),
@@ -101,7 +113,8 @@ describe("normalizeExtraction", () => {
       known,
     );
     expect(r.courses).toHaveLength(5);
-    expect(r.flags[0]).toMatch(/not in MyAdvisor's course data/i);
+    expect(r.flags[0]).toBeUndefined();
+    expect(r.notes[0]).toMatch(/elective credit/);
     expect(r.flags[1]).toMatch(/pick the term/i);
     expect(r.courses[1]!.term).toBe("");
     expect(r.flags[2]).toMatch(/add the grade/i);

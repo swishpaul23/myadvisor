@@ -1,7 +1,7 @@
 import Link from "next/link";
 import {
   DATA_NOTE,
-  NextTermCard,
+  PlanGrid,
   SampleDataTag,
   WhyThisPlan,
 } from "@/components/app/degree-parts";
@@ -9,28 +9,33 @@ import { PlanSettings } from "@/components/app/plan-settings";
 import { EmptyPanel } from "@/components/app/states";
 import { FOCUS, HINT, KICKER, SCREEN_TITLE } from "@/components/app/styles";
 import { getDegreeView } from "@/lib/app/degree";
-import { planTermOptions, termLabel } from "@/lib/app/terms";
+import { coopTermOptions, planTermOptions, termLabel } from "@/lib/app/terms";
 import { cn } from "@/lib/utils";
 
 export const metadata = { title: "My plan · MyAdvisor" };
 
-/** My plan: the suggested next term, why, and the plan's settings. */
+/** My plan: every term from the selected start term, why, and the plan's settings. */
 export default async function PlanPage() {
   const view = await getDegreeView();
   if (!view) return null; // the layout redirects to onboarding
-  const { profile, plan, suggestion } = view;
-  const noneSuggested = suggestion.courses.length === 0;
+  const { profile, plan } = view;
 
   return (
     <>
       <header className="flex items-start justify-between gap-4">
         <div>
           <p className={KICKER}>
-            BBA · {profile.concentrations.join(" & ")} · Fall 2026 requirements
+            BBA · {profile.concentrations.join(" & ")} · Fall 2026 calendar ·
+            admitted {termLabel(profile.admissionTerm)}
           </p>
           <h1 className={cn(SCREEN_TITLE, "mt-1")}>
-            My plan · {termLabel(plan.termId)}
+            My plan · from {termLabel(plan.termId)}
           </h1>
+          <p className="mt-1 text-[13px] text-ink-body">
+            {plan.finishTerm
+              ? `Plans your remaining requirements through ${termLabel(plan.finishTerm)}.`
+              : "Some requirements can't be planned automatically. See “Why this plan”."}
+          </p>
         </div>
         {profile.origin === "sample" && <SampleDataTag />}
       </header>
@@ -41,26 +46,28 @@ export default async function PlanPage() {
         A plan, not enrolment. Seats and timetable aren&apos;t checked.
       </p>
       <p className={HINT}>{DATA_NOTE}</p>
+      {plan.notes.map((note) => (
+        <p key={note} role="note" className={HINT}>
+          {note}
+        </p>
+      ))}
 
-      {noneSuggested && (
-        <EmptyPanel
-          title={`No required course to suggest for ${termLabel(plan.termId)}`}
-        >
-          Every required course you still need either has prerequisites you
-          haven&apos;t met yet or didn&apos;t run in this season recently. The
-          reasons are listed under &ldquo;Why this plan&rdquo;. Your{" "}
-          {profile.courseLoad} slots are open for your choice.
+      <PlanSettings
+        planTerm={profile.planTerm}
+        courseLoad={profile.courseLoad}
+        summer={profile.surveyAnswers.summer}
+        coop={profile.coop}
+        termOptions={planTermOptions(new Date())}
+        coopOptions={coopTermOptions(new Date())}
+      />
+      {plan.terms.length === 0 ? (
+        <EmptyPanel title="Nothing left to plan">
+          Every requirement MyAdvisor can plan is already on your record or in
+          progress.
         </EmptyPanel>
+      ) : (
+        <PlanGrid terms={plan.terms} />
       )}
-
-      <div className="grid grid-cols-2 items-start gap-3 max-[900px]:grid-cols-1">
-        <NextTermCard plan={plan} link={false} />
-        <PlanSettings
-          planTerm={profile.planTerm}
-          courseLoad={profile.courseLoad}
-          termOptions={planTermOptions(new Date())}
-        />
-      </div>
       <WhyThisPlan claims={plan.claims} />
       <p className={HINT}>
         Want to talk it through?{" "}

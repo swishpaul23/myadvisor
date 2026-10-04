@@ -118,6 +118,8 @@ export type NormalizedTranscript = {
   courses: RecordCourse[];
   /** Row index -> what to double-check. */
   flags: Record<number, string>;
+  /** Row index -> a neutral note (e.g. elective credit), nothing to fix. */
+  notes: Record<number, string>;
   cgpa: number | null;
   standing: string | null;
 };
@@ -136,15 +138,16 @@ export function normalizeExtraction(
   knownCodes: ReadonlySet<string>,
 ): NormalizedTranscript {
   const flags: Record<number, string> = {};
+  const notes: Record<number, string> = {};
   const courses = raw.courses.map((c, i): RecordCourse => {
     const problems: string[] = [];
     const parsedCode = courseCodeSchema.safeParse(c.code);
     const code = parsedCode.success ? parsedCode.data : c.code.trim();
     if (!parsedCode.success) problems.push("check the course code");
+    // Another faculty's course or an elective: counted as elective credit, not an error.
     else if (c.institution === "SFU" && !knownCodes.has(code))
-      problems.push(
-        "not in MyAdvisor's course data, so it may not count toward requirements; check the code",
-      );
+      notes[i] =
+        "Not in MyAdvisor's course data, so it counts as elective credit.";
 
     const term = c.term && termSchema.safeParse(c.term).success ? c.term : "";
     if (!term) problems.push("pick the term");
@@ -180,5 +183,5 @@ export function normalizeExtraction(
       units: c.units !== null && c.units >= 0 && c.units <= 30 ? c.units : null,
     };
   });
-  return { courses, flags, cgpa: raw.cgpa, standing: raw.standing };
+  return { courses, flags, notes, cgpa: raw.cgpa, standing: raw.standing };
 }

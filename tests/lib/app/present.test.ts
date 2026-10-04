@@ -2,12 +2,13 @@ import { readFileSync } from "node:fs";
 import { describe, expect, test } from "vitest";
 import { audit } from "@/engine/audit";
 import type { ReqResult } from "@/engine/audit/types";
-import { suggestNextTerm } from "@/engine/plan/suggest";
+import type { RemainingPlan } from "@/engine/plan/remaining";
 import type { PlanCatalog } from "@/engine/plan/types";
 import { toEngineStudent } from "@/lib/app/engine-input";
 import {
   buildChecklist,
   buildGaps,
+  electiveLabel,
   presentPlan,
   recordSummary,
   requiredCourseClaim,
@@ -183,7 +184,7 @@ describe("claim statuses", () => {
       ),
     ).toMatchObject({
       status: "verified",
-      text: "BUS 478 isn't suggested yet: its prerequisites aren't met yet.",
+      text: "BUS 478 couldn't be placed in any term: its prerequisites aren't met yet.",
     });
     for (const reason of [
       "PREREQ_UNKNOWN",
@@ -200,51 +201,143 @@ describe("claim statuses", () => {
   });
 });
 
-describe("presentPlan: the sample student's next term", () => {
-  const suggestion = suggestNextTerm(student, catalog, {
-    termId: "2027-spring",
-    courseLoad: 4,
-  });
+describe("presentPlan: a hand-built multi-term plan for the sample student", () => {
+  // Built by hand (not by the planner) so the expectations follow only the display rules.
+  const remaining: RemainingPlan = {
+    terms: [
+      {
+        id: "2027-spring",
+        kind: "study",
+        items: [
+          {
+            kind: "course",
+            code: "BUS 373",
+            reqIds: ["upper-bus373"],
+            choice: false,
+          },
+          {
+            kind: "course",
+            code: "BUS 374",
+            reqIds: ["upper-organization-or-hr"],
+            choice: true,
+          },
+          {
+            kind: "elective",
+            slot: {
+              level: "400",
+              business: true,
+              designation: null,
+              fromList: null,
+            },
+            reqIds: ["upper-400-courses", "upper-business-units"],
+          },
+        ],
+      },
+      { id: "2027-fall", kind: "coop", items: [] },
+      {
+        id: "2028-spring",
+        kind: "study",
+        items: [
+          {
+            kind: "elective",
+            slot: {
+              level: null,
+              business: false,
+              designation: "B-Sci",
+              fromList: null,
+            },
+            reqIds: ["univ-breadth-science"],
+          },
+        ],
+      },
+    ],
+    unscheduled: [],
+    notPlannable: [],
+    plan: { terms: [] },
+    validation: {
+      violations: [],
+      terms: [],
+      graduationTerm: null,
+      graduationTermExcludingUnknown: null,
+      graduationAssumesValidPlan: false,
+      graduationBlockers: [],
+      auditAfterPlan: result,
+    },
+  };
+  const context = {
+    summer: "none" as const,
+    summerUnsure: true,
+    unitLoad: catalog.policy.unit_load,
+    electiveUnits: 3,
+    coop: { doing: false, terms: [], isDefault: false },
+  };
   const plan = presentPlan(
-    suggestion,
+    remaining,
     catalog.requirements,
     result,
     SAMPLE_PROFILE,
     catalog.courses,
+    context,
   );
 
-  test("courses: the three suggested, then the open slot", () => {
+  test("every term from the start term; co-op terms are empty", () => {
+    expect(plan.terms).toEqual([
+      {
+        termId: "2027-spring",
+        kind: "study",
+        units: 9,
+        courses: [
+          {
+            code: "BUS 373",
+            label: "BUS 373",
+            note: "Closes gap · BBA upper-division core",
+            units: 3,
+            closesGap: true,
+          },
+          {
+            code: "BUS 374",
+            label: "BUS 374",
+            note: "One option for Organization or HR course · you can swap it",
+            units: 3,
+            closesGap: false,
+          },
+          {
+            code: null,
+            label: "400-level BUS elective",
+            note: "Your choice · counts toward 400-level BUS courses, Upper-division BUS units",
+            units: 3,
+            closesGap: false,
+          },
+        ],
+      },
+      { termId: "2027-fall", kind: "coop", units: 0, courses: [] },
+      {
+        termId: "2028-spring",
+        kind: "study",
+        units: 3,
+        courses: [
+          {
+            code: null,
+            label: "Science breadth (B-Sci) course, outside Business",
+            note: "Your choice · counts toward Science breadth (B-Sci)",
+            units: 3,
+            closesGap: false,
+          },
+        ],
+      },
+    ]);
+  });
+
+  test("the first term is the next-term draft; finish term when all is planned", () => {
     expect(plan.termId).toBe("2027-spring");
+    expect(plan.courses).toEqual(plan.terms[0]!.courses);
     expect(plan.units).toBe(9);
-    expect(plan.courses).toEqual([
-      {
-        code: "BUS 373",
-        label: "BUS 373",
-        note: "Closes gap · BBA upper-division core",
-        units: 3,
-        closesGap: true,
-      },
-      {
-        code: "BUS 313",
-        label: "BUS 313",
-        note: "Closes gap · Finance concentration",
-        units: 3,
-        closesGap: true,
-      },
-      {
-        code: "BUS 315",
-        label: "BUS 315",
-        note: "Closes gap · Finance concentration",
-        units: 3,
-        closesGap: true,
-      },
-      {
-        code: null,
-        label: "Open elective",
-        note: "Your choice",
-        units: null,
-        closesGap: false,
-      },
+    expect(plan.finishTerm).toBe("2028-spring");
+  });
+
+  test("summer left out because the student wasn't sure: a neutral note", () => {
+    expect(plan.notes).toEqual([
+      "Summer terms are left out because you weren't sure about summer courses. Choose a summer option in Plan settings to include them.",
     ]);
   });
 
@@ -256,27 +349,15 @@ describe("presentPlan: the sample student's next term", () => {
       ],
       [
         "verified",
-        "BUS 313 is required for the Finance concentration and isn't on your record.",
+        "Each course comes after the courses it needs: prerequisites are checked term by term.",
       ],
       [
-        "verified",
-        "BUS 315 is required for the Finance concentration and isn't on your record.",
+        "assumption",
+        "BUS 374 is picked from a list of options; you can swap it for another option.",
       ],
       [
-        "verified",
-        "Prerequisites for BUS 373, BUS 313, BUS 315 are met by your record.",
-      ],
-      [
-        "verified",
-        "Still to choose: Organization or HR course, Global Perspectives course, Finance electives. These have several options, so they're left to you.",
-      ],
-      [
-        "verified",
-        "BUS 478 isn't suggested yet: its prerequisites aren't met yet.",
-      ],
-      [
-        "verified",
-        "BUS 496 isn't suggested yet: its prerequisites aren't met yet.",
+        "assumption",
+        "2 electives are placeholders for requirements that count units, levels or designations, 3 units each.",
       ],
       [
         "assumption",
@@ -284,9 +365,13 @@ describe("presentPlan: the sample student's next term", () => {
       ],
       [
         "assumption",
-        "Offerings are estimated from past spring terms; the Spring 2027 timetable isn't confirmed.",
+        "Offerings are estimated from past terms of the same season; no future timetable is confirmed.",
       ],
-      ["assumption", "4 courses is the load you chose."],
+      ["assumption", "4 courses per term is the load you chose."],
+      [
+        "assumption",
+        "Spring 2028 is below the 9-unit minimum (unit limits not yet confirmed against the calendar).",
+      ],
       ["unresolved", "Seats and timetable fit aren't checked yet."],
     ]);
   });
@@ -298,24 +383,134 @@ describe("presentPlan: the sample student's next term", () => {
       );
   });
 
-  test("a light load adds the unit-limit assumption once", () => {
-    const light = suggestNextTerm(student, catalog, {
-      termId: "2027-spring",
-      courseLoad: 2,
-    });
+  test("unscheduled courses and rows courses can't settle are said plainly", () => {
     const p = presentPlan(
-      light,
+      {
+        ...remaining,
+        unscheduled: [
+          {
+            code: "BUS 478",
+            reqIds: ["upper-bus478"],
+            reasons: ["PREREQ_UNMET"],
+          },
+        ],
+        notPlannable: [{ reqId: "gpa-cum", status: "unknown" }],
+      },
       catalog.requirements,
       result,
-      { ...SAMPLE_PROFILE, courseLoad: 2 },
+      SAMPLE_PROFILE,
       catalog.courses,
+      { ...context, summer: "some", summerUnsure: false },
     );
-    expect(
-      p.claims
-        .filter((c) => /unit/i.test(c.text) && c.status === "assumption")
-        .map((c) => c.text),
-    ).toEqual([
-      "6 units is below the 9-unit minimum (unit limits not yet confirmed against the calendar).",
+    const texts = p.claims.map((c) => c.text);
+    expect(texts).toContain(
+      "BUS 478 couldn't be placed in any term: its prerequisites aren't met yet.",
+    );
+    expect(texts).toContain(
+      "Adding courses can't settle this: Gpa cum. Check with an advisor.",
+    );
+    expect(texts).toContain(
+      "4 courses per term is the load you chose (up to 2 in summer).",
+    );
+    expect(p.notes).toEqual([]);
+    expect(p.finishTerm).toBeNull();
+  });
+});
+
+describe("presentPlan: co-op notes", () => {
+  const empty: RemainingPlan = {
+    terms: [{ id: "2027-spring", kind: "study", items: [] }],
+    unscheduled: [],
+    notPlannable: [],
+    plan: { terms: [] },
+    validation: {
+      violations: [],
+      terms: [],
+      graduationTerm: null,
+      graduationTermExcludingUnknown: null,
+      graduationAssumesValidPlan: false,
+      graduationBlockers: [],
+      auditAfterPlan: result,
+    },
+  };
+  const base = {
+    summer: "none" as const,
+    summerUnsure: false,
+    unitLoad: catalog.policy.unit_load,
+    electiveUnits: 3,
+  };
+  const present = (coop: {
+    doing: boolean;
+    terms: string[];
+    isDefault: boolean;
+  }) =>
+    presentPlan(
+      empty,
+      catalog.requirements,
+      result,
+      SAMPLE_PROFILE,
+      catalog.courses,
+      { ...base, coop },
+    );
+
+  test("the default placement is said to be a default the student can change", () => {
+    const p = present({
+      doing: true,
+      terms: ["2027-fall", "2028-spring", "2029-spring"],
+      isDefault: true,
+    });
+    expect(p.notes).toEqual([
+      "Co-op work terms are a default: an 8-month placement (Fall 2027 + Spring 2028) and Spring 2029. Pick your own in Plan settings.",
     ]);
+    expect(p.claims).toContainEqual({
+      text: "The default co-op placement starts after at least one study term; the SFU calendar's co-op timing rules aren't checked.",
+      status: "assumption",
+    });
+  });
+
+  test("fewer than 3 picked work terms: a neutral reminder", () => {
+    const p = present({ doing: true, terms: ["2027-fall"], isDefault: false });
+    expect(p.notes).toEqual([
+      "Co-op has 3 work terms; you've picked 1. Add the others in Plan settings when you know them.",
+    ]);
+  });
+
+  test("no co-op: no co-op notes", () => {
+    expect(
+      present({ doing: false, terms: [], isDefault: false }).notes,
+    ).toEqual([]);
+  });
+});
+
+describe("electiveLabel", () => {
+  const rowById = new Map(catalog.requirements.map((r) => [r.req_id, r]));
+  test.each([
+    [{ level: "400", business: true }, "400-level BUS elective"],
+    [{ level: "upper", business: true }, "Upper-division BUS elective"],
+    [{ level: "upper", business: null }, "Upper-division elective"],
+    [{ business: false }, "Elective outside Business"],
+    [{}, "Open elective"],
+    [
+      { level: "upper", business: true, designation: "W" },
+      "Writing (W) course, upper-division BUS",
+    ],
+    [{ designation: "Q" }, "Quantitative (Q) course"],
+    [
+      { business: false, fromList: "beedie-nonbus-group-a" },
+      "Group A course outside Business",
+    ],
+  ] as const)("%o -> %s", (partial, label) => {
+    expect(
+      electiveLabel(
+        {
+          level: null,
+          business: null,
+          designation: null,
+          fromList: null,
+          ...partial,
+        },
+        rowById,
+      ),
+    ).toBe(label);
   });
 });

@@ -50,7 +50,7 @@ describe("Kleene logic", () => {
 });
 
 describe("course nodes and grades", () => {
-  test("letter minimum, P on pass/fail courses only, CR assumed", () => {
+  test("letter minimum; P and CR meet any minimum", () => {
     const done = ctx({
       completed: new Map([
         ["BUS 312", "C"],
@@ -63,7 +63,7 @@ describe("course nodes and grades", () => {
     expect(truth(c("BUS 312", "C-"), done)).toBe("met");
     expect(truth(c("BUS 251", "C-"), done)).toBe("unmet");
     expect(truth(c("BUS 300", "C-"), done)).toBe("met"); // pass/fail course
-    expect(truth(c("BUS 272", "C-"), done)).toBe("unmet"); // P is no letter grade elsewhere
+    expect(truth(c("BUS 272", "C-"), done)).toBe("met"); // P meets any minimum
     expect(truth(c("ECON 105", "C-"), done)).toBe("met"); // ASSUMPTION
   });
 

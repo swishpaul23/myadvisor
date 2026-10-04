@@ -7,6 +7,7 @@ import {
   parseAnswer,
   parseStep,
 } from "@/lib/app/onboarding";
+import { admissionYearOptions } from "@/lib/app/terms";
 import type { OnboardingDraft, RecordCourse } from "@/lib/app/types";
 
 const form = (entries: [string, string][]) => {
@@ -37,12 +38,13 @@ const full: OnboardingDraft = {
 };
 
 describe("parseStep", () => {
-  test("program: term and one or two concentrations", () => {
+  test("program: admission season and year, one or two concentrations", () => {
     expect(
       parseStep(
         "program",
         form([
-          ["admissionTerm", "2024-fall"],
+          ["admissionSeason", "fall"],
+          ["admissionYear", "2023"],
           ["concentrations", "Finance"],
           ["concentrations", "Marketing"],
         ]),
@@ -50,7 +52,7 @@ describe("parseStep", () => {
     ).toEqual({
       ok: true,
       data: {
-        admissionTerm: "2024-fall",
+        admissionTerm: "2023-fall",
         concentrations: ["Finance", "Marketing"],
       },
     });
@@ -61,8 +63,25 @@ describe("parseStep", () => {
     expect(r.ok).toBe(false);
     if (r.ok) return;
     expect(r.fieldErrors).toEqual({
-      admissionTerm: "Pick a term.",
+      admissionSeason: "Pick the season you were admitted.",
+      admissionYear: "Pick the year you were admitted.",
       concentrations: "Pick at least one concentration.",
+    });
+  });
+
+  test("program: a made-up season is refused", () => {
+    const r = parseStep(
+      "program",
+      form([
+        ["admissionSeason", "winter"],
+        ["admissionYear", "2023"],
+        ["concentrations", "Finance"],
+      ]),
+    );
+    expect(r.ok).toBe(false);
+    if (r.ok) return;
+    expect(r.fieldErrors).toEqual({
+      admissionSeason: "Pick the season you were admitted.",
     });
   });
 
@@ -70,7 +89,8 @@ describe("parseStep", () => {
     const r = parseStep(
       "program",
       form([
-        ["admissionTerm", "2024-fall"],
+        ["admissionSeason", "fall"],
+        ["admissionYear", "2024"],
         ["concentrations", "Basket Weaving"],
       ]),
     );
@@ -96,6 +116,77 @@ describe("parseStep", () => {
     );
     expect(r.ok === false && r.fieldErrors?.courseLoad).toBe(
       "Pick a course load.",
+    );
+  });
+
+  test("next-term: co-op with work terms (sorted, consecutive allowed)", () => {
+    const r = parseStep(
+      "next-term",
+      form([
+        ["planTerm", "2027-spring"],
+        ["courseLoad", "4"],
+        ["coop", "yes"],
+        ["coopTerms", "2028-spring"],
+        ["coopTerms", "2027-fall"],
+      ]),
+    );
+    expect(r).toEqual({
+      ok: true,
+      data: {
+        planTerm: "2027-spring",
+        courseLoad: 4,
+        coop: { doing: true, workTerms: ["2027-fall", "2028-spring"] },
+      },
+    });
+  });
+
+  test("next-term: no co-op answer, or 'no', means no co-op and no work terms", () => {
+    for (const extra of [
+      [],
+      [
+        ["coop", "no"],
+        ["coopTerms", "2027-fall"],
+      ],
+    ]) {
+      const r = parseStep(
+        "next-term",
+        form([
+          ["planTerm", "2027-spring"],
+          ["courseLoad", "4"],
+          ...(extra as [string, string][]),
+        ]),
+      );
+      expect(r.ok && r.data.coop).toEqual({ doing: false, workTerms: [] });
+    }
+  });
+
+  test("next-term: at most 3 work terms, none before the start term", () => {
+    const many = parseStep(
+      "next-term",
+      form([
+        ["planTerm", "2027-spring"],
+        ["courseLoad", "4"],
+        ["coop", "yes"],
+        ["coopTerms", "2027-summer"],
+        ["coopTerms", "2027-fall"],
+        ["coopTerms", "2028-spring"],
+        ["coopTerms", "2028-summer"],
+      ]),
+    );
+    expect(many.ok === false && many.fieldErrors?.coopTerms).toBe(
+      "Pick up to 3 work terms.",
+    );
+    const early = parseStep(
+      "next-term",
+      form([
+        ["planTerm", "2027-spring"],
+        ["courseLoad", "4"],
+        ["coop", "yes"],
+        ["coopTerms", "2026-fall"],
+      ]),
+    );
+    expect(early.ok === false && early.fieldErrors?.coopTerms).toBe(
+      "Work terms start from your plan's start term.",
     );
   });
 
@@ -229,5 +320,14 @@ describe("draftToProfile", () => {
       ok: false,
       error: 'Finish "Your program" first.',
     });
+  });
+});
+
+describe("admission year options", () => {
+  test("this year back twelve years, newest first (2023 included)", () => {
+    const years = admissionYearOptions(new Date(2026, 9, 4));
+    expect(years[0]).toBe(2026);
+    expect(years.at(-1)).toBe(2014);
+    expect(years).toContain(2023);
   });
 });

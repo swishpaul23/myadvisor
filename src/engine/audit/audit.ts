@@ -323,6 +323,15 @@ export function audit(
   const earnedUnits = [...completedFacts.values()]
     .filter((f) => f.earns)
     .reduce((n, f) => n + (f.units ?? 0), 0);
+  const electiveCredit = [...completedFacts.values()]
+    .filter((f) => !f.known && f.earns)
+    .map((f) => ({
+      code: f.code,
+      units: f.units ?? catalog.policy.unknown_course.units,
+      unitsAssumed: !student.courses.some(
+        (c) => c.code === f.code && c.units !== undefined,
+      ),
+    }));
   const inProgressUnits = [...pendingFacts.values()]
     .filter((f) => f.pending)
     .reduce((n, f) => n + (f.units ?? 0), 0);
@@ -335,6 +344,7 @@ export function audit(
       inProgressUnits,
       gpas,
       declaredConcentrations: student.declaredConcentrations,
+      electiveCredit,
     },
     unknowns,
   };

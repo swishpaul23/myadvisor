@@ -2,9 +2,10 @@ import { describe, expect, test } from "vitest";
 import {
   APP_HOME,
   authDecision,
+  GOOGLE_SIGN_IN_PATH,
+  googleSignInHref,
   isPublicPath,
   safeCallbackUrl,
-  SIGN_IN_PATH,
 } from "@/lib/auth/routes";
 
 const at = (path: string) => new URL(path, "http://localhost:3000");
@@ -16,15 +17,26 @@ const decide = (path: string, signedIn: boolean) => {
 };
 
 describe("authDecision: signed out", () => {
-  test("an app page goes to sign-in, remembering path and query", () => {
+  test("an app page goes straight into Google sign-in, remembering path and query", () => {
     const d = authDecision(at("/app/plan?term=2027-spring"), false);
     expect(d.kind).toBe("redirect");
     if (d.kind !== "redirect") return;
-    expect(d.url.pathname).toBe(SIGN_IN_PATH);
+    expect(d.url.pathname).toBe(GOOGLE_SIGN_IN_PATH);
     expect(d.url.searchParams.get("callbackUrl")).toBe(
       "/app/plan?term=2027-spring",
     );
     expect(d.url.origin).toBe("http://localhost:3000");
+  });
+  test("the sign-in page without an error goes straight into Google sign-in", () => {
+    expect(decide("/sign-in", false)).toBe(
+      `http://localhost:3000${googleSignInHref(APP_HOME)}`,
+    );
+    expect(decide("/sign-in?callbackUrl=%2Fapp%2Fplan", false)).toBe(
+      `http://localhost:3000${googleSignInHref("/app/plan")}`,
+    );
+    expect(
+      decide("/sign-in?callbackUrl=https%3A%2F%2Fevil.example", false),
+    ).toBe(`http://localhost:3000${googleSignInHref(APP_HOME)}`);
   });
   test("API routes answer 401 instead of redirecting", () => {
     expect(decide("/api/transcript", false)).toBe("401");
@@ -33,8 +45,9 @@ describe("authDecision: signed out", () => {
   test("the landing page, sign-in, /api/auth/* and static assets are public", () => {
     for (const path of [
       "/",
-      "/sign-in",
-      "/sign-in?callbackUrl=%2Fapp",
+      "/sign-in?error=AccessDenied",
+      "/sign-in?error=Configuration&callbackUrl=%2Fapp",
+      "/sign-in/google?callbackUrl=%2Fapp%2Fstart",
       "/api/auth/signin/google",
       "/api/auth/callback/google?code=x",
       "/api/auth/session",
@@ -47,6 +60,7 @@ describe("authDecision: signed out", () => {
   });
   test("lookalike paths are not public", () => {
     expect(isPublicPath("/sign-in-other")).toBe(false);
+    expect(isPublicPath("/sign-in/other")).toBe(false);
     expect(isPublicPath("/api/authx")).toBe(false);
     expect(isPublicPath("/api/auth-admin/secret")).toBe(false);
     expect(isPublicPath("/app")).toBe(false);
@@ -68,6 +82,14 @@ describe("authDecision: signed in", () => {
     );
     expect(decide("/sign-in", true)).toBe(`http://localhost:3000${APP_HOME}`);
   });
+  test("the Google sign-in link skips sign-in and goes to the target", () => {
+    expect(decide(googleSignInHref("/app/start/upload"), true)).toBe(
+      "http://localhost:3000/app/start/upload",
+    );
+    expect(decide("/sign-in/google?callbackUrl=//evil.example", true)).toBe(
+      `http://localhost:3000${APP_HOME}`,
+    );
+  });
   test("never redirects off-site from a crafted callbackUrl", () => {
     for (const cb of [
       "https://evil.example",
@@ -79,6 +101,19 @@ describe("authDecision: signed in", () => {
         cb,
       ).toBe("http://localhost:3000/app");
     }
+  });
+});
+
+describe("googleSignInHref", () => {
+  test("encodes the target as callbackUrl", () => {
+    const u = new URL(
+      googleSignInHref("/app/plan?term=2027-spring"),
+      "http://x",
+    );
+    expect(u.pathname).toBe(GOOGLE_SIGN_IN_PATH);
+    expect(u.searchParams.get("callbackUrl")).toBe(
+      "/app/plan?term=2027-spring",
+    );
   });
 });
 
@@ -97,6 +132,9 @@ describe("safeCallbackUrl", () => {
       "https://evil.example",
       "//evil.example",
       "/\\evil",
+      "/\t/evil.example",
+      "/\n/evil.example",
+      "/\r/evil.example",
       ["/a", "/b"],
     ]) {
       expect(safeCallbackUrl(v), String(v)).toBe(APP_HOME);

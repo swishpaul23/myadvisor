@@ -8,7 +8,7 @@ export function letterRank(grade: string, policy: Policy): number | null {
   return i === -1 ? null : i;
 }
 
-/** D or better, P, CR (policy grade_order.earns_units). F, FD, N, W earn nothing. */
+/** D or better, P, CR (policy grade_order.earns_units). F, FD, N, W, DE earn nothing. */
 export function earnsUnits(grade: string | null, policy: Policy): boolean {
   return grade !== null && policy.grade_order.earns_units.includes(grade);
 }
@@ -16,8 +16,8 @@ export function earnsUnits(grade: string | null, policy: Policy): boolean {
 /**
  * Does `grade` on course `code` meet `min`?
  * - blank minimum: any grade that earns units (ASSUMPTION for concentration rows)
- * - P: only on the pass/fail courses (BUS 203, 300, 496), where it meets any minimum
- * - CR (transfer): meets any minimum (ASSUMPTION; the caller adds a note)
+ * - P (pass) and CR (transfer credit): meet any minimum, letter minimums included (Stuart,
+ *   2026-10-04). The caller adds a note for CR, whose grade isn't known.
  * - letters: at least as good as the minimum
  */
 export function meetsMinimum(
@@ -29,8 +29,7 @@ export function meetsMinimum(
   if (grade === null) return false;
   if (!earnsUnits(grade, policy)) return false;
   if (min === null) return true;
-  if (grade === policy.transfer_credit.grade) return true;
-  if (grade === "P") return policy.pass_fail_courses.courses.includes(code);
+  if (grade === policy.transfer_credit.grade || grade === "P") return true;
   if (min === "P") return true; // any passing letter on a pass/fail row
   const g = letterRank(grade, policy);
   const m = letterRank(min, policy);

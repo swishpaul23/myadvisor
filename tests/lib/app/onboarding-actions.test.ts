@@ -49,7 +49,8 @@ describe("onboarding server actions", () => {
         "program",
         null,
         form([
-          ["admissionTerm", "2024-fall"],
+          ["admissionSeason", "fall"],
+          ["admissionYear", "2024"],
           ["concentrations", "Finance"],
         ]),
       ),
@@ -77,7 +78,8 @@ describe("onboarding server actions", () => {
       "program",
       null,
       form([
-        ["admissionTerm", "2024-fall"],
+        ["admissionSeason", "fall"],
+        ["admissionYear", "2024"],
         ["concentrations", "Finance"],
       ]),
     );
@@ -134,7 +136,42 @@ describe("onboarding server actions", () => {
     });
   });
 
-  test("a reviewed transcript needs the tick, then continues onboarding", async () => {
+  test("courses already entered (from a transcript) aren't asked for again", async () => {
+    stored = {
+      version: 1,
+      profile: null,
+      draft: {
+        step: 3,
+        admissionTerm: "2024-fall",
+        concentrations: ["Finance"],
+        courses: [
+          {
+            code: "BUS 201",
+            term: "2024-fall",
+            status: "completed",
+            grade: "B",
+            institution: "SFU",
+            units: null,
+          },
+        ],
+        origin: "transcript",
+        recordConfirmed: false,
+      },
+    };
+    const to = await redirectOf(
+      actions.saveStep(
+        "next-term",
+        null,
+        form([
+          ["planTerm", "2027-spring"],
+          ["courseLoad", "4"],
+        ]),
+      ),
+    );
+    expect(to).toBe("/app/start/questions"); // the courses step is done
+  });
+
+  test("a reviewed transcript continues onboarding; it is confirmed once, at review", async () => {
     const courses = JSON.stringify([
       {
         code: "BUS 201",
@@ -145,29 +182,13 @@ describe("onboarding server actions", () => {
         units: null,
       },
     ]);
-    const unticked = await actions.saveTranscriptReview(
-      null,
-      form([["courses", courses]]),
-    );
-    expect(unticked).toMatchObject({
-      ok: false,
-      fieldErrors: { confirm: expect.any(String) },
-    });
-    expect(writeState).not.toHaveBeenCalled();
-
     const to = await redirectOf(
-      actions.saveTranscriptReview(
-        null,
-        form([
-          ["courses", courses],
-          ["confirm", "on"],
-        ]),
-      ),
+      actions.saveTranscriptReview(null, form([["courses", courses]])),
     );
     expect(to).toBe("/app/start/program"); // program not done yet
     expect(stored.draft).toMatchObject({
       origin: "transcript",
-      recordConfirmed: true,
+      recordConfirmed: false, // the one confirmation is the review step's
       step: 3,
     });
   });

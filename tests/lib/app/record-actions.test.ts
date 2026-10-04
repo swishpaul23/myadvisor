@@ -23,10 +23,9 @@ const course: RecordCourse = {
   institution: "SFU",
   units: null,
 };
-const form = (courses: unknown, confirm = true) => {
+const form = (courses: unknown) => {
   const f = new FormData();
   f.append("courses", JSON.stringify(courses));
-  if (confirm) f.append("confirm", "on");
   return f;
 };
 
@@ -35,7 +34,7 @@ beforeEach(() => {
 });
 
 describe("updateRecord", () => {
-  test("saves the edited list, re-confirmed; an edited sample is no longer sample data", async () => {
+  test("saves the edited list without a second confirmation; an edited sample is no longer sample data", async () => {
     expect(await updateRecord(null, form([course]))).toEqual({
       ok: true,
       data: undefined,
@@ -55,14 +54,6 @@ describe("updateRecord", () => {
     };
     await updateRecord(null, form([course]));
     expect(stored.profile?.origin).toBe("transcript");
-  });
-
-  test("needs the Reviewed and confirmed tick", async () => {
-    expect(await updateRecord(null, form([course], false))).toMatchObject({
-      ok: false,
-      fieldErrors: { confirm: expect.any(String) },
-    });
-    expect(stored.profile).toEqual(SAMPLE_PROFILE);
   });
 
   test("row errors come back per field; nothing saved", async () => {

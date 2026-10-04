@@ -7,8 +7,10 @@ import { readState, writeState } from "@/lib/app/store";
 import type { ActionResult } from "@/lib/app/types";
 
 /**
- * Academic record: save an edited course list. Same validation as onboarding, and the
- * student must confirm it again. An edited sample record is no longer "sample data".
+ * Academic record: save an edited course list, the one place to edit it after onboarding.
+ * Same validation as onboarding; the list was confirmed once in onboarding, so saving the
+ * student's own edit needs no second confirmation. An edited sample record is no longer
+ * "sample data".
  */
 export async function updateRecord(
   _prev: ActionResult | null,
@@ -16,13 +18,6 @@ export async function updateRecord(
 ): Promise<ActionResult> {
   const parsed = parseStep("courses", form);
   if (!parsed.ok) return parsed;
-  if (form.get("confirm") !== "on") {
-    return {
-      ok: false,
-      error: "Check your courses, then tick “Reviewed and confirmed”.",
-      fieldErrors: { confirm: "Confirm that your course list is correct." },
-    };
-  }
   const state = await readState();
   if (!state.profile) return { ok: false, error: "Set up your profile first." };
   const courses = parsed.data.courses ?? [];

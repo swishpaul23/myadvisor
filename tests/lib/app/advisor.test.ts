@@ -1,7 +1,7 @@
 import { readFileSync } from "node:fs";
 import { describe, expect, test } from "vitest";
 import { audit } from "@/engine/audit";
-import { suggestNextTerm } from "@/engine/plan/suggest";
+import { planRemaining } from "@/engine/plan/remaining";
 import type { PlanCatalog } from "@/engine/plan/types";
 import {
   advisorRequestSchema,
@@ -10,7 +10,7 @@ import {
   introMessage,
   stripUnknownCitations,
 } from "@/lib/app/advisor";
-import { toEngineStudent } from "@/lib/app/engine-input";
+import { toEngineStudent, toPlanOptions } from "@/lib/app/engine-input";
 import {
   buildChecklist,
   buildGaps,
@@ -34,11 +34,18 @@ const catalog: PlanCatalog = {
 const student = toEngineStudent(SAMPLE_PROFILE);
 const result = audit(student, catalog);
 const plan = presentPlan(
-  suggestNextTerm(student, catalog, { termId: "2027-spring", courseLoad: 4 }),
+  planRemaining(student, catalog, toPlanOptions(SAMPLE_PROFILE)),
   catalog.requirements,
   result,
   SAMPLE_PROFILE,
   catalog.courses,
+  {
+    summer: "none",
+    summerUnsure: true,
+    unitLoad: catalog.policy.unit_load,
+    electiveUnits: 3,
+    coop: { doing: false, terms: [], isDefault: false },
+  },
 );
 const facts = {
   profile: SAMPLE_PROFILE,
@@ -96,8 +103,7 @@ describe("buildAdvisorPrompt (grounding)", () => {
     expect(sources.map((s) => s.title)).toEqual([
       "SFU Calendar · BBA program requirements",
       "SFU Calendar · BUS 496", // upper-bus496 cites the BUS 496 course page (gaps come first)
-      "SFU Calendar · BUS 373",
-      "SFU Calendar · BUS 478",
+      "SFU Calendar · BUS 373", // the prerequisite-order claim cites the first planned course
       "SFU Calendar · BUS 393",
     ]);
     expect(prompt).toContain(
@@ -115,9 +121,12 @@ describe("buildAdvisorPrompt (grounding)", () => {
     expect(prompt).toContain(
       "- UNRESOLVED: Seats and timetable fit aren't checked yet.",
     );
-    expect(prompt).toContain("- ASSUMPTION: 4 courses is the load you chose.");
+    expect(prompt).toContain(
+      "- ASSUMPTION: 4 courses per term is the load you chose.",
+    );
+    expect(prompt).toContain("PLAN BY TERM, from Spring 2027");
     expect(prompt).toContain("(a fictional sample student)");
-    expect(prompt).toContain("Prerequisites: 45 units. [5]");
+    expect(prompt).toContain("Prerequisites: 45 units. [4]");
   });
 
   test("history and the question come last", () => {

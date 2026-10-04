@@ -1,8 +1,10 @@
 import { z } from "zod";
 import { MOCK_SURVEY_QUESTIONS, SKIP } from "./mocks";
+import { termIndex } from "./terms";
 import {
   coursesSchema,
   profileSchema,
+  SEASONS,
   type ActionResult,
   type OnboardingDraft,
   type StudentProfile,
@@ -13,7 +15,7 @@ import {
 
 export const STEPS = [
   { slug: "program", title: "Your program" },
-  { slug: "next-term", title: "Your next term" },
+  { slug: "next-term", title: "Your plan" },
   { slug: "courses", title: "Your courses" },
   { slug: "questions", title: "A few questions" },
   { slug: "review", title: "Review and confirm" },
@@ -31,7 +33,11 @@ const programStep = profileSchema.pick({
   admissionTerm: true,
   concentrations: true,
 });
-const nextTermStep = profileSchema.pick({ planTerm: true, courseLoad: true });
+const nextTermStep = profileSchema.pick({
+  planTerm: true,
+  courseLoad: true,
+  coop: true,
+});
 const coursesStep = z.object({
   courses: coursesSchema.min(
     1,
@@ -101,22 +107,71 @@ export function parseStep(
   form: FormData,
 ): ActionResult<Partial<OnboardingDraft>> {
   if (slug === "program") {
+    // Two answers, season and year, make the admission term ("2023-fall").
+    const season = str(form, "admissionSeason");
+    const year = str(form, "admissionYear");
+    const seasonOk = (SEASONS as readonly string[]).includes(season);
+    const yearOk = /^\d{4}$/.test(year);
     const result = programStep.safeParse({
-      admissionTerm: str(form, "admissionTerm"),
+      admissionTerm: seasonOk && yearOk ? `${year}-${season}` : "",
       concentrations: form.getAll("concentrations").map(String),
     });
-    return result.success
-      ? { ok: true, data: result.data }
-      : fail(result.error);
+    if (result.success) return { ok: true, data: result.data };
+    const errors = fieldErrors(result.error);
+    delete errors.admissionTerm; // reported per field below
+    return {
+      ok: false,
+      error: "Some answers need fixing. See the highlighted fields.",
+      fieldErrors: {
+        ...(seasonOk
+          ? {}
+          : { admissionSeason: "Pick the season you were admitted." }),
+        ...(yearOk
+          ? {}
+          : { admissionYear: "Pick the year you were admitted." }),
+        ...errors,
+      },
+    };
   }
   if (slug === "next-term") {
+    // Co-op: "yes" with the picked work terms; anything else is no co-op.
+    const doing = str(form, "coop") === "yes";
+    const workTerms = doing
+      ? [...new Set(form.getAll("coopTerms").map(String))].sort(
+          (a, b) => termIndex(a) - termIndex(b),
+        )
+      : [];
+    const planTerm = str(form, "planTerm");
     const result = nextTermStep.safeParse({
-      planTerm: str(form, "planTerm"),
+      planTerm,
       courseLoad: Number(str(form, "courseLoad")) || 0,
+      coop: { doing, workTerms },
     });
-    return result.success
-      ? { ok: true, data: result.data }
-      : fail(result.error);
+    if (!result.success) {
+      const errors = fieldErrors(result.error);
+      const coopError = Object.entries(errors).find(([k]) =>
+        k.startsWith("coop"),
+      )?.[1];
+      for (const k of Object.keys(errors))
+        if (k.startsWith("coop")) delete errors[k];
+      return {
+        ok: false,
+        error: "Some answers need fixing. See the highlighted fields.",
+        fieldErrors: {
+          ...errors,
+          ...(coopError ? { coopTerms: coopError } : {}),
+        },
+      };
+    }
+    if (workTerms.some((t) => termIndex(t) < termIndex(planTerm)))
+      return {
+        ok: false,
+        error: "Some answers need fixing. See the highlighted fields.",
+        fieldErrors: {
+          coopTerms: "Work terms start from your plan's start term.",
+        },
+      };
+    return { ok: true, data: result.data };
   }
   let courses: unknown;
   try {

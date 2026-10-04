@@ -15,7 +15,7 @@ describe("meetsMinimum", () => {
     ["W", null, "BUS 410", false],
     ["P", "P", "BUS 203", true],
     ["P", "C-", "BUS 300", true], // pass/fail course: P meets any minimum
-    ["P", "C-", "BUS 312", false], // P satisfies no other letter minimum
+    ["P", "C-", "BUS 312", true], // P meets any minimum (Stuart, 2026-10-04)
     ["P", null, "BUS 410", true], // blank minimum: P earns units
     ["CR", "C-", "ECON 105", true], // ASSUMPTION: transfer CR meets minimums
     [null, "C-", "BUS 312", false],

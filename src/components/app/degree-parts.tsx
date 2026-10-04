@@ -7,7 +7,14 @@ import type {
   UnitsSummary,
 } from "@/lib/app/present";
 import { termLabel } from "@/lib/app/terms";
-import type { Claim, Gap, Plan, Source } from "@/lib/app/types";
+import type {
+  Claim,
+  Gap,
+  Plan,
+  PlanCourse,
+  PlanTermView,
+  Source,
+} from "@/lib/app/types";
 import { cn } from "@/lib/utils";
 import { ClaimLabel } from "./claim-label";
 import { FOCUS, PANEL, PANEL_TITLE, TAG } from "./styles";
@@ -170,6 +177,72 @@ export function GapCallout({ gap, more }: { gap: Gap; more: number }) {
   );
 }
 
+/** One term's courses: named courses bold, notes on the right (red when closing a gap). */
+function CourseRows({ courses }: { courses: PlanCourse[] }) {
+  return (
+    <ul className="mt-2.5 flex flex-col">
+      {courses.map((row, i) => (
+        <li
+          key={`${row.label}-${i}`}
+          className="flex justify-between gap-3 border-b border-line-soft py-[9px] last:border-b-0"
+        >
+          <span className={row.code ? "font-semibold" : undefined}>
+            {row.label}
+          </span>
+          <span
+            className={cn(
+              "text-right",
+              row.closesGap ? "text-brand" : "text-ink-muted",
+            )}
+          >
+            {row.note}
+          </span>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+const COOP_NOTE = "Co-op work term. No courses planned.";
+
+/** Every planned term, in order, from the selected start term. Co-op terms are empty. */
+export function PlanGrid({ terms }: { terms: PlanTermView[] }) {
+  return (
+    <section aria-label="Plan by term">
+      <ol className="grid grid-cols-2 gap-3 max-[900px]:grid-cols-1">
+        {terms.map((term) => (
+          <li
+            key={term.termId}
+            className={cn(
+              PANEL,
+              "flex flex-col p-4",
+              term.kind === "coop" && "bg-surface-subtle",
+            )}
+          >
+            <div className="flex items-center justify-between gap-3">
+              <h3 className={PANEL_TITLE}>{termLabel(term.termId)}</h3>
+              {term.kind === "coop" ? (
+                <span className={TAG}>Co-op</span>
+              ) : (
+                term.units !== null && (
+                  <span className="font-mono text-[11px] text-ink-body">
+                    {term.units} units
+                  </span>
+                )
+              )}
+            </div>
+            {term.kind === "coop" ? (
+              <p className="mt-2.5 text-ink-muted">{COOP_NOTE}</p>
+            ) : (
+              <CourseRows courses={term.courses} />
+            )}
+          </li>
+        ))}
+      </ol>
+    </section>
+  );
+}
+
 /** Draft next-term plan. Labelled as a plan, not enrolment. */
 export function NextTermCard({
   plan,
@@ -185,32 +258,21 @@ export function NextTermCard({
     >
       <div className="flex items-center justify-between gap-3">
         <h2 className={PANEL_TITLE}>{termLabel(plan.termId)} · draft</h2>
-        {plan.units !== null && (
-          <span className="font-mono text-[11px] text-ink-body">
-            {plan.units} units
-          </span>
+        {plan.terms[0]?.kind === "coop" ? (
+          <span className={TAG}>Co-op</span>
+        ) : (
+          plan.units !== null && (
+            <span className="font-mono text-[11px] text-ink-body">
+              {plan.units} units
+            </span>
+          )
         )}
       </div>
-      <ul className="mt-2.5 flex flex-col">
-        {plan.courses.map((row) => (
-          <li
-            key={row.label}
-            className="flex justify-between gap-3 border-b border-line-soft py-[9px] last:border-b-0"
-          >
-            <span className={row.code ? "font-semibold" : undefined}>
-              {row.label}
-            </span>
-            <span
-              className={cn(
-                "text-right",
-                row.closesGap ? "text-brand" : "text-ink-muted",
-              )}
-            >
-              {row.note}
-            </span>
-          </li>
-        ))}
-      </ul>
+      {plan.terms[0]?.kind === "coop" ? (
+        <p className="mt-2.5 text-ink-muted">{COOP_NOTE}</p>
+      ) : (
+        <CourseRows courses={plan.courses} />
+      )}
       <p className="mt-auto pt-2.5 text-[12px] leading-[1.4] text-ink-muted">
         A plan, not enrolment. Seats and timetable aren&apos;t checked.
       </p>

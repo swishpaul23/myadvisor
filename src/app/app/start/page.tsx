@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import {
   BUTTON_PRIMARY,
   FOCUS,
@@ -33,6 +34,8 @@ export const metadata = { title: "Get started · MyAdvisor" };
 
 export default async function StartPage() {
   const { draft, profile } = await readState();
+  // Onboarding is done once; after that, courses are edited in Academic record.
+  if (profile) redirect("/app");
   const resume = draft ? firstOpenStep(draft) : null;
 
   return (
@@ -90,18 +93,6 @@ export default async function StartPage() {
           </li>
         ))}
       </ul>
-
-      {profile && (
-        <p className={HINT}>
-          You already have a saved profile.{" "}
-          <Link
-            href="/app"
-            className={cn("text-ink underline underline-offset-2", FOCUS)}
-          >
-            Back to your overview
-          </Link>
-        </p>
-      )}
     </div>
   );
 }

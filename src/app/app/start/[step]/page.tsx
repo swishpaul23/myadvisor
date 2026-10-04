@@ -19,7 +19,8 @@ import {
 } from "@/lib/app/onboarding";
 import { readState } from "@/lib/app/store";
 import {
-  admissionTermOptions,
+  admissionYearOptions,
+  coopTermOptions,
   planTermOptions,
   recordTermOptions,
   termLabel,
@@ -31,7 +32,8 @@ export const metadata = { title: "Get started · MyAdvisor" };
 
 const INTRO: Record<(typeof STEPS)[number]["slug"], string> = {
   program: "Your program and concentration decide which requirements apply.",
-  "next-term": "Tell us which term to plan and how full you'd like it.",
+  "next-term":
+    "Tell us where your plan starts, how full each term should be, and whether you're doing co-op.",
   courses: "Add every course you've completed or are taking now.",
   questions: "Three quick questions so the advisor knows what matters to you.",
   review: "Check everything once more. Your progress is worked out from this.",
@@ -43,7 +45,9 @@ export default async function StepPage({
 }: PageProps<"/app/start/[step]">) {
   const { step } = await params;
   if (!isStepSlug(step)) notFound();
-  const { draft } = await readState();
+  const { draft, profile } = await readState();
+  // Onboarding is done once; after that, courses are edited in Academic record.
+  if (profile) redirect("/app");
 
   // Steps unlock in order: going back is fine, skipping ahead is not.
   const open = firstOpenStep(draft);
@@ -65,14 +69,16 @@ export default async function StepPage({
         <ProgramForm
           admissionTerm={draft?.admissionTerm}
           concentrations={draft?.concentrations}
-          termOptions={admissionTermOptions(today)}
+          yearOptions={admissionYearOptions(today)}
         />
       )}
       {step === "next-term" && (
         <NextTermForm
           planTerm={draft?.planTerm}
           courseLoad={draft?.courseLoad}
+          coop={draft?.coop}
           termOptions={planTermOptions(today)}
+          coopOptions={coopTermOptions(today)}
         />
       )}
       {step === "courses" && (
@@ -138,8 +144,17 @@ function Review({ draft }: { draft: OnboardingDraft }) {
     [
       "Planning",
       draft.planTerm
-        ? `${termLabel(draft.planTerm)} · ${draft.courseLoad} courses`
+        ? `From ${termLabel(draft.planTerm)} · ${draft.courseLoad} courses per term`
         : "—",
+      "next-term",
+    ],
+    [
+      "Co-op",
+      !draft.coop?.doing
+        ? "No"
+        : draft.coop.workTerms.length > 0
+          ? `Yes · ${draft.coop.workTerms.map(termLabel).join(", ")}`
+          : "Yes · default placement",
       "next-term",
     ],
     [

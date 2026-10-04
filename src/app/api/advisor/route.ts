@@ -50,7 +50,15 @@ export async function POST(request: Request): Promise<Response> {
       parsed.error.issues[0]?.message ?? "That message couldn't be read.",
     );
 
-  const view = await getDegreeView();
+  const view = await getDegreeView().catch(() => undefined);
+  if (view === undefined) {
+    console.error("Advisor: loading the degree view failed.");
+    return fail(
+      500,
+      "server_error",
+      "Something went wrong loading your progress. Try again.",
+    );
+  }
   if (!view)
     return fail(
       400,

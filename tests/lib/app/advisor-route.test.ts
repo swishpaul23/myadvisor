@@ -2,7 +2,12 @@ import { beforeEach, describe, expect, test, vi } from "vitest";
 
 // POST /api/advisor with auth, Gemini, the degree view and calendar search mocked. The
 // degree view is a minimal stand-in: the prompt itself is tested in advisor.test.ts.
-const state = { signedIn: true, hasKey: true, hasProfile: true };
+const state = {
+  signedIn: true,
+  hasKey: true,
+  hasProfile: true,
+  viewFails: false,
+};
 const gemini =
   vi.fn<(a: { prompt: string; fallback: string }) => Promise<string>>();
 
@@ -26,8 +31,9 @@ const BBA =
 vi.mock("@/lib/app/degree", async () => {
   const { SAMPLE_PROFILE } = await import("@/lib/app/sample");
   return {
-    getDegreeView: async () =>
-      state.hasProfile
+    getDegreeView: async () => {
+      if (state.viewFails) throw new Error("data unavailable");
+      return state.hasProfile
         ? {
             profile: SAMPLE_PROFILE,
             units: { completed: 61, inProgress: 13, required: 120 },
@@ -50,9 +56,13 @@ vi.mock("@/lib/app/degree", async () => {
               courses: [],
               units: null,
               claims: [],
+              terms: [],
+              notes: [],
+              finishTerm: null,
             },
           }
-        : null,
+        : null;
+    },
   };
 });
 vi.mock("@/lib/data/source", () => ({ searchCalendar: async () => [] }));
@@ -68,7 +78,12 @@ const ask = (body: unknown) =>
   );
 
 beforeEach(() => {
-  Object.assign(state, { signedIn: true, hasKey: true, hasProfile: true });
+  Object.assign(state, {
+    signedIn: true,
+    hasKey: true,
+    hasProfile: true,
+    viewFails: false,
+  });
   gemini.mockReset();
 });
 
@@ -134,6 +149,18 @@ describe("POST /api/advisor", () => {
     await ask({ message: "My grade in BUS 207 was B+" });
     for (const call of spy.mock.calls)
       expect(JSON.stringify(call)).not.toContain("BUS 207");
+    spy.mockRestore();
+  });
+
+  test("loading the degree view fails -> typed 500, not a crash", async () => {
+    state.viewFails = true;
+    const spy = vi.spyOn(console, "error").mockImplementation(() => {});
+    const res = await ask({ message: "hi" });
+    expect(res.status).toBe(500);
+    expect(await res.json()).toMatchObject({
+      ok: false,
+      error: "server_error",
+    });
     spy.mockRestore();
   });
 });
