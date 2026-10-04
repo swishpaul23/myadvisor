@@ -28,7 +28,7 @@ Optional for the app:
 
 - `DATA_SOURCE` (`json` by default, or `snowflake`)
 - `SNOWFLAKE_TIMEOUT_MS`
-- `ELEVENLABS_API_KEY` (Advisor voice; without it the mic and read-aloud are hidden and text chat still works)
+- `ELEVENLABS_API_KEY` (Advisor voice; without it Speak stays visible but disabled with an explanation, read-aloud is hidden, and text chat still works)
 - `ELEVENLABS_VOICE_ID` (the voice that reads answers aloud; without it only the mic is shown)
 - `AUTH_URL`, `AUTH_TRUST_HOST` (not needed on Vercel)
 - With `DATA_SOURCE=snowflake` only: `SNOWFLAKE_ACCOUNT`, `SNOWFLAKE_USER`, `SNOWFLAKE_ROLE`, `SNOWFLAKE_WAREHOUSE`, `SNOWFLAKE_DATABASE`, `SNOWFLAKE_SCHEMA`, `SNOWFLAKE_PRIVATE_KEY_PATH`
@@ -40,6 +40,8 @@ Scripts only (not the app):
 - `SNOWFLAKE_*` (`scripts/load-snowflake.mjs`, `scripts/build-search.mjs`, `scripts/snowflake-smoke.mjs`)
 
 Run `npm run check` (lint, typecheck, tests) before committing. See `CLAUDE.md` for architecture and the data contract.
+
+For Advisor voice, set `ELEVENLABS_API_KEY` in the running environment as well as `ELEVENLABS_VOICE_ID` for read-aloud. On Vercel, select the environment used by the deployment (Production for the live site) and redeploy after changing variables; existing deployments keep their previous configuration. Locally, restart `npm run dev` after changing `.env.local`.
 
 ## Auth setup
 

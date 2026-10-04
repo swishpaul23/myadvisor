@@ -286,12 +286,16 @@ export function MicButton({
   state,
   seconds,
   disabled,
+  describedBy,
+  title,
   onStart,
   onStop,
 }: {
   state: RecorderState;
   seconds: number;
   disabled: boolean;
+  describedBy?: string;
+  title?: string;
   onStart: () => void;
   onStop: () => void;
 }) {
@@ -321,6 +325,8 @@ export function MicButton({
       type="button"
       onClick={onStart}
       disabled={disabled || state !== "idle"}
+      aria-describedby={describedBy}
+      title={title}
       className={BUTTON_SECONDARY}
     >
       <Mic size={16} aria-hidden="true" />
