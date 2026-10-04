@@ -47,14 +47,21 @@ tests/golden/        teammate's test questions as expected-answer cases
 ## 6. Data contract
 
 `data/sheets/requirements.csv`:
-`req_id,program,concentration,catalog_term,group,rule,n_or_units,courses,filter,min_grade,notes,source_url,status,verified_by`
+`req_id,program,concentration,catalog_term,group,rule,n_or_units,courses,level_min,level_max,designation,filter,min_grade,notes,source_url,status,verified_by`
 
+- `req_id`: unique and stable; never renamed once code or tests depend on it. Used for audit output, links between rows, chat citations, and golden tests.
 - `program`: `BBA`, or `*` for university-wide rules. `concentration`: blank means all concentrations.
 - `group`: `Lower core | Upper core | Concentration | Beedie | University`
 - `rule`: `one course | choose N | all of | units from | courses from | gpa`
 - `courses`: comma-separated list inside quotes, e.g. `"BUS 312,BUS 315"`.
-- `filter`: simple expressions separated by `;`, e.g. `dept not in BUS,BUEC` or `level 400; dept BUS; exclude BUS 425,BUS 478,BUS 496`. This is v0 syntax; extend it only when a real rule needs it.
-- `status`: `beta | verified`. Everything starts `beta`; only Stuart marks rows `verified`.
+- `level_min` / `level_max`: integers, a course-number range (upper division = 300 to 499, lower = 100 to 299). Blank means no level restriction.
+- `designation`: blank, or one or more of `W`, `Q`, `B-Soc`, `B-Hum`, `B-Sci` joined with `|`. A course counts only if it carries one of these.
+- `filter`: semicolon-separated leftovers only. Allowed terms so far: `dept X`, `institution SFU`, `course_units >= N`, `exclude CODE|CODE`, `subject outside major`, `subject in major`, `degree first_bachelors`. Anything else is reported by `data:build`, never guessed at.
+- `min_grade`: blank, a letter grade (`A+` to `D`), or `P`.
+- `status`: `beta | verified | out-of-scope`. Everything starts `beta`; only Stuart marks rows `verified`. Rows with status `out-of-scope` are skipped by the engine.
+- `verified_by`: a person's name; blank until a human checks the row. Required when `verified`, must be blank when `beta`.
+
+Schema: `src/lib/data/schema.ts` (zod). `npm run data:build` fails with sheet row and `req_id` on any bad value or duplicate `req_id`, and writes `data/generated/requirements.json`.
 
 `data/sheets/test-questions.csv`: `question,type,expected_answer,source_url,app_answer,correct` (`type`: `need course | prereq | plan`).
 `data/sheets/prereq-overrides.csv`: `course_code,override_text,reason,source_url` (prerequisite text the parser can't handle).

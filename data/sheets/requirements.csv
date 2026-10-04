@@ -1,1 +1,1 @@
-req_id,program,concentration,catalog_term,group,rule,n_or_units,courses,filter,min_grade,notes,source_url,status,verified_by
+req_id,program,concentration,catalog_term,group,rule,n_or_units,courses,level_min,level_max,designation,filter,min_grade,notes,source_url,status,verified_by
