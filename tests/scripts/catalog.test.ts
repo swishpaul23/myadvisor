@@ -70,8 +70,6 @@ describe("buildCourse", () => {
         department: "BUS",
         prerequisites_text: "BUS 217W with a minimum grade of C-.",
         corequisites_text: "",
-        requirements_text: null,
-        short_note: null,
         description: "Writing for business.",
         designations: ["W"],
         designation_raw: "Writing",

@@ -233,24 +233,34 @@ describe("stripOutline", () => {
     expect(result.outline.info).toEqual({ dept: "BUS" });
   });
 
-  test("keeps requirements and shortNote, scrubbed; drops recommendedText", () => {
+  test("drops requirements, shortNote and recommendedText without reporting them", () => {
     const result = stripOutline({
       info: {
         dept: "BUS",
-        requirements: "Ask Quintessa Vandermolen at qv@example.sfu.ca.",
-        shortNote: ["Call 778-555-0142", { who: "Quintessa Vandermolen" }],
+        requirements: "Attendance is mandatory. Ask Quintessa Vandermolen.",
+        shortNote: "Books are available at SFU Bookstore.",
       },
       instructor: [{ firstName: "Quintessa", lastName: "Vandermolen" }],
       recommendedText: [{ details: "Some textbook" }],
     });
     expect(result.unknownKeys).toEqual([]);
-    expect(result.outline).toEqual({
+    expect(result.outline).toEqual({ info: { dept: "BUS" } });
+  });
+
+  test("scrubs strings nested inside kept values", () => {
+    const result = stripOutline({
       info: {
-        dept: "BUS",
-        requirements: "Ask [name removed] at [email removed].",
-        shortNote: ["Call [phone removed]", { who: "[name removed]" }],
+        notes: [
+          "Call 778-555-0142",
+          { who: "Quintessa Vandermolen at qv@example.sfu.ca" },
+        ],
       },
+      instructor: [{ firstName: "Quintessa", lastName: "Vandermolen" }],
     });
+    expect(result.outline.info.notes).toEqual([
+      "Call [phone removed]",
+      { who: "[name removed] at [email removed]" },
+    ]);
   });
 
   test("does not remove ordinary words that match a first name", () => {

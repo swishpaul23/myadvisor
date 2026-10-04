@@ -19,8 +19,6 @@ export const courseSchema = z.object({
   department: z.string().regex(/^[A-Z]{2,5}$/),
   prerequisites_text: text,
   corequisites_text: text,
-  requirements_text: text,
-  short_note: text,
   description: text,
   designations: z.array(z.enum(DESIGNATIONS)),
   /** info.designation exactly as SFU returned it; null if absent. */

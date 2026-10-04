@@ -85,8 +85,6 @@ export function buildCourse(
     department: code.split(" ")[0] ?? "",
     prerequisites_text: optionalText(info, "prerequisites", errors),
     corequisites_text: optionalText(info, "corequisites", errors),
-    requirements_text: optionalText(info, "requirements", errors),
-    short_note: optionalText(info, "shortNote", errors),
     description: optionalText(info, "description", errors),
     designations,
     designation_raw: designationRaw,

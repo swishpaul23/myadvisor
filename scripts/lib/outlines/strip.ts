@@ -24,8 +24,6 @@ export const KEPT_INFO_FIELDS = [
   "name",
   "classNumber",
   "outlinePath",
-  "requirements", // first seen in the full run, 2026-10-03; kept per Stuart
-  "shortNote", // first seen in the full run, 2026-10-03; kept per Stuart
 ] as const;
 
 /** `info` fields seen in samples and dropped on purpose. */
@@ -35,6 +33,8 @@ export const DROPPED_INFO_FIELDS = [
   "gradingNotes", // grading scheme
   "courseDetails", // one instructor's syllabus for one section
   "educationalGoals", // one instructor's syllabus for one section
+  "requirements", // one instructor's section notes (policies, book lists, grading), not course requirements
+  "shortNote", // one instructor's section notes
 ] as const;
 
 /** Top-level outline keys dropped: people, grading, textbooks, schedules. */

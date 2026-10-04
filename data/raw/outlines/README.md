@@ -22,4 +22,4 @@ _manifest.json                              per term/department: date fetched, c
 
 ## Stripping rule
 
-Outlines are stripped before they are written: only `info` is kept, with course-level fields (title, units, prerequisites, corequisites, requirements, short note, designation, description, department, level, delivery method, notes). Instructor data, grading, textbooks, and class or exam schedules are removed, and emails, phone numbers, and instructor names are redacted from all kept text. Values are otherwise stored exactly as returned (`designation` is not mapped to W/Q/B). The exact field lists are in `docs/outlines-api.md`.
+Outlines are stripped before they are written: only `info` is kept, with course-level fields (title, units, prerequisites, corequisites, designation, description, department, level, delivery method, notes). Instructor data and section notes, grading, textbooks, and class or exam schedules are removed, and emails, phone numbers, and instructor names are redacted from all kept text. Values are otherwise stored exactly as returned (`designation` is not mapped to W/Q/B). The exact field lists are in `docs/outlines-api.md`.
