@@ -3,7 +3,7 @@ import { cn } from "@/lib/utils";
 // Hover lifts 1px and presses back on click. Tailwind's hover variant only applies on
 // devices that can hover; motion-reduce drops the movement.
 const BASE =
-  "inline-flex h-12 items-center rounded-[11px] px-[22px] text-[15px] font-medium transition-[transform,box-shadow,border-color] duration-200 ease-[cubic-bezier(0.2,0.7,0.2,1)] hover:-translate-y-px active:translate-y-0 active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2 motion-reduce:transition-none motion-reduce:hover:translate-y-0 motion-reduce:active:scale-100";
+  "inline-flex h-12 items-center rounded-[11px] px-[22px] text-[15px] font-medium transition-[translate,scale,box-shadow,border-color] duration-200 ease-[cubic-bezier(0.2,0.7,0.2,1)] hover:-translate-y-px active:translate-y-0 active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2 motion-reduce:transition-none motion-reduce:hover:translate-y-0 motion-reduce:active:scale-100";
 
 // A soft light sheen crosses the red button on hover. It only transitions while hovered, so
 // it resets off-screen on leave instead of sweeping back.

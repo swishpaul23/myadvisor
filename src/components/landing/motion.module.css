@@ -101,7 +101,8 @@
 /*
  * As the page scrolls, the dark frame grows from 94% to full size, the app window settles
  * into it, and the floating cards drift into place at different speeds. Ranges are page
- * scroll offsets, so the end state (no transform) is reached well before the frame closes.
+ * scroll offsets, capped at the full scroll range so very tall viewports still reach the end
+ * state (no transform) by the bottom of the page.
  * Browsers without scroll-driven animations show the end state.
  */
 @supports (animation-timeline: scroll()) {
@@ -111,10 +112,10 @@
     .floatGap,
     .floatVoice {
       animation-duration: auto;
-      animation-timing-function: cubic-bezier(0.25, 0.6, 0.3, 1);
+      animation-timing-function: cubic-bezier(0.3, 0.5, 0.5, 1);
       animation-fill-mode: both;
       animation-timeline: scroll(root block);
-      animation-range: 0px 560px;
+      animation-range: 0px min(560px, 100%);
     }
 
     .frame {
@@ -128,12 +129,12 @@
 
     .floatGap {
       animation-name: float-gap;
-      animation-range: 0px 640px;
+      animation-range: 0px min(640px, 100%);
     }
 
     .floatVoice {
       animation-name: float-voice;
-      animation-range: 0px 880px;
+      animation-range: 0px min(880px, 100%);
     }
   }
 }

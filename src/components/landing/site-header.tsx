@@ -55,7 +55,7 @@ export function SiteHeader() {
           </a>
           <a
             href="#"
-            className={`group inline-flex h-10 items-center gap-2 rounded-[10px] bg-ink px-4 text-[14px] font-medium text-white transition-[background-color,transform] duration-200 ${EASE} hover:bg-black active:scale-[0.97] motion-reduce:transition-none motion-reduce:active:scale-100 ${FOCUS}`}
+            className={`group inline-flex h-10 items-center gap-2 rounded-[10px] bg-ink px-4 text-[14px] font-medium text-white transition-[background-color,scale] duration-200 ${EASE} hover:bg-black active:scale-[0.97] motion-reduce:transition-none motion-reduce:active:scale-100 ${FOCUS}`}
           >
             Start planning
             <svg
