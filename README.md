@@ -10,28 +10,49 @@ Requires Node 24 (see `.nvmrc`).
 git clone https://github.com/swishpaul23/myadvisor.git
 cd myadvisor
 npm install
-cp .env.example .env.local   # then fill in the values
-npm run dev                  # http://localhost:3000
+npm run dev     # http://localhost:3000 (put your values in .env first; see below)
 ```
 
-`.env.local` values: `ANTHROPIC_API_KEY` (Claude API key), `ANTHROPIC_MODEL` (default given), `DATABASE_URL` (optional; without it the app uses the JSON snapshot in `data/generated/`), `CONTACT_EMAIL` (sent to SFU's API so they can reach us). `AUTH_SECRET`, `AUTH_GOOGLE_ID`, `AUTH_GOOGLE_SECRET`: see [Auth setup](#auth-setup).
+## Environment variables
+
+Names only; never commit values. Locally they go in `.env`; in production, in the host's settings.
+
+The app needs:
+
+- `AUTH_SECRET`
+- `AUTH_GOOGLE_ID`
+- `AUTH_GOOGLE_SECRET`
+- `GOOGLE_GENERATIVE_AI_API_KEY`
+
+Optional for the app:
+
+- `DATA_SOURCE` (`json` by default, or `snowflake`)
+- `SNOWFLAKE_TIMEOUT_MS`
+- `AUTH_URL`, `AUTH_TRUST_HOST` (not needed on Vercel)
+- With `DATA_SOURCE=snowflake` only: `SNOWFLAKE_ACCOUNT`, `SNOWFLAKE_USER`, `SNOWFLAKE_ROLE`, `SNOWFLAKE_WAREHOUSE`, `SNOWFLAKE_DATABASE`, `SNOWFLAKE_SCHEMA`, `SNOWFLAKE_PRIVATE_KEY_PATH`
+
+Scripts only (not the app):
+
+- `DATABASE_URL` (`data:build` Postgres load, `db:migrate`)
+- `CONTACT_EMAIL` (`data:fetch`)
+- `SNOWFLAKE_*` (`scripts/load-snowflake.mjs`, `scripts/build-search.mjs`, `scripts/snowflake-smoke.mjs`)
 
 Run `npm run check` (lint, typecheck, tests) before committing. See `CLAUDE.md` for architecture and the data contract.
 
 ## Auth setup
 
-Sign-in is Google via Auth.js (next-auth v5), with sessions in a signed cookie (JWT) and no database. Every page needs a signed-in user except `/sign-in`, `/api/auth/*` and static files.
+Sign-in is Google via Auth.js (next-auth v5), with sessions in a signed cookie (JWT) and no database. The landing page (`/`), `/sign-in`, `/api/auth/*` and static files are public; everything under `/app` and `/api` needs a signed-in user.
 
 1. **Google Cloud Console** (console.cloud.google.com): pick or create a project, then **APIs & Services → OAuth consent screen**. Choose **External**, fill in the app name and support email, and keep the default scopes (`openid`, `email`, `profile`). While the app is in **Testing**, add every Google account that should be able to sign in under **Test users**.
 2. **APIs & Services → Credentials → Create credentials → OAuth client ID**, type **Web application**:
    - Authorized JavaScript origin: `http://localhost:3000`
    - Authorized redirect URI: `http://localhost:3000/api/auth/callback/google`
    - When deployed, add `https://<your-domain>` and `https://<your-domain>/api/auth/callback/google` as well.
-3. Put the values in `.env.local` (never commit them):
+3. Put the values in `.env` (never commit them):
    - `AUTH_GOOGLE_ID`: the client ID
    - `AUTH_GOOGLE_SECRET`: the client secret
-   - `AUTH_SECRET`: run `npx auth secret`, which generates one and writes it to `.env.local`
-4. Restart `npm run dev` and open http://localhost:3000. You should land on `/sign-in`.
+   - `AUTH_SECRET`: run `npx auth secret` to generate one
+4. Restart `npm run dev`, open http://localhost:3000 and click **Log in**. After signing in you land on `/app`.
 
 In code: `session.user.id` is the Google `sub` (stable per account). API routes and server actions call `requireUser()` from `src/lib/auth/require-user.ts`, which returns `{ id, email, name }` or throws `UnauthorizedError` (status 401). Only verified Google emails can sign in.
 

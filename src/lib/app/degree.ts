@@ -37,6 +37,8 @@ export type DegreeView = {
   sources: Source[];
   dataSource: DataSource;
   dataFallback: boolean;
+  /** Units from the course data for the student's own courses (null when unknown). */
+  catalogUnits: Record<string, number | null>;
 };
 
 /** null when the student hasn't finished onboarding. */
@@ -79,5 +81,11 @@ export const getDegreeView = cache(async (): Promise<DegreeView | null> => {
     ]),
     dataSource: data.source,
     dataFallback: data.fallbackReason !== null,
+    catalogUnits: Object.fromEntries(
+      profile.courses.map((c) => [
+        c.code,
+        data.courses.find((k) => k.code === c.code)?.units ?? null,
+      ]),
+    ),
   };
 });
