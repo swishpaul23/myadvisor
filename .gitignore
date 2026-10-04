@@ -42,6 +42,10 @@ data/raw/outlines/**/*.sections.json
 data/sources/*
 !data/sources/README.md
 
+# real student records for `npm run audit` (private); keep only the dummy template
+tests/private/*
+!tests/private/student.template.json
+
 # vercel
 .vercel
 

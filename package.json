@@ -17,7 +17,8 @@
     "check": "npm run lint && npm run typecheck && npm run test",
     "data:fetch": "tsx scripts/fetch-outlines.ts",
     "data:build": "tsx scripts/build-data.ts",
-    "db:migrate": "tsx scripts/db-migrate.ts"
+    "db:migrate": "tsx scripts/db-migrate.ts",
+    "audit": "tsx scripts/audit-cli.ts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.131.0",
