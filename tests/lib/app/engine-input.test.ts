@@ -1,5 +1,9 @@
 import { describe, expect, test } from "vitest";
-import { toEngineStudent, toPlanOptions } from "@/lib/app/engine-input";
+import {
+  coopTerms,
+  toEngineStudent,
+  toPlanOptions,
+} from "@/lib/app/engine-input";
 import { SAMPLE_PROFILE } from "@/lib/app/sample";
 import { profileSchema } from "@/lib/app/types";
 import { demoStudent } from "../../engine/fixtures/demo-student";
@@ -54,6 +58,20 @@ describe("toEngineStudent (profile -> rules engine input)", () => {
         coop: { doing: true, workTerms: ["2027-spring", "2028-spring"] },
       }).coopTerms,
     ).toEqual(["2028-spring"]);
+  });
+
+  test("plan options: every pick before a moved start term -> the default, not no co-op", () => {
+    // Start moved to 2028-spring, past both picks: Fall 2028 + Spring 2029, then Spring 2030.
+    expect(
+      coopTerms({
+        ...SAMPLE_PROFILE,
+        planTerm: "2028-spring",
+        coop: { doing: true, workTerms: ["2027-fall", "2027-summer"] },
+      }),
+    ).toEqual({
+      terms: ["2028-fall", "2029-spring", "2030-spring"],
+      isDefault: true,
+    });
   });
 
   test("units are passed only when the student gave them", () => {

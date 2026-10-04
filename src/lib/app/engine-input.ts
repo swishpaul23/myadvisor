@@ -36,24 +36,23 @@ export function summerChoice(profile: StudentProfile): {
 
 /**
  * Co-op work terms for the plan: the student's picks from the start term on, or, when they
- * are doing co-op but picked none, the default placement (engine/plan/coop.ts).
+ * are doing co-op but none of their picks is left (none picked, or the start term moved past
+ * them), the default placement (engine/plan/coop.ts).
  */
 export function coopTerms(profile: StudentProfile): {
   terms: string[];
   isDefault: boolean;
 } {
   if (!profile.coop.doing) return { terms: [], isDefault: false };
-  if (profile.coop.workTerms.length === 0)
+  const picked = profile.coop.workTerms.filter(
+    (t) => termIndex(t) >= termIndex(profile.planTerm),
+  );
+  if (picked.length === 0)
     return {
       terms: defaultCoopTerms(profile.planTerm, summerChoice(profile).summer),
       isDefault: true,
     };
-  return {
-    terms: profile.coop.workTerms.filter(
-      (t) => termIndex(t) >= termIndex(profile.planTerm),
-    ),
-    isDefault: false,
-  };
+  return { terms: picked, isDefault: false };
 }
 
 /** The multi-term planner's options from the profile. */
