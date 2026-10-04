@@ -1,282 +1,80 @@
-# myAdvisor
+# MyAdvisor
 
-myAdvisor is a degree planner for SFU Beedie BBA students: it audits completed courses against the Fall 2026 calendar, builds a 4-year plan that flags rule breaks, and answers questions like "do I still need BUS 393?" with calendar citations. Every fact comes from a tested rules engine; the AI chat only explains the engine's answers.
+**Plan your degree, term by term.**
 
-## Run locally
+MyAdvisor is an SFU degree-planning web app. Add the courses you've completed, see exactly where you stand against your program requirements, and get a term-by-term plan through to graduation. Every answer shows its source in the SFU Calendar.
 
-Requires Node 24 (see `.nvmrc`).
+Built for a 24-hour hackathon.
 
-```bash
-git clone https://github.com/swishpaul23/myadvisor.git
-cd myadvisor
-npm install
-npm run dev     # http://localhost:3000 (put your values in .env first; see below)
-```
+![Landing page](docs/screenshots/landing.png)
 
-## Environment variables
+## Features
 
-Names only; never commit values. Locally they go in `.env`; in production, in the host's settings.
+- **Student setup:** enter your program and the courses you've completed (or upload a sample transcript).
+- **Degree audit:** a progress bar and status for every requirement, with gaps called out and cited to the Calendar.
+- **Plan generator:** a multi-term plan covering your remaining requirements. Set the start term, courses per term, summer terms and co-op.
+- **Drag-and-drop planner:** move courses between terms. Moves that break a rule are allowed but flagged in red with the reason.
+- **Advisor chat:** ask questions like "Do I still need BUS 393?" and get an answer that cites the SFU Calendar.
 
-The app needs:
+## Screenshots
 
-- `AUTH_SECRET`
-- `GCP_AUTH_CLIENT_ID` (Google OAuth client ID)
-- `GCP_AUTH_ID_SECRET` (Google OAuth client secret)
-- `GOOGLE_GENERATIVE_AI_API_KEY`
+### Degree progress
 
-Optional for the app:
+![Degree progress](docs/screenshots/degree-progress.png)
 
-- `DATA_SOURCE` (`json` by default, or `snowflake`)
-- `SNOWFLAKE_TIMEOUT_MS`
-- `ELEVENLABS_API_KEY` (Advisor voice; without it Speak stays visible but disabled with an explanation, read-aloud is hidden, and text chat still works)
-- `ELEVENLABS_VOICE_ID` (the voice that reads answers aloud; without it only the mic is shown)
-- `AUTH_URL`, `AUTH_TRUST_HOST` (not needed on Vercel)
-- With `DATA_SOURCE=snowflake` only: `SNOWFLAKE_ACCOUNT`, `SNOWFLAKE_USER`, `SNOWFLAKE_ROLE`, `SNOWFLAKE_WAREHOUSE`, `SNOWFLAKE_DATABASE`, `SNOWFLAKE_SCHEMA`, `SNOWFLAKE_PRIVATE_KEY_PATH`
+Each requirement shows its status: complete, in progress, or a gap. Gaps expand into an action card naming the missing course and linking to the Calendar source.
 
-Scripts only (not the app):
+### My plan
 
-- `DATABASE_URL` (`data:build` Postgres load, `db:migrate`)
-- `CONTACT_EMAIL` (`data:fetch`)
-- `SNOWFLAKE_*` (`scripts/load-snowflake.mjs`, `scripts/build-search.mjs`, `scripts/snowflake-smoke.mjs`)
+![My plan](docs/screenshots/my-plan.png)
 
-Run `npm run check` (lint, typecheck, tests) before committing. See `CLAUDE.md` for architecture and the data contract.
+Courses are grouped by term with unit totals. Each course shows which requirement it closes, and rule breaks (such as a term below the 9-unit full-time minimum) are flagged inline.
 
-For Advisor voice, set `ELEVENLABS_API_KEY` in the running environment as well as `ELEVENLABS_VOICE_ID` for read-aloud. On Vercel, select the environment used by the deployment (Production for the live site) and redeploy after changing variables; existing deployments keep their previous configuration. Locally, restart `npm run dev` after changing `.env.local`.
+## Scope
 
-## Auth setup
+| | |
+|---|---|
+| Program | BBA, Finance concentration (Beedie School of Business) |
+| Calendar | SFU Fall 2026 |
+| Demo data | A made-up sample student |
 
-Sign-in is Google via Auth.js (next-auth v5), with sessions in a signed cookie (JWT) and no database. The landing page (`/`), `/sign-in`, `/api/auth/*` and static files are public; everything under `/app` and `/api` needs a signed-in user.
+Plans are a planning aid, not enrolment. Seats and timetables are not checked, and requirement data has not been verified by an academic advisor. Always confirm with an SFU advisor.
 
-1. **Google Cloud Console** (console.cloud.google.com): pick or create a project, then **APIs & Services → OAuth consent screen**. Choose **External**, fill in the app name and support email, and keep the default scopes (`openid`, `email`, `profile`). While the app is in **Testing**, add every Google account that should be able to sign in under **Test users**.
-2. **APIs & Services → Credentials → Create credentials → OAuth client ID**, type **Web application**:
-   - Authorized JavaScript origin: `http://localhost:3000`
-   - Authorized redirect URI: `http://localhost:3000/api/auth/callback/google`
-   - When deployed, add `https://<your-domain>` and `https://<your-domain>/api/auth/callback/google` as well.
-3. Put the values in `.env` (never commit them):
-   - `GCP_AUTH_CLIENT_ID`: the client ID
-   - `GCP_AUTH_ID_SECRET`: the client secret
-   - `AUTH_SECRET`: run `npx auth secret` to generate one
-4. Restart `npm run dev`, open http://localhost:3000 and click **Log in**. After signing in you land on `/app`.
-
-In code: `session.user.id` is the Google `sub` (stable per account). API routes and server actions call `requireUser()` from `src/lib/auth/require-user.ts`, which returns `{ id, email, name }` or throws `UnauthorizedError` (status 401). Only verified Google emails can sign in.
-
-## For my teammate
-
-You don't need git or code. You fill in the Google Sheet; Stuart moves the files into the project.
-
-1. **Templates.** The column headers are in `data/sheets/` (Stuart will share them): `requirements.csv` (program rules), `test-questions.csv` (questions with known answers), `prereq-overrides.csv` (prerequisites the app can't read on its own). Make one Google Sheet tab per file and paste the header row into row 1 exactly as given.
-2. **Filling rows.** Copy what the SFU Fall 2026 calendar says, paste the calendar page URL into `source_url`, and leave `status` as `beta`. If you're not sure about something, write "unsure" in `notes` instead of guessing.
-3. **Exporting.** Open the tab, then **File → Download → Comma-separated values (.csv)**. This downloads only the tab you're looking at, so repeat it for each tab. Keep the file names `requirements.csv`, `test-questions.csv`, `prereq-overrides.csv`.
-4. **Handing off.** Send the CSV files to Stuart, who drops them into `data/sheets/` and runs the data build. It reports any rows it can't use, with the reason.
-
-## Product plan
-
-The team's product and implementation plan (from `main`). Sections marked planned are not built yet; see above for what runs today.
-
-An academic advisor app being built for [StormHacks 2026](https://stormhacks2026.devpost.com/). (Hackathon Project)
-
-MyAdvisor will help students understand their degree progress, choose courses, and plan their next semester using their confirmed academic record and official university requirements. Students will be able to ask questions through text or voice and see the reasoning and sources behind the advice.
-
-### The problem
-
-Academic planning requires students to combine their transcript, program requirements, concentration rules, prerequisites, and personal goals. That information is spread across calendars and other university resources. A course choice can affect several requirements and later semesters, making it difficult to understand what to take next.
-
-We want students to answer three questions in one place:
-
-- Where do I stand in my degree?
-- What can I take next, and why?
-- How would a different course load or course choice change my plan?
-- and much more features
-
-### Initial scope
-
-The first version will focus on **Simon Fraser University’s Bachelor of Business Administration**, using **Fall 2026** requirements. The initial demo student will be in **Finance**.
-
-The requirements dataset also covers Accounting, Innovation and Entrepreneurship, Human Resource Management, International Business, Management Information Systems, Marketing, Operations Management, and Strategic Analysis.
-
-Supporting additional universities, degrees, and requirement terms is a future expansion. Each needs its own verified sources and rules before MyAdvisor can provide a complete degree audit.
-
-### Planned student experience
+## Architecture
 
 ```mermaid
-flowchart TD
-    A[Sign up or sign in] --> B[Confirm academic profile]
-    B --> C[Upload transcript or enter courses]
-    C --> D[Review and confirm coursework]
-    D --> E[View degree progress]
-    E --> E[Standard questions part of the UI]
-    F --> F[Ask advisor by text or voice]
-    G --> G[Review and edit semester plan]
-    H --> H[Save plan]
-    I --> F
+flowchart LR
+    UI[Web app] --> API[Backend API]
+    API --> RULES[Rules engine]
+    API --> LLM[Gemini]
+    RULES --> DATA[(SFU Calendar requirement data)]
+    LLM --> DATA
+    UI --> AUTH[Google sign-in]
 ```
 
-1. **Sign in and set up a profile.** Confirm the university, program, concentration, applicable requirement term, admission pathway, target semester and preferred course load.
-2. **Add an academic record.** Upload a transcript PDF or enter courses manually.
-3. **Review extracted information.** Correct course codes, credits, grades and terms before confirming the record. Completed, in-progress and transfer coursework remain distinct.
-4. **See degree progress.** Review completed requirements, remaining gaps and unresolved items. Open a requirement to inspect the matching courses and its official source. Then Standard questions by UI
-5. **Ask for advice.** Ask questions such as “What should I take next term?”, “Can I take this course?” or “What changes if I take fewer courses?”
-6. **Build and save a plan.** Review suggested courses, understand eligibility and warnings, make changes, and explicitly save the semester plan.
+**Rules engine is the source of truth.** Degree audits, plan generation and rule-break checks are deterministic code run against structured requirement data from the SFU Fall 2026 Calendar. The same inputs always give the same audit, and every result carries a citation back to the Calendar.
 
-Returning students will go to their overview or resume unfinished setup. The proposed main navigation is **Overview**, **Advisor**, **My plan**, and **Academic record**.
+**The LLM explains; it doesn't decide.** Gemini powers the advisor chat. It is grounded in the same requirement data and the student's record, so answers like "Do I still need BUS 393?" match what the audit shows and cite the Calendar.
 
-### Planned features
+**Plan moves are validated, not blocked.** When a course is dragged between terms, the rules engine re-checks the plan and returns any violations (prerequisites, unit minimums, requirement coverage). The UI flags them in red with the reason.
 
-| Feature | Intended behavior |
-| --- | --- |
-| Accounts and profiles | Persist each student’s academic context and isolate their records. Application login is the initial proposal; official SFU SSO remains a separate integration decision. |
-| Transcript upload | Use Gemini to extract structured coursework from PDFs, with an editable review step before the data informs advice. |
-| Degree audit | Evaluate core, concentration, Beedie and WQB requirements against confirmed coursework. |
-| Prerequisite checks | Explain eligible, conditionally eligible, blocked and unresolved courses using curated prerequisite data. |
-| Personalised academic chat | Combine student context, computed results and official source material in Gemini answers. |
-| Voice advising | Use ElevenLabs for spoken answers, with speech-to-text for spoken questions. Keep readable text alongside audio. |
-| Semester planning | Recommend, edit and persist course selections with credit totals and requirement coverage. |
-| What-if comparisons | Explore different course loads or course sequences with visible assumptions. |
-| History | Reopen saved plans and conversations; recheck plans when the confirmed record changes. |
+## Stack
 
-Later features may include institution-specific GPA scenarios, graduation estimates, sourced deadlines, calendar export, co-op and scholarship guidance, and a summary to bring to a human advisor. These follow the first working transcript-to-plan journey. and much more
+| Layer | Choice |
+|---|---|
+| Hosting | Vercel |
+| Auth | Google sign-in |
+| LLM | Gemini |
+| Rules and audit | Custom rules engine over structured Calendar data |
+| Data | Static SFU Fall 2026 requirement data for BBA Finance |
 
-### Technology choices
+## Live demo
 
-| Layer | Technology | Status and intended role |
-| --- | --- | --- |
-| Frontend | Next.js 16, React 19, TypeScript, Tailwind CSS 4, shadcn/Base UI | Present in the scaffold; application screens still need implementation. |
-| Main LLM | Gemini through the Vercel AI SDK (`ai`, `@ai-sdk/google`) | Model `gemini-2.5-flash`. Calls stay in server route handlers or `src/lib/ai/google.ts`. The browser never sees the key. |
-| Application database | Snowflake Postgres | Selected for profiles, confirmed course attempts, requirements, plans and conversation history. Instance, schema and connection are pending. |
-| Voice | ElevenLabs API | Push-to-talk in the Advisor: Scribe (`scribe_v2`) speech-to-text and `eleven_flash_v2_5` text-to-speech, called server-side from `/api/advisor/transcribe` and `/api/advisor/speak`. Clips up to 60 s / 4 MB; audio and transcripts are never stored or logged. |
-| Backend | Authenticated API/orchestrator | Planned. FastAPI on AWS Lambda is an option in the team sketch; framework and deployment are not final. |
-| Transcript files | Private object storage | Planned. Storage provider and retention policy are pending. |
-| Source retrieval | Calendar retrieval, with Snowflake Cortex Search REST API as a proposed option | Search service, source ingestion and track fit still need confirmation. |
-| Public site | A .tech domain | Planned for the deployed demo; domain name and hosting are not selected. |
+Deployed on Vercel: **<[your-vercel-url](https://myadvisor-rosy.vercel.app/)>**
 
-**Snowflake Postgres and the Snowflake REST API have different roles.** The application will connect to Snowflake Postgres using a PostgreSQL connection through the backend. Snowflake documents standard PostgreSQL clients and requires SSL connections. A Snowflake AI/search REST integration would be a separate service call, not the application database connection. [Snowflake Postgres connection documentation](https://docs.snowflake.com/en/user-guide/snowflake-postgres/connecting-to-snowflakepg).
+Open the site and choose **Try the sample student** to explore without uploading anything.
 
-Gemini is the selected main LLM. The earlier handwritten sketch’s Claude label is superseded by this choice.
+## Team
 
-### Proposed architecture
-
-```mermaid
-flowchart TD
-    Student[Student] --> Web[Next.js frontend]
-    Web --> API[Authenticated backend orchestrator]
-    API --> PG[Snowflake Postgres]
-    API --> Files[Private transcript storage]
-    API --> Rules[Requirements and prerequisite evaluator]
-    Rules --> PG
-    API --> Retrieval[Official-source retrieval]
-    Calendar[Public SFU calendar sources] --> Retrieval
-    API --> Gemini[Gemini API]
-    API --> Voice[ElevenLabs API]
-```
-
-The backend will resolve the authenticated student’s record, run requirement and prerequisite checks, retrieve relevant source material, and give those results to Gemini for explanation. API keys and database access will stay on the server.
-
-If Cortex Search is adopted, public calendar excerpts will need to be loaded into a Snowflake search service and queried through its REST endpoint. This is additional setup; the app will not assume that Cortex Search automatically indexes its Postgres tables. [Cortex Search API documentation](https://docs.snowflake.com/en/user-guide/snowflake-cortex/cortex-search/query-cortex-search-service).
-
-### Academic data and advising behavior
-
-[data/sheets/requirements.csv](data/sheets/requirements.csv) uses these fields (full contract in [CLAUDE.md](CLAUDE.md) section 6):
-
-```text
-req_id, program, concentration, catalog_term, group, rule, n_or_units,
-courses, level_min, level_max, designation, filter, min_grade, notes,
-source_url, status, verified_by
-```
-
-The planned database will hold student profiles, transcript metadata, confirmed course attempts, versioned requirements and sources, course/prerequisite data, saved plans, and conversations. Original transcript files will live in private file storage, with database references to them.
-
-Important implementation requirements:
-
-- **Compute academic rules in code.** Credit totals, prerequisites and requirement allocation come from an evaluator; Gemini explains the results.
-- **Use confirmed records.** Extraction is a proposal until the student reviews it. In-progress courses do not count as already completed.
-- **Preserve exceptions.** P-graded courses, transfer equivalencies, selected-topics courses, residency rules and WQB allocation need explicit handling.
-- **Show evidence.** Advice should cite the applicable calendar sources and distinguish verified facts from assumptions or unresolved information.
-- **Reconcile record updates.** A replacement transcript should not duplicate course attempts, and affected plans should be rechecked.
-- **Keep data scoped to its owner.** Account isolation must apply to records, files, plans and conversation context.
-- **Make course availability explicit.** An academic recommendation does not establish section availability, available seats or timetable compatibility. Saving a plan does not enrol the student.
-
-The requirements CSV is a curated starting point, not an executable rules engine. Its descriptive filters and rule vocabulary still need an agreed schema, validated import and meaningful tests. Course prerequisites need separate curation.
-
-### Hackathon tracks we intend to target
-
-These are intended entries, not completed integrations or confirmed eligibility. The [official StormHacks prize page](https://stormhacks2026.devpost.com/#prizes) is the source for the track names and descriptions.
-
-| Track | Planned project use | Remaining work |
-| --- | --- | --- |
-| Best Use of Snowflake API | Snowflake Postgres for application data; proposed Snowflake REST-based retrieval for sourced advising. | Confirm the qualifying API use with organisers, provision services, and demonstrate an actual API-backed feature. |
-| Best Use of Gemini API | Transcript extraction and personalised academic explanations using the Gemini API. | Implement the calls, validate extracted records, and demonstrate grounded responses. |
-| Best Use of ElevenLabs | Spoken academic advice and voice interaction tied to the same student context as text chat. | Implement and demonstrate the voice experience. |
-| Best .Tech Domain Name | Choose a .tech name that fits MyAdvisor and use it for the deployed project. | Select/register the domain, configure deployment and verify any additional track instructions. |
-
-The published Snowflake track description emphasises AI through Snowflake’s REST API. **We should not assume that using Snowflake Postgres alone establishes eligibility.** Cortex Search is a proposed way to add an API-backed advising feature; its eligibility has not been confirmed. [Track description](https://stormhacks2026.devpost.com/#prizes).
-
-The event requires a project link, a demo video of at most three minutes, and explicit opt-in to each selected track. These submission items still need to be prepared. [Submission requirements](https://stormhacks2026.devpost.com/).
-
-### Development setup
-
-These commands run the **current frontend scaffold**, not the planned advisor integrations.
-
-```bash
-git clone git@github.com:swishpaul23/myadvisor.git
-cd myadvisor
-npm ci
-npm run dev
-```
-
-Open [http://localhost:3000](http://localhost:3000). The current homepage is `src/app/page.tsx`.
-
-Available scripts:
-
-```bash
-npm run dev    # Development server
-npm run lint   # ESLint
-npm run build  # Production build
-npm run start  # Serve an existing production build
-```
-
-There is no project test script yet. Consult [package.json](package.json) and the committed lockfile for exact dependency versions.
-
-#### Configuration to add during implementation
-
-Put the Gemini key in `.env.local` for local calls:
-
-```bash
-GOOGLE_GENERATIVE_AI_API_KEY=your-google-ai-api-key
-```
-
-Get the key at [Google AI Studio](https://aistudio.google.com/apikey). The name must not start with `NEXT_PUBLIC_`. Routes read it per request, so a production build does not need the key. ElevenLabs voice reads `ELEVENLABS_API_KEY` and `ELEVENLABS_VOICE_ID` the same way. Other integrations (Postgres, private storage, Snowflake REST) still need their own server-side settings when those features are implemented.
-
-Keep credentials out of source control and browser bundles. Use environment configuration for local development and the deployment platform’s secret storage when hosting the app.
-
-### Build order and demo goal
-
-1. Implement accounts, profile persistence and resumable onboarding.
-2. Connect Snowflake Postgres and import validated academic rules.
-3. Build transcript/manual entry, extraction review and confirmed coursework.
-4. Implement deterministic degree progress and prerequisite checks.
-5. Add Gemini advising with relevant source retrieval.
-6. Build an editable planner and persistent saved plans.
-7. Add ElevenLabs voice, the qualifying Snowflake API feature, and the .tech deployment.
-8. Verify the end-to-end journey and prepare the track submissions.
-
-The intended demo follows a Finance student who uploads a synthetic transcript, corrects an extraction issue, discovers an outstanding requirement or prerequisite gap, asks for a manageable next-term plan, edits a recommendation, hears the explanation and saves the plan. Reloading should show the same saved plan.
-
-### Decisions still open
-
-- Whether official SFU SSO is available. (Authentication provider decided: Google sign-in via Auth.js (decided by Stuart, 2026-10-04); see [Auth setup](#auth-setup).)
-- Backend framework, hosting and private file storage.
-- ElevenLabs voice choice (`ELEVENLABS_VOICE_ID`); the interaction mode is push-to-talk. Gemini model is `gemini-2.5-flash` through the Vercel AI SDK.
-- Snowflake account/instance access and the qualifying Snowflake REST feature.
-- Requirement evaluator format, prerequisite coverage and exception handling.
-- Live course-offering data and the limits of graduation estimates.
-- .tech domain name and deployment configuration.
-
-### References
-
-- [Proposed user flow](docs/user-flow.md)
-- [SFU Fall 2026 BBA calendar](https://www.sfu.ca/students/calendar/2026/fall/programs/business/major/bachelor-of-business-administration.html)
-- [SFU Fall 2026 WQB requirements](https://www.sfu.ca/students/calendar/2026/fall/fees-and-regulations/enrolment/WQB.html)
-- [Gemini PDF understanding](https://ai.google.dev/gemini-api/docs/document-processing)
-- [ElevenLabs text-to-speech](https://elevenlabs.io/docs/overview/capabilities/text-to-speech)
-- [ElevenLabs speech-to-text](https://elevenlabs.io/docs/overview/capabilities/speech-to-text)
-- [StormHacks tracks and prizes](https://stormhacks2026.devpost.com/#prizes)
+- **Stuart:** backend (rules engine, LLM), sign-in, app UI
+- **Vaibhav:** landing page, design, pitch
