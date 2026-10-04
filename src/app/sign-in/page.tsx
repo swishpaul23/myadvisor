@@ -15,7 +15,10 @@ function errorMessage(code: string): string {
   return "Sign-in didn't work. Please try again.";
 }
 
-/** Google sign-in, on the landing grey like onboarding. */
+/**
+ * Fallback sign-in, on the landing grey like onboarding. Normal flows go straight to Google
+ * (/sign-in/google); src/proxy.ts only lets signed-out users stay here with ?error=.
+ */
 export default async function SignInPage({
   searchParams,
 }: PageProps<"/sign-in">) {
