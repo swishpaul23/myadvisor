@@ -1,0 +1,129 @@
+{
+  "catalog_term": "2026-fall",
+  "grade_points": {
+    "points": {
+      "A+": 4.33,
+      "A": 4.0,
+      "A-": 3.67,
+      "B+": 3.33,
+      "B": 3.0,
+      "B-": 2.67,
+      "C+": 2.33,
+      "C": 2.0,
+      "C-": 1.67,
+      "D": 1.0,
+      "F": 0.0,
+      "FD": 0.0,
+      "N": 0.0
+    },
+    "no_grade_points": ["P", "W"],
+    "source_url": "https://www.sfu.ca/students/calendar/2026/fall/fees-and-regulations/grading-policy/grading-systems-and-policies.html",
+    "status": "beta"
+  },
+  "repeated_courses": {
+    "gpa_counts": "higher_grade",
+    "text": "When a course is repeated, the higher grade counts in GPA calculations.",
+    "source_url": "https://www.sfu.ca/students/calendar/2026/fall/fees-and-regulations/grading-policy/grading-systems-and-policies.html",
+    "status": "beta"
+  },
+  "transfer_credit": {
+    "grade": "CR",
+    "counts_for_units": true,
+    "counts_in_gpa": false,
+    "text": "Transfer credit is recorded as CR: it counts for units but is excluded from GPA.",
+    "source_url": "https://www.sfu.ca/students/calendar/2026/fall/fees-and-regulations/grading-policy/grading-systems-and-policies.html",
+    "status": "beta"
+  },
+  "wqb_min_grade": {
+    "designations": ["W", "Q", "B"],
+    "min_grade": "C-",
+    "text": "A grade of C- or better is required to earn W, Q, or B credit.",
+    "source_url": "https://www.sfu.ca/students/calendar/2026/fall/fees-and-regulations/enrolment/WQB.html",
+    "status": "beta"
+  },
+  "grade_order": {
+    "letter_grades": [
+      "A+",
+      "A",
+      "A-",
+      "B+",
+      "B",
+      "B-",
+      "C+",
+      "C",
+      "C-",
+      "D",
+      "F",
+      "FD",
+      "N"
+    ],
+    "earns_units": [
+      "A+",
+      "A",
+      "A-",
+      "B+",
+      "B",
+      "B-",
+      "C+",
+      "C",
+      "C-",
+      "D",
+      "P",
+      "CR"
+    ],
+    "text": "Letter grades from best to worst; grades that earn units (D or better, P, transfer CR). F, FD, N and W earn none.",
+    "source_url": "https://www.sfu.ca/students/calendar/2026/fall/fees-and-regulations/grading-policy/grading-systems-and-policies.html",
+    "status": "beta"
+  },
+  "major_subjects": {
+    "subjects": ["BUS"],
+    "text": "ASSUMPTION (Stuart to verify): the BBA major's subject is BUS only, for 'subject in major' / 'subject outside major'. BUEC is treated as outside the major.",
+    "source_url": "https://www.sfu.ca/students/calendar/2026/fall/fees-and-regulations/enrolment/WQB.html",
+    "status": "beta"
+  },
+  "bus_gpa_subjects": {
+    "subjects": ["BUS"],
+    "text": "The BUS GPA (beedie-bus-gpa-*) counts BUS courses only (Stuart, 2026-10-04).",
+    "source_url": "https://www.sfu.ca/students/calendar/2026/fall/programs/business/major/bachelor-of-business-administration.html",
+    "status": "beta"
+  },
+  "pass_fail_courses": {
+    "courses": ["BUS 203", "BUS 300", "BUS 496"],
+    "text": "Pass/fail courses: a P grade satisfies their requirement. A P satisfies no other letter-grade minimum (Stuart, 2026-10-04).",
+    "source_url": "https://www.sfu.ca/students/calendar/2026/fall/programs/business/major/bachelor-of-business-administration.html",
+    "status": "beta"
+  },
+  "entryGpaExempt": ["BUS 300", "BUS 496"],
+  "admission_gated_courses": {
+    "courses": ["BUS 203", "BUS 300", "BUS 496"],
+    "from_term": "2022-fall",
+    "text": "Required for BBA entrants admitted Fall 2022 onward. Earlier admissions: different requirement set; the audit reports these rows as unknown (Stuart, 2026-10-04).",
+    "source_url": "https://www.sfu.ca/students/calendar/2026/fall/programs/business/major/bachelor-of-business-administration.html",
+    "status": "beta"
+  },
+  "restriction_programs": {
+    "entries": [
+      {
+        "text": "This course is only open to approved business administration majors admitted to the faculty in Fall 2022 and onward",
+        "program": "BBA",
+        "admitted_from": "2022-fall"
+      },
+      {
+        "text": "This course is only open to approved business administration majors admitted to the faculty through the BBA major - highschool or transfer stream in Fall 2022 and onward",
+        "program": "BBA",
+        "admitted_from": "2022-fall"
+      }
+    ],
+    "text": "Exact prerequisite restriction texts (prereqs.json) resolved from student.program and admissionTerm; exact string match only. Not listed on purpose: the BUS 201 and BUS 202 texts, which also require a Business Foundation Pathway the student data doesn't record. Any text not listed stays unknown (Stuart, 2026-10-04).",
+    "source_url": "https://www.sfu.ca/students/calendar/2026/fall/programs/business/major/bachelor-of-business-administration.html",
+    "status": "beta"
+  },
+  "unit_load": {
+    "spring": { "min": 9, "max": 18 },
+    "summer": { "min": 9, "max": 18 },
+    "fall": { "min": 9, "max": 18 },
+    "text": "ASSUMPTION - verify against the calendar: units per study term, min 9 (full time) and max 18. Summer uses the same values for now. Violations are warnings until verified (Stuart, 2026-10-04).",
+    "source_url": "https://www.sfu.ca/students/calendar/2026/fall/fees-and-regulations.html",
+    "status": "beta"
+  }
+}

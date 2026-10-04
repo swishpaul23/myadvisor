@@ -1,0 +1,56 @@
+[
+  {
+    "code": "BUS 360W",
+    "status": "unparsed",
+    "raw": "This course is open to students admitted to the business administration major, honours, or second degree program and who have 45 units and BUS 130 or (BUS 201 or BUS 202) or BUS 301, and BUS 217W, both with a minimum grade of C-, OR to students admitted Fall 2022 onwards to the business administration major, honours, or second degree program, and who have 45 units; BUS 217W and (BUS 201 or BUS 202), both with a minimum grade of C-; and BUS 300, OR to business administration joint major or joint honours students with BUS 217W with a minimum grade of C- and 45 units, OR to business and economics joint major students with ECON 220W with a minimum grade of C- and 45 units, OR to mechatronic systems engineering and business administration double degree students with 45 units, OR to data science major with BUS 217W with a minimum grade of C- and 45 units.",
+    "raw_coreq": null,
+    "unparsed_fragments": [
+      "This course is open to students admitted to the business administration major, honours, or second degree program and who have 45 units and BUS 130 or (BUS 201 or BUS 202) or BUS 301, and BUS 217W, both with a minimum grade of C-, OR to students admitted Fall 2022 onwards to the business administration major, honours, or second degree program, and who have 45 units; BUS 217W and (BUS 201 or BUS 202), both with a minimum grade of C-; and BUS 300, OR to business administration joint major or joint honours students with BUS 217W with a minimum grade of C- and 45 units, OR to business and economics joint major students with ECON 220W with a minimum grade of C- and 45 units, OR to mechatronic systems engineering and business administration double degree students with 45 units, OR to data science major with BUS 217W with a minimum grade of C- and 45 units"
+    ]
+  },
+  {
+    "code": "BUS 473",
+    "status": "partial",
+    "raw": "Students admitted prior to Fall 2023 with (BUS 373 or BUS 336) and BUS 360W, or students admitted Fall 2023 onward with BUS 373 and BUS 360W; both with a minimum grade of C-; 60 units.",
+    "raw_coreq": null,
+    "unparsed_fragments": [
+      "both with a minimum grade of C-"
+    ]
+  },
+  {
+    "code": "BUS 474",
+    "status": "partial",
+    "raw": "Students admitted prior to Fall 2023 with (BUS 373 or BUS 336) and BUS 360W, or students admitted Fall 2023 onward with BUS 373 and BUS 360W; both with a minimum grade of C-; 60 units.",
+    "raw_coreq": null,
+    "unparsed_fragments": [
+      "both with a minimum grade of C-"
+    ]
+  },
+  {
+    "code": "BUS 492",
+    "status": "partial",
+    "raw": "As stated by the faculty at the time of offering and BUS 360W with a minimum grade of C-; 60 units.",
+    "raw_coreq": null,
+    "unparsed_fragments": [
+      "As stated by the faculty at the time of offering and BUS 360W with a minimum grade of C-"
+    ]
+  },
+  {
+    "code": "BUS 493",
+    "status": "partial",
+    "raw": "As stated by the faculty at the time of offering and BUS 360W with a minimum grade of C-; 60 units.",
+    "raw_coreq": null,
+    "unparsed_fragments": [
+      "As stated by the faculty at the time of offering and BUS 360W with a minimum grade of C-"
+    ]
+  },
+  {
+    "code": "REM 320W",
+    "status": "partial",
+    "raw": "45 units. Philosophy Majors and Minors may not take this course for credit towards their major or minor degree.",
+    "raw_coreq": null,
+    "unparsed_fragments": [
+      "Philosophy Majors and Minors may not take this course for credit towards their major or minor degree"
+    ]
+  }
+]

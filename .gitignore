@@ -32,6 +32,19 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
+!.env.example
+
+# SFU section lists are a local fetch cache; data/raw/outlines/_manifest.json (section types
+# per term) and data/generated/offerings.json replace them in git
+data/raw/outlines/**/*.sections.json
+
+# reference PDFs (may contain a real student's progress); keep only the README
+data/sources/*
+!data/sources/README.md
+
+# real student records for `npm run audit` (private); keep only the dummy template
+tests/private/*
+!tests/private/student.template.json
 
 # vercel
 .vercel
@@ -39,3 +52,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Snowflake key-pair auth (never commit)
+rsa_key.p8
+rsa_key.pub
+.env
+snowflake.log

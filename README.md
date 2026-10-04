@@ -1,12 +1,41 @@
-# MyAdvisor
+# myAdvisor
+
+myAdvisor is a degree planner for SFU Beedie BBA students: it audits completed courses against the Fall 2026 calendar, builds a 4-year plan that flags rule breaks, and answers questions like "do I still need BUS 393?" with calendar citations. Every fact comes from a tested rules engine; the AI chat only explains the engine's answers.
+
+## Run locally
+
+Requires Node 24 (see `.nvmrc`).
+
+```bash
+git clone https://github.com/swishpaul23/myadvisor.git
+cd myadvisor
+npm install
+cp .env.example .env.local   # then fill in the values
+npm run dev                  # http://localhost:3000
+```
+
+`.env.local` values: `ANTHROPIC_API_KEY` (Claude API key), `ANTHROPIC_MODEL` (default given), `DATABASE_URL` (optional; without it the app uses the JSON snapshot in `data/generated/`), `CONTACT_EMAIL` (sent to SFU's API so they can reach us).
+
+Run `npm run check` (lint, typecheck, tests) before committing. See `CLAUDE.md` for architecture and the data contract.
+
+## For my teammate
+
+You don't need git or code. You fill in the Google Sheet; Stuart moves the files into the project.
+
+1. **Templates.** The column headers are in `data/sheets/` (Stuart will share them): `requirements.csv` (program rules), `test-questions.csv` (questions with known answers), `prereq-overrides.csv` (prerequisites the app can't read on its own). Make one Google Sheet tab per file and paste the header row into row 1 exactly as given.
+2. **Filling rows.** Copy what the SFU Fall 2026 calendar says, paste the calendar page URL into `source_url`, and leave `status` as `beta`. If you're not sure about something, write "unsure" in `notes` instead of guessing.
+3. **Exporting.** Open the tab, then **File → Download → Comma-separated values (.csv)**. This downloads only the tab you're looking at, so repeat it for each tab. Keep the file names `requirements.csv`, `test-questions.csv`, `prereq-overrides.csv`.
+4. **Handing off.** Send the CSV files to Stuart, who drops them into `data/sheets/` and runs the data build. It reports any rows it can't use, with the reason.
+
+## Product plan
+
+The team's product and implementation plan (from `main`). Sections marked planned are not built yet; see above for what runs today.
 
 An academic advisor app being built for [StormHacks 2026](https://stormhacks2026.devpost.com/). (Hackathon Project)
 
 MyAdvisor will help students understand their degree progress, choose courses, and plan their next semester using their confirmed academic record and official university requirements. Students will be able to ask questions through text or voice and see the reasoning and sources behind the advice.
 
-**Status: planning and initial scaffolding. The academic advisor is not built yet.** This README describes the intended product and implementation plan. Features and integrations below are planned unless explicitly listed as present.
-
-## The problem
+### The problem
 
 Academic planning requires students to combine their transcript, program requirements, concentration rules, prerequisites, and personal goals. That information is spread across calendars and other university resources. A course choice can affect several requirements and later semesters, making it difficult to understand what to take next.
 
@@ -14,10 +43,10 @@ We want students to answer three questions in one place:
 
 - Where do I stand in my degree?
 - What can I take next, and why?
-- How would a different course load or course choice change my plan? 
+- How would a different course load or course choice change my plan?
 - and much more features
 
-## Initial scope
+### Initial scope
 
 The first version will focus on **Simon Fraser University’s Bachelor of Business Administration**, using **Fall 2026** requirements. The initial demo student will be in **Finance**.
 
@@ -25,19 +54,7 @@ The requirements dataset also covers Accounting, Innovation and Entrepreneurship
 
 Supporting additional universities, degrees, and requirement terms is a future expansion. Each needs its own verified sources and rules before MyAdvisor can provide a complete degree audit.
 
-## What exists today
-
-| Component | Current state |
-| --- | --- |
-| Frontend | Next.js starter with React, TypeScript, Tailwind CSS and a basic UI button component. The page still shows starter content. |
-| Requirements data | [Requirements.csv](Requirements.csv): 91 source-referenced rules covering BBA core, concentrations, Beedie and university/WQB requirements. Rule encoding and exceptions need team review before use by an evaluator. |
-| Product planning | [Proposed user flow](docs/user-flow.md), including onboarding, advising, planning and recovery paths. |
-| Authentication and database | Not implemented or connected. |
-| Transcript processing, degree audit and planner | Not implemented. |
-| Gemini | Server-only Vercel AI SDK client in `src/lib/ai/google.ts` (`ai` and `@ai-sdk/google`, model `gemini-2.5-flash`). Transcript extraction and advising chat are not built yet. |
-| Deployment and .tech domain | Not configured. |
-
-## Planned student experience
+### Planned student experience
 
 ```mermaid
 flowchart TD
@@ -52,7 +69,7 @@ flowchart TD
     I --> F
 ```
 
-1. **Sign in and set up a profile.** Confirm the university, program, concentration, applicable requirement term, admission pathway, target semester and preferred course load. 
+1. **Sign in and set up a profile.** Confirm the university, program, concentration, applicable requirement term, admission pathway, target semester and preferred course load.
 2. **Add an academic record.** Upload a transcript PDF or enter courses manually.
 3. **Review extracted information.** Correct course codes, credits, grades and terms before confirming the record. Completed, in-progress and transfer coursework remain distinct.
 4. **See degree progress.** Review completed requirements, remaining gaps and unresolved items. Open a requirement to inspect the matching courses and its official source. Then Standard questions by UI
@@ -61,7 +78,7 @@ flowchart TD
 
 Returning students will go to their overview or resume unfinished setup. The proposed main navigation is **Overview**, **Advisor**, **My plan**, and **Academic record**.
 
-## Planned features
+### Planned features
 
 | Feature | Intended behavior |
 | --- | --- |
@@ -77,7 +94,7 @@ Returning students will go to their overview or resume unfinished setup. The pro
 
 Later features may include institution-specific GPA scenarios, graduation estimates, sourced deadlines, calendar export, co-op and scholarship guidance, and a summary to bring to a human advisor. These follow the first working transcript-to-plan journey. and much more
 
-## Technology choices
+### Technology choices
 
 | Layer | Technology | Status and intended role |
 | --- | --- | --- |
@@ -94,7 +111,7 @@ Later features may include institution-specific GPA scenarios, graduation estima
 
 Gemini is the selected main LLM. The earlier handwritten sketch’s Claude label is superseded by this choice.
 
-## Proposed architecture
+### Proposed architecture
 
 ```mermaid
 flowchart TD
@@ -114,13 +131,14 @@ The backend will resolve the authenticated student’s record, run requirement a
 
 If Cortex Search is adopted, public calendar excerpts will need to be loaded into a Snowflake search service and queried through its REST endpoint. This is additional setup; the app will not assume that Cortex Search automatically indexes its Postgres tables. [Cortex Search API documentation](https://docs.snowflake.com/en/user-guide/snowflake-cortex/cortex-search/query-cortex-search-service).
 
-## Academic data and advising behavior
+### Academic data and advising behavior
 
-[Requirements.csv](Requirements.csv) uses these fields:
+[data/sheets/requirements.csv](data/sheets/requirements.csv) uses these fields (full contract in [CLAUDE.md](CLAUDE.md) section 6):
 
 ```text
 req_id, program, concentration, catalog_term, group, rule, n_or_units,
-courses, filter, min_grade, notes, source_url, status, verified_by
+courses, level_min, level_max, designation, filter, min_grade, notes,
+source_url, status, verified_by
 ```
 
 The planned database will hold student profiles, transcript metadata, confirmed course attempts, versioned requirements and sources, course/prerequisite data, saved plans, and conversations. Original transcript files will live in private file storage, with database references to them.
@@ -137,7 +155,7 @@ Important implementation requirements:
 
 The requirements CSV is a curated starting point, not an executable rules engine. Its descriptive filters and rule vocabulary still need an agreed schema, validated import and meaningful tests. Course prerequisites need separate curation.
 
-## Hackathon tracks we intend to target
+### Hackathon tracks we intend to target
 
 These are intended entries, not completed integrations or confirmed eligibility. The [official StormHacks prize page](https://stormhacks2026.devpost.com/#prizes) is the source for the track names and descriptions.
 
@@ -152,7 +170,7 @@ The published Snowflake track description emphasises AI through Snowflake’s RE
 
 The event requires a project link, a demo video of at most three minutes, and explicit opt-in to each selected track. These submission items still need to be prepared. [Submission requirements](https://stormhacks2026.devpost.com/).
 
-## Development setup
+### Development setup
 
 These commands run the **current frontend scaffold**, not the planned advisor integrations.
 
@@ -176,7 +194,7 @@ npm run start  # Serve an existing production build
 
 There is no project test script yet. Consult [package.json](package.json) and the committed lockfile for exact dependency versions.
 
-### Configuration to add during implementation
+#### Configuration to add during implementation
 
 Put the Gemini key in `.env.local` for local calls:
 
@@ -188,7 +206,7 @@ Get the key at [Google AI Studio](https://aistudio.google.com/apikey). The name 
 
 Keep credentials out of source control and browser bundles. Use environment configuration for local development and the deployment platform’s secret storage when hosting the app.
 
-## Build order and demo goal
+### Build order and demo goal
 
 1. Implement accounts, profile persistence and resumable onboarding.
 2. Connect Snowflake Postgres and import validated academic rules.
@@ -201,7 +219,7 @@ Keep credentials out of source control and browser bundles. Use environment conf
 
 The intended demo follows a Finance student who uploads a synthetic transcript, corrects an extraction issue, discovers an outstanding requirement or prerequisite gap, asks for a manageable next-term plan, edits a recommendation, hears the explanation and saves the plan. Reloading should show the same saved plan.
 
-## Decisions still open
+### Decisions still open
 
 - Authentication provider and whether official SFU SSO is available.
 - Backend framework, hosting and private file storage.
@@ -211,7 +229,7 @@ The intended demo follows a Finance student who uploads a synthetic transcript, 
 - Live course-offering data and the limits of graduation estimates.
 - .tech domain name and deployment configuration.
 
-## References
+### References
 
 - [Proposed user flow](docs/user-flow.md)
 - [SFU Fall 2026 BBA calendar](https://www.sfu.ca/students/calendar/2026/fall/programs/business/major/bachelor-of-business-administration.html)

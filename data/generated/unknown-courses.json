@@ -1,0 +1,161 @@
+[
+  {
+    "code": "BUS 394",
+    "req_ids": [
+      "innovation-entrepreneurship-electives"
+    ],
+    "reason": "offering unknown: no outline found in 2025-spring to 2027-spring"
+  },
+  {
+    "code": "BUS 395",
+    "req_ids": [
+      "innovation-entrepreneurship-electives"
+    ],
+    "reason": "offering unknown: no outline found in 2025-spring to 2027-spring"
+  },
+  {
+    "code": "BUS 428",
+    "req_ids": [
+      "accounting-electives"
+    ],
+    "reason": "offering unknown: no outline found in 2025-spring to 2027-spring"
+  },
+  {
+    "code": "BUS 465",
+    "req_ids": [
+      "management-information-systems-electives"
+    ],
+    "reason": "offering unknown: no outline found in 2025-spring to 2027-spring"
+  },
+  {
+    "code": "BUS 487",
+    "req_ids": [
+      "human-resource-management-electives"
+    ],
+    "reason": "offering unknown: no outline found in 2025-spring to 2027-spring"
+  },
+  {
+    "code": "BUS 490",
+    "req_ids": [
+      "finance-electives",
+      "accounting-electives",
+      "innovation-entrepreneurship-electives",
+      "human-resource-management-electives",
+      "international-business-electives",
+      "management-information-systems-electives",
+      "marketing-total",
+      "marketing-analytics",
+      "marketing-consumer-behaviours",
+      "operations-management-electives",
+      "strategic-analysis-electives"
+    ],
+    "reason": "offering unknown: no outline found in 2025-spring to 2027-spring"
+  },
+  {
+    "code": "BUS 491",
+    "req_ids": [
+      "finance-electives",
+      "accounting-electives",
+      "innovation-entrepreneurship-electives",
+      "human-resource-management-electives",
+      "international-business-electives",
+      "management-information-systems-electives",
+      "marketing-total",
+      "marketing-analytics",
+      "marketing-consumer-behaviours",
+      "operations-management-electives",
+      "strategic-analysis-electives"
+    ],
+    "reason": "offering unknown: no outline found in 2025-spring to 2027-spring"
+  },
+  {
+    "code": "BUS 494",
+    "req_ids": [
+      "finance-electives",
+      "accounting-electives",
+      "innovation-entrepreneurship-electives",
+      "human-resource-management-electives",
+      "international-business-electives",
+      "management-information-systems-electives",
+      "marketing-total",
+      "marketing-analytics",
+      "marketing-consumer-behaviours",
+      "operations-management-electives",
+      "strategic-analysis-electives"
+    ],
+    "reason": "offering unknown: no outline found in 2025-spring to 2027-spring"
+  },
+  {
+    "code": "BUS 495",
+    "req_ids": [
+      "finance-electives",
+      "accounting-electives",
+      "innovation-entrepreneurship-electives",
+      "human-resource-management-electives",
+      "international-business-electives",
+      "management-information-systems-electives",
+      "marketing-total",
+      "marketing-analytics",
+      "marketing-consumer-behaviours",
+      "operations-management-electives",
+      "strategic-analysis-electives"
+    ],
+    "reason": "offering unknown: no outline found in 2025-spring to 2027-spring"
+  },
+  {
+    "code": "CA 381",
+    "req_ids": [
+      "beedie-nonbus-group-a"
+    ],
+    "reason": "offering unknown: no outline found in 2025-spring to 2027-spring"
+  },
+  {
+    "code": "EASC 104",
+    "req_ids": [
+      "beedie-nonbus-group-a"
+    ],
+    "reason": "offering unknown: no outline found in 2025-spring to 2027-spring"
+  },
+  {
+    "code": "EASC 107",
+    "req_ids": [
+      "beedie-nonbus-group-a"
+    ],
+    "reason": "offering unknown: no outline found in 2025-spring to 2027-spring"
+  },
+  {
+    "code": "HIST 231",
+    "req_ids": [
+      "beedie-nonbus-group-a"
+    ],
+    "reason": "offering unknown: no outline found in 2025-spring to 2027-spring"
+  },
+  {
+    "code": "INDG 110W",
+    "req_ids": [
+      "beedie-nonbus-group-b"
+    ],
+    "reason": "offering unknown: no outline found in 2025-spring to 2027-spring"
+  },
+  {
+    "code": "PHIL 121",
+    "req_ids": [
+      "beedie-nonbus-group-a"
+    ],
+    "reason": "offering unknown: no outline found in 2025-spring to 2027-spring"
+  },
+  {
+    "code": "PSYC 106",
+    "req_ids": [
+      "beedie-nonbus-group-a"
+    ],
+    "reason": "offering unknown: no outline found in 2025-spring to 2027-spring"
+  },
+  {
+    "code": "WL 105W",
+    "req_ids": [
+      "lower-english-philosophy-literature"
+    ],
+    "reason": "offering unknown: no outline found in 2025-spring to 2027-spring"
+  }
+]

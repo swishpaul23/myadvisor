@@ -1,0 +1,7204 @@
+{
+  "ARCH 101": {
+    "2025-spring": [
+      "OLC"
+    ],
+    "2025-summer": [
+      "OLC"
+    ],
+    "2025-fall": [
+      "LEC",
+      "OLC"
+    ],
+    "2026-spring": [
+      "LEC",
+      "OLC"
+    ],
+    "2026-summer": [
+      "OLC"
+    ],
+    "2026-fall": [
+      "LEC",
+      "OLC"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC",
+        "OLC"
+      ]
+    }
+  },
+  "BPK 140": {
+    "2025-spring": [
+      "LEC",
+      "OLC",
+      "TUT"
+    ],
+    "2025-summer": [
+      "OLC"
+    ],
+    "2025-fall": [
+      "LEC",
+      "OLC",
+      "TUT"
+    ],
+    "2026-spring": [
+      "LEC",
+      "OLC",
+      "TUT"
+    ],
+    "2026-summer": [
+      "OLC"
+    ],
+    "2026-fall": [
+      "LEC",
+      "OLC",
+      "TUT"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC",
+        "OLC",
+        "TUT"
+      ]
+    }
+  },
+  "BUS 200": {
+    "2025-spring": [
+      "LEC"
+    ],
+    "2025-summer": [
+      "LEC"
+    ],
+    "2025-fall": [
+      "LEC"
+    ],
+    "2026-spring": [
+      "LEC"
+    ],
+    "2026-summer": [
+      "LEC"
+    ],
+    "2026-fall": [
+      "LEC"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC"
+      ]
+    }
+  },
+  "BUS 201": {
+    "2025-fall": [
+      "LEC",
+      "SEM"
+    ],
+    "2026-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "future": {}
+  },
+  "BUS 202": {
+    "2025-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "2025-fall": [
+      "LEC",
+      "SEM"
+    ],
+    "2026-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC",
+        "TUT"
+      ]
+    }
+  },
+  "BUS 203": {
+    "2025-spring": [
+      "SEM"
+    ],
+    "2025-fall": [
+      "SEM"
+    ],
+    "2026-spring": [
+      "SEM"
+    ],
+    "2026-fall": [
+      "SEM"
+    ],
+    "future": {
+      "2027-spring": [
+        "SEM"
+      ]
+    }
+  },
+  "BUS 207": {
+    "2025-spring": [
+      "LEC"
+    ],
+    "2025-summer": [
+      "LEC"
+    ],
+    "2025-fall": [
+      "LEC"
+    ],
+    "2026-spring": [
+      "LEC"
+    ],
+    "2026-summer": [
+      "LEC"
+    ],
+    "2026-fall": [
+      "LEC"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC"
+      ]
+    }
+  },
+  "BUS 217W": {
+    "2025-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "2025-summer": [
+      "LEC",
+      "TUT"
+    ],
+    "2025-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-summer": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC",
+        "TUT"
+      ]
+    }
+  },
+  "BUS 225": {
+    "2025-spring": [
+      "COP"
+    ],
+    "2025-summer": [
+      "COP"
+    ],
+    "2025-fall": [
+      "COP"
+    ],
+    "2026-spring": [
+      "COP"
+    ],
+    "2026-summer": [
+      "COP"
+    ],
+    "2026-fall": [
+      "COP"
+    ],
+    "future": {
+      "2027-spring": [
+        "COP"
+      ]
+    }
+  },
+  "BUS 232": {
+    "2025-spring": [
+      "LEC",
+      "OPL"
+    ],
+    "2025-summer": [
+      "LEC",
+      "OPL"
+    ],
+    "2025-fall": [
+      "LEC",
+      "OPL"
+    ],
+    "2026-spring": [
+      "LEC",
+      "OPL"
+    ],
+    "2026-summer": [
+      "LEC",
+      "OPL"
+    ],
+    "2026-fall": [
+      "LEC",
+      "OPL"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC",
+        "OPL"
+      ]
+    }
+  },
+  "BUS 233": {
+    "2025-spring": [
+      "SEM"
+    ],
+    "2025-summer": [
+      "SEM"
+    ],
+    "2025-fall": [
+      "SEM"
+    ],
+    "2026-spring": [
+      "SEM"
+    ],
+    "2026-summer": [
+      "SEM"
+    ],
+    "2026-fall": [
+      "SEM"
+    ],
+    "future": {
+      "2027-spring": [
+        "SEM"
+      ]
+    }
+  },
+  "BUS 237": {
+    "2025-spring": [
+      "LAB",
+      "LEC"
+    ],
+    "2025-summer": [
+      "LAB",
+      "LEC"
+    ],
+    "2025-fall": [
+      "LAB",
+      "LEC"
+    ],
+    "2026-spring": [
+      "LAB",
+      "LEC"
+    ],
+    "2026-summer": [
+      "LAB",
+      "LEC"
+    ],
+    "2026-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC",
+        "TUT"
+      ]
+    }
+  },
+  "BUS 238": {
+    "2025-spring": [
+      "LEC"
+    ],
+    "2025-fall": [
+      "LEC"
+    ],
+    "2026-summer": [
+      "LEC"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC"
+      ]
+    }
+  },
+  "BUS 240": {
+    "2025-spring": [
+      "LEC"
+    ],
+    "2025-summer": [
+      "LEC"
+    ],
+    "2025-fall": [
+      "LEC"
+    ],
+    "2026-spring": [
+      "LEC"
+    ],
+    "2026-summer": [
+      "LEC"
+    ],
+    "2026-fall": [
+      "LEC"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC"
+      ]
+    }
+  },
+  "BUS 251": {
+    "2025-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "2025-summer": [
+      "LEC",
+      "TUT"
+    ],
+    "2025-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-summer": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC",
+        "TUT"
+      ]
+    }
+  },
+  "BUS 254": {
+    "2025-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "2025-summer": [
+      "LEC",
+      "TUT"
+    ],
+    "2025-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-summer": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC",
+        "TUT"
+      ]
+    }
+  },
+  "BUS 272": {
+    "2025-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "2025-summer": [
+      "LEC",
+      "TUT"
+    ],
+    "2025-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-summer": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC",
+        "TUT"
+      ]
+    }
+  },
+  "BUS 275": {
+    "2025-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "2025-summer": [
+      "LEC",
+      "TUT"
+    ],
+    "2025-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-summer": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC",
+        "TUT"
+      ]
+    }
+  },
+  "BUS 296": {
+    "2025-spring": [
+      "SEM"
+    ],
+    "future": {}
+  },
+  "BUS 300": {
+    "2025-spring": [
+      "SEM"
+    ],
+    "2025-summer": [
+      "SEM"
+    ],
+    "2025-fall": [
+      "SEM"
+    ],
+    "2026-spring": [
+      "SEM"
+    ],
+    "2026-summer": [
+      "SEM"
+    ],
+    "2026-fall": [
+      "SEM"
+    ],
+    "future": {
+      "2027-spring": [
+        "SEM"
+      ]
+    }
+  },
+  "BUS 303": {
+    "2025-spring": [
+      "LEC"
+    ],
+    "2025-summer": [
+      "LEC"
+    ],
+    "2025-fall": [
+      "LEC"
+    ],
+    "2026-spring": [
+      "LEC"
+    ],
+    "2026-summer": [
+      "LEC"
+    ],
+    "2026-fall": [
+      "LEC"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC"
+      ]
+    }
+  },
+  "BUS 307": {
+    "2025-fall": [
+      "TUT"
+    ],
+    "2026-fall": [
+      "SEM"
+    ],
+    "future": {}
+  },
+  "BUS 311": {
+    "2025-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "2025-summer": [
+      "LEC",
+      "OPL"
+    ],
+    "2025-fall": [
+      "LEC"
+    ],
+    "2026-spring": [
+      "LEC"
+    ],
+    "2026-summer": [
+      "LEC"
+    ],
+    "2026-fall": [
+      "LEC"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC"
+      ]
+    }
+  },
+  "BUS 312": {
+    "2025-spring": [
+      "LEC"
+    ],
+    "2025-summer": [
+      "LEC"
+    ],
+    "2025-fall": [
+      "LEC"
+    ],
+    "2026-spring": [
+      "LEC"
+    ],
+    "2026-summer": [
+      "LEC"
+    ],
+    "2026-fall": [
+      "LEC"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC"
+      ]
+    }
+  },
+  "BUS 313": {
+    "2025-fall": [
+      "LEC"
+    ],
+    "2026-spring": [
+      "LEC"
+    ],
+    "2026-summer": [
+      "LEC"
+    ],
+    "2026-fall": [
+      "LEC"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC"
+      ]
+    }
+  },
+  "BUS 314": {
+    "2026-spring": [
+      "LEC"
+    ],
+    "2026-fall": [
+      "LEC"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC"
+      ]
+    }
+  },
+  "BUS 315": {
+    "2025-spring": [
+      "LEC"
+    ],
+    "2025-summer": [
+      "LEC"
+    ],
+    "2025-fall": [
+      "LEC"
+    ],
+    "2026-spring": [
+      "LEC"
+    ],
+    "2026-summer": [
+      "LEC"
+    ],
+    "2026-fall": [
+      "LEC"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC"
+      ]
+    }
+  },
+  "BUS 316": {
+    "2025-spring": [
+      "LEC"
+    ],
+    "2025-summer": [
+      "LEC"
+    ],
+    "future": {}
+  },
+  "BUS 318": {
+    "2025-fall": [
+      "SEM"
+    ],
+    "2026-fall": [
+      "SEM"
+    ],
+    "future": {}
+  },
+  "BUS 320": {
+    "2025-spring": [
+      "LEC"
+    ],
+    "2025-summer": [
+      "LEC"
+    ],
+    "2025-fall": [
+      "LEC"
+    ],
+    "2026-spring": [
+      "LEC"
+    ],
+    "2026-summer": [
+      "LEC"
+    ],
+    "2026-fall": [
+      "LEC"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC"
+      ]
+    }
+  },
+  "BUS 321": {
+    "2025-spring": [
+      "LEC"
+    ],
+    "2025-summer": [
+      "LEC"
+    ],
+    "2025-fall": [
+      "LEC"
+    ],
+    "2026-spring": [
+      "LEC"
+    ],
+    "2026-summer": [
+      "LEC"
+    ],
+    "2026-fall": [
+      "LEC"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC"
+      ]
+    }
+  },
+  "BUS 322": {
+    "2025-spring": [
+      "LEC"
+    ],
+    "2025-summer": [
+      "LEC"
+    ],
+    "2025-fall": [
+      "LEC"
+    ],
+    "2026-spring": [
+      "LEC"
+    ],
+    "2026-summer": [
+      "LEC"
+    ],
+    "2026-fall": [
+      "LEC"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC"
+      ]
+    }
+  },
+  "BUS 325": {
+    "2025-spring": [
+      "COP"
+    ],
+    "2025-summer": [
+      "COP"
+    ],
+    "2025-fall": [
+      "COP"
+    ],
+    "2026-spring": [
+      "COP"
+    ],
+    "2026-summer": [
+      "COP"
+    ],
+    "2026-fall": [
+      "COP"
+    ],
+    "future": {
+      "2027-spring": [
+        "COP"
+      ]
+    }
+  },
+  "BUS 326": {
+    "2025-spring": [
+      "COP"
+    ],
+    "2025-summer": [
+      "COP"
+    ],
+    "2025-fall": [
+      "COP"
+    ],
+    "2026-spring": [
+      "COP"
+    ],
+    "2026-summer": [
+      "COP"
+    ],
+    "2026-fall": [
+      "COP"
+    ],
+    "future": {
+      "2027-spring": [
+        "COP"
+      ]
+    }
+  },
+  "BUS 327": {
+    "2025-spring": [
+      "COP"
+    ],
+    "2025-summer": [
+      "COP"
+    ],
+    "2025-fall": [
+      "COP"
+    ],
+    "2026-spring": [
+      "COP"
+    ],
+    "2026-summer": [
+      "COP"
+    ],
+    "2026-fall": [
+      "COP"
+    ],
+    "future": {
+      "2027-spring": [
+        "COP"
+      ]
+    }
+  },
+  "BUS 330": {
+    "2025-spring": [
+      "SEM"
+    ],
+    "2025-summer": [
+      "SEM"
+    ],
+    "2025-fall": [
+      "SEM"
+    ],
+    "2026-spring": [
+      "SEM"
+    ],
+    "2026-summer": [
+      "SEM"
+    ],
+    "2026-fall": [
+      "SEM"
+    ],
+    "future": {
+      "2027-spring": [
+        "SEM"
+      ]
+    }
+  },
+  "BUS 331": {
+    "2025-spring": [
+      "SEM"
+    ],
+    "2025-summer": [
+      "SEM"
+    ],
+    "2025-fall": [
+      "SEM"
+    ],
+    "2026-spring": [
+      "SEM"
+    ],
+    "2026-summer": [
+      "SEM"
+    ],
+    "2026-fall": [
+      "SEM"
+    ],
+    "future": {
+      "2027-spring": [
+        "SEM"
+      ]
+    }
+  },
+  "BUS 336": {
+    "2025-spring": [
+      "LEC",
+      "OPL"
+    ],
+    "2025-summer": [
+      "LEC",
+      "OPL"
+    ],
+    "2025-fall": [
+      "LEC",
+      "OPL"
+    ],
+    "2026-spring": [
+      "LEC",
+      "OPL"
+    ],
+    "2026-summer": [
+      "LEC",
+      "OPL"
+    ],
+    "2026-fall": [
+      "LEC",
+      "OPL"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC",
+        "OPL"
+      ]
+    }
+  },
+  "BUS 338": {
+    "2025-spring": [
+      "LEC"
+    ],
+    "2025-fall": [
+      "LEC"
+    ],
+    "2026-spring": [
+      "LEC"
+    ],
+    "2026-fall": [
+      "LEC"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC"
+      ]
+    }
+  },
+  "BUS 340": {
+    "2025-spring": [
+      "LEC"
+    ],
+    "2025-summer": [
+      "LEC",
+      "TUT"
+    ],
+    "2025-fall": [
+      "LEC"
+    ],
+    "2026-spring": [
+      "LEC"
+    ],
+    "2026-summer": [
+      "LEC"
+    ],
+    "2026-fall": [
+      "LEC"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC"
+      ]
+    }
+  },
+  "BUS 341": {
+    "2025-spring": [
+      "LEC"
+    ],
+    "2025-summer": [
+      "LEC"
+    ],
+    "2025-fall": [
+      "LEC"
+    ],
+    "2026-spring": [
+      "LEC"
+    ],
+    "2026-summer": [
+      "LEC"
+    ],
+    "2026-fall": [
+      "LEC"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC"
+      ]
+    }
+  },
+  "BUS 343": {
+    "2025-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "2025-summer": [
+      "LEC",
+      "TUT"
+    ],
+    "2025-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-summer": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC",
+        "TUT"
+      ]
+    }
+  },
+  "BUS 345": {
+    "2025-spring": [
+      "SEM"
+    ],
+    "2025-summer": [
+      "SEM"
+    ],
+    "2025-fall": [
+      "SEM"
+    ],
+    "2026-spring": [
+      "SEM"
+    ],
+    "2026-summer": [
+      "SEM"
+    ],
+    "2026-fall": [
+      "SEM"
+    ],
+    "future": {
+      "2027-spring": [
+        "SEM"
+      ]
+    }
+  },
+  "BUS 346": {
+    "2025-spring": [
+      "LEC"
+    ],
+    "2025-summer": [
+      "LEC"
+    ],
+    "2025-fall": [
+      "LEC"
+    ],
+    "2026-spring": [
+      "LEC"
+    ],
+    "2026-summer": [
+      "LEC"
+    ],
+    "2026-fall": [
+      "LEC"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC"
+      ]
+    }
+  },
+  "BUS 347": {
+    "2025-spring": [
+      "LEC"
+    ],
+    "2025-summer": [
+      "LEC",
+      "TUT"
+    ],
+    "2025-fall": [
+      "LEC"
+    ],
+    "2026-spring": [
+      "LEC"
+    ],
+    "2026-summer": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-fall": [
+      "LEC"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC"
+      ]
+    }
+  },
+  "BUS 360W": {
+    "2025-spring": [
+      "LEC"
+    ],
+    "2025-summer": [
+      "LEC"
+    ],
+    "2025-fall": [
+      "LEC"
+    ],
+    "2026-spring": [
+      "LEC"
+    ],
+    "2026-summer": [
+      "LEC"
+    ],
+    "2026-fall": [
+      "LEC"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC"
+      ]
+    }
+  },
+  "BUS 361": {
+    "2025-spring": [
+      "LEC"
+    ],
+    "2025-summer": [
+      "LEC"
+    ],
+    "2025-fall": [
+      "LEC"
+    ],
+    "2026-spring": [
+      "LEC"
+    ],
+    "2026-summer": [
+      "LEC"
+    ],
+    "2026-fall": [
+      "LEC"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC"
+      ]
+    }
+  },
+  "BUS 362": {
+    "2025-spring": [
+      "LAB",
+      "LEC"
+    ],
+    "2025-summer": [
+      "LAB",
+      "LEC"
+    ],
+    "2025-fall": [
+      "LAB",
+      "LEC"
+    ],
+    "2026-spring": [
+      "LAB",
+      "LEC"
+    ],
+    "2026-summer": [
+      "LAB",
+      "LEC"
+    ],
+    "2026-fall": [
+      "LAB",
+      "LEC"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC",
+        "TUT"
+      ]
+    }
+  },
+  "BUS 371": {
+    "2025-fall": [
+      "LEC"
+    ],
+    "2026-fall": [
+      "SEM"
+    ],
+    "future": {}
+  },
+  "BUS 373": {
+    "2025-spring": [
+      "LEC"
+    ],
+    "2025-summer": [
+      "LEC"
+    ],
+    "2025-fall": [
+      "LEC"
+    ],
+    "2026-spring": [
+      "LEC"
+    ],
+    "2026-summer": [
+      "LEC"
+    ],
+    "2026-fall": [
+      "LEC"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC"
+      ]
+    }
+  },
+  "BUS 374": {
+    "2025-spring": [
+      "LEC"
+    ],
+    "2025-fall": [
+      "LEC"
+    ],
+    "2026-spring": [
+      "LEC"
+    ],
+    "2026-fall": [
+      "LEC"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC"
+      ]
+    }
+  },
+  "BUS 381": {
+    "2025-spring": [
+      "LEC"
+    ],
+    "2025-summer": [
+      "LEC"
+    ],
+    "2025-fall": [
+      "LEC"
+    ],
+    "2026-spring": [
+      "LEC"
+    ],
+    "2026-summer": [
+      "LEC"
+    ],
+    "2026-fall": [
+      "LEC"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC"
+      ]
+    }
+  },
+  "BUS 393": {
+    "2025-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "2025-summer": [
+      "LEC",
+      "TUT"
+    ],
+    "2025-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-summer": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC",
+        "TUT"
+      ]
+    }
+  },
+  "BUS 401": {
+    "2025-spring": [
+      "SEM",
+      "TUT"
+    ],
+    "2025-summer": [
+      "SEM",
+      "TUT"
+    ],
+    "2025-fall": [
+      "SEM"
+    ],
+    "2026-spring": [
+      "SEM"
+    ],
+    "2026-summer": [
+      "SEM"
+    ],
+    "2026-fall": [
+      "SEM"
+    ],
+    "future": {
+      "2027-spring": [
+        "SEM"
+      ]
+    }
+  },
+  "BUS 410": {
+    "2025-spring": [
+      "SEM"
+    ],
+    "2025-summer": [
+      "SEM"
+    ],
+    "2025-fall": [
+      "SEM"
+    ],
+    "2026-spring": [
+      "SEM"
+    ],
+    "2026-summer": [
+      "SEM"
+    ],
+    "2026-fall": [
+      "SEM"
+    ],
+    "future": {
+      "2027-spring": [
+        "SEM"
+      ]
+    }
+  },
+  "BUS 411": {
+    "2025-summer": [
+      "SEM"
+    ],
+    "2025-fall": [
+      "SEM"
+    ],
+    "2026-summer": [
+      "SEM"
+    ],
+    "2026-fall": [
+      "SEM"
+    ],
+    "future": {}
+  },
+  "BUS 412": {
+    "2026-spring": [
+      "LEC"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC"
+      ]
+    }
+  },
+  "BUS 413": {
+    "2025-spring": [
+      "SEM"
+    ],
+    "2025-summer": [
+      "SEM"
+    ],
+    "2025-fall": [
+      "SEM"
+    ],
+    "future": {}
+  },
+  "BUS 414": {
+    "2025-spring": [
+      "SEM"
+    ],
+    "2025-fall": [
+      "SEM"
+    ],
+    "2026-spring": [
+      "SEM"
+    ],
+    "2026-fall": [
+      "SEM"
+    ],
+    "future": {
+      "2027-spring": [
+        "SEM"
+      ]
+    }
+  },
+  "BUS 417": {
+    "2025-spring": [
+      "SEM"
+    ],
+    "2025-summer": [
+      "SEM"
+    ],
+    "2025-fall": [
+      "SEM"
+    ],
+    "2026-spring": [
+      "SEM"
+    ],
+    "2026-summer": [
+      "SEM"
+    ],
+    "2026-fall": [
+      "SEM"
+    ],
+    "future": {
+      "2027-spring": [
+        "SEM"
+      ]
+    }
+  },
+  "BUS 418": {
+    "2025-spring": [
+      "SEM"
+    ],
+    "2025-summer": [
+      "SEM"
+    ],
+    "2025-fall": [
+      "SEM"
+    ],
+    "2026-spring": [
+      "SEM"
+    ],
+    "2026-summer": [
+      "SEM"
+    ],
+    "2026-fall": [
+      "SEM"
+    ],
+    "future": {
+      "2027-spring": [
+        "SEM"
+      ]
+    }
+  },
+  "BUS 419": {
+    "2025-fall": [
+      "SEM"
+    ],
+    "2026-fall": [
+      "SEM"
+    ],
+    "future": {}
+  },
+  "BUS 420": {
+    "2025-spring": [
+      "SEM"
+    ],
+    "2025-summer": [
+      "SEM"
+    ],
+    "2025-fall": [
+      "SEM"
+    ],
+    "2026-spring": [
+      "SEM"
+    ],
+    "2026-summer": [
+      "SEM"
+    ],
+    "2026-fall": [
+      "SEM"
+    ],
+    "future": {
+      "2027-spring": [
+        "SEM"
+      ]
+    }
+  },
+  "BUS 421": {
+    "2025-spring": [
+      "SEM"
+    ],
+    "2025-summer": [
+      "SEM"
+    ],
+    "2025-fall": [
+      "SEM"
+    ],
+    "2026-spring": [
+      "SEM"
+    ],
+    "2026-summer": [
+      "SEM"
+    ],
+    "2026-fall": [
+      "SEM"
+    ],
+    "future": {
+      "2027-spring": [
+        "SEM"
+      ]
+    }
+  },
+  "BUS 424": {
+    "2025-spring": [
+      "SEM"
+    ],
+    "2025-summer": [
+      "SEM"
+    ],
+    "2025-fall": [
+      "SEM"
+    ],
+    "2026-spring": [
+      "SEM"
+    ],
+    "2026-summer": [
+      "SEM"
+    ],
+    "2026-fall": [
+      "SEM"
+    ],
+    "future": {
+      "2027-spring": [
+        "SEM"
+      ]
+    }
+  },
+  "BUS 425": {
+    "2025-spring": [
+      "COP"
+    ],
+    "2025-summer": [
+      "COP"
+    ],
+    "2025-fall": [
+      "COP"
+    ],
+    "2026-spring": [
+      "COP"
+    ],
+    "2026-summer": [
+      "COP"
+    ],
+    "2026-fall": [
+      "COP"
+    ],
+    "future": {
+      "2027-spring": [
+        "COP"
+      ]
+    }
+  },
+  "BUS 426": {
+    "2025-spring": [
+      "SEM"
+    ],
+    "2025-summer": [
+      "SEM"
+    ],
+    "2025-fall": [
+      "SEM"
+    ],
+    "2026-spring": [
+      "SEM"
+    ],
+    "2026-summer": [
+      "SEM"
+    ],
+    "2026-fall": [
+      "SEM"
+    ],
+    "future": {
+      "2027-spring": [
+        "SEM"
+      ]
+    }
+  },
+  "BUS 430": {
+    "2025-spring": [
+      "LEC"
+    ],
+    "2025-summer": [
+      "LEC"
+    ],
+    "2026-spring": [
+      "LEC"
+    ],
+    "2026-summer": [
+      "LEC"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC"
+      ]
+    }
+  },
+  "BUS 431": {
+    "2025-fall": [
+      "LEC"
+    ],
+    "2026-fall": [
+      "LEC"
+    ],
+    "future": {}
+  },
+  "BUS 432": {
+    "2025-spring": [
+      "LEC"
+    ],
+    "2025-fall": [
+      "LEC"
+    ],
+    "2026-spring": [
+      "LEC"
+    ],
+    "2026-fall": [
+      "LEC"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC"
+      ]
+    }
+  },
+  "BUS 434": {
+    "2025-summer": [
+      "SEM"
+    ],
+    "2025-fall": [
+      "SEM"
+    ],
+    "2026-summer": [
+      "SEM"
+    ],
+    "2026-fall": [
+      "SEM"
+    ],
+    "future": {}
+  },
+  "BUS 435": {
+    "2025-fall": [
+      "SEM"
+    ],
+    "2026-fall": [
+      "SEM"
+    ],
+    "future": {}
+  },
+  "BUS 437": {
+    "2025-spring": [
+      "SEM"
+    ],
+    "2025-summer": [
+      "SEM"
+    ],
+    "2025-fall": [
+      "SEM"
+    ],
+    "2026-spring": [
+      "SEM"
+    ],
+    "2026-summer": [
+      "SEM"
+    ],
+    "2026-fall": [
+      "SEM"
+    ],
+    "future": {
+      "2027-spring": [
+        "SEM"
+      ]
+    }
+  },
+  "BUS 439": {
+    "2025-spring": [
+      "SEM"
+    ],
+    "2025-fall": [
+      "SEM"
+    ],
+    "2026-spring": [
+      "SEM"
+    ],
+    "2026-fall": [
+      "SEM"
+    ],
+    "future": {
+      "2027-spring": [
+        "SEM"
+      ]
+    }
+  },
+  "BUS 440": {
+    "2025-spring": [
+      "SEM"
+    ],
+    "2026-spring": [
+      "SEM"
+    ],
+    "future": {
+      "2027-spring": [
+        "SEM"
+      ]
+    }
+  },
+  "BUS 441": {
+    "2025-spring": [
+      "LEC"
+    ],
+    "2025-fall": [
+      "LEC"
+    ],
+    "2026-spring": [
+      "LEC"
+    ],
+    "2026-fall": [
+      "LEC"
+    ],
+    "future": {}
+  },
+  "BUS 443": {
+    "2025-spring": [
+      "SEM"
+    ],
+    "2025-fall": [
+      "SEM"
+    ],
+    "2026-spring": [
+      "SEM"
+    ],
+    "2026-fall": [
+      "SEM"
+    ],
+    "future": {
+      "2027-spring": [
+        "SEM"
+      ]
+    }
+  },
+  "BUS 444": {
+    "2025-summer": [
+      "LEC"
+    ],
+    "2026-spring": [
+      "LEC"
+    ],
+    "future": {}
+  },
+  "BUS 445": {
+    "2025-spring": [
+      "SEM"
+    ],
+    "2025-summer": [
+      "SEM"
+    ],
+    "2025-fall": [
+      "SEM"
+    ],
+    "2026-spring": [
+      "SEM"
+    ],
+    "2026-summer": [
+      "SEM"
+    ],
+    "2026-fall": [
+      "SEM"
+    ],
+    "future": {
+      "2027-spring": [
+        "SEM"
+      ]
+    }
+  },
+  "BUS 446": {
+    "2025-fall": [
+      "SEM"
+    ],
+    "2026-spring": [
+      "SEM"
+    ],
+    "2026-fall": [
+      "SEM"
+    ],
+    "future": {
+      "2027-spring": [
+        "SEM"
+      ]
+    }
+  },
+  "BUS 447": {
+    "2025-spring": [
+      "SEM"
+    ],
+    "2025-summer": [
+      "SEM"
+    ],
+    "2025-fall": [
+      "SEM"
+    ],
+    "2026-spring": [
+      "SEM"
+    ],
+    "2026-summer": [
+      "SEM"
+    ],
+    "2026-fall": [
+      "SEM"
+    ],
+    "future": {
+      "2027-spring": [
+        "SEM"
+      ]
+    }
+  },
+  "BUS 448": {
+    "2025-spring": [
+      "SEM"
+    ],
+    "2025-fall": [
+      "SEM"
+    ],
+    "2026-spring": [
+      "SEM"
+    ],
+    "future": {
+      "2027-spring": [
+        "SEM"
+      ]
+    }
+  },
+  "BUS 449": {
+    "2025-spring": [
+      "SEM"
+    ],
+    "2025-fall": [
+      "SEM"
+    ],
+    "2026-fall": [
+      "SEM"
+    ],
+    "future": {}
+  },
+  "BUS 450": {
+    "future": {
+      "2027-spring": [
+        "LEC"
+      ]
+    }
+  },
+  "BUS 453": {
+    "2025-fall": [
+      "LEC"
+    ],
+    "future": {}
+  },
+  "BUS 455": {
+    "2025-spring": [
+      "LEC"
+    ],
+    "2026-spring": [
+      "LEC"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC"
+      ]
+    }
+  },
+  "BUS 462": {
+    "2025-spring": [
+      "SEM"
+    ],
+    "2025-summer": [
+      "SEM"
+    ],
+    "2025-fall": [
+      "SEM"
+    ],
+    "2026-spring": [
+      "SEM"
+    ],
+    "2026-summer": [
+      "SEM"
+    ],
+    "2026-fall": [
+      "SEM"
+    ],
+    "future": {
+      "2027-spring": [
+        "SEM"
+      ]
+    }
+  },
+  "BUS 464": {
+    "2025-spring": [
+      "SEM"
+    ],
+    "2025-fall": [
+      "SEM"
+    ],
+    "2026-spring": [
+      "SEM"
+    ],
+    "2026-summer": [
+      "SEM"
+    ],
+    "2026-fall": [
+      "SEM"
+    ],
+    "future": {
+      "2027-spring": [
+        "SEM"
+      ]
+    }
+  },
+  "BUS 466": {
+    "2025-summer": [
+      "SEM"
+    ],
+    "2025-fall": [
+      "SEM"
+    ],
+    "2026-summer": [
+      "SEM"
+    ],
+    "2026-fall": [
+      "SEM"
+    ],
+    "future": {}
+  },
+  "BUS 468": {
+    "2025-spring": [
+      "SEM"
+    ],
+    "2025-summer": [
+      "SEM"
+    ],
+    "2025-fall": [
+      "SEM"
+    ],
+    "2026-spring": [
+      "SEM"
+    ],
+    "2026-summer": [
+      "SEM"
+    ],
+    "2026-fall": [
+      "SEM"
+    ],
+    "future": {
+      "2027-spring": [
+        "SEM"
+      ]
+    }
+  },
+  "BUS 471": {
+    "2025-spring": [
+      "SEM"
+    ],
+    "2025-fall": [
+      "SEM"
+    ],
+    "2026-spring": [
+      "SEM"
+    ],
+    "2026-fall": [
+      "SEM"
+    ],
+    "future": {
+      "2027-spring": [
+        "SEM"
+      ]
+    }
+  },
+  "BUS 473": {
+    "2025-spring": [
+      "SEM"
+    ],
+    "2025-summer": [
+      "SEM"
+    ],
+    "2025-fall": [
+      "SEM"
+    ],
+    "2026-spring": [
+      "SEM"
+    ],
+    "2026-summer": [
+      "SEM"
+    ],
+    "2026-fall": [
+      "SEM"
+    ],
+    "future": {
+      "2027-spring": [
+        "SEM"
+      ]
+    }
+  },
+  "BUS 474": {
+    "2025-spring": [
+      "SEM"
+    ],
+    "2025-summer": [
+      "SEM"
+    ],
+    "2026-spring": [
+      "SEM"
+    ],
+    "2026-summer": [
+      "SEM"
+    ],
+    "future": {
+      "2027-spring": [
+        "SEM"
+      ]
+    }
+  },
+  "BUS 475": {
+    "2025-spring": [
+      "SEM"
+    ],
+    "2025-summer": [
+      "SEM"
+    ],
+    "2026-spring": [
+      "SEM"
+    ],
+    "2026-summer": [
+      "SEM"
+    ],
+    "future": {
+      "2027-spring": [
+        "SEM"
+      ]
+    }
+  },
+  "BUS 477": {
+    "2025-spring": [
+      "SEM"
+    ],
+    "2025-fall": [
+      "SEM"
+    ],
+    "2026-spring": [
+      "SEM"
+    ],
+    "2026-fall": [
+      "SEM"
+    ],
+    "future": {
+      "2027-spring": [
+        "SEM"
+      ]
+    }
+  },
+  "BUS 478": {
+    "2025-spring": [
+      "SEM"
+    ],
+    "2025-summer": [
+      "SEM"
+    ],
+    "2025-fall": [
+      "SEM"
+    ],
+    "2026-spring": [
+      "SEM"
+    ],
+    "2026-summer": [
+      "SEM"
+    ],
+    "2026-fall": [
+      "SEM"
+    ],
+    "future": {
+      "2027-spring": [
+        "SEM"
+      ]
+    }
+  },
+  "BUS 479": {
+    "2025-spring": [
+      "SEM"
+    ],
+    "2026-spring": [
+      "SEM"
+    ],
+    "future": {
+      "2027-spring": [
+        "SEM"
+      ]
+    }
+  },
+  "BUS 481": {
+    "2025-spring": [
+      "SEM"
+    ],
+    "2025-summer": [
+      "SEM"
+    ],
+    "2025-fall": [
+      "SEM"
+    ],
+    "2026-spring": [
+      "SEM"
+    ],
+    "2026-summer": [
+      "SEM"
+    ],
+    "2026-fall": [
+      "SEM"
+    ],
+    "future": {
+      "2027-spring": [
+        "SEM"
+      ]
+    }
+  },
+  "BUS 482": {
+    "2025-spring": [
+      "SEM"
+    ],
+    "2025-fall": [
+      "SEM"
+    ],
+    "2026-spring": [
+      "SEM"
+    ],
+    "2026-fall": [
+      "SEM"
+    ],
+    "future": {
+      "2027-spring": [
+        "SEM"
+      ]
+    }
+  },
+  "BUS 483": {
+    "2025-spring": [
+      "SEM"
+    ],
+    "2025-fall": [
+      "SEM"
+    ],
+    "2026-spring": [
+      "SEM"
+    ],
+    "2026-fall": [
+      "SEM"
+    ],
+    "future": {
+      "2027-spring": [
+        "SEM"
+      ]
+    }
+  },
+  "BUS 484": {
+    "2025-fall": [
+      "SEM"
+    ],
+    "future": {}
+  },
+  "BUS 485": {
+    "2025-spring": [
+      "SEM"
+    ],
+    "2025-summer": [
+      "SEM"
+    ],
+    "2025-fall": [
+      "SEM"
+    ],
+    "2026-spring": [
+      "SEM"
+    ],
+    "2026-fall": [
+      "SEM"
+    ],
+    "future": {
+      "2027-spring": [
+        "SEM"
+      ]
+    }
+  },
+  "BUS 486": {
+    "2025-fall": [
+      "SEM"
+    ],
+    "2026-fall": [
+      "SEM"
+    ],
+    "future": {}
+  },
+  "BUS 488": {
+    "2025-spring": [
+      "SEM"
+    ],
+    "future": {}
+  },
+  "BUS 489": {
+    "2025-summer": [
+      "SEM"
+    ],
+    "2026-summer": [
+      "SEM"
+    ],
+    "future": {}
+  },
+  "BUS 492": {
+    "2025-summer": [
+      "SEM"
+    ],
+    "2026-summer": [
+      "SEM"
+    ],
+    "future": {
+      "2027-spring": [
+        "SEM"
+      ]
+    }
+  },
+  "BUS 493": {
+    "2026-spring": [
+      "SEM"
+    ],
+    "2026-summer": [
+      "SEM"
+    ],
+    "future": {}
+  },
+  "BUS 496": {
+    "2025-spring": [
+      "SEM"
+    ],
+    "2025-summer": [
+      "SEM"
+    ],
+    "2025-fall": [
+      "SEM"
+    ],
+    "2026-spring": [
+      "SEM"
+    ],
+    "2026-summer": [
+      "SEM"
+    ],
+    "2026-fall": [
+      "SEM"
+    ],
+    "future": {
+      "2027-spring": [
+        "SEM"
+      ]
+    }
+  },
+  "BUS 498": {
+    "2025-fall": [
+      "IND"
+    ],
+    "future": {}
+  },
+  "CMNS 110": {
+    "2025-spring": [
+      "LEC",
+      "OLC",
+      "TUT"
+    ],
+    "2025-summer": [
+      "OLC"
+    ],
+    "2025-fall": [
+      "LEC",
+      "OLC",
+      "TUT"
+    ],
+    "2026-spring": [
+      "LEC",
+      "OLC",
+      "TUT"
+    ],
+    "2026-summer": [
+      "OLC"
+    ],
+    "2026-fall": [
+      "LEC",
+      "OLC",
+      "TUT"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC",
+        "OLC",
+        "TUT"
+      ]
+    }
+  },
+  "ECON 102": {
+    "2025-fall": [
+      "LEC"
+    ],
+    "future": {}
+  },
+  "ECON 103": {
+    "2025-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "2025-summer": [
+      "LEC",
+      "TUT"
+    ],
+    "2025-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-summer": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC",
+        "TUT"
+      ]
+    }
+  },
+  "ECON 104": {
+    "2025-spring": [
+      "LEC"
+    ],
+    "2026-spring": [
+      "LEC"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC"
+      ]
+    }
+  },
+  "ECON 105": {
+    "2025-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "2025-summer": [
+      "LEC",
+      "TUT"
+    ],
+    "2025-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-summer": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC",
+        "TUT"
+      ]
+    }
+  },
+  "ECON 113": {
+    "2025-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "2025-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC",
+        "TUT"
+      ]
+    }
+  },
+  "ECON 115": {
+    "2025-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "2025-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC",
+        "TUT"
+      ]
+    }
+  },
+  "ECON 182": {
+    "2026-fall": [
+      "LEC"
+    ],
+    "future": {}
+  },
+  "ECON 201": {
+    "2025-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "2025-summer": [
+      "LEC",
+      "TUT"
+    ],
+    "2025-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-summer": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC",
+        "TUT"
+      ]
+    }
+  },
+  "ECON 220W": {
+    "2025-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "2025-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC",
+        "TUT"
+      ]
+    }
+  },
+  "ECON 222": {
+    "2025-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "future": {}
+  },
+  "ECON 233": {
+    "2025-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC",
+        "TUT"
+      ]
+    }
+  },
+  "ECON 260": {
+    "2025-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "future": {}
+  },
+  "ECON 280": {
+    "2025-summer": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-summer": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "future": {}
+  },
+  "ECON 290": {
+    "2025-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC",
+        "TUT"
+      ]
+    }
+  },
+  "ECON 291": {
+    "2025-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "future": {}
+  },
+  "ECON 302": {
+    "2025-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "2025-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-summer": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC",
+        "TUT"
+      ]
+    }
+  },
+  "ECON 305": {
+    "2025-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "2025-summer": [
+      "LEC",
+      "TUT"
+    ],
+    "2025-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-summer": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC",
+        "TUT"
+      ]
+    }
+  },
+  "ECON 310": {
+    "2025-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "2025-summer": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "future": {}
+  },
+  "ECON 325": {
+    "2025-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "2025-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "future": {}
+  },
+  "ECON 331": {
+    "2025-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC",
+        "TUT"
+      ]
+    }
+  },
+  "ECON 332": {
+    "2026-spring": [
+      "LAB",
+      "LEC"
+    ],
+    "2026-fall": [
+      "LAB",
+      "LEC"
+    ],
+    "future": {}
+  },
+  "ECON 333": {
+    "2025-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "2025-summer": [
+      "LEC",
+      "TUT"
+    ],
+    "2025-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC",
+        "TUT"
+      ]
+    }
+  },
+  "ECON 334": {
+    "2025-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "future": {}
+  },
+  "ECON 335": {
+    "2025-spring": [
+      "LEC",
+      "SEM"
+    ],
+    "2026-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC",
+        "TUT"
+      ]
+    }
+  },
+  "ECON 342": {
+    "2025-summer": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-summer": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "future": {}
+  },
+  "ECON 345": {
+    "2025-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC",
+        "TUT"
+      ]
+    }
+  },
+  "ECON 355W": {
+    "2025-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "2025-summer": [
+      "LEC",
+      "TUT"
+    ],
+    "2025-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-summer": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "future": {}
+  },
+  "ECON 362": {
+    "future": {
+      "2027-spring": [
+        "LEC",
+        "TUT"
+      ]
+    }
+  },
+  "ECON 370": {
+    "2026-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "future": {}
+  },
+  "ECON 381": {
+    "2025-summer": [
+      "LEC",
+      "TUT"
+    ],
+    "future": {}
+  },
+  "ECON 383": {
+    "2025-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "future": {}
+  },
+  "ECON 392": {
+    "2025-summer": [
+      "LEC",
+      "TUT"
+    ],
+    "future": {}
+  },
+  "ECON 393": {
+    "2025-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC",
+        "TUT"
+      ]
+    }
+  },
+  "ECON 398": {
+    "2026-spring": [
+      "IND"
+    ],
+    "future": {}
+  },
+  "ECON 402": {
+    "2025-fall": [
+      "LEC"
+    ],
+    "2026-fall": [
+      "LEC"
+    ],
+    "future": {}
+  },
+  "ECON 403": {
+    "2025-spring": [
+      "LEC"
+    ],
+    "2026-spring": [
+      "LEC"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC"
+      ]
+    }
+  },
+  "ECON 410": {
+    "2025-summer": [
+      "SEM"
+    ],
+    "2025-fall": [
+      "SEM"
+    ],
+    "future": {}
+  },
+  "ECON 425": {
+    "2025-spring": [
+      "SEM"
+    ],
+    "2026-fall": [
+      "SEM"
+    ],
+    "future": {
+      "2027-spring": [
+        "SEM"
+      ]
+    }
+  },
+  "ECON 427W": {
+    "2025-spring": [
+      "SEM"
+    ],
+    "2026-spring": [
+      "SEM"
+    ],
+    "future": {
+      "2027-spring": [
+        "SEM"
+      ]
+    }
+  },
+  "ECON 434": {
+    "2025-spring": [
+      "SEM"
+    ],
+    "2026-spring": [
+      "SEM"
+    ],
+    "future": {
+      "2027-spring": [
+        "SEM"
+      ]
+    }
+  },
+  "ECON 435": {
+    "2025-fall": [
+      "LAB",
+      "SEM"
+    ],
+    "2026-fall": [
+      "LAB",
+      "SEM"
+    ],
+    "future": {}
+  },
+  "ECON 436": {
+    "2025-fall": [
+      "SEM"
+    ],
+    "2026-spring": [
+      "SEM"
+    ],
+    "future": {
+      "2027-spring": [
+        "SEM"
+      ]
+    }
+  },
+  "ECON 446": {
+    "2025-fall": [
+      "SEM"
+    ],
+    "2026-spring": [
+      "SEM"
+    ],
+    "future": {}
+  },
+  "ECON 453": {
+    "future": {
+      "2027-spring": [
+        "SEM"
+      ]
+    }
+  },
+  "ECON 454": {
+    "2026-fall": [
+      "SEM"
+    ],
+    "future": {}
+  },
+  "ECON 455W": {
+    "2025-summer": [
+      "SEM"
+    ],
+    "2026-summer": [
+      "SEM"
+    ],
+    "future": {}
+  },
+  "ECON 460": {
+    "2026-spring": [
+      "SEM"
+    ],
+    "future": {}
+  },
+  "ECON 480": {
+    "2025-summer": [
+      "SEM"
+    ],
+    "2026-summer": [
+      "SEM"
+    ],
+    "future": {}
+  },
+  "ECON 482": {
+    "2025-spring": [
+      "SEM"
+    ],
+    "2025-fall": [
+      "SEM"
+    ],
+    "2026-fall": [
+      "SEM"
+    ],
+    "future": {}
+  },
+  "ECON 483": {
+    "2025-fall": [
+      "SEM"
+    ],
+    "2026-fall": [
+      "SEM"
+    ],
+    "future": {}
+  },
+  "ECON 484": {
+    "2025-spring": [
+      "SEM"
+    ],
+    "2025-summer": [
+      "SEM"
+    ],
+    "2026-summer": [
+      "SEM"
+    ],
+    "future": {}
+  },
+  "ECON 494": {
+    "2025-fall": [
+      "SEM"
+    ],
+    "2026-fall": [
+      "SEM"
+    ],
+    "future": {}
+  },
+  "ECON 498": {
+    "2026-fall": [
+      "IND"
+    ],
+    "future": {}
+  },
+  "ECON 499W": {
+    "2025-spring": [
+      "SEM"
+    ],
+    "2026-spring": [
+      "SEM"
+    ],
+    "future": {
+      "2027-spring": [
+        "SEM"
+      ]
+    }
+  },
+  "EDUC 100W": {
+    "2025-spring": [
+      "OLC",
+      "SEM"
+    ],
+    "2025-summer": [
+      "OLC",
+      "SEM"
+    ],
+    "2025-fall": [
+      "OLC",
+      "SEM"
+    ],
+    "2026-spring": [
+      "LEC",
+      "OLC",
+      "SEM"
+    ],
+    "2026-summer": [
+      "LEC",
+      "OLC"
+    ],
+    "2026-fall": [
+      "OLC",
+      "SEM"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC",
+        "OLC",
+        "SEM"
+      ]
+    }
+  },
+  "ENGL 111W": {
+    "2025-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC",
+        "TUT"
+      ]
+    }
+  },
+  "ENGL 112W": {
+    "2025-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "2025-summer": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-summer": [
+      "LEC",
+      "TUT"
+    ],
+    "future": {}
+  },
+  "ENGL 113W": {
+    "2026-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "future": {}
+  },
+  "ENGL 114W": {
+    "2025-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "2025-summer": [
+      "OLC"
+    ],
+    "2025-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-summer": [
+      "LEC",
+      "TUT"
+    ],
+    "future": {}
+  },
+  "ENGL 115W": {
+    "2025-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "2025-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC",
+        "TUT"
+      ]
+    }
+  },
+  "ENGL 199W": {
+    "2025-spring": [
+      "OLC",
+      "SEM",
+      "TUT"
+    ],
+    "2025-fall": [
+      "OLC",
+      "SEM"
+    ],
+    "2026-spring": [
+      "OLC",
+      "SEM"
+    ],
+    "2026-summer": [
+      "OLC"
+    ],
+    "2026-fall": [
+      "SEM",
+      "TUT"
+    ],
+    "future": {}
+  },
+  "ENGL 202": {
+    "2025-summer": [
+      "LEC",
+      "TUT"
+    ],
+    "2025-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "future": {}
+  },
+  "ENGL 204": {
+    "2025-summer": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-spring": [
+      "OLC"
+    ],
+    "future": {
+      "2027-spring": [
+        "OLC"
+      ]
+    }
+  },
+  "ENGL 209": {
+    "2025-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "future": {}
+  },
+  "ENGL 210": {
+    "2025-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-summer": [
+      "LEC",
+      "TUT"
+    ],
+    "future": {}
+  },
+  "ENGL 211": {
+    "2025-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "2025-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC",
+        "TUT"
+      ]
+    }
+  },
+  "ENGL 213": {
+    "2025-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "future": {}
+  },
+  "ENGL 214": {
+    "2026-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "future": {}
+  },
+  "ENGL 234": {
+    "future": {
+      "2027-spring": [
+        "SEM",
+        "TUT"
+      ]
+    }
+  },
+  "ENGL 272": {
+    "2025-fall": [
+      "LEC",
+      "SEM"
+    ],
+    "2026-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "future": {}
+  },
+  "ENGL 300": {
+    "2025-fall": [
+      "LEC"
+    ],
+    "future": {}
+  },
+  "ENGL 304": {
+    "2025-fall": [
+      "LEC"
+    ],
+    "2026-spring": [
+      "LEC"
+    ],
+    "future": {}
+  },
+  "ENGL 310": {
+    "2025-fall": [
+      "LEC"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC"
+      ]
+    }
+  },
+  "ENGL 312": {
+    "2025-summer": [
+      "LEC"
+    ],
+    "2025-fall": [
+      "LEC"
+    ],
+    "2026-spring": [
+      "LEC"
+    ],
+    "2026-fall": [
+      "OLC"
+    ],
+    "future": {}
+  },
+  "ENGL 320": {
+    "2026-fall": [
+      "LEC"
+    ],
+    "future": {}
+  },
+  "ENGL 330": {
+    "2025-spring": [
+      "OLC"
+    ],
+    "2026-fall": [
+      "OLC"
+    ],
+    "future": {}
+  },
+  "ENGL 345": {
+    "2025-summer": [
+      "LEC"
+    ],
+    "2026-fall": [
+      "LEC"
+    ],
+    "future": {}
+  },
+  "ENGL 355": {
+    "2025-spring": [
+      "OLC"
+    ],
+    "2025-fall": [
+      "SEM"
+    ],
+    "2026-spring": [
+      "LEC",
+      "OLC"
+    ],
+    "2026-fall": [
+      "OLC"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC"
+      ]
+    }
+  },
+  "ENGL 360": {
+    "2025-spring": [
+      "SEM"
+    ],
+    "2026-spring": [
+      "LEC"
+    ],
+    "2026-fall": [
+      "LEC"
+    ],
+    "future": {}
+  },
+  "ENGL 361": {
+    "2025-spring": [
+      "SEM"
+    ],
+    "2026-spring": [
+      "LEC"
+    ],
+    "future": {}
+  },
+  "ENGL 362": {
+    "2025-spring": [
+      "SEM"
+    ],
+    "2026-fall": [
+      "LEC"
+    ],
+    "future": {}
+  },
+  "ENGL 363": {
+    "2025-spring": [
+      "LEC"
+    ],
+    "2025-summer": [
+      "LEC"
+    ],
+    "2025-fall": [
+      "LEC",
+      "SEM"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC"
+      ]
+    }
+  },
+  "ENGL 364": {
+    "2025-spring": [
+      "SEM"
+    ],
+    "2026-spring": [
+      "LEC"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC"
+      ]
+    }
+  },
+  "ENGL 371": {
+    "2025-spring": [
+      "SEM"
+    ],
+    "2025-summer": [
+      "LEC"
+    ],
+    "2026-spring": [
+      "LEC"
+    ],
+    "2026-summer": [
+      "LEC"
+    ],
+    "future": {}
+  },
+  "ENGL 372": {
+    "2025-fall": [
+      "SEM"
+    ],
+    "2026-fall": [
+      "SEM"
+    ],
+    "future": {}
+  },
+  "ENGL 374": {
+    "2025-spring": [
+      "SEM"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC"
+      ]
+    }
+  },
+  "ENGL 375": {
+    "2025-spring": [
+      "SEM"
+    ],
+    "2025-fall": [
+      "LEC"
+    ],
+    "2026-spring": [
+      "LEC"
+    ],
+    "future": {}
+  },
+  "ENGL 376": {
+    "2026-spring": [
+      "LEC"
+    ],
+    "2026-fall": [
+      "LEC"
+    ],
+    "future": {}
+  },
+  "ENGL 383": {
+    "2025-spring": [
+      "SEM"
+    ],
+    "2026-spring": [
+      "LEC"
+    ],
+    "2026-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC"
+      ]
+    }
+  },
+  "ENGL 385": {
+    "2025-summer": [
+      "LEC",
+      "SEM"
+    ],
+    "2025-fall": [
+      "LEC"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC"
+      ]
+    }
+  },
+  "ENGL 387": {
+    "2025-spring": [
+      "SEM"
+    ],
+    "future": {}
+  },
+  "ENGL 397": {
+    "2026-spring": [
+      "LEC"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC"
+      ]
+    }
+  },
+  "ENGL 398": {
+    "2026-spring": [
+      "LEC"
+    ],
+    "2026-fall": [
+      "LEC"
+    ],
+    "future": {}
+  },
+  "ENGL 400W": {
+    "2026-spring": [
+      "SEM"
+    ],
+    "future": {}
+  },
+  "ENGL 411W": {
+    "2025-summer": [
+      "SEM"
+    ],
+    "2025-fall": [
+      "SEM"
+    ],
+    "2026-fall": [
+      "SEM"
+    ],
+    "future": {}
+  },
+  "ENGL 413W": {
+    "2025-summer": [
+      "SEM"
+    ],
+    "2025-fall": [
+      "SEM"
+    ],
+    "2026-fall": [
+      "SEM"
+    ],
+    "future": {}
+  },
+  "ENGL 414W": {
+    "2025-spring": [
+      "SEM"
+    ],
+    "2026-spring": [
+      "SEM"
+    ],
+    "future": {
+      "2027-spring": [
+        "SEM"
+      ]
+    }
+  },
+  "ENGL 415W": {
+    "2025-spring": [
+      "SEM"
+    ],
+    "2026-spring": [
+      "SEM"
+    ],
+    "future": {}
+  },
+  "ENGL 417W": {
+    "future": {
+      "2027-spring": [
+        "SEM"
+      ]
+    }
+  },
+  "ENGL 418W": {
+    "2025-spring": [
+      "SEM"
+    ],
+    "2025-fall": [
+      "SEM"
+    ],
+    "future": {}
+  },
+  "ENGL 431W": {
+    "2025-spring": [
+      "SEM"
+    ],
+    "2026-spring": [
+      "SEM"
+    ],
+    "2026-fall": [
+      "SEM"
+    ],
+    "future": {}
+  },
+  "ENGL 432W": {
+    "2026-spring": [
+      "SEM"
+    ],
+    "future": {}
+  },
+  "ENGL 433W": {
+    "2025-spring": [
+      "SEM"
+    ],
+    "2025-summer": [
+      "SEM"
+    ],
+    "2026-spring": [
+      "SEM"
+    ],
+    "2026-fall": [
+      "SEM"
+    ],
+    "future": {
+      "2027-spring": [
+        "SEM"
+      ]
+    }
+  },
+  "ENGL 437W": {
+    "2025-fall": [
+      "SEM"
+    ],
+    "2026-summer": [
+      "SEM"
+    ],
+    "future": {}
+  },
+  "ENGL 443W": {
+    "2025-summer": [
+      "SEM"
+    ],
+    "future": {}
+  },
+  "ENGL 470W": {
+    "2025-spring": [
+      "SEM"
+    ],
+    "2025-fall": [
+      "SEM"
+    ],
+    "future": {}
+  },
+  "ENGL 472W": {
+    "2025-spring": [
+      "SEM"
+    ],
+    "2026-spring": [
+      "SEM"
+    ],
+    "future": {}
+  },
+  "ENGL 474W": {
+    "2026-summer": [
+      "SEM"
+    ],
+    "future": {
+      "2027-spring": [
+        "SEM"
+      ]
+    }
+  },
+  "ENGL 475W": {
+    "2025-spring": [
+      "SEM"
+    ],
+    "2026-spring": [
+      "SEM"
+    ],
+    "future": {}
+  },
+  "ENGL 490": {
+    "2025-spring": [
+      "IND"
+    ],
+    "2025-summer": [
+      "IND"
+    ],
+    "2025-fall": [
+      "IND"
+    ],
+    "2026-spring": [
+      "IND"
+    ],
+    "2026-summer": [
+      "IND"
+    ],
+    "2026-fall": [
+      "IND"
+    ],
+    "future": {
+      "2027-spring": [
+        "IND"
+      ]
+    }
+  },
+  "ENGL 491": {
+    "2025-spring": [
+      "IND"
+    ],
+    "2025-summer": [
+      "IND"
+    ],
+    "2025-fall": [
+      "IND"
+    ],
+    "2026-spring": [
+      "IND"
+    ],
+    "2026-fall": [
+      "IND"
+    ],
+    "future": {
+      "2027-spring": [
+        "IND"
+      ]
+    }
+  },
+  "ENGL 493W": {
+    "2025-summer": [
+      "SEM"
+    ],
+    "2025-fall": [
+      "SEM"
+    ],
+    "future": {}
+  },
+  "ENGL 494": {
+    "2025-spring": [
+      "SEM"
+    ],
+    "2025-fall": [
+      "SEM"
+    ],
+    "2026-spring": [
+      "SEM"
+    ],
+    "2026-fall": [
+      "SEM"
+    ],
+    "future": {
+      "2027-spring": [
+        "SEM"
+      ]
+    }
+  },
+  "ENGL 496": {
+    "2025-spring": [
+      "SEM"
+    ],
+    "2025-summer": [
+      "SEM"
+    ],
+    "2025-fall": [
+      "SEM"
+    ],
+    "2026-spring": [
+      "SEM"
+    ],
+    "2026-summer": [
+      "SEM"
+    ],
+    "2026-fall": [
+      "SEM"
+    ],
+    "future": {
+      "2027-spring": [
+        "SEM"
+      ]
+    }
+  },
+  "GA 101": {
+    "2025-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "2025-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC",
+        "TUT"
+      ]
+    }
+  },
+  "GEOG 100": {
+    "2025-spring": [
+      "OLC"
+    ],
+    "2025-summer": [
+      "OLC"
+    ],
+    "2025-fall": [
+      "LEC"
+    ],
+    "2026-spring": [
+      "OLC"
+    ],
+    "2026-summer": [
+      "OLC"
+    ],
+    "2026-fall": [
+      "LEC"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC"
+      ]
+    }
+  },
+  "GEOG 104": {
+    "2025-spring": [
+      "OLC"
+    ],
+    "2025-summer": [
+      "OLC"
+    ],
+    "2025-fall": [
+      "OLC"
+    ],
+    "2026-spring": [
+      "LEC"
+    ],
+    "2026-summer": [
+      "LEC"
+    ],
+    "2026-fall": [
+      "OLC"
+    ],
+    "future": {
+      "2027-spring": [
+        "OLC"
+      ]
+    }
+  },
+  "GEOG 333": {
+    "2025-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC",
+        "TUT"
+      ]
+    }
+  },
+  "GSWS 100": {
+    "2025-spring": [
+      "OLC",
+      "TUT"
+    ],
+    "2025-fall": [
+      "OLC"
+    ],
+    "2026-spring": [
+      "OLC"
+    ],
+    "2026-fall": [
+      "OLC"
+    ],
+    "future": {}
+  },
+  "HIST 135": {
+    "2025-summer": [
+      "LEC",
+      "TUT"
+    ],
+    "2025-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "future": {}
+  },
+  "HUM 101W": {
+    "2025-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "2025-summer": [
+      "LEC",
+      "TUT"
+    ],
+    "2025-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-spring": [
+      "LEC"
+    ],
+    "2026-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC"
+      ]
+    }
+  },
+  "IAT 110": {
+    "2025-spring": [
+      "LEC"
+    ],
+    "2025-fall": [
+      "LEC"
+    ],
+    "future": {}
+  },
+  "IAT 210": {
+    "2025-spring": [
+      "OLC"
+    ],
+    "2025-summer": [
+      "OLC"
+    ],
+    "2025-fall": [
+      "OLC"
+    ],
+    "2026-spring": [
+      "OLC"
+    ],
+    "2026-summer": [
+      "OLC"
+    ],
+    "2026-fall": [
+      "OLC"
+    ],
+    "future": {
+      "2027-spring": [
+        "OLC"
+      ]
+    }
+  },
+  "INDG 101": {
+    "2025-spring": [
+      "LEC",
+      "OLC"
+    ],
+    "2025-summer": [
+      "LEC",
+      "OLC",
+      "TUT"
+    ],
+    "2025-fall": [
+      "LEC",
+      "OLC",
+      "TUT"
+    ],
+    "2026-spring": [
+      "LEC",
+      "OLC",
+      "TUT"
+    ],
+    "2026-summer": [
+      "LEC",
+      "OLC",
+      "TUT"
+    ],
+    "2026-fall": [
+      "LEC",
+      "OLC",
+      "TUT"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC",
+        "OLC",
+        "TUT"
+      ]
+    }
+  },
+  "INDG 111": {
+    "2026-fall": [
+      "SEM"
+    ],
+    "future": {}
+  },
+  "INDG 201W": {
+    "2025-spring": [
+      "LEC",
+      "OLC"
+    ],
+    "2025-summer": [
+      "OLC"
+    ],
+    "2025-fall": [
+      "OLC"
+    ],
+    "2026-spring": [
+      "LEC",
+      "OLC"
+    ],
+    "2026-summer": [
+      "OLC"
+    ],
+    "2026-fall": [
+      "OLC"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC"
+      ]
+    }
+  },
+  "INDG 210": {
+    "future": {
+      "2027-spring": [
+        "OLC"
+      ]
+    }
+  },
+  "INDG 211": {
+    "2025-fall": [
+      "LEC",
+      "OLC"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC"
+      ]
+    }
+  },
+  "INDG 212": {
+    "future": {
+      "2027-spring": [
+        "LEC"
+      ]
+    }
+  },
+  "INDG 222": {
+    "2026-spring": [
+      "OLC"
+    ],
+    "future": {}
+  },
+  "INDG 232": {
+    "2026-fall": [
+      "LEC"
+    ],
+    "future": {}
+  },
+  "INDG 250": {
+    "2025-fall": [
+      "LEC"
+    ],
+    "2026-fall": [
+      "LEC"
+    ],
+    "future": {}
+  },
+  "INDG 286": {
+    "2025-spring": [
+      "LEC",
+      "OLC"
+    ],
+    "2025-fall": [
+      "LEC",
+      "OLC"
+    ],
+    "2026-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC"
+      ]
+    }
+  },
+  "INDG 301": {
+    "2025-fall": [
+      "SEM"
+    ],
+    "2026-fall": [
+      "SEM"
+    ],
+    "future": {}
+  },
+  "INDG 305": {
+    "2025-spring": [
+      "OLC"
+    ],
+    "2025-summer": [
+      "OLC"
+    ],
+    "2025-fall": [
+      "OLC"
+    ],
+    "2026-spring": [
+      "OLC"
+    ],
+    "2026-summer": [
+      "OLC"
+    ],
+    "2026-fall": [
+      "OLC"
+    ],
+    "future": {
+      "2027-spring": [
+        "OLC"
+      ]
+    }
+  },
+  "INDG 322": {
+    "2026-spring": [
+      "OLC"
+    ],
+    "2026-fall": [
+      "SEM"
+    ],
+    "future": {}
+  },
+  "INDG 325": {
+    "2026-fall": [
+      "LEC"
+    ],
+    "future": {}
+  },
+  "INDG 326": {
+    "2025-spring": [
+      "LEC"
+    ],
+    "2026-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC"
+      ]
+    }
+  },
+  "INDG 327": {
+    "2025-spring": [
+      "OLC",
+      "SEM"
+    ],
+    "future": {}
+  },
+  "INDG 332": {
+    "2025-spring": [
+      "SEM"
+    ],
+    "2025-summer": [
+      "SEM"
+    ],
+    "2026-spring": [
+      "SEM"
+    ],
+    "2026-summer": [
+      "SEM"
+    ],
+    "future": {
+      "2027-spring": [
+        "SEM"
+      ]
+    }
+  },
+  "INDG 333": {
+    "2025-fall": [
+      "OLC"
+    ],
+    "2026-fall": [
+      "OLC"
+    ],
+    "future": {}
+  },
+  "INDG 343": {
+    "future": {
+      "2027-spring": [
+        "OLC"
+      ]
+    }
+  },
+  "INDG 353": {
+    "2026-fall": [
+      "LEC"
+    ],
+    "future": {}
+  },
+  "INDG 353W": {
+    "2025-spring": [
+      "LEC"
+    ],
+    "future": {}
+  },
+  "INDG 360": {
+    "2026-fall": [
+      "SEM"
+    ],
+    "future": {}
+  },
+  "INDG 401": {
+    "2025-spring": [
+      "OLC"
+    ],
+    "2025-fall": [
+      "SEM"
+    ],
+    "2026-spring": [
+      "OLC"
+    ],
+    "2026-fall": [
+      "SEM"
+    ],
+    "future": {
+      "2027-spring": [
+        "OLC"
+      ]
+    }
+  },
+  "INDG 402W": {
+    "2025-spring": [
+      "OLC",
+      "SEM"
+    ],
+    "2026-spring": [
+      "OLC"
+    ],
+    "future": {
+      "2027-spring": [
+        "OLC"
+      ]
+    }
+  },
+  "INDG 403": {
+    "2025-spring": [
+      "OLC",
+      "SEM"
+    ],
+    "2026-spring": [
+      "SEM"
+    ],
+    "2026-summer": [
+      "OLC"
+    ],
+    "2026-fall": [
+      "SEM"
+    ],
+    "future": {
+      "2027-spring": [
+        "SEM"
+      ]
+    }
+  },
+  "INDG 410": {
+    "2025-spring": [
+      "LEC",
+      "OLC"
+    ],
+    "future": {}
+  },
+  "INDG 419": {
+    "2025-fall": [
+      "SEM"
+    ],
+    "future": {}
+  },
+  "INDG 422": {
+    "2025-summer": [
+      "OLC"
+    ],
+    "future": {
+      "2027-spring": [
+        "SEM"
+      ]
+    }
+  },
+  "INDG 429": {
+    "2025-spring": [
+      "SEM"
+    ],
+    "future": {
+      "2027-spring": [
+        "SEM"
+      ]
+    }
+  },
+  "INDG 433": {
+    "2025-fall": [
+      "LEC"
+    ],
+    "2026-fall": [
+      "LEC"
+    ],
+    "future": {}
+  },
+  "INDG 435": {
+    "2025-summer": [
+      "FLD"
+    ],
+    "future": {}
+  },
+  "INDG 442": {
+    "2025-spring": [
+      "IND"
+    ],
+    "2025-summer": [
+      "IND"
+    ],
+    "2025-fall": [
+      "IND"
+    ],
+    "2026-spring": [
+      "IND"
+    ],
+    "2026-summer": [
+      "IND"
+    ],
+    "2026-fall": [
+      "IND"
+    ],
+    "future": {
+      "2027-spring": [
+        "IND"
+      ]
+    }
+  },
+  "INDG 447": {
+    "2025-spring": [
+      "LEC"
+    ],
+    "2025-summer": [
+      "IND",
+      "LEC"
+    ],
+    "2025-fall": [
+      "LEC"
+    ],
+    "2026-spring": [
+      "LEC"
+    ],
+    "2026-summer": [
+      "LEC"
+    ],
+    "2026-fall": [
+      "LEC"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC"
+      ]
+    }
+  },
+  "INDG 462": {
+    "2026-spring": [
+      "SEM",
+      "TUT"
+    ],
+    "future": {}
+  },
+  "IS 101": {
+    "2025-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "2025-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-summer": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "future": {
+      "2027-spring": [
+        "OLC"
+      ]
+    }
+  },
+  "IS 200": {
+    "2025-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "future": {}
+  },
+  "IS 210": {
+    "2025-spring": [
+      "LEC"
+    ],
+    "2025-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "future": {}
+  },
+  "IS 220": {
+    "2025-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "2025-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC"
+      ]
+    }
+  },
+  "IS 315": {
+    "2025-spring": [
+      "LEC"
+    ],
+    "2025-fall": [
+      "LEC"
+    ],
+    "2026-summer": [
+      "LEC"
+    ],
+    "2026-fall": [
+      "SEM"
+    ],
+    "future": {}
+  },
+  "IS 427": {
+    "2025-spring": [
+      "SEM"
+    ],
+    "future": {}
+  },
+  "LBST 100": {
+    "2025-spring": [
+      "LEC"
+    ],
+    "2025-fall": [
+      "LEC"
+    ],
+    "2026-spring": [
+      "LEC"
+    ],
+    "2026-summer": [
+      "LEC"
+    ],
+    "future": {}
+  },
+  "LBST 101": {
+    "2025-spring": [
+      "LEC"
+    ],
+    "2025-summer": [
+      "LEC"
+    ],
+    "2025-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-spring": [
+      "OLC"
+    ],
+    "2026-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "future": {
+      "2027-spring": [
+        "OLC"
+      ]
+    }
+  },
+  "LBST 312": {
+    "2025-spring": [
+      "SEM"
+    ],
+    "2026-fall": [
+      "SEM"
+    ],
+    "future": {}
+  },
+  "MATH 100": {
+    "2025-spring": [
+      "LAB",
+      "LEC",
+      "OPL"
+    ],
+    "2025-fall": [
+      "LAB",
+      "LEC",
+      "OPL"
+    ],
+    "2026-spring": [
+      "LAB",
+      "LEC",
+      "OPL"
+    ],
+    "2026-fall": [
+      "LAB",
+      "LEC",
+      "OPL"
+    ],
+    "future": {}
+  },
+  "MATH 110": {
+    "2025-fall": [
+      "LAB",
+      "LEC"
+    ],
+    "2026-fall": [
+      "LAB",
+      "LEC"
+    ],
+    "future": {
+      "2027-spring": [
+        "LAB",
+        "LEC",
+        "OPL"
+      ]
+    }
+  },
+  "MATH 130": {
+    "2025-spring": [
+      "LEC"
+    ],
+    "2026-spring": [
+      "LEC",
+      "OPL"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC",
+        "OPL"
+      ]
+    }
+  },
+  "MATH 141W": {
+    "2026-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "future": {}
+  },
+  "MATH 150": {
+    "2025-spring": [
+      "LEC",
+      "OPL",
+      "SEM"
+    ],
+    "2025-summer": [
+      "LEC",
+      "OPL",
+      "SEM"
+    ],
+    "2025-fall": [
+      "LEC",
+      "OPL",
+      "SEM"
+    ],
+    "2026-spring": [
+      "LEC",
+      "OPL",
+      "SEM"
+    ],
+    "2026-summer": [
+      "LEC",
+      "OPL",
+      "SEM"
+    ],
+    "2026-fall": [
+      "LEC",
+      "OPL",
+      "SEM"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC",
+        "OPL",
+        "SEM"
+      ]
+    }
+  },
+  "MATH 151": {
+    "2025-fall": [
+      "LEC",
+      "OPL"
+    ],
+    "2026-fall": [
+      "LEC",
+      "OPL"
+    ],
+    "future": {}
+  },
+  "MATH 152": {
+    "2025-spring": [
+      "LEC",
+      "OPL"
+    ],
+    "2025-summer": [
+      "LEC",
+      "OPL"
+    ],
+    "2025-fall": [
+      "LEC",
+      "OPL"
+    ],
+    "2026-spring": [
+      "LEC",
+      "OPL"
+    ],
+    "2026-summer": [
+      "LEC",
+      "OPL"
+    ],
+    "2026-fall": [
+      "LEC",
+      "OPL"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC",
+        "OPL"
+      ]
+    }
+  },
+  "MATH 154": {
+    "2025-spring": [
+      "LEC",
+      "OPL"
+    ],
+    "2025-fall": [
+      "LEC",
+      "OPL"
+    ],
+    "2026-spring": [
+      "LEC",
+      "OPL"
+    ],
+    "2026-fall": [
+      "LEC",
+      "OPL"
+    ],
+    "future": {
+      "2027-spring": [
+        "LAB",
+        "LEC",
+        "OPL"
+      ]
+    }
+  },
+  "MATH 155": {
+    "2025-spring": [
+      "LEC",
+      "OPL"
+    ],
+    "2025-summer": [
+      "LEC",
+      "OPL"
+    ],
+    "2026-spring": [
+      "LEC",
+      "OPL"
+    ],
+    "2026-summer": [
+      "LEC",
+      "OPL"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC",
+        "OPL"
+      ]
+    }
+  },
+  "MATH 157": {
+    "2025-spring": [
+      "LEC",
+      "OPL"
+    ],
+    "2025-summer": [
+      "LEC",
+      "OPL"
+    ],
+    "2025-fall": [
+      "LEC",
+      "OPL"
+    ],
+    "2026-spring": [
+      "LEC",
+      "OPL"
+    ],
+    "2026-summer": [
+      "LEC",
+      "OPL"
+    ],
+    "2026-fall": [
+      "LEC",
+      "OPL"
+    ],
+    "future": {
+      "2027-spring": [
+        "LAB",
+        "LEC",
+        "OPL"
+      ]
+    }
+  },
+  "MATH 158": {
+    "2025-spring": [
+      "LEC",
+      "OPL"
+    ],
+    "2026-spring": [
+      "LEC",
+      "OPL"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC",
+        "OPL"
+      ]
+    }
+  },
+  "MATH 190": {
+    "2025-spring": [
+      "LEC",
+      "OLC",
+      "OPL"
+    ],
+    "2025-summer": [
+      "OLC",
+      "OPL"
+    ],
+    "2025-fall": [
+      "LEC",
+      "OLC",
+      "OPL"
+    ],
+    "2026-spring": [
+      "LEC",
+      "OLC",
+      "OPL"
+    ],
+    "2026-summer": [
+      "OLC",
+      "OPL"
+    ],
+    "2026-fall": [
+      "LEC",
+      "OLC",
+      "OPL"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC",
+        "OLC",
+        "OPL"
+      ]
+    }
+  },
+  "MATH 208": {
+    "future": {
+      "2027-spring": [
+        "LEC",
+        "TUT"
+      ]
+    }
+  },
+  "MATH 208W": {
+    "2025-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "future": {}
+  },
+  "MATH 232": {
+    "2025-spring": [
+      "LEC",
+      "OPL"
+    ],
+    "2025-summer": [
+      "LEC",
+      "OPL"
+    ],
+    "2025-fall": [
+      "LEC",
+      "OPL"
+    ],
+    "2026-spring": [
+      "LEC",
+      "OPL"
+    ],
+    "2026-summer": [
+      "LEC",
+      "OPL"
+    ],
+    "2026-fall": [
+      "LEC",
+      "OPL"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC",
+        "OPL"
+      ]
+    }
+  },
+  "MATH 240": {
+    "2025-spring": [
+      "LEC",
+      "OPL"
+    ],
+    "2025-summer": [
+      "LEC",
+      "OPL"
+    ],
+    "2025-fall": [
+      "LEC",
+      "OPL"
+    ],
+    "2026-spring": [
+      "LEC",
+      "OPL"
+    ],
+    "2026-summer": [
+      "LEC",
+      "OPL"
+    ],
+    "2026-fall": [
+      "LEC",
+      "OPL"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC",
+        "OPL"
+      ]
+    }
+  },
+  "MATH 242": {
+    "2025-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC",
+        "TUT"
+      ]
+    }
+  },
+  "MATH 251": {
+    "2025-spring": [
+      "LEC",
+      "OPL"
+    ],
+    "2025-summer": [
+      "LEC",
+      "OPL"
+    ],
+    "2025-fall": [
+      "LEC",
+      "OPL"
+    ],
+    "2026-spring": [
+      "LEC",
+      "OPL"
+    ],
+    "2026-summer": [
+      "LEC",
+      "OPL"
+    ],
+    "2026-fall": [
+      "LEC",
+      "OPL"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC",
+        "OPL"
+      ]
+    }
+  },
+  "MATH 252": {
+    "2025-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC",
+        "TUT"
+      ]
+    }
+  },
+  "MATH 254": {
+    "2025-summer": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-summer": [
+      "LEC",
+      "TUT"
+    ],
+    "future": {}
+  },
+  "MATH 260": {
+    "2025-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "2025-summer": [
+      "LEC",
+      "TUT"
+    ],
+    "2025-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-summer": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC",
+        "TUT"
+      ]
+    }
+  },
+  "MATH 292": {
+    "2025-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "future": {}
+  },
+  "MATH 301": {
+    "2025-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "future": {}
+  },
+  "MATH 302": {
+    "2026-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "future": {}
+  },
+  "MATH 303": {
+    "2026-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "future": {}
+  },
+  "MATH 304": {
+    "2025-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC",
+        "TUT"
+      ]
+    }
+  },
+  "MATH 308": {
+    "2025-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "2025-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC",
+        "TUT"
+      ]
+    }
+  },
+  "MATH 309": {
+    "2025-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "future": {}
+  },
+  "MATH 314": {
+    "2025-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC",
+        "TUT"
+      ]
+    }
+  },
+  "MATH 320": {
+    "2025-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC",
+        "TUT"
+      ]
+    }
+  },
+  "MATH 322": {
+    "2025-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "future": {}
+  },
+  "MATH 336": {
+    "2025-spring": [
+      "COP"
+    ],
+    "2025-summer": [
+      "COP"
+    ],
+    "2025-fall": [
+      "COP"
+    ],
+    "2026-spring": [
+      "COP"
+    ],
+    "2026-summer": [
+      "COP"
+    ],
+    "2026-fall": [
+      "COP"
+    ],
+    "future": {
+      "2027-spring": [
+        "COP"
+      ]
+    }
+  },
+  "MATH 337": {
+    "2025-spring": [
+      "COP"
+    ],
+    "2025-summer": [
+      "COP"
+    ],
+    "2025-fall": [
+      "COP"
+    ],
+    "2026-spring": [
+      "COP"
+    ],
+    "2026-summer": [
+      "COP"
+    ],
+    "2026-fall": [
+      "COP"
+    ],
+    "future": {
+      "2027-spring": [
+        "COP"
+      ]
+    }
+  },
+  "MATH 338": {
+    "2025-summer": [
+      "LEC"
+    ],
+    "future": {}
+  },
+  "MATH 340": {
+    "2025-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "future": {}
+  },
+  "MATH 341": {
+    "2025-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC",
+        "TUT"
+      ]
+    }
+  },
+  "MATH 342": {
+    "2025-summer": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-summer": [
+      "LEC",
+      "TUT"
+    ],
+    "future": {}
+  },
+  "MATH 345": {
+    "2025-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "future": {}
+  },
+  "MATH 348": {
+    "2025-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC",
+        "TUT"
+      ]
+    }
+  },
+  "MATH 360": {
+    "2025-fall": [
+      "LEC"
+    ],
+    "2026-fall": [
+      "LEC"
+    ],
+    "future": {}
+  },
+  "MATH 380W": {
+    "2026-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "future": {}
+  },
+  "MATH 381W": {
+    "2025-spring": [
+      "SEM",
+      "TUT"
+    ],
+    "future": {}
+  },
+  "MATH 402": {
+    "future": {
+      "2027-spring": [
+        "LEC"
+      ]
+    }
+  },
+  "MATH 402W": {
+    "2025-spring": [
+      "LEC"
+    ],
+    "2026-spring": [
+      "LEC"
+    ],
+    "future": {}
+  },
+  "MATH 408": {
+    "2026-fall": [
+      "LEC"
+    ],
+    "future": {}
+  },
+  "MATH 418": {
+    "2025-fall": [
+      "LEC"
+    ],
+    "2026-fall": [
+      "LEC"
+    ],
+    "future": {}
+  },
+  "MATH 419": {
+    "2026-summer": [
+      "LEC"
+    ],
+    "future": {}
+  },
+  "MATH 425": {
+    "2025-fall": [
+      "LEC"
+    ],
+    "future": {}
+  },
+  "MATH 426": {
+    "2025-summer": [
+      "LEC"
+    ],
+    "future": {}
+  },
+  "MATH 436": {
+    "2025-spring": [
+      "COP"
+    ],
+    "2025-summer": [
+      "COP"
+    ],
+    "2025-fall": [
+      "COP"
+    ],
+    "2026-spring": [
+      "COP"
+    ],
+    "2026-summer": [
+      "COP"
+    ],
+    "2026-fall": [
+      "COP"
+    ],
+    "future": {
+      "2027-spring": [
+        "COP"
+      ]
+    }
+  },
+  "MATH 437": {
+    "2025-spring": [
+      "COP"
+    ],
+    "2025-summer": [
+      "COP"
+    ],
+    "2025-fall": [
+      "COP"
+    ],
+    "2026-spring": [
+      "COP"
+    ],
+    "2026-summer": [
+      "COP"
+    ],
+    "2026-fall": [
+      "COP"
+    ],
+    "future": {
+      "2027-spring": [
+        "COP"
+      ]
+    }
+  },
+  "MATH 440": {
+    "2025-spring": [
+      "LEC"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC"
+      ]
+    }
+  },
+  "MATH 441": {
+    "2026-spring": [
+      "LEC"
+    ],
+    "future": {}
+  },
+  "MATH 443": {
+    "2026-spring": [
+      "LEC"
+    ],
+    "future": {}
+  },
+  "MATH 445": {
+    "future": {
+      "2027-spring": [
+        "LEC"
+      ]
+    }
+  },
+  "MATH 447": {
+    "2026-fall": [
+      "LEC"
+    ],
+    "future": {}
+  },
+  "MATH 450": {
+    "2026-fall": [
+      "LEC"
+    ],
+    "future": {}
+  },
+  "MATH 462": {
+    "2026-spring": [
+      "LEC"
+    ],
+    "future": {}
+  },
+  "MATH 467": {
+    "2025-spring": [
+      "LEC"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC"
+      ]
+    }
+  },
+  "MATH 468": {
+    "2026-spring": [
+      "LEC"
+    ],
+    "future": {}
+  },
+  "MATH 469": {
+    "2025-spring": [
+      "LEC"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC"
+      ]
+    }
+  },
+  "MATH 475": {
+    "2026-spring": [
+      "LEC"
+    ],
+    "future": {}
+  },
+  "MATH 480W": {
+    "2025-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "future": {}
+  },
+  "MATH 486": {
+    "2025-spring": [
+      "COP"
+    ],
+    "2025-summer": [
+      "COP"
+    ],
+    "2025-fall": [
+      "COP"
+    ],
+    "2026-spring": [
+      "COP"
+    ],
+    "2026-summer": [
+      "COP"
+    ],
+    "2026-fall": [
+      "COP"
+    ],
+    "future": {
+      "2027-spring": [
+        "COP"
+      ]
+    }
+  },
+  "MATH 498": {
+    "2025-fall": [
+      "LEC"
+    ],
+    "2026-fall": [
+      "LEC"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC"
+      ]
+    }
+  },
+  "MATH 499W": {
+    "2025-fall": [
+      "LEC"
+    ],
+    "2026-fall": [
+      "LEC"
+    ],
+    "future": {}
+  },
+  "PHIL 100W": {
+    "2025-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "2025-summer": [
+      "LEC",
+      "TUT"
+    ],
+    "2025-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-summer": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC",
+        "TUT"
+      ]
+    }
+  },
+  "PHIL 105": {
+    "2025-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "2025-summer": [
+      "LEC",
+      "TUT"
+    ],
+    "2025-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-summer": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC",
+        "TUT"
+      ]
+    }
+  },
+  "PHIL 110": {
+    "2025-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "2025-summer": [
+      "LEC",
+      "TUT"
+    ],
+    "2025-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-summer": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC",
+        "TUT"
+      ]
+    }
+  },
+  "PHIL 120W": {
+    "2025-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "2025-summer": [
+      "LEC",
+      "TUT"
+    ],
+    "2025-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-summer": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC",
+        "TUT"
+      ]
+    }
+  },
+  "PHIL 144": {
+    "2026-fall": [
+      "LEC"
+    ],
+    "future": {}
+  },
+  "PHIL 150": {
+    "2025-spring": [
+      "LEC",
+      "OLC"
+    ],
+    "2025-fall": [
+      "LEC"
+    ],
+    "2026-spring": [
+      "LEC"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC"
+      ]
+    }
+  },
+  "PHIL 201": {
+    "2025-spring": [
+      "LEC"
+    ],
+    "2026-spring": [
+      "LEC"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC"
+      ]
+    }
+  },
+  "PHIL 203": {
+    "2025-fall": [
+      "LEC",
+      "OLC"
+    ],
+    "2026-fall": [
+      "LEC"
+    ],
+    "future": {}
+  },
+  "PHIL 221": {
+    "2025-spring": [
+      "LEC"
+    ],
+    "2026-spring": [
+      "LEC"
+    ],
+    "2026-fall": [
+      "LEC"
+    ],
+    "future": {}
+  },
+  "PHIL 270": {
+    "2025-spring": [
+      "OLC",
+      "SEM"
+    ],
+    "2026-spring": [
+      "SEM"
+    ],
+    "2026-fall": [
+      "LEC"
+    ],
+    "future": {}
+  },
+  "PHIL 300": {
+    "2025-spring": [
+      "LEC"
+    ],
+    "future": {}
+  },
+  "PHIL 302": {
+    "2025-fall": [
+      "LEC",
+      "OLC"
+    ],
+    "future": {}
+  },
+  "PHIL 310": {
+    "2025-spring": [
+      "LEC"
+    ],
+    "2026-spring": [
+      "LEC"
+    ],
+    "future": {}
+  },
+  "PHIL 314": {
+    "2025-spring": [
+      "LEC"
+    ],
+    "2026-fall": [
+      "LEC"
+    ],
+    "future": {}
+  },
+  "PHIL 315": {
+    "2025-fall": [
+      "LEC"
+    ],
+    "future": {}
+  },
+  "PHIL 320": {
+    "2025-fall": [
+      "LEC"
+    ],
+    "2026-fall": [
+      "LEC"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC"
+      ]
+    }
+  },
+  "PHIL 321": {
+    "2025-summer": [
+      "LEC"
+    ],
+    "2026-spring": [
+      "LEC"
+    ],
+    "2026-summer": [
+      "LEC"
+    ],
+    "2026-fall": [
+      "LEC"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC"
+      ]
+    }
+  },
+  "PHIL 322": {
+    "2025-spring": [
+      "LEC"
+    ],
+    "2025-fall": [
+      "LEC"
+    ],
+    "2026-spring": [
+      "LEC"
+    ],
+    "2026-fall": [
+      "LEC"
+    ],
+    "future": {}
+  },
+  "PHIL 326": {
+    "2025-spring": [
+      "LEC"
+    ],
+    "2025-fall": [
+      "LEC"
+    ],
+    "2026-spring": [
+      "LEC"
+    ],
+    "2026-fall": [
+      "LEC"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC"
+      ]
+    }
+  },
+  "PHIL 329": {
+    "2025-spring": [
+      "LEC"
+    ],
+    "2025-fall": [
+      "LEC",
+      "OLC"
+    ],
+    "2026-spring": [
+      "LEC"
+    ],
+    "2026-summer": [
+      "LEC",
+      "OLC"
+    ],
+    "2026-fall": [
+      "LEC"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC"
+      ]
+    }
+  },
+  "PHIL 331": {
+    "2025-spring": [
+      "LEC"
+    ],
+    "2025-summer": [
+      "LEC",
+      "OLC"
+    ],
+    "2026-spring": [
+      "LEC"
+    ],
+    "future": {}
+  },
+  "PHIL 332": {
+    "2026-spring": [
+      "LEC"
+    ],
+    "2026-fall": [
+      "LEC"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC"
+      ]
+    }
+  },
+  "PHIL 342": {
+    "2025-spring": [
+      "SEM"
+    ],
+    "2025-fall": [
+      "SEM"
+    ],
+    "2026-summer": [
+      "SEM"
+    ],
+    "future": {}
+  },
+  "PHIL 343": {
+    "2025-summer": [
+      "LEC",
+      "OLC"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC"
+      ]
+    }
+  },
+  "PHIL 344": {
+    "future": {
+      "2027-spring": [
+        "LEC"
+      ]
+    }
+  },
+  "PHIL 345": {
+    "future": {
+      "2027-spring": [
+        "LEC"
+      ]
+    }
+  },
+  "PHIL 350": {
+    "2025-spring": [
+      "LEC"
+    ],
+    "2026-spring": [
+      "LEC"
+    ],
+    "future": {}
+  },
+  "PHIL 356": {
+    "2026-fall": [
+      "LEC"
+    ],
+    "future": {}
+  },
+  "PHIL 421": {
+    "2025-fall": [
+      "LEC"
+    ],
+    "2026-spring": [
+      "LEC"
+    ],
+    "2026-fall": [
+      "LEC"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC"
+      ]
+    }
+  },
+  "PHIL 435": {
+    "2025-summer": [
+      "LEC"
+    ],
+    "future": {}
+  },
+  "PHIL 451": {
+    "2026-summer": [
+      "LEC"
+    ],
+    "future": {}
+  },
+  "PHIL 467W": {
+    "2025-spring": [
+      "SEM"
+    ],
+    "2025-summer": [
+      "SEM"
+    ],
+    "2025-fall": [
+      "SEM"
+    ],
+    "2026-spring": [
+      "SEM"
+    ],
+    "2026-summer": [
+      "OLC",
+      "SEM"
+    ],
+    "2026-fall": [
+      "SEM"
+    ],
+    "future": {
+      "2027-spring": [
+        "SEM"
+      ]
+    }
+  },
+  "PHIL 479": {
+    "2025-spring": [
+      "TUT"
+    ],
+    "2025-summer": [
+      "TUT"
+    ],
+    "2025-fall": [
+      "TUT"
+    ],
+    "2026-spring": [
+      "TUT"
+    ],
+    "2026-summer": [
+      "TUT"
+    ],
+    "2026-fall": [
+      "TUT"
+    ],
+    "future": {}
+  },
+  "PLAN 100": {
+    "2025-spring": [
+      "OLC"
+    ],
+    "2025-summer": [
+      "LEC",
+      "TUT"
+    ],
+    "2025-fall": [
+      "OLC"
+    ],
+    "2026-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-fall": [
+      "OLC"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC",
+        "TUT"
+      ]
+    }
+  },
+  "POL 141": {
+    "2025-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC",
+        "TUT"
+      ]
+    }
+  },
+  "POL 150": {
+    "2025-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "future": {}
+  },
+  "POL 253": {
+    "2025-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC",
+        "TUT"
+      ]
+    }
+  },
+  "REM 100": {
+    "2025-spring": [
+      "OLC"
+    ],
+    "2025-summer": [
+      "OLC"
+    ],
+    "2025-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-spring": [
+      "OLC"
+    ],
+    "2026-summer": [
+      "OLC"
+    ],
+    "2026-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "future": {
+      "2027-spring": [
+        "OLC"
+      ]
+    }
+  },
+  "REM 207": {
+    "2025-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC",
+        "TUT"
+      ]
+    }
+  },
+  "REM 320W": {
+    "2025-summer": [
+      "SEM"
+    ],
+    "2026-summer": [
+      "LEC"
+    ],
+    "future": {}
+  },
+  "REM 321": {
+    "2025-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "future": {}
+  },
+  "REM 350": {
+    "2025-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "2025-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC",
+        "TUT"
+      ]
+    }
+  },
+  "REM 355": {
+    "2025-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "future": {
+      "2027-spring": [
+        "OLC"
+      ]
+    }
+  },
+  "REM 357": {
+    "2025-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "future": {}
+  },
+  "SA 150": {
+    "2025-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "2025-summer": [
+      "LEC",
+      "TUT"
+    ],
+    "2025-fall": [
+      "LEC",
+      "OLC",
+      "TUT"
+    ],
+    "2026-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-summer": [
+      "LEC",
+      "OLC",
+      "TUT"
+    ],
+    "2026-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC",
+        "TUT"
+      ]
+    }
+  },
+  "SA 200W": {
+    "2025-spring": [
+      "LEC"
+    ],
+    "2025-fall": [
+      "OLC"
+    ],
+    "2026-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "future": {}
+  },
+  "SA 216": {
+    "2025-spring": [
+      "LEC"
+    ],
+    "2026-spring": [
+      "LEC"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC"
+      ]
+    }
+  },
+  "SA 219": {
+    "2026-fall": [
+      "LEC"
+    ],
+    "future": {}
+  },
+  "SA 302W": {
+    "future": {
+      "2027-spring": [
+        "SEM"
+      ]
+    }
+  },
+  "SD 281": {
+    "2025-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-spring": [
+      "OLC"
+    ],
+    "2026-fall": [
+      "OLC"
+    ],
+    "future": {}
+  },
+  "SEE 110": {
+    "2025-fall": [
+      "LEC"
+    ],
+    "2026-fall": [
+      "LEC"
+    ],
+    "future": {}
+  },
+  "STAT 100": {
+    "2025-spring": [
+      "LAB",
+      "LEC",
+      "OPL"
+    ],
+    "2025-summer": [
+      "LAB",
+      "LEC",
+      "OPL"
+    ],
+    "2025-fall": [
+      "LEC",
+      "OPL",
+      "RQL"
+    ],
+    "2026-spring": [
+      "LAB",
+      "LEC",
+      "OPL"
+    ],
+    "2026-summer": [
+      "LAB",
+      "LEC",
+      "OPL"
+    ],
+    "2026-fall": [
+      "LAB",
+      "LEC",
+      "OPL"
+    ],
+    "future": {
+      "2027-spring": [
+        "LAB",
+        "LEC",
+        "OPL"
+      ]
+    }
+  },
+  "STAT 180": {
+    "2025-fall": [
+      "SEM"
+    ],
+    "2026-fall": [
+      "SEM"
+    ],
+    "future": {}
+  },
+  "STAT 201": {
+    "2025-spring": [
+      "LEC",
+      "OLC",
+      "OPL"
+    ],
+    "2025-summer": [
+      "LEC",
+      "OLC",
+      "OPL"
+    ],
+    "2025-fall": [
+      "LEC",
+      "OLC",
+      "OPL"
+    ],
+    "2026-spring": [
+      "LEC",
+      "OLC",
+      "OPL"
+    ],
+    "2026-summer": [
+      "LEC",
+      "OLC",
+      "OPL"
+    ],
+    "2026-fall": [
+      "LEC",
+      "OLC",
+      "OPL"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC",
+        "OLC",
+        "OPL"
+      ]
+    }
+  },
+  "STAT 203": {
+    "2025-spring": [
+      "LEC",
+      "OLC",
+      "OPL"
+    ],
+    "2025-summer": [
+      "LEC",
+      "OPL"
+    ],
+    "2025-fall": [
+      "LEC",
+      "OLC",
+      "OPL"
+    ],
+    "2026-spring": [
+      "LAB",
+      "LEC",
+      "OLC",
+      "OPL"
+    ],
+    "2026-summer": [
+      "LEC",
+      "OLC",
+      "OPL"
+    ],
+    "2026-fall": [
+      "LEC",
+      "OLC",
+      "OPL"
+    ],
+    "future": {
+      "2027-spring": [
+        "LAB",
+        "LEC",
+        "OLC",
+        "OPL"
+      ]
+    }
+  },
+  "STAT 240": {
+    "2025-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC",
+        "TUT"
+      ]
+    }
+  },
+  "STAT 260": {
+    "2025-spring": [
+      "LAB",
+      "LEC"
+    ],
+    "2025-fall": [
+      "LEC",
+      "RQL"
+    ],
+    "2026-spring": [
+      "LAB",
+      "LEC"
+    ],
+    "future": {}
+  },
+  "STAT 270": {
+    "2025-spring": [
+      "LEC",
+      "OLC",
+      "OPL"
+    ],
+    "2025-summer": [
+      "OLC",
+      "OPL"
+    ],
+    "2025-fall": [
+      "LEC",
+      "OLC",
+      "OPL"
+    ],
+    "2026-spring": [
+      "LEC",
+      "OPL"
+    ],
+    "2026-summer": [
+      "LEC",
+      "OLC",
+      "OPL"
+    ],
+    "2026-fall": [
+      "LEC",
+      "OPL"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC",
+        "OLC",
+        "OPL"
+      ]
+    }
+  },
+  "STAT 271": {
+    "2025-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "2025-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-summer": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC",
+        "TUT"
+      ]
+    }
+  },
+  "STAT 285": {
+    "2025-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "2025-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC",
+        "TUT"
+      ]
+    }
+  },
+  "STAT 300W": {
+    "2025-spring": [
+      "SEM"
+    ],
+    "2026-spring": [
+      "SEM"
+    ],
+    "future": {
+      "2027-spring": [
+        "SEM"
+      ]
+    }
+  },
+  "STAT 302": {
+    "2025-spring": [
+      "LEC",
+      "OPL"
+    ],
+    "2025-summer": [
+      "OLC"
+    ],
+    "2025-fall": [
+      "LEC",
+      "OLC",
+      "OPL"
+    ],
+    "2026-summer": [
+      "LEC",
+      "OLC",
+      "OPL"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC",
+        "OLC",
+        "OPL"
+      ]
+    }
+  },
+  "STAT 305": {
+    "2025-summer": [
+      "LEC",
+      "OPL"
+    ],
+    "2026-spring": [
+      "LEC",
+      "OPL"
+    ],
+    "2026-fall": [
+      "LEC",
+      "OPL"
+    ],
+    "future": {}
+  },
+  "STAT 310": {
+    "2025-fall": [
+      "LEC",
+      "RQL"
+    ],
+    "future": {}
+  },
+  "STAT 330": {
+    "2025-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "future": {}
+  },
+  "STAT 336": {
+    "2025-spring": [
+      "COP"
+    ],
+    "2025-summer": [
+      "COP"
+    ],
+    "2025-fall": [
+      "COP"
+    ],
+    "2026-spring": [
+      "COP"
+    ],
+    "2026-summer": [
+      "COP"
+    ],
+    "2026-fall": [
+      "COP"
+    ],
+    "future": {
+      "2027-spring": [
+        "COP"
+      ]
+    }
+  },
+  "STAT 337": {
+    "2025-spring": [
+      "COP"
+    ],
+    "2025-summer": [
+      "COP"
+    ],
+    "2025-fall": [
+      "COP"
+    ],
+    "2026-spring": [
+      "COP"
+    ],
+    "2026-summer": [
+      "COP"
+    ],
+    "2026-fall": [
+      "COP"
+    ],
+    "future": {
+      "2027-spring": [
+        "COP"
+      ]
+    }
+  },
+  "STAT 342": {
+    "2025-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC",
+        "TUT"
+      ]
+    }
+  },
+  "STAT 350": {
+    "2025-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "2025-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC",
+        "TUT"
+      ]
+    }
+  },
+  "STAT 360": {
+    "2026-spring": [
+      "LAB",
+      "LEC"
+    ],
+    "future": {
+      "2027-spring": [
+        "LAB",
+        "LEC"
+      ]
+    }
+  },
+  "STAT 380": {
+    "2025-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "future": {}
+  },
+  "STAT 403": {
+    "2025-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "future": {}
+  },
+  "STAT 410": {
+    "2026-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "future": {}
+  },
+  "STAT 430": {
+    "2026-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC",
+        "TUT"
+      ]
+    }
+  },
+  "STAT 436": {
+    "2025-spring": [
+      "COP"
+    ],
+    "2025-summer": [
+      "COP"
+    ],
+    "2025-fall": [
+      "COP"
+    ],
+    "2026-spring": [
+      "COP"
+    ],
+    "2026-summer": [
+      "COP"
+    ],
+    "2026-fall": [
+      "COP"
+    ],
+    "future": {
+      "2027-spring": [
+        "COP"
+      ]
+    }
+  },
+  "STAT 437": {
+    "2025-spring": [
+      "COP"
+    ],
+    "2025-summer": [
+      "COP"
+    ],
+    "2025-fall": [
+      "COP"
+    ],
+    "2026-spring": [
+      "COP"
+    ],
+    "2026-summer": [
+      "COP"
+    ],
+    "2026-fall": [
+      "COP"
+    ],
+    "future": {
+      "2027-spring": [
+        "COP"
+      ]
+    }
+  },
+  "STAT 438": {
+    "2025-spring": [
+      "COP"
+    ],
+    "2025-summer": [
+      "COP"
+    ],
+    "2025-fall": [
+      "COP"
+    ],
+    "2026-spring": [
+      "COP"
+    ],
+    "2026-summer": [
+      "COP"
+    ],
+    "2026-fall": [
+      "COP"
+    ],
+    "future": {
+      "2027-spring": [
+        "COP"
+      ]
+    }
+  },
+  "STAT 440": {
+    "2025-fall": [
+      "LAB"
+    ],
+    "2026-fall": [
+      "LAB"
+    ],
+    "future": {}
+  },
+  "STAT 445": {
+    "2025-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC",
+        "TUT"
+      ]
+    }
+  },
+  "STAT 450": {
+    "2025-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "future": {}
+  },
+  "STAT 452": {
+    "2025-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "future": {}
+  },
+  "STAT 460": {
+    "2025-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC",
+        "TUT"
+      ]
+    }
+  },
+  "STAT 475": {
+    "2025-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC",
+        "TUT"
+      ]
+    }
+  },
+  "STAT 485": {
+    "2025-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "future": {}
+  },
+  "STAT 490": {
+    "2025-spring": [
+      "LEC"
+    ],
+    "future": {}
+  },
+  "STAT 495": {
+    "2026-fall": [
+      "IND"
+    ],
+    "future": {}
+  },
+  "TEKX 101": {
+    "2025-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "2025-summer": [
+      "LEC",
+      "TUT"
+    ],
+    "2025-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-summer": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC",
+        "TUT"
+      ]
+    }
+  },
+  "URB 101": {
+    "2025-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "future": {}
+  },
+  "WL 100": {
+    "2025-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "2025-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC",
+        "TUT"
+      ]
+    }
+  },
+  "WL 101W": {
+    "2025-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "2025-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC",
+        "TUT"
+      ]
+    }
+  },
+  "WL 103W": {
+    "2025-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "2025-summer": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-summer": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "future": {}
+  },
+  "WL 104W": {
+    "2025-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "2025-fall": [
+      "LEC",
+      "TUT"
+    ],
+    "2026-spring": [
+      "LEC",
+      "TUT"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC",
+        "TUT"
+      ]
+    }
+  },
+  "WL 200": {
+    "2025-fall": [
+      "LEC"
+    ],
+    "future": {
+      "2027-spring": [
+        "LEC"
+      ]
+    }
+  },
+  "WL 201": {
+    "2026-fall": [
+      "LEC"
+    ],
+    "future": {}
+  },
+  "WL 202": {
+    "2025-fall": [
+      "LEC"
+    ],
+    "future": {}
+  },
+  "WL 203": {
+    "2026-spring": [
+      "LEC"
+    ],
+    "future": {}
+  },
+  "WL 204": {
+    "2025-spring": [
+      "LEC"
+    ],
+    "future": {}
+  },
+  "WL 300": {
+    "2026-spring": [
+      "SEM",
+      "TUT"
+    ],
+    "future": {}
+  },
+  "WL 301W": {
+    "future": {
+      "2027-spring": [
+        "SEM",
+        "TUT"
+      ]
+    }
+  },
+  "WL 303": {
+    "future": {
+      "2027-spring": [
+        "SEM",
+        "TUT"
+      ]
+    }
+  },
+  "WL 304": {
+    "2025-spring": [
+      "SEM",
+      "TUT"
+    ],
+    "2026-fall": [
+      "SEM"
+    ],
+    "future": {}
+  },
+  "WL 305W": {
+    "2026-spring": [
+      "SEM",
+      "TUT"
+    ],
+    "future": {}
+  },
+  "WL 306": {
+    "2025-fall": [
+      "SEM",
+      "TUT"
+    ],
+    "future": {}
+  },
+  "WL 308": {
+    "2025-spring": [
+      "SEM",
+      "TUT"
+    ],
+    "2026-fall": [
+      "SEM",
+      "TUT"
+    ],
+    "future": {}
+  },
+  "WL 309": {
+    "2025-fall": [
+      "SEM"
+    ],
+    "future": {}
+  },
+  "WL 320": {
+    "2025-summer": [
+      "SEM",
+      "TUT"
+    ],
+    "2026-spring": [
+      "SEM",
+      "TUT"
+    ],
+    "2026-summer": [
+      "SEM",
+      "TUT"
+    ],
+    "future": {}
+  },
+  "WL 340": {
+    "2025-spring": [
+      "IND"
+    ],
+    "2026-spring": [
+      "IND"
+    ],
+    "future": {
+      "2027-spring": [
+        "IND"
+      ]
+    }
+  },
+  "WL 360": {
+    "2025-summer": [
+      "SEM"
+    ],
+    "future": {
+      "2027-spring": [
+        "SEM",
+        "TUT"
+      ]
+    }
+  },
+  "WL 400": {
+    "2026-spring": [
+      "SEM"
+    ],
+    "future": {}
+  },
+  "WL 401": {
+    "2026-fall": [
+      "SEM"
+    ],
+    "future": {}
+  },
+  "WL 402": {
+    "future": {
+      "2027-spring": [
+        "SEM"
+      ]
+    }
+  },
+  "WL 404W": {
+    "2025-spring": [
+      "SEM"
+    ],
+    "future": {}
+  },
+  "WL 410": {
+    "2025-fall": [
+      "SEM"
+    ],
+    "future": {}
+  },
+  "WL 480": {
+    "2025-fall": [
+      "SEM"
+    ],
+    "future": {}
+  },
+  "WL 490": {
+    "2026-spring": [
+      "SEM"
+    ],
+    "future": {}
+  }
+}

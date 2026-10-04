@@ -4,13 +4,13 @@ StormHacks 2026 academic advisor for degree progress, course choice, and next-se
 
 **Read [README.md](README.md) before making changes.** It is the product and implementation plan. [docs/user-flow.md](docs/user-flow.md) is the proposed student journey.
 
-**Status: planning and initial scaffolding. The advisor is not built yet.** Planned features, integrations, and tracks are not implemented unless README lists them as present. Do not describe or build as if accounts, transcripts, audits, plans, advising chat, ElevenLabs, Snowflake, or deployment already exist. Gemini is only the server client in `src/lib/ai/google.ts`.
+**Status: the rules engine and data pipeline are built; the student-facing advisor is not.** Built: degree audit, prerequisite evaluator and plan validator (`src/engine`, unit-tested), the requirements and course-data pipeline (`data/sheets` → `data/generated`), and a server-side Snowflake data layer (`src/lib/data`). Not built: accounts, transcripts, the planner UI, advising chat, ElevenLabs, and deployment. Do not describe or build as if those exist. Gemini is only the server client in `src/lib/ai/google.ts`.
 
 ## Scope
 
 First version: **Simon Fraser University Bachelor of Business Administration**, **Fall 2026** requirements. Demo student: **Finance**.
 
-[Requirements.csv](Requirements.csv) also covers Accounting, Innovation and Entrepreneurship, Human Resource Management, International Business, Management Information Systems, Marketing, Operations Management, and Strategic Analysis (91 source-referenced rules: BBA core, concentrations, Beedie, and university/WQB). It is a curated starting point, not an executable rules engine. Do not use it for advice until rule encoding, exceptions, import, and tests are agreed. Prerequisites need separate curation.
+[data/sheets/requirements.csv](data/sheets/requirements.csv) also covers Accounting, Innovation and Entrepreneurship, Human Resource Management, International Business, Management Information Systems, Marketing, Operations Management, and Strategic Analysis (96 source-referenced rows, 90 in scope: BBA core, concentrations, Beedie, and university/WQB). `npm run data:build` validates and imports it, and the audit engine evaluates it with unit tests; every row is still `beta` (none verified). Do not use it for advice until rule encoding, exceptions, import, and tests are agreed. Prerequisites need separate curation: they are parsed from the SFU course outlines into `data/generated/prereqs.json`, with hand corrections in `data/sheets/prereq-overrides.csv`.
 
 Other universities, degrees, and requirement terms are out of scope until each has verified sources and rules.
 
@@ -18,9 +18,9 @@ Other universities, degrees, and requirement terms are out of scope until each h
 
 | Present | Not built |
 | --- | --- |
-| Next.js 16, React 19, TypeScript, Tailwind CSS 4, shadcn/Base UI. Homepage `src/app/page.tsx` is still starter content. Gemini client: `src/lib/ai/google.ts` using the Vercel AI SDK and `gemini-2.5-flash`. | Auth, database, transcript processing, degree audit, planner, advising chat, ElevenLabs, Snowflake, private file storage, deployment, .tech domain. |
+| Next.js 16, React 19, TypeScript, Tailwind CSS 4, shadcn/Base UI. Homepage `src/app/page.tsx` is still starter content (plus a badge showing the data source). Gemini client: `src/lib/ai/google.ts` using the Vercel AI SDK and `gemini-2.5-flash`. Rules engine in `src/engine` (degree audit, prerequisite evaluator, plan validator) with Vitest tests. Data pipeline: SFU Course Outlines fetch, requirements CSV validation, prerequisite parser. Snowflake reference-data tables in `myadvisor.app`, read by `src/lib/data`. | Auth, Postgres application database (`db/migrations` has no migrations yet), transcript processing, planner UI, advising chat, ElevenLabs, private file storage, deployment, .tech domain. |
 
-Scripts: `npm ci`, `npm run dev` (http://localhost:3000), `npm run lint`, `npm run build`, `npm run start`. There is no test script yet.
+Scripts: `npm ci`, `npm run dev` (http://localhost:3000), `npm run lint`, `npm run build`, `npm run start`, `npm run test` (Vitest), `npm run check` (lint, typecheck, tests), `npm run data:build`, `npm run data:parity`. Full list in [CLAUDE.md](CLAUDE.md) section 8.
 
 ## Architecture
 
@@ -36,6 +36,7 @@ Student → Next.js → authenticated backend orchestrator
 
 - **Gemini is the main LLM**, called only through the Vercel AI SDK (`ai` and `@ai-sdk/google`) from server route handlers or `src/lib/ai/google.ts`. Model: `gemini-2.5-flash`. Do not call the Gemini REST API, `@google/genai`, or `@google/generative-ai`. Structured JSON uses `generateText` with `Output.object` and `jsonSchema`, then a hand-written type guard. Plain text uses `generateText`. Streaming chat uses `streamText` and `toUIMessageStreamResponse`. Tool loops use `tool`, `jsonSchema`, and `stopWhen: stepCountIs(n)`. Read `GOOGLE_GENERATIVE_AI_API_KEY` at request time. If it is missing, return HTTP 500 with `{ error: "Missing GOOGLE_GENERATIVE_AI_API_KEY." }` before calling the model. On model failure, timeout, or bad output, return the deterministic fallback instead of throwing.
 - **Snowflake Postgres is the application database**, reached with a PostgreSQL client over SSL through the backend. A Snowflake AI/search REST call is a separate service. Postgres use alone does not satisfy the Snowflake REST API track, and Cortex Search does not index these Postgres tables automatically.
+- Current state (separate from the Postgres plan above): reference data (courses, prerequisites, requirements, offerings, `calendar_chunks`) is loaded into Snowflake tables in `myadvisor.app` by `scripts/load-snowflake.mjs` and `scripts/build-search.mjs`, and read with `snowflake-sdk` (key-pair auth) in `src/lib/data/snowflake.ts` behind `DATA_SOURCE=json|snowflake`, with the `data/generated/` JSON snapshot as fallback. Calendar search is plain SQL `ILIKE`; Cortex Search and `EMBED` are blocked on the current trial account.
 - Backend framework and host are undecided. FastAPI on AWS Lambda is an option in the team sketch, not a decision.
 - API keys, database access, and storage credentials stay on the server. Never commit secrets or put them in client bundles. Gemini uses `GOOGLE_GENERATIVE_AI_API_KEY` in `.env.local`. Do not prefix it with `NEXT_PUBLIC_`.
 

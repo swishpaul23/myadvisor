@@ -1,0 +1,18 @@
+{
+  "baseUrl": "https://www.sfu.ca/bin/wcm/course-outlines",
+  "robotsUrl": "https://www.sfu.ca/robots.txt",
+  "departments": [
+    "BUS",
+    "ECON",
+    "MATH",
+    "STAT",
+    "ENGL",
+    "PHIL",
+    "WL",
+    "INDG"
+  ],
+  "endTerm": "2026/fall",
+  "termCount": 6,
+  "maxCourseNumber": 499,
+  "requestIntervalMs": 1000
+}

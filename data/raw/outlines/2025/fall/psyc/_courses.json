@@ -1,0 +1,382 @@
+[
+  {
+    "text": "100",
+    "value": "100",
+    "title": "Introduction to Psychology I"
+  },
+  {
+    "text": "102",
+    "value": "102",
+    "title": "Introduction to Psychology II"
+  },
+  {
+    "text": "201W",
+    "value": "201w",
+    "title": "Introduction to Research Methods in Psychology"
+  },
+  {
+    "text": "210",
+    "value": "210",
+    "title": "Introduction to Data Analysis in Psychology"
+  },
+  {
+    "text": "221",
+    "value": "221",
+    "title": "Introduction to Cognitive Psychology"
+  },
+  {
+    "text": "241",
+    "value": "241",
+    "title": "Introduction to Psychological Disorders and Neurodiversity"
+  },
+  {
+    "text": "250",
+    "value": "250",
+    "title": "Introduction to Developmental Psychology"
+  },
+  {
+    "text": "260",
+    "value": "260",
+    "title": "Introduction to Social Psychology"
+  },
+  {
+    "text": "268",
+    "value": "268",
+    "title": "Introduction to Law and Psychology"
+  },
+  {
+    "text": "280",
+    "value": "280",
+    "title": "Introduction to Biological Psychology"
+  },
+  {
+    "text": "300W",
+    "value": "300w",
+    "title": "Critical Analysis of Issues in Psychology"
+  },
+  {
+    "text": "301",
+    "value": "301",
+    "title": "Intermediate Research Methods and Data Analysis"
+  },
+  {
+    "text": "303",
+    "value": "303",
+    "title": "Perception"
+  },
+  {
+    "text": "330",
+    "value": "330",
+    "title": "Attention"
+  },
+  {
+    "text": "352",
+    "value": "352",
+    "title": "Culture and Cognition"
+  },
+  {
+    "text": "359",
+    "value": "359",
+    "title": "Developmental Disabilities"
+  },
+  {
+    "text": "362",
+    "value": "362",
+    "title": "Close Relationships"
+  },
+  {
+    "text": "363",
+    "value": "363",
+    "title": "Intergroup Relations"
+  },
+  {
+    "text": "365",
+    "value": "365",
+    "title": "Health Psychology"
+  },
+  {
+    "text": "367",
+    "value": "367",
+    "title": "Psychological Perspectives on Human Sexuality"
+  },
+  {
+    "text": "371",
+    "value": "371",
+    "title": "Intervention: Process and Outcome"
+  },
+  {
+    "text": "376",
+    "value": "376",
+    "title": "Selected Topics in Experimental Psychology and Law"
+  },
+  {
+    "text": "385",
+    "value": "385",
+    "title": "Evolution and Psychology"
+  },
+  {
+    "text": "386",
+    "value": "386",
+    "title": "Laboratory in Human Electrophysiology"
+  },
+  {
+    "text": "388",
+    "value": "388",
+    "title": "Biological Rhythms and Sleep"
+  },
+  {
+    "text": "391",
+    "value": "391",
+    "title": "Selected Topics in Psychology"
+  },
+  {
+    "text": "393",
+    "value": "393",
+    "title": "Research Engagement"
+  },
+  {
+    "text": "410",
+    "value": "410",
+    "title": "Research Design I"
+  },
+  {
+    "text": "441",
+    "value": "441",
+    "title": "Advanced Topics in Clinical Psychology"
+  },
+  {
+    "text": "450",
+    "value": "450",
+    "title": "Advanced Topics in Developmental Psychology"
+  },
+  {
+    "text": "457",
+    "value": "457",
+    "title": "Behavioural Neuroscience Undergraduate Honours Thesis Proposal"
+  },
+  {
+    "text": "461",
+    "value": "461",
+    "title": "Advanced Topics in Social Psychology"
+  },
+  {
+    "text": "476",
+    "value": "476",
+    "title": "Advanced Topics in Law and Forensic Psychology"
+  },
+  {
+    "text": "480",
+    "value": "480",
+    "title": "Advanced Topics in Biological Psychology"
+  },
+  {
+    "text": "490",
+    "value": "490",
+    "title": "Honours Project"
+  },
+  {
+    "text": "493",
+    "value": "493",
+    "title": "Directed Studies"
+  },
+  {
+    "text": "494",
+    "value": "494",
+    "title": "Directed Studies"
+  },
+  {
+    "text": "495",
+    "value": "495",
+    "title": "Directed Studies"
+  },
+  {
+    "text": "499",
+    "value": "499",
+    "title": "Honours Project"
+  },
+  {
+    "text": "600",
+    "value": "600",
+    "title": "Biological Bases of Behaviour"
+  },
+  {
+    "text": "744",
+    "value": "744",
+    "title": "Proseminar in Psychopathology"
+  },
+  {
+    "text": "790",
+    "value": "790",
+    "title": "Proseminar in Law and Psychology"
+  },
+  {
+    "text": "819",
+    "value": "819",
+    "title": "Ethics and Professional Issues"
+  },
+  {
+    "text": "820A",
+    "value": "820a",
+    "title": "Psychological Assessment I"
+  },
+  {
+    "text": "821A",
+    "value": "821a",
+    "title": "Practicum in Psychological Assessment I"
+  },
+  {
+    "text": "822",
+    "value": "822",
+    "title": "Psychological Intervention I"
+  },
+  {
+    "text": "825",
+    "value": "825",
+    "title": "Clinical Practice"
+  },
+  {
+    "text": "836",
+    "value": "836",
+    "title": "Forensic Assessment"
+  },
+  {
+    "text": "880",
+    "value": "880",
+    "title": "Junior Practicum"
+  },
+  {
+    "text": "881",
+    "value": "881",
+    "title": "Senior Practicum"
+  },
+  {
+    "text": "882",
+    "value": "882",
+    "title": "Neuropsychology Practicum"
+  },
+  {
+    "text": "886",
+    "value": "886",
+    "title": "Internship"
+  },
+  {
+    "text": "890",
+    "value": "890",
+    "title": "Practicum in Clinical Forensic Psychology"
+  },
+  {
+    "text": "892",
+    "value": "892",
+    "title": "Research/Policy Practicum in Law and Psychology"
+  },
+  {
+    "text": "895",
+    "value": "895",
+    "title": "MA Thesis Proposal"
+  },
+  {
+    "text": "896",
+    "value": "896",
+    "title": "PhD Thesis Proposal"
+  },
+  {
+    "text": "897",
+    "value": "897",
+    "title": "Research Project/Law & Psyc/Forensic Psyc"
+  },
+  {
+    "text": "898",
+    "value": "898",
+    "title": "MA Thesis"
+  },
+  {
+    "text": "899",
+    "value": "899",
+    "title": "PhD Thesis"
+  },
+  {
+    "text": "910",
+    "value": "910",
+    "title": "Research Design I: Experiments"
+  },
+  {
+    "text": "912",
+    "value": "912",
+    "title": "Research Seminar"
+  },
+  {
+    "text": "913",
+    "value": "913",
+    "title": "Research Seminar"
+  },
+  {
+    "text": "914",
+    "value": "914",
+    "title": "Research Seminar"
+  },
+  {
+    "text": "916",
+    "value": "916",
+    "title": "Research Seminar"
+  },
+  {
+    "text": "917",
+    "value": "917",
+    "title": "Research Seminar"
+  },
+  {
+    "text": "918",
+    "value": "918",
+    "title": "Research Seminar"
+  },
+  {
+    "text": "925",
+    "value": "925",
+    "title": "Seminar in Cognitive Processes"
+  },
+  {
+    "text": "950",
+    "value": "950",
+    "title": "Seminar in Developmental Psychology"
+  },
+  {
+    "text": "960",
+    "value": "960",
+    "title": "Seminar in Social Psychology"
+  },
+  {
+    "text": "990",
+    "value": "990",
+    "title": "Seminar in Law and Psychology"
+  },
+  {
+    "text": "991",
+    "value": "991",
+    "title": "Research Comprehensive Examination 1"
+  },
+  {
+    "text": "992",
+    "value": "992",
+    "title": "Research Comprehensive Examination 2"
+  },
+  {
+    "text": "993",
+    "value": "993",
+    "title": "Research Comprehensive Examination 3"
+  },
+  {
+    "text": "997",
+    "value": "997",
+    "title": "Directed Studies"
+  },
+  {
+    "text": "998",
+    "value": "998",
+    "title": "Directed Readings"
+  },
+  {
+    "text": "999",
+    "value": "999",
+    "title": "PhD Clinical Comprehensive Examination"
+  }
+]

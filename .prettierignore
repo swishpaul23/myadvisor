@@ -1,0 +1,7 @@
+.next
+.venv
+node_modules
+package-lock.json
+data/raw
+data/generated
+data/sources

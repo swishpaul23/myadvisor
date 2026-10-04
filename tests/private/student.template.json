@@ -1,0 +1,23 @@
+{
+  "_readme": "Template for `npm run audit -- <path>`. Copy it to tests/private/<name>.json (gitignored) and fill in your own courses. Keys starting with _ are comments; the CLI ignores them. All values below are fictional dummies.",
+
+  "_program": "Program you are admitted to. Only \"BBA\" is supported. Used to resolve 'only open to business administration majors' prerequisite restrictions.",
+  "program": "BBA",
+
+  "_admissionTerm": "Term you were admitted to the BBA, as YYYY-season (season = spring, summer, fall). BUS 203/300/496 rows apply to admissions from 2022-fall.",
+  "admissionTerm": "2024-fall",
+
+  "_declaredConcentrations": "Zero or more of: Accounting, Finance, Human Resource Management, Innovation and Entrepreneurship, International Business, Management Information Systems, Marketing, Operations Management, Strategic Analysis. Only declared concentrations are audited.",
+  "declaredConcentrations": ["Finance"],
+
+  "_courses": "One entry per attempt (list a repeated course twice). Fields: code = \"DEPT NUMBER\" as in the calendar, e.g. \"BUS 217W\"; grade = A+ A A- B+ B B- C+ C C- D F FD N P W, or CR for transfer credit, or null if not finished; units = optional, only needed for a course the app has no data for; term = YYYY-season; institution = \"SFU\" or \"transfer\" (transfer courses use the SFU equivalent code); status = \"completed\", \"in_progress\" or \"planned\" (planned courses are ignored by the audit).",
+  "courses": [
+    { "code": "BUS 201", "grade": "B", "term": "2024-fall", "institution": "SFU", "status": "completed" },
+    { "code": "MATH 157", "grade": "D", "term": "2024-fall", "institution": "SFU", "status": "completed" },
+    { "code": "MATH 157", "grade": "B+", "term": "2025-spring", "institution": "SFU", "status": "completed" },
+    { "code": "ECON 105", "grade": "CR", "term": "2025-spring", "institution": "transfer", "status": "completed" },
+    { "code": "PSYC 106", "grade": "A-", "units": 3, "term": "2025-fall", "institution": "SFU", "status": "completed" },
+    { "code": "BUS 312", "grade": null, "term": "2026-fall", "institution": "SFU", "status": "in_progress" },
+    { "code": "BUS 313", "grade": null, "term": "2027-spring", "institution": "SFU", "status": "planned" }
+  ]
+}
