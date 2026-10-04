@@ -12,18 +12,34 @@ type SampleRequirement = {
   label: string;
   detail?: string;
   status: RequirementStatus;
+  source: string;
 };
 
-export const SAMPLE_REQUIREMENTS: readonly SampleRequirement[] = [
-  { label: "BBA core", status: "complete" },
+const SAMPLE_REQUIREMENTS: readonly SampleRequirement[] = [
+  { label: "BBA core", status: "complete", source: "Calendar · BBA" },
   {
     label: "Finance concentration",
     detail: "BUS 313 missing",
     status: "gap",
+    source: "Calendar · Finance",
   },
-  { label: "Finance electives", detail: "1 of 3", status: "progress" },
-  { label: "Writing, Quantitative, Breadth", status: "complete" },
-  { label: "Upper-division units", detail: "27 of 45", status: "progress" },
+  {
+    label: "Finance electives",
+    detail: "1 of 3",
+    status: "progress",
+    source: "Calendar · Finance",
+  },
+  {
+    label: "Writing, Quantitative, Breadth",
+    status: "complete",
+    source: "Calendar · WQB",
+  },
+  {
+    label: "Upper-division units",
+    detail: "27 of 45",
+    status: "progress",
+    source: "Calendar · BBA",
+  },
 ];
 
 const STATUS_TEXT: Record<RequirementStatus, string> = {
@@ -107,9 +123,21 @@ function StatusIcon({ status }: { status: RequirementStatus }) {
   );
 }
 
-export function RequirementList() {
+/** Requirement status rows. `withSource` adds the header row and calendar source column. */
+export function RequirementList({
+  withSource = false,
+}: {
+  withSource?: boolean;
+}) {
   return (
     <div className="flex flex-col rounded-[12px] border border-line-soft text-[13px]">
+      {withSource && (
+        <div className="flex items-center gap-3 rounded-t-[12px] border-b border-line-soft bg-surface-subtle px-4 py-3 text-[12px] text-ink-muted">
+          <span className="flex-1">Requirement</span>
+          <span className="w-[120px]">Source</span>
+          <span className="w-[90px] text-right">Status</span>
+        </div>
+      )}
       {SAMPLE_REQUIREMENTS.map((req) => (
         <div
           key={req.label}
@@ -125,12 +153,16 @@ export function RequirementList() {
               <span className="text-ink-muted"> · {req.detail}</span>
             )}
           </span>
+          {withSource && (
+            <span className="w-[120px] text-ink-muted">{req.source}</span>
+          )}
           <span
-            className={
+            className={cn(
               req.status === "gap"
                 ? "font-semibold text-brand"
-                : "text-ink-muted"
-            }
+                : "text-ink-muted",
+              withSource && "w-[90px] text-right",
+            )}
           >
             {STATUS_TEXT[req.status]}
           </span>
