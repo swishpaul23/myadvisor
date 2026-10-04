@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { auth } from "@/auth";
+import type { ApiError } from "@/lib/app/types";
 import { authDecision } from "@/lib/auth/routes";
 
 // Next 16 "proxy" (formerly middleware). Public: the landing page, /sign-in, /api/auth/* and
@@ -9,7 +10,14 @@ export const proxy = auth((req) => {
   const decision = authDecision(req.nextUrl, Boolean(req.auth?.user));
   if (decision.kind === "redirect") return NextResponse.redirect(decision.url);
   if (decision.kind === "unauthorized")
-    return NextResponse.json({ error: "Not signed in." }, { status: 401 });
+    return NextResponse.json(
+      {
+        ok: false,
+        error: "unauthorized",
+        message: "Sign in to continue.",
+      } satisfies ApiError,
+      { status: 401 },
+    );
   return NextResponse.next();
 });
 

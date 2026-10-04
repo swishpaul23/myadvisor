@@ -3,6 +3,7 @@
 import { redirect } from "next/navigation";
 import {
   draftToProfile,
+  firstOpenStep,
   parseAnswer,
   parseStep,
   stepIndex,
@@ -50,6 +51,37 @@ export async function saveStep(
   const failed = await save({ ...state, draft });
   if (failed) return failed;
   redirect(`/app/start/${nextSlug(slug)}`);
+}
+
+/**
+ * Transcript review: the student fixed any rows and ticked "Reviewed and confirmed". The
+ * courses replace the draft's list (same validation as manual entry) and onboarding
+ * continues at the first unfinished step.
+ */
+export async function saveTranscriptReview(
+  _prev: ActionResult | null,
+  form: FormData,
+): Promise<ActionResult> {
+  const parsed = parseStep("courses", form);
+  if (!parsed.ok) return parsed;
+  if (form.get("confirm") !== "on") {
+    return {
+      ok: false,
+      error: "Check each course, then tick “Reviewed and confirmed”.",
+      fieldErrors: { confirm: "Confirm you've checked every course." },
+    };
+  }
+  const state = await readState();
+  const draft = {
+    ...(state.draft ?? { step: 0 }),
+    ...parsed.data,
+    origin: "transcript" as const,
+    recordConfirmed: true,
+  };
+  draft.step = Math.max(draft.step, stepIndex("courses") + 1);
+  const failed = await save({ ...state, draft });
+  if (failed) return failed;
+  redirect(`/app/start/${firstOpenStep(draft)}`);
 }
 
 /** One survey answer (or Skip), saved as soon as it's given. */

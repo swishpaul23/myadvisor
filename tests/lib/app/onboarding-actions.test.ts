@@ -133,4 +133,42 @@ describe("onboarding server actions", () => {
       draft: null,
     });
   });
+
+  test("a reviewed transcript needs the tick, then continues onboarding", async () => {
+    const courses = JSON.stringify([
+      {
+        code: "BUS 201",
+        term: "2024-fall",
+        status: "completed",
+        grade: "B",
+        institution: "SFU",
+        units: null,
+      },
+    ]);
+    const unticked = await actions.saveTranscriptReview(
+      null,
+      form([["courses", courses]]),
+    );
+    expect(unticked).toMatchObject({
+      ok: false,
+      fieldErrors: { confirm: expect.any(String) },
+    });
+    expect(writeState).not.toHaveBeenCalled();
+
+    const to = await redirectOf(
+      actions.saveTranscriptReview(
+        null,
+        form([
+          ["courses", courses],
+          ["confirm", "on"],
+        ]),
+      ),
+    );
+    expect(to).toBe("/app/start/program"); // program not done yet
+    expect(stored.draft).toMatchObject({
+      origin: "transcript",
+      recordConfirmed: true,
+      step: 3,
+    });
+  });
 });

@@ -149,6 +149,11 @@ export function CourseEditor({
                         aria-invalid={Boolean(err("term"))}
                         className={SELECT}
                       >
+                        {!row.term && (
+                          <option value="" disabled>
+                            Pick a term
+                          </option>
+                        )}
                         {!termOptions.includes(row.term) && row.term && (
                           <option value={row.term}>
                             {termLabel(row.term)}

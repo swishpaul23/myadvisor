@@ -137,6 +137,29 @@ export type Plan = {
   claims: Claim[];
 };
 
+/** Machine-readable error codes every app API route may return, with a plain message. */
+export type ApiErrorCode =
+  | "unauthorized"
+  | "invalid_input"
+  | "file_too_large"
+  | "not_a_pdf"
+  | "upload_unavailable"
+  | "unreadable"
+  | "server_error";
+export type ApiError = { ok: false; error: ApiErrorCode; message: string };
+
+/** POST /api/transcript: courses read from the PDF, for the student to review. */
+export type TranscriptResult =
+  | {
+      ok: true;
+      courses: RecordCourse[];
+      /** Row index -> what to double-check. */
+      flags: Record<number, string>;
+      cgpa: number | null;
+      standing: string | null;
+    }
+  | ApiError;
+
 /** A server action result: ok, or a plain-language error with per-field messages. */
 export type ActionResult<T = undefined> =
   | { ok: true; data: T }
