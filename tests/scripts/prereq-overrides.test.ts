@@ -215,9 +215,10 @@ describe("parseOverridesCsv", () => {
 
 describe("applyOverrides", () => {
   const records = [
+    // A still-partial calendar string (REM 320W's text), under the override's course code.
     parsePrerequisites(
       "BUS 312",
-      "BUS 254 and (BUS 232 or ECON 233 or STAT 270 or STAT 271), both with a minimum grade of C- and 45 units; OR actuarial science students with BUS 254 and (BUS 232 or ECON 233 or STAT 270 or STAT 271), both with a minimum grade of C- and 45 units.",
+      "45 units. Philosophy Majors and Minors may not take this course for credit towards their major or minor degree.",
       null,
     ),
     parsePrerequisites("BUS 303", "45 units.", null),

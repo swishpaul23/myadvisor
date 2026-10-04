@@ -12,7 +12,9 @@ export function isTextNode(node: PrereqNode): boolean {
     node.type === "unknown" ||
     node.type === "count" ||
     node.type === "permission" ||
-    node.type === "restriction"
+    node.type === "restriction" ||
+    node.type === "alt_group" ||
+    node.type === "external"
   );
 }
 

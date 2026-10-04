@@ -1,4 +1,5 @@
 import type { PrereqNode } from "@/lib/data/prereqs";
+import { matchAltGroup } from "./fragments";
 import { lex, type Token } from "./lexer";
 import {
   applyGrade,
@@ -428,6 +429,9 @@ export function parseClause(raw: string): PrereqNode | null {
     .replace(/[\s.;,]+$/, "");
   if (!text) return null;
 
+  const alt = splitAltGroup(text);
+  if (alt) return alt;
+
   // Nothing we can map at all (admission rules, "To be determined ..."): one unknown.
   const all = lex(text);
   if (!all.some((t) => t.kind === "course" || t.kind === "units"))
@@ -472,6 +476,48 @@ export function parseClause(raw: string): PrereqNode | null {
     if (e instanceof Ambiguous) return unknown(text);
     throw e;
   }
+}
+
+const OR_AT = /(?:,\s*)?\s+(?:or|OR)\s+/g;
+const TRAILING_GROUP_GRADE =
+  /,\s*(?:(?:both|all)\s+)?with\s+(?:a\s+minimum\s+grade\s+of|a\s+grade\s+of\s+at\s+least)\s+([A-D][+-]?)$/;
+
+/**
+ * "45 units OR business administration minor students ... with 45 units",
+ * "BUS 360W or innovation and entrepreneurship certificate students with ..., with a
+ * minimum grade of C-": an alternative for another student group (alt_group) after a
+ * top-level "or". A trailing group grade (", both with a minimum grade of C-") covers both
+ * sides, so it is applied to the left side too. The left side may itself be a group
+ * ("Students admitted prior to Fall 2023 with ..., or students admitted Fall 2023 onward ...").
+ */
+function splitAltGroup(text: string): PrereqNode | null {
+  for (const m of text.matchAll(OR_AT)) {
+    const at = m.index;
+    let depth = 0;
+    for (const ch of text.slice(0, at)) {
+      if (ch === "(") depth++;
+      if (ch === ")") depth--;
+    }
+    if (depth !== 0) continue;
+
+    const left = text.slice(0, at).trim();
+    const right = text.slice(at + m[0].length).trim();
+    const grade = TRAILING_GROUP_GRADE.exec(right);
+    const core = grade ? right.slice(0, grade.index) : right;
+    const altRight = matchAltGroup(core);
+    if (!altRight || altRight.type !== "alt_group" || !left) continue;
+    altRight.text = right;
+
+    const leftNode = matchAltGroup(left) ?? parseClause(left);
+    if (!leftNode) continue;
+    if (grade && leftNode.type !== "alt_group") {
+      // The grade can't be placed safely on units or text nodes; keep everything verbatim.
+      if (hasUnits(leftNode) || containsUnknown(leftNode)) return unknown(text);
+      applyGrade(leftNode, grade[1] as "C-");
+    }
+    return group("any", [leftNode, altRight]);
+  }
+  return null;
 }
 
 /**

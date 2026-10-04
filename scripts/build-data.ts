@@ -39,7 +39,7 @@ import {
 import { prereqsFileSchema } from "@/lib/data/prereqs";
 import { courseReferencesFromRequirementsCsv } from "./lib/outlines/requirements";
 import { parsePrerequisites } from "./lib/prereqs";
-import { walk } from "./lib/prereqs/nodes";
+import { isTextNode, walk } from "./lib/prereqs/nodes";
 import { applyOverrides, parseOverridesCsv } from "./lib/prereqs/overrides";
 import { codesWithoutData, topFragments } from "./lib/prereqs/report";
 import { validateRequirementsCsv } from "./validate-requirements";
@@ -219,17 +219,13 @@ const nodeKinds: Record<string, number> = {};
 for (const r of prereqs) {
   for (const tree of [r.prereq, r.coreq]) {
     walk(tree, (n) => {
-      if (
-        n.type === "count" ||
-        n.type === "permission" ||
-        n.type === "restriction"
-      ) {
+      if (isTextNode(n) && n.type !== "unknown") {
         nodeKinds[n.type] = (nodeKinds[n.type] ?? 0) + 1;
       }
     });
   }
 }
-printCounts("Typed text nodes (count / permission / restriction)", nodeKinds);
+printCounts("Typed text nodes", nodeKinds);
 
 const prereqCounts: Record<string, number> = {};
 for (const r of prereqs)

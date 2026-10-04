@@ -195,26 +195,25 @@
           ]
         },
         {
-          "type": "unknown",
+          "type": "alt_group",
+          "group": "business administration joint major, joint honours, or double degree students",
           "text": "business administration joint major, joint honours, or double degree students with 45 units"
         },
         {
-          "type": "unknown",
+          "type": "alt_group",
+          "group": "data science students",
           "text": "data science students with 15 units"
         },
         {
-          "type": "unknown",
+          "type": "alt_group",
+          "group": "actuarial science students",
           "text": "actuarial science students with 15 units"
         }
       ]
     },
     "coreq": null,
-    "status": "partial",
-    "unparsed_fragments": [
-      "business administration joint major, joint honours, or double degree students with 45 units",
-      "data science students with 15 units",
-      "actuarial science students with 15 units"
-    ],
+    "status": "parsed",
+    "unparsed_fragments": [],
     "source": "parsed",
     "raw": "BUS 201 with a minimum grade of C- and 15 units; OR 45 units and corequisite: BUS 202; OR business administration joint major, joint honours, or double degree students with 45 units; OR data science students with 15 units; OR actuarial science students with 15 units.",
     "raw_coreq": null,
@@ -577,16 +576,15 @@
           ]
         },
         {
-          "type": "unknown",
+          "type": "alt_group",
+          "group": "actuarial science students",
           "text": "actuarial science students with BUS 254 and (BUS 232 or ECON 233 or STAT 270 or STAT 271), both with a minimum grade of C- and 45 units"
         }
       ]
     },
     "coreq": null,
-    "status": "partial",
-    "unparsed_fragments": [
-      "actuarial science students with BUS 254 and (BUS 232 or ECON 233 or STAT 270 or STAT 271), both with a minimum grade of C- and 45 units"
-    ],
+    "status": "parsed",
+    "unparsed_fragments": [],
     "source": "parsed",
     "raw": "BUS 254 and (BUS 232 or ECON 233 or STAT 270 or STAT 271), both with a minimum grade of C- and 45 units; OR actuarial science students with BUS 254 and (BUS 232 or ECON 233 or STAT 270 or STAT 271), both with a minimum grade of C- and 45 units. Recommended: BUS 207 or ECON 201.",
     "raw_coreq": null,
@@ -668,16 +666,15 @@
           ]
         },
         {
-          "type": "unknown",
+          "type": "alt_group",
+          "group": "business administration minor students admitted Fall 2025 - onwards",
           "text": "business administration minor students admitted Fall 2025 - onwards with BUS 240 with a minimum grade of C- and 45 units"
         }
       ]
     },
     "coreq": null,
-    "status": "partial",
-    "unparsed_fragments": [
-      "business administration minor students admitted Fall 2025 - onwards with BUS 240 with a minimum grade of C- and 45 units"
-    ],
+    "status": "parsed",
+    "unparsed_fragments": [],
     "source": "parsed",
     "raw": "BUS 238 or BUS 240, with a minimum grade of C- and 45 units; OR business administration minor students admitted Fall 2025 - onwards with BUS 240 with a minimum grade of C- and 45 units.",
     "raw_coreq": null,
@@ -721,16 +718,15 @@
           ]
         },
         {
-          "type": "unknown",
+          "type": "alt_group",
+          "group": "actuarial science students",
           "text": "actuarial science students with STAT 285 and (BUS 312 or ACMA 201 or RISK 201), both with a minimum grade of C- and 45 units"
         }
       ]
     },
     "coreq": null,
-    "status": "partial",
-    "unparsed_fragments": [
-      "actuarial science students with STAT 285 and (BUS 312 or ACMA 201 or RISK 201), both with a minimum grade of C- and 45 units"
-    ],
+    "status": "parsed",
+    "unparsed_fragments": [],
     "source": "parsed",
     "raw": "BUS 312 and (BUS 207 or ECON 201), both with a minimum grade of C- and 45 units; OR actuarial science students with STAT 285 and (BUS 312 or ACMA 201 or RISK 201), both with a minimum grade of C- and 45 units.",
     "raw_coreq": null,
@@ -763,16 +759,15 @@
           ]
         },
         {
-          "type": "unknown",
+          "type": "alt_group",
+          "group": "actuarial science students",
           "text": "actuarial science students with STAT 285 and BUS 312, both with a minimum grade of C- and 45 units"
         }
       ]
     },
     "coreq": null,
-    "status": "partial",
-    "unparsed_fragments": [
-      "actuarial science students with STAT 285 and BUS 312, both with a minimum grade of C- and 45 units"
-    ],
+    "status": "parsed",
+    "unparsed_fragments": [],
     "source": "parsed",
     "raw": "BUS 312 and BUS 336, both with a minimum grade of C- and 45 units; OR actuarial science students with STAT 285 and BUS 312, both with a minimum grade of C- and 45 units.",
     "raw_coreq": null,
@@ -1090,16 +1085,15 @@
           ]
         },
         {
-          "type": "unknown",
+          "type": "alt_group",
+          "group": "business administration minor students admitted Fall 2025 - onwards",
           "text": "business administration minor students admitted Fall 2025 - onwards with BUS 240 with a minimum grade of C- and 45 units"
         }
       ]
     },
     "coreq": null,
-    "status": "partial",
-    "unparsed_fragments": [
-      "business administration minor students admitted Fall 2025 - onwards with BUS 240 with a minimum grade of C- and 45 units"
-    ],
+    "status": "parsed",
+    "unparsed_fragments": [],
     "source": "parsed",
     "raw": "BUS 238 or BUS 240, with a minimum grade of C- and 45 units; OR business administration minor students admitted Fall 2025 - onwards with BUS 240 with a minimum grade of C- and 45 units.",
     "raw_coreq": null,
@@ -1201,16 +1195,15 @@
           ]
         },
         {
-          "type": "unknown",
+          "type": "alt_group",
+          "group": "data science majors",
           "text": "data science majors with BUS 343 with a minimum grade of C- and 45 units"
         }
       ]
     },
     "coreq": null,
-    "status": "partial",
-    "unparsed_fragments": [
-      "data science majors with BUS 343 with a minimum grade of C- and 45 units"
-    ],
+    "status": "parsed",
+    "unparsed_fragments": [],
     "source": "parsed",
     "raw": "BUS 232 or ECON 233 or STAT 270 or STAT 271, and BUS 343, both with a minimum grade of C- and 45 units; OR data science majors with BUS 343 with a minimum grade of C- and 45 units.",
     "raw_coreq": null,
@@ -1251,16 +1244,15 @@
           ]
         },
         {
-          "type": "unknown",
+          "type": "alt_group",
+          "group": "business administration minor students admitted Fall 2025 - onwards",
           "text": "business administration minor students admitted Fall 2025 - onwards with BUS 341 with a minimum grade of C- and 45 units"
         }
       ]
     },
     "coreq": null,
-    "status": "partial",
-    "unparsed_fragments": [
-      "business administration minor students admitted Fall 2025 - onwards with BUS 341 with a minimum grade of C- and 45 units"
-    ],
+    "status": "parsed",
+    "unparsed_fragments": [],
     "source": "parsed",
     "raw": "BUS 343 with a minimum grade of C- and 45 units; OR business administration minor students admitted Fall 2025 - onwards with BUS 341 with a minimum grade of C- and 45 units.",
     "raw_coreq": null,
@@ -1285,14 +1277,22 @@
   {
     "code": "BUS 361",
     "prereq": {
-      "type": "unknown",
-      "text": "45 units OR business administration minor students admitted Fall 2025 - onwards with 45 units"
+      "type": "any",
+      "of": [
+        {
+          "type": "units",
+          "min": 45
+        },
+        {
+          "type": "alt_group",
+          "group": "business administration minor students admitted Fall 2025 - onwards",
+          "text": "business administration minor students admitted Fall 2025 - onwards with 45 units"
+        }
+      ]
     },
     "coreq": null,
-    "status": "unparsed",
-    "unparsed_fragments": [
-      "45 units OR business administration minor students admitted Fall 2025 - onwards with 45 units"
-    ],
+    "status": "parsed",
+    "unparsed_fragments": [],
     "source": "parsed",
     "raw": "45 units OR business administration minor students admitted Fall 2025 - onwards with 45 units.",
     "raw_coreq": null,
@@ -1319,16 +1319,15 @@
           ]
         },
         {
-          "type": "unknown",
+          "type": "alt_group",
+          "group": "Data Science majors",
           "text": "Data Science majors with 45 units"
         }
       ]
     },
     "coreq": null,
-    "status": "partial",
-    "unparsed_fragments": [
-      "Data Science majors with 45 units"
-    ],
+    "status": "parsed",
+    "unparsed_fragments": [],
     "source": "parsed",
     "raw": "BUS 237 with a minimum grade of C-; 45 units; OR Data Science majors with 45 units.",
     "raw_coreq": null,
@@ -1428,16 +1427,15 @@
           ]
         },
         {
-          "type": "unknown",
+          "type": "alt_group",
+          "group": "business administration minor students admitted Fall 2025 - onwards",
           "text": "business administration minor students admitted Fall 2025 - onwards with BUS 272 with a minimum grade of C- and 45 units"
         }
       ]
     },
     "coreq": null,
-    "status": "partial",
-    "unparsed_fragments": [
-      "business administration minor students admitted Fall 2025 - onwards with BUS 272 with a minimum grade of C- and 45 units"
-    ],
+    "status": "parsed",
+    "unparsed_fragments": [],
     "source": "parsed",
     "raw": "45 units and BUS 272 with a minimum grade of C-; OR business administration minor students admitted Fall 2025 - onwards with BUS 272 with a minimum grade of C- and 45 units.",
     "raw_coreq": null,
@@ -1464,16 +1462,15 @@
           ]
         },
         {
-          "type": "unknown",
+          "type": "alt_group",
+          "group": "business administration minor students admitted Fall 2025 - onwards",
           "text": "business administration minor students admitted Fall 2025 - onwards with BUS 272 with a minimum grade of C- and 45 units"
         }
       ]
     },
     "coreq": null,
-    "status": "partial",
-    "unparsed_fragments": [
-      "business administration minor students admitted Fall 2025 - onwards with BUS 272 with a minimum grade of C- and 45 units"
-    ],
+    "status": "parsed",
+    "unparsed_fragments": [],
     "source": "parsed",
     "raw": "BUS 272 with a minimum grade of C- and 45 units; OR business administration minor students admitted Fall 2025 - onwards with BUS 272 with a minimum grade of C- and 45 units.",
     "raw_coreq": null,
@@ -2130,16 +2127,15 @@
           ]
         },
         {
-          "type": "unknown",
+          "type": "alt_group",
+          "group": "Data Science majors",
           "text": "Data Science majors with BUS 360W with a minimum grade of C- and 60 units"
         }
       ]
     },
     "coreq": null,
-    "status": "partial",
-    "unparsed_fragments": [
-      "Data Science majors with BUS 360W with a minimum grade of C- and 60 units"
-    ],
+    "status": "parsed",
+    "unparsed_fragments": [],
     "source": "parsed",
     "raw": "BUS 336, 360W, both with a minimum grade of C-; 60 units; OR Data Science majors with BUS 360W with a minimum grade of C- and 60 units.",
     "raw_coreq": null,
@@ -2218,16 +2214,15 @@
           ]
         },
         {
-          "type": "unknown",
+          "type": "alt_group",
+          "group": "data science majors",
           "text": "data science majors with BUS 360W, (BUS 445 or BUS 462), CMPT 354, all with a minimum grade of C- and 90 units"
         }
       ]
     },
     "coreq": null,
-    "status": "partial",
-    "unparsed_fragments": [
-      "data science majors with BUS 360W, (BUS 445 or BUS 462), CMPT 354, all with a minimum grade of C- and 90 units"
-    ],
+    "status": "parsed",
+    "unparsed_fragments": [],
     "source": "parsed",
     "raw": "BUS 345 or BUS 440, BUS 360W, BUS 437 or BUS 441, BUS 445, BUS 462, and BUS 464, all with a minimum grade of C-; 90 units; OR data science majors with BUS 360W, (BUS 445 or BUS 462), CMPT 354, all with a minimum grade of C- and 90 units.",
     "raw_coreq": null,
@@ -2260,25 +2255,15 @@
           ]
         },
         {
-          "type": "all",
-          "of": [
-            {
-              "type": "unknown",
-              "text": "Data Science majors with BUS 360W with a minimum grade of C-"
-            },
-            {
-              "type": "units",
-              "min": 60
-            }
-          ]
+          "type": "alt_group",
+          "group": "Data Science majors",
+          "text": "Data Science majors with BUS 360W with a minimum grade of C-, 60 units"
         }
       ]
     },
     "coreq": null,
-    "status": "partial",
-    "unparsed_fragments": [
-      "Data Science majors with BUS 360W with a minimum grade of C-"
-    ],
+    "status": "parsed",
+    "unparsed_fragments": [],
     "source": "parsed",
     "raw": "BUS 336, 360W, both with a minimum grade of C-, 60 units; OR Data Science majors with BUS 360W with a minimum grade of C-, 60 units.",
     "raw_coreq": null,
@@ -2350,8 +2335,31 @@
       "type": "all",
       "of": [
         {
-          "type": "unknown",
-          "text": "BUS 343 and BUS 360W, or innovation and entrepreneurship certificate students with BUS 343 and an upper division Writing (W) course, both with a minimum grade of C-"
+          "type": "any",
+          "of": [
+            {
+              "type": "all",
+              "of": [
+                {
+                  "type": "course",
+                  "code": "BUS 343",
+                  "minGrade": "C-",
+                  "concurrentOk": false
+                },
+                {
+                  "type": "course",
+                  "code": "BUS 360W",
+                  "minGrade": "C-",
+                  "concurrentOk": false
+                }
+              ]
+            },
+            {
+              "type": "alt_group",
+              "group": "innovation and entrepreneurship certificate students",
+              "text": "innovation and entrepreneurship certificate students with BUS 343 and an upper division Writing (W) course, both with a minimum grade of C-"
+            }
+          ]
         },
         {
           "type": "units",
@@ -2360,10 +2368,8 @@
       ]
     },
     "coreq": null,
-    "status": "partial",
-    "unparsed_fragments": [
-      "BUS 343 and BUS 360W, or innovation and entrepreneurship certificate students with BUS 343 and an upper division Writing (W) course, both with a minimum grade of C-"
-    ],
+    "status": "parsed",
+    "unparsed_fragments": [],
     "source": "parsed",
     "raw": "BUS 343 and BUS 360W, or innovation and entrepreneurship certificate students with BUS 343 and an upper division Writing (W) course, both with a minimum grade of C-; 60 units.",
     "raw_coreq": null,
@@ -2433,16 +2439,15 @@
           ]
         },
         {
-          "type": "unknown",
+          "type": "alt_group",
+          "group": "Data Science majors",
           "text": "Data Science majors with BUS 343, 360W, both with a minimum grade of C-, and 60 units"
         }
       ]
     },
     "coreq": null,
-    "status": "partial",
-    "unparsed_fragments": [
-      "Data Science majors with BUS 343, 360W, both with a minimum grade of C-, and 60 units"
-    ],
+    "status": "parsed",
+    "unparsed_fragments": [],
     "source": "parsed",
     "raw": "BUS 343, 336, 360W, all with a minimum grade of C-, 60 units; OR Data Science majors with BUS 343, 360W, both with a minimum grade of C-, and 60 units.",
     "raw_coreq": null,
@@ -2549,8 +2554,31 @@
       "type": "all",
       "of": [
         {
-          "type": "unknown",
-          "text": "BUS 343 and 360W, or corporate environmental and social sustainability certificate students with BUS 343 and upper division Writing (W) course, both with a minimum grade of C-"
+          "type": "any",
+          "of": [
+            {
+              "type": "all",
+              "of": [
+                {
+                  "type": "course",
+                  "code": "BUS 343",
+                  "minGrade": "C-",
+                  "concurrentOk": false
+                },
+                {
+                  "type": "course",
+                  "code": "BUS 360W",
+                  "minGrade": "C-",
+                  "concurrentOk": false
+                }
+              ]
+            },
+            {
+              "type": "alt_group",
+              "group": "corporate environmental and social sustainability certificate students",
+              "text": "corporate environmental and social sustainability certificate students with BUS 343 and upper division Writing (W) course, both with a minimum grade of C-"
+            }
+          ]
         },
         {
           "type": "units",
@@ -2559,10 +2587,8 @@
       ]
     },
     "coreq": null,
-    "status": "partial",
-    "unparsed_fragments": [
-      "BUS 343 and 360W, or corporate environmental and social sustainability certificate students with BUS 343 and upper division Writing (W) course, both with a minimum grade of C-"
-    ],
+    "status": "parsed",
+    "unparsed_fragments": [],
     "source": "parsed",
     "raw": "BUS 343 and 360W, or corporate environmental and social sustainability certificate students with BUS 343 and upper division Writing (W) course, both with a minimum grade of C-; 60 units.",
     "raw_coreq": null,
@@ -2574,8 +2600,20 @@
       "type": "all",
       "of": [
         {
-          "type": "unknown",
-          "text": "BUS 360W or innovation and entrepreneurship certificate students with an upper division Writing (W) course, with a minimum grade of C-"
+          "type": "any",
+          "of": [
+            {
+              "type": "course",
+              "code": "BUS 360W",
+              "minGrade": "C-",
+              "concurrentOk": false
+            },
+            {
+              "type": "alt_group",
+              "group": "innovation and entrepreneurship certificate students",
+              "text": "innovation and entrepreneurship certificate students with an upper division Writing (W) course, with a minimum grade of C-"
+            }
+          ]
         },
         {
           "type": "units",
@@ -2584,10 +2622,8 @@
       ]
     },
     "coreq": null,
-    "status": "partial",
-    "unparsed_fragments": [
-      "BUS 360W or innovation and entrepreneurship certificate students with an upper division Writing (W) course, with a minimum grade of C-"
-    ],
+    "status": "parsed",
+    "unparsed_fragments": [],
     "source": "parsed",
     "raw": "BUS 360W or innovation and entrepreneurship certificate students with an upper division Writing (W) course, with a minimum grade of C-; 60 units.",
     "raw_coreq": null,
@@ -2599,8 +2635,20 @@
       "type": "all",
       "of": [
         {
-          "type": "unknown",
-          "text": "BUS 360W or (corporate environmental and social sustainability certificate students or innovation and entrepreneurship certificate students with an upper division Writing (W) course), with a minimum grade of C-"
+          "type": "any",
+          "of": [
+            {
+              "type": "course",
+              "code": "BUS 360W",
+              "minGrade": "C-",
+              "concurrentOk": false
+            },
+            {
+              "type": "alt_group",
+              "group": "corporate environmental and social sustainability certificate students or innovation and entrepreneurship certificate students",
+              "text": "(corporate environmental and social sustainability certificate students or innovation and entrepreneurship certificate students with an upper division Writing (W) course), with a minimum grade of C-"
+            }
+          ]
         },
         {
           "type": "units",
@@ -2609,10 +2657,8 @@
       ]
     },
     "coreq": null,
-    "status": "partial",
-    "unparsed_fragments": [
-      "BUS 360W or (corporate environmental and social sustainability certificate students or innovation and entrepreneurship certificate students with an upper division Writing (W) course), with a minimum grade of C-"
-    ],
+    "status": "parsed",
+    "unparsed_fragments": [],
     "source": "parsed",
     "raw": "BUS 360W or (corporate environmental and social sustainability certificate students or innovation and entrepreneurship certificate students with an upper division Writing (W) course), with a minimum grade of C-; 60 units. Recommended: BUS 338.",
     "raw_coreq": null,
@@ -2696,25 +2742,15 @@
           ]
         },
         {
-          "type": "all",
-          "of": [
-            {
-              "type": "unknown",
-              "text": "data science majors with BUS 360W with a minimum grade of C-"
-            },
-            {
-              "type": "units",
-              "min": 60
-            }
-          ]
+          "type": "alt_group",
+          "group": "data science majors",
+          "text": "data science majors with BUS 360W with a minimum grade of C-, and 60 units"
         }
       ]
     },
     "coreq": null,
-    "status": "partial",
-    "unparsed_fragments": [
-      "data science majors with BUS 360W with a minimum grade of C-"
-    ],
+    "status": "parsed",
+    "unparsed_fragments": [],
     "source": "parsed",
     "raw": "BUS 360W and BUS 362, both with a minimum grade of C-, 60 units, and corequisite: BUS 336; OR data science majors with BUS 360W with a minimum grade of C-, and 60 units.",
     "raw_coreq": null,
@@ -2856,8 +2892,19 @@
       "type": "all",
       "of": [
         {
-          "type": "unknown",
-          "text": "Students admitted prior to Fall 2023 with (BUS 373 or BUS 336) and BUS 360W, or students admitted Fall 2023 onward with BUS 373 and BUS 360W"
+          "type": "any",
+          "of": [
+            {
+              "type": "alt_group",
+              "group": "Students admitted prior to Fall 2023",
+              "text": "Students admitted prior to Fall 2023 with (BUS 373 or BUS 336) and BUS 360W"
+            },
+            {
+              "type": "alt_group",
+              "group": "students admitted Fall 2023 onward",
+              "text": "students admitted Fall 2023 onward with BUS 373 and BUS 360W"
+            }
+          ]
         },
         {
           "type": "unknown",
@@ -2872,7 +2919,6 @@
     "coreq": null,
     "status": "partial",
     "unparsed_fragments": [
-      "Students admitted prior to Fall 2023 with (BUS 373 or BUS 336) and BUS 360W, or students admitted Fall 2023 onward with BUS 373 and BUS 360W",
       "both with a minimum grade of C-"
     ],
     "source": "parsed",
@@ -2886,8 +2932,19 @@
       "type": "all",
       "of": [
         {
-          "type": "unknown",
-          "text": "Students admitted prior to Fall 2023 with (BUS 373 or BUS 336) and BUS 360W, or students admitted Fall 2023 onward with BUS 373 and BUS 360W"
+          "type": "any",
+          "of": [
+            {
+              "type": "alt_group",
+              "group": "Students admitted prior to Fall 2023",
+              "text": "Students admitted prior to Fall 2023 with (BUS 373 or BUS 336) and BUS 360W"
+            },
+            {
+              "type": "alt_group",
+              "group": "students admitted Fall 2023 onward",
+              "text": "students admitted Fall 2023 onward with BUS 373 and BUS 360W"
+            }
+          ]
         },
         {
           "type": "unknown",
@@ -2902,7 +2959,6 @@
     "coreq": null,
     "status": "partial",
     "unparsed_fragments": [
-      "Students admitted prior to Fall 2023 with (BUS 373 or BUS 336) and BUS 360W, or students admitted Fall 2023 onward with BUS 373 and BUS 360W",
       "both with a minimum grade of C-"
     ],
     "source": "parsed",
@@ -2916,8 +2972,20 @@
       "type": "all",
       "of": [
         {
-          "type": "unknown",
-          "text": "BUS 360W or corporate environmental and social sustainability certificate students with an upper division Writing (W) course, with a minimum grade of C-"
+          "type": "any",
+          "of": [
+            {
+              "type": "course",
+              "code": "BUS 360W",
+              "minGrade": "C-",
+              "concurrentOk": false
+            },
+            {
+              "type": "alt_group",
+              "group": "corporate environmental and social sustainability certificate students",
+              "text": "corporate environmental and social sustainability certificate students with an upper division Writing (W) course, with a minimum grade of C-"
+            }
+          ]
         },
         {
           "type": "units",
@@ -2926,10 +2994,8 @@
       ]
     },
     "coreq": null,
-    "status": "partial",
-    "unparsed_fragments": [
-      "BUS 360W or corporate environmental and social sustainability certificate students with an upper division Writing (W) course, with a minimum grade of C-"
-    ],
+    "status": "parsed",
+    "unparsed_fragments": [],
     "source": "parsed",
     "raw": "BUS 360W or corporate environmental and social sustainability certificate students with an upper division Writing (W) course, with a minimum grade of C-; 60 units.",
     "raw_coreq": null,
@@ -2941,8 +3007,31 @@
       "type": "all",
       "of": [
         {
-          "type": "unknown",
-          "text": "BUS 338 and BUS 360W, or innovation and entrepreneurship certificate students with BUS 338 and an upper division Writing (W) course, both with a minimum grade of C-"
+          "type": "any",
+          "of": [
+            {
+              "type": "all",
+              "of": [
+                {
+                  "type": "course",
+                  "code": "BUS 338",
+                  "minGrade": "C-",
+                  "concurrentOk": false
+                },
+                {
+                  "type": "course",
+                  "code": "BUS 360W",
+                  "minGrade": "C-",
+                  "concurrentOk": false
+                }
+              ]
+            },
+            {
+              "type": "alt_group",
+              "group": "innovation and entrepreneurship certificate students",
+              "text": "innovation and entrepreneurship certificate students with BUS 338 and an upper division Writing (W) course, both with a minimum grade of C-"
+            }
+          ]
         },
         {
           "type": "units",
@@ -2951,10 +3040,8 @@
       ]
     },
     "coreq": null,
-    "status": "partial",
-    "unparsed_fragments": [
-      "BUS 338 and BUS 360W, or innovation and entrepreneurship certificate students with BUS 338 and an upper division Writing (W) course, both with a minimum grade of C-"
-    ],
+    "status": "parsed",
+    "unparsed_fragments": [],
     "source": "parsed",
     "raw": "BUS 338 and BUS 360W, or innovation and entrepreneurship certificate students with BUS 338 and an upper division Writing (W) course, both with a minimum grade of C-; 60 units. Recommended: BUS 314.",
     "raw_coreq": null,
@@ -3338,8 +3425,42 @@
       "type": "all",
       "of": [
         {
-          "type": "unknown",
-          "text": "(BUS 374 or BUS 381) and BUS 360W, or corporate environmental and social sustainability certificate students with an upper division Writing (W) course, all with a minimum grade of C-"
+          "type": "any",
+          "of": [
+            {
+              "type": "all",
+              "of": [
+                {
+                  "type": "any",
+                  "of": [
+                    {
+                      "type": "course",
+                      "code": "BUS 374",
+                      "minGrade": "C-",
+                      "concurrentOk": false
+                    },
+                    {
+                      "type": "course",
+                      "code": "BUS 381",
+                      "minGrade": "C-",
+                      "concurrentOk": false
+                    }
+                  ]
+                },
+                {
+                  "type": "course",
+                  "code": "BUS 360W",
+                  "minGrade": "C-",
+                  "concurrentOk": false
+                }
+              ]
+            },
+            {
+              "type": "alt_group",
+              "group": "corporate environmental and social sustainability certificate students",
+              "text": "corporate environmental and social sustainability certificate students with an upper division Writing (W) course, all with a minimum grade of C-"
+            }
+          ]
         },
         {
           "type": "units",
@@ -3348,10 +3469,8 @@
       ]
     },
     "coreq": null,
-    "status": "partial",
-    "unparsed_fragments": [
-      "(BUS 374 or BUS 381) and BUS 360W, or corporate environmental and social sustainability certificate students with an upper division Writing (W) course, all with a minimum grade of C-"
-    ],
+    "status": "parsed",
+    "unparsed_fragments": [],
     "source": "parsed",
     "raw": "(BUS 374 or BUS 381) and BUS 360W, or corporate environmental and social sustainability certificate students with an upper division Writing (W) course, all with a minimum grade of C-; 60 units.",
     "raw_coreq": null,
@@ -8097,7 +8216,9 @@
       "type": "any",
       "of": [
         {
-          "type": "unknown",
+          "type": "external",
+          "kind": "high_school",
+          "minGrade": "B",
           "text": "Pre-Calculus 12 or Foundations of Mathematics 12 (or equivalent) with a grade of at least B"
         },
         {
@@ -8115,10 +8236,8 @@
       ]
     },
     "coreq": null,
-    "status": "partial",
-    "unparsed_fragments": [
-      "Pre-Calculus 12 or Foundations of Mathematics 12 (or equivalent) with a grade of at least B"
-    ],
+    "status": "parsed",
+    "unparsed_fragments": [],
     "source": "parsed",
     "raw": "Pre-Calculus 12 or Foundations of Mathematics 12 (or equivalent) with a grade of at least B, or MATH 100 with a grade of at least C, or MATH 110 with a grade of at least C.",
     "raw_coreq": null,
@@ -8146,7 +8265,9 @@
       "type": "any",
       "of": [
         {
-          "type": "unknown",
+          "type": "external",
+          "kind": "high_school",
+          "minGrade": "B+",
           "text": "Pre-Calculus 12 (or equivalent) with a grade of at least B+"
         },
         {
@@ -8164,10 +8285,8 @@
       ]
     },
     "coreq": null,
-    "status": "partial",
-    "unparsed_fragments": [
-      "Pre-Calculus 12 (or equivalent) with a grade of at least B+"
-    ],
+    "status": "parsed",
+    "unparsed_fragments": [],
     "source": "parsed",
     "raw": "Pre-Calculus 12 (or equivalent) with a grade of at least B+, or MATH 100 with a grade of at least B-, or MATH 110 with a grade of at least A-.",
     "raw_coreq": null,
@@ -8179,7 +8298,9 @@
       "type": "any",
       "of": [
         {
-          "type": "unknown",
+          "type": "external",
+          "kind": "high_school",
+          "minGrade": "A",
           "text": "Pre-Calculus 12 (or equivalent) with a grade of at least A"
         },
         {
@@ -8197,10 +8318,8 @@
       ]
     },
     "coreq": null,
-    "status": "partial",
-    "unparsed_fragments": [
-      "Pre-Calculus 12 (or equivalent) with a grade of at least A"
-    ],
+    "status": "parsed",
+    "unparsed_fragments": [],
     "source": "parsed",
     "raw": "Pre-Calculus 12 (or equivalent) with a grade of at least A, or MATH 100 with a grade of at least B, or MATH 110 with a grade of at least A.",
     "raw_coreq": null,
@@ -8251,7 +8370,9 @@
       "type": "any",
       "of": [
         {
-          "type": "unknown",
+          "type": "external",
+          "kind": "high_school",
+          "minGrade": "B",
           "text": "Pre-Calculus 12 (or equivalent) with a grade of at least B"
         },
         {
@@ -8269,10 +8390,8 @@
       ]
     },
     "coreq": null,
-    "status": "partial",
-    "unparsed_fragments": [
-      "Pre-Calculus 12 (or equivalent) with a grade of at least B"
-    ],
+    "status": "parsed",
+    "unparsed_fragments": [],
     "source": "parsed",
     "raw": "Pre-Calculus 12 (or equivalent) with a grade of at least B, or MATH 100 with a grade of at least C-, or MATH 110 with a grade of at least C-.",
     "raw_coreq": null,
@@ -8323,7 +8442,9 @@
       "type": "any",
       "of": [
         {
-          "type": "unknown",
+          "type": "external",
+          "kind": "high_school",
+          "minGrade": "B",
           "text": "Pre-Calculus 12 (or equivalent) with a grade of at least B"
         },
         {
@@ -8341,10 +8462,8 @@
       ]
     },
     "coreq": null,
-    "status": "partial",
-    "unparsed_fragments": [
-      "Pre-Calculus 12 (or equivalent) with a grade of at least B"
-    ],
+    "status": "parsed",
+    "unparsed_fragments": [],
     "source": "parsed",
     "raw": "Pre-Calculus 12 (or equivalent) with a grade of at least B, or MATH 100 with a grade of at least C, or MATH 110 with a grade of at least C.",
     "raw_coreq": null,
@@ -12569,16 +12688,16 @@
           "text": "90 units including STAT 350 with a minimum grade of C- and one of STAT 341, STAT 260, or CMPT 225, with a minimum grade of C-"
         },
         {
-          "type": "unknown",
+          "type": "alt_group",
+          "group": "data science majors",
           "text": "data science majors with 90 units including STAT 302 or STAT 305, CMPT 225, STAT 260, and STAT 240, all with a minimum grade of C-"
         }
       ]
     },
     "coreq": null,
-    "status": "unparsed",
+    "status": "partial",
     "unparsed_fragments": [
-      "90 units including STAT 350 with a minimum grade of C- and one of STAT 341, STAT 260, or CMPT 225, with a minimum grade of C-",
-      "data science majors with 90 units including STAT 302 or STAT 305, CMPT 225, STAT 260, and STAT 240, all with a minimum grade of C-"
+      "90 units including STAT 350 with a minimum grade of C- and one of STAT 341, STAT 260, or CMPT 225, with a minimum grade of C-"
     ],
     "source": "parsed",
     "raw": "90 units including STAT 350 with a minimum grade of C- and one of STAT 341, STAT 260, or CMPT 225, with a minimum grade of C- (STAT 240 is also recommended); OR data science majors with 90 units including STAT 302 or STAT 305, CMPT 225, STAT 260, and STAT 240, all with a minimum grade of C-.",

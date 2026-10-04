@@ -1,5 +1,6 @@
 import type { PrereqNode, PrereqRecord } from "@/lib/data/prereqs";
 import { parseClause } from "./clause";
+import { matchAltGroup } from "./fragments";
 import { lex } from "./lexer";
 import {
   countKnown,
@@ -63,7 +64,8 @@ export function parseRequirement(sentence: string): PrereqNode | null {
       return unknown(sentence);
     }
     clause = clause.replace(/^and\b\s*/, "");
-    const node = parseClause(clause);
+    // "; OR data science majors with ...": a whole alternative for another student group.
+    const node = (orLead ? matchAltGroup(clause) : null) ?? parseClause(clause);
     if (node) alternatives[alternatives.length - 1]!.push(node);
   }
   const groups = alternatives

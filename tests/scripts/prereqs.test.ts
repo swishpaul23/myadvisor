@@ -205,13 +205,15 @@ describe("and/or precedence and parentheses", () => {
           ),
           units(45),
         ),
-        q(
-          "actuarial science students with BUS 254 and (BUS 232 or ECON 233 or STAT 270 or STAT 271), both with a minimum grade of C- and 45 units",
-        ),
+        {
+          type: "alt_group",
+          group: "actuarial science students",
+          text: "actuarial science students with BUS 254 and (BUS 232 or ECON 233 or STAT 270 or STAT 271), both with a minimum grade of C- and 45 units",
+        },
       ),
     );
     expect(r.advisory).toEqual(["Recommended: BUS 207 or ECON 201"]);
-    expect(r.status).toBe("partial");
+    expect(r.status).toBe("parsed");
   });
 
   test("'(or X)' alternatives (BUS 331)", () => {
@@ -335,19 +337,16 @@ describe("and/or precedence and parentheses", () => {
     );
   });
 
-  test("'; OR' alternatives with unknown student groups (BUS 217W)", () => {
+  test("'; OR' alternatives: a student group outside the known ones stays unknown", () => {
+    // Same shape as BUS 217W, with a group name the alt_group patterns don't know.
     const r = parse(
-      "BUS 201 with a minimum grade of C- and 15 units; OR 45 units and corequisite: BUS 202; OR business administration joint major, joint honours, or double degree students with 45 units; OR data science students with 15 units; OR actuarial science students with 15 units.",
+      "BUS 201 with a minimum grade of C- and 15 units; OR 45 units and corequisite: BUS 202; OR mechatronics students with 15 units.",
     );
     expect(r.prereq).toEqual(
       any(
         all(c("BUS 201", "C-"), units(15)),
         all(units(45), c("BUS 202", null, true)),
-        q(
-          "business administration joint major, joint honours, or double degree students with 45 units",
-        ),
-        q("data science students with 15 units"),
-        q("actuarial science students with 15 units"),
+        q("mechatronics students with 15 units"),
       ),
     );
   });

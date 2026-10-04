@@ -33,6 +33,18 @@ export type PrereqNode =
     }
   /** Program or admission restriction ("Reserved for English honours ... students"). */
   | { type: "restriction"; text: string }
+  /**
+   * An alternative route for another student group ("OR data science majors with ...").
+   * `group` is the student group as written; `text` is the whole alternative verbatim.
+   */
+  | { type: "alt_group"; group: string; text: string }
+  /** A credential outside SFU courses ("Pre-Calculus 12 (or equivalent) with a grade of at least B"). */
+  | {
+      type: "external";
+      kind: "high_school";
+      minGrade?: (typeof MIN_GRADES)[number];
+      text: string;
+    }
   /** Anything the parser can't map exactly, kept verbatim. */
   | { type: "unknown"; text: string };
 
@@ -68,6 +80,17 @@ export const prereqNodeSchema: z.ZodType<PrereqNode> = z.lazy(() =>
       text: z.string().min(1),
     }),
     z.object({ type: z.literal("restriction"), text: z.string().min(1) }),
+    z.object({
+      type: z.literal("alt_group"),
+      group: z.string().min(1),
+      text: z.string().min(1),
+    }),
+    z.object({
+      type: z.literal("external"),
+      kind: z.literal("high_school"),
+      minGrade: z.enum(MIN_GRADES).optional(),
+      text: z.string().min(1),
+    }),
     z.object({ type: z.literal("unknown"), text: z.string().min(1) }),
   ]),
 );
