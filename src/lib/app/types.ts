@@ -145,6 +145,7 @@ export type ApiErrorCode =
   | "not_a_pdf"
   | "upload_unavailable"
   | "unreadable"
+  | "advisor_unavailable"
   | "server_error";
 export type ApiError = { ok: false; error: ApiErrorCode; message: string };
 
@@ -159,6 +160,10 @@ export type TranscriptResult =
       standing: string | null;
     }
   | ApiError;
+
+/** POST /api/advisor: an explanation grounded in the engine's results, with its sources. */
+export type AdvisorReply =
+  { ok: true; answer: string; sources: Source[] } | ApiError;
 
 /** A server action result: ok, or a plain-language error with per-field messages. */
 export type ActionResult<T = undefined> =
