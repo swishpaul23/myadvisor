@@ -41,7 +41,15 @@ export type ValidateOptions = {
   graduation?: boolean;
   /** The student's current audit, when the caller already has it. */
   currentAudit?: AuditResult;
+  /**
+   * Placeholder electives by term id: the units of each. They count toward the term's unit
+   * load and make a co-op term non-empty. They have no prerequisites, offerings or units
+   * toward other courses' prerequisites to check.
+   */
+  placeholders?: Record<string, number[]>;
 };
+
+const plural = (n: number, word: string) => `${n} ${word}${n === 1 ? "" : "s"}`;
 
 export function validatePlan(
   student: Student,
@@ -136,14 +144,21 @@ export function validatePlan(
     }
     if (!Number.isNaN(ord)) previous = Math.max(previous, ord);
 
+    const placeholders = options.placeholders?.[term.id] ?? [];
     if (term.kind === "coop") {
-      if (term.courses.length > 0) {
+      if (term.courses.length + placeholders.length > 0) {
+        const listed = [
+          ...term.courses,
+          ...(placeholders.length > 0
+            ? [plural(placeholders.length, "elective")]
+            : []),
+        ];
         add({
           severity: "error",
           code: "COURSES_IN_COOP_TERM",
           courseCode: null,
           termId: term.id,
-          message: `Co-op term lists courses: ${term.courses.join(", ")}.`,
+          message: `Co-op term lists courses: ${listed.join(", ")}.`,
         });
       }
       terms.push({ id: term.id, units: 0, cumulativeUnits: cumulative });
@@ -303,10 +318,13 @@ export function validatePlan(
     }
 
     // Load and totals
-    const termUnits = term.courses.reduce<number | null>((n, c) => {
-      const u = unitsOf(c);
-      return n === null || u === null ? null : n + u;
-    }, 0);
+    const termUnits = term.courses.reduce<number | null>(
+      (n, c) => {
+        const u = unitsOf(c);
+        return n === null || u === null ? null : n + u;
+      },
+      placeholders.reduce((n, u) => n + u, 0),
+    );
     const season = term.id.split("-")[1] as "spring" | "summer" | "fall";
     const load = policy.unit_load[season];
     if (termUnits !== null && load) {
