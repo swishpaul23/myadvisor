@@ -32,6 +32,11 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
+!.env.example
+
+# reference PDFs (may contain a real student's progress); keep only the README
+data/sources/*
+!data/sources/README.md
 
 # vercel
 .vercel

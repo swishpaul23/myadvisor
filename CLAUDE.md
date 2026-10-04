@@ -1,1 +1,113 @@
+# myAdvisor
+
+## 1. The architecture rule
+
+**Code computes every fact. The LLM only explains.** The rules engine (audit, prerequisite checks, plan validator, plan generator) is plain, deterministic TypeScript with unit tests. The chat model calls the engine through tools and explains the results with citations. It never states a requirement, prerequisite, or grade rule on its own. If the engine can't decide, the answer is "unknown, check with an advisor", never a guess.
+
+## 2. Product
+
+myAdvisor is a degree planner for SFU Beedie BBA students, built at a 24-hour hackathon by Stuart (code) and a non-technical teammate (requirement data, test questions, design, pitch). Demo flow: (1) fill in a setup form and add completed courses; (2) see a degree audit with progress bars per requirement; (3) generate a 4-year plan grid, drag courses between terms, and see rule breaks flagged in red; (4) ask the chat "do I still need BUS 393?" and get an answer citing the SFU calendar; (5) if time allows, elective suggestions and a sample transcript upload.
+
+## 3. Scope
+
+- In: Beedie BBA major and all 9 concentrations (Accounting, Innovation & Entrepreneurship, Finance, Human Resource Management, International Business, Management Information Systems, Marketing, Operations Management, Strategic Analysis), on the SFU Fall 2026 calendar (`catalog_term` = `2026-fall`). Finance is the demo program. The demo student is fictional.
+- Cut: login, saved plans beyond the demo, other programs or calendars, joint majors, honours, other faculties.
+
+## 4. Folder map
+
+```
+data/sheets/         CSVs exported from the teammate's Google Sheet (source of truth for rules)
+data/raw/outlines/   saved SFU Course Outlines API responses (committed, never hand-edited)
+data/policy/sfu.json SFU-wide counting policies (grade points, repeats, CR, WQB)
+data/sources/        reference PDFs, gitignored
+data/generated/      JSON snapshot built by scripts, never hand-edited
+db/migrations/       numbered plain .sql files
+docs/decisions.md    architecture decisions
+scripts/             fetch-outlines.ts, build-data.ts, db-migrate.ts (run with tsx)
+src/app/             Next.js routes and API handlers only, kept thin
+src/components/      React UI (shadcn in components/ui)
+src/engine/          pure TypeScript rules engine
+src/lib/llm/         Claude client and tool definitions (server-only)
+src/lib/data/        loads reference data into typed objects
+src/lib/db/          Postgres access (server-only)
+tests/engine/        engine unit tests
+tests/golden/        teammate's test questions as expected-answer cases
+```
+
+**Engine purity:** `src/engine/**` may not import `react`, `next`, `pg`, `@/components`, `@/app`, `@/lib/llm`, `@/lib/db`, or `fs`/`path`/`http`. ESLint enforces it; `tests/engine/purity.test.ts` proves the rule fires. Data comes in as arguments, results go out as return values. Never silence the rule; move the import out of the engine. Files in `src/lib/llm` and `src/lib/db` start with `import "server-only";`.
+
+## 5. Data flow
+
+1. Teammate's Google Sheet → CSV exports in `data/sheets/`.
+2. SFU Course Outlines API → `data/raw/outlines/{year}/{term}/{dept}/{course}.json` (`npm run data:fetch`).
+3. `npm run data:build` validates CSVs + outlines + `data/policy/sfu.json`, writes JSON to `data/generated/`, and loads Postgres when `DATABASE_URL` is set.
+4. The app reads Postgres, falling back to the JSON snapshot if the database is unreachable.
+5. The engine receives reference data loaded into memory once and never touches the database.
+
+## 6. Data contract
+
+`data/sheets/requirements.csv`:
+`req_id,program,concentration,catalog_term,group,rule,n_or_units,courses,filter,min_grade,notes,source_url,status,verified_by`
+
+- `program`: `BBA`, or `*` for university-wide rules. `concentration`: blank means all concentrations.
+- `group`: `Lower core | Upper core | Concentration | Beedie | University`
+- `rule`: `one course | choose N | all of | units from | courses from | gpa`
+- `courses`: comma-separated list inside quotes, e.g. `"BUS 312,BUS 315"`.
+- `filter`: simple expressions separated by `;`, e.g. `dept not in BUS,BUEC` or `level 400; dept BUS; exclude BUS 425,BUS 478,BUS 496`. This is v0 syntax; extend it only when a real rule needs it.
+- `status`: `beta | verified`. Everything starts `beta`; only Stuart marks rows `verified`.
+
+`data/sheets/test-questions.csv`: `question,type,expected_answer,source_url,app_answer,correct` (`type`: `need course | prereq | plan`).
+`data/sheets/prereq-overrides.csv`: `course_code,override_text,reason,source_url` (prerequisite text the parser can't handle).
+There is no courses CSV: course data comes from the SFU Course Outlines API.
+
+**Rule for every row:** copy what the calendar says, include its URL, and write "unsure" in `notes` rather than guess.
+
+## 7. Database
+
+- Standard Postgres only (target is Snowflake Postgres or Supabase/Neon, undecided). Plain SQL migrations with `pg`.
+- Reference tables (`courses`, `course_offerings`, `course_prereqs`, `requirements`, `requirement_courses`) are rebuilt from files by `data:build`, never edited by hand.
+- Student tables (`students`, `student_courses`, `plans`, `plan_courses`, `chat_messages`, `feedback`) are written by the app.
+- No real student data. No transcript files stored.
+
+## 8. Commands
+
+```
+npm run dev          start the dev server
+npm run build        production build
+npm run lint         ESLint (includes engine purity rule)
+npm run typecheck    next typegen + tsc --noEmit
+npm run test         Vitest once (test:watch for watch mode)
+npm run format       Prettier write
+npm run check        lint, typecheck, test; fails fast. Run before calling a task done.
+npm run data:fetch   fetch SFU Course Outlines (network; ask before running)
+npm run data:build   CSVs + outlines -> data/generated/ (+ Postgres if DATABASE_URL)
+npm run db:migrate   apply db/migrations (touches the database; ask before running)
+```
+
+Node 24 (`.nvmrc`). Skills: `/check`, `/data-sync`.
+
+## 9. Working rules
+
+- Never invent a requirement, prerequisite, grade rule, or course code. Return "unknown" and flag it.
+- Every engine function gets unit tests in `tests/engine/`.
+- Run `npm run check` before calling a task done.
+- Small commits. No new dependencies without asking Stuart.
+- API handlers stay thin: validate input with zod, call the engine, return.
+- The demo student is fictional. Never log request bodies that contain grades.
+- `CONTACT_EMAIL` comes from the environment; never hard-code an email address.
+
+## 10. Known program facts to verify (all `beta`)
+
+From the Beedie advising checklist for Fall 2025 to Summer 2026, an older term: a cross-check, not truth. Verify each against the Fall 2026 calendar before encoding it.
+
+- 120 units total; 45 upper-division units, at least 36 of them BUS.
+- Six GPA gates: cumulative 2.00, cumulative upper-division 2.00, upper-division BUS 2.00, overall SFU BUS 2.30, SFU program 2.00, SFU upper-division program 2.00.
+- C- minimum in lower-division and upper-division requirements and in the Business Foundation Pathway.
+- Business Foundation Pathway: BUS 201 (direct entry) or BUS 202 (transfer). Professional Development Series, pass required: BUS 203, 300, 496.
+- 36 units outside BUS. Group A: 6 units (Global Perspectives, Innovation, Social Responsibility). Group B: 3 units with an Indigenous perspective.
+- Three 400-level BUS courses, at least one at SFU, not counting BUS 425, 478, 496.
+- One of an approved list of Global Perspectives upper-division BUS courses.
+- At least one concentration, following the requirements in the term it was declared.
+- Sources: https://www.sfu.ca/students/calendar/2026/fall/programs/business/major/bachelor-of-business-administration.html and https://www.sfu.ca/beedie/programs/undergraduate/bba-major/curriculum.html
+
 @AGENTS.md
