@@ -4,7 +4,7 @@ StormHacks 2026 academic advisor for degree progress, course choice, and next-se
 
 **Read [README.md](README.md) before making changes.** It is the product and implementation plan. [docs/user-flow.md](docs/user-flow.md) is the proposed student journey.
 
-**Status: planning and initial scaffolding. The advisor is not built yet.** Planned features, integrations, and tracks are not implemented unless README lists them as present. Do not describe or build as if accounts, transcripts, audits, plans, Gemini, ElevenLabs, Snowflake, or deployment already exist.
+**Status: planning and initial scaffolding. The advisor is not built yet.** Planned features, integrations, and tracks are not implemented unless README lists them as present. Do not describe or build as if accounts, transcripts, audits, plans, advising chat, ElevenLabs, Snowflake, or deployment already exist. Gemini is only the server client in `src/lib/ai/google.ts`.
 
 ## Scope
 
@@ -18,7 +18,7 @@ Other universities, degrees, and requirement terms are out of scope until each h
 
 | Present | Not built |
 | --- | --- |
-| Next.js 16, React 19, TypeScript, Tailwind CSS 4, shadcn/Base UI. Homepage `src/app/page.tsx` is still starter content. | Auth, database, transcript processing, degree audit, planner, Gemini, ElevenLabs, Snowflake, private file storage, deployment, .tech domain. |
+| Next.js 16, React 19, TypeScript, Tailwind CSS 4, shadcn/Base UI. Homepage `src/app/page.tsx` is still starter content. Gemini client: `src/lib/ai/google.ts` using the Vercel AI SDK and `gemini-2.5-flash`. | Auth, database, transcript processing, degree audit, planner, advising chat, ElevenLabs, Snowflake, private file storage, deployment, .tech domain. |
 
 Scripts: `npm ci`, `npm run dev` (http://localhost:3000), `npm run lint`, `npm run build`, `npm run start`. There is no test script yet.
 
@@ -34,10 +34,10 @@ Student → Next.js → authenticated backend orchestrator
   → ElevenLabs API (voice)
 ```
 
-- **Gemini is the main LLM.** The handwritten sketch’s Claude label is superseded. No model version is selected yet.
+- **Gemini is the main LLM**, called only through the Vercel AI SDK (`ai` and `@ai-sdk/google`) from server route handlers or `src/lib/ai/google.ts`. Model: `gemini-2.5-flash`. Do not call the Gemini REST API, `@google/genai`, or `@google/generative-ai`. Structured JSON uses `generateText` with `Output.object` and `jsonSchema`, then a hand-written type guard. Plain text uses `generateText`. Streaming chat uses `streamText` and `toUIMessageStreamResponse`. Tool loops use `tool`, `jsonSchema`, and `stopWhen: stepCountIs(n)`. Read `GOOGLE_GENERATIVE_AI_API_KEY` at request time. If it is missing, return HTTP 500 with `{ error: "Missing GOOGLE_GENERATIVE_AI_API_KEY." }` before calling the model. On model failure, timeout, or bad output, return the deterministic fallback instead of throwing.
 - **Snowflake Postgres is the application database**, reached with a PostgreSQL client over SSL through the backend. A Snowflake AI/search REST call is a separate service. Postgres use alone does not satisfy the Snowflake REST API track, and Cortex Search does not index these Postgres tables automatically.
 - Backend framework and host are undecided. FastAPI on AWS Lambda is an option in the team sketch, not a decision.
-- API keys, database access, and storage credentials stay on the server. Never commit secrets or put them in client bundles. Environment variable names are not defined yet; add them only when an integration is implemented, and document them then.
+- API keys, database access, and storage credentials stay on the server. Never commit secrets or put them in client bundles. Gemini uses `GOOGLE_GENERATIVE_AI_API_KEY` in `.env.local`. Do not prefix it with `NEXT_PUBLIC_`.
 
 ## Advising rules
 
@@ -68,7 +68,7 @@ Demo: a Finance student uploads a synthetic transcript, corrects an extraction i
 
 ## Decisions still open
 
-Do not lock these in without an explicit decision: auth provider and SFU SSO, backend framework and hosting, private file storage, Gemini model, ElevenLabs voice and interaction mode, Snowflake instance and the qualifying REST feature, evaluator schema and exception handling, live offerings and graduation estimates, .tech domain and deployment.
+Do not lock these in without an explicit decision: auth provider and SFU SSO, backend framework and hosting, private file storage, ElevenLabs voice and interaction mode, Snowflake instance and the qualifying REST feature, evaluator schema and exception handling, live offerings and graduation estimates, .tech domain and deployment. Gemini is `gemini-2.5-flash` through the Vercel AI SDK.
 
 If a product, status, or architecture decision changes, update [README.md](README.md) and keep this file aligned with it.
 

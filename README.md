@@ -34,7 +34,7 @@ Supporting additional universities, degrees, and requirement terms is a future e
 | Product planning | [Proposed user flow](docs/user-flow.md), including onboarding, advising, planning and recovery paths. |
 | Authentication and database | Not implemented or connected. |
 | Transcript processing, degree audit and planner | Not implemented. |
-| Gemini, ElevenLabs and Snowflake API integrations | Not implemented or connected. |
+| Gemini | Server-only Vercel AI SDK client in `src/lib/ai/google.ts` (`ai` and `@ai-sdk/google`, model `gemini-2.5-flash`). Transcript extraction and advising chat are not built yet. |
 | Deployment and .tech domain | Not configured. |
 
 ## Planned student experience
@@ -82,7 +82,7 @@ Later features may include institution-specific GPA scenarios, graduation estima
 | Layer | Technology | Status and intended role |
 | --- | --- | --- |
 | Frontend | Next.js 16, React 19, TypeScript, Tailwind CSS 4, shadcn/Base UI | Present in the scaffold; application screens still need implementation. |
-| Main LLM | Gemini API | Selected for transcript understanding, grounded answers and planning explanations. No model version is selected yet. |
+| Main LLM | Gemini through the Vercel AI SDK (`ai`, `@ai-sdk/google`) | Model `gemini-2.5-flash`. Calls stay in server route handlers or `src/lib/ai/google.ts`. The browser never sees the key. |
 | Application database | Snowflake Postgres | Selected for profiles, confirmed course attempts, requirements, plans and conversation history. Instance, schema and connection are pending. |
 | Voice | ElevenLabs API | Selected for spoken advising; voice choice and input/output integration are pending. |
 | Backend | Authenticated API/orchestrator | Planned. FastAPI on AWS Lambda is an option in the team sketch; framework and deployment are not final. |
@@ -178,7 +178,13 @@ There is no project test script yet. Consult [package.json](package.json) and th
 
 ### Configuration to add during implementation
 
-The integrations will need server-side configuration such as a Postgres connection URL, Gemini API key, ElevenLabs API key and voice ID, authentication/session settings, private storage credentials, and any chosen Snowflake REST authentication. Exact environment-variable names and setup instructions will be documented when the integrations are implemented; the scaffold does not consume these settings yet.
+Put the Gemini key in `.env.local` for local calls:
+
+```bash
+GOOGLE_GENERATIVE_AI_API_KEY=your-google-ai-api-key
+```
+
+Get the key at [Google AI Studio](https://aistudio.google.com/apikey). The name must not start with `NEXT_PUBLIC_`. Routes read it per request, so a production build does not need the key. Other integrations (Postgres, ElevenLabs, auth, private storage, Snowflake REST) still need their own server-side settings when those features are implemented.
 
 Keep credentials out of source control and browser bundles. Use environment configuration for local development and the deployment platform’s secret storage when hosting the app.
 
@@ -199,7 +205,7 @@ The intended demo follows a Finance student who uploads a synthetic transcript, 
 
 - Authentication provider and whether official SFU SSO is available.
 - Backend framework, hosting and private file storage.
-- Gemini model, ElevenLabs voice and voice interaction mode.
+- ElevenLabs voice and voice interaction mode. Gemini model is `gemini-2.5-flash` through the Vercel AI SDK.
 - Snowflake account/instance access and the qualifying Snowflake REST feature.
 - Requirement evaluator format, prerequisite coverage and exception handling.
 - Live course-offering data and the limits of graduation estimates.
