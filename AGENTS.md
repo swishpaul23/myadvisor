@@ -4,7 +4,7 @@ StormHacks 2026 academic advisor for degree progress, course choice, and next-se
 
 **Read [README.md](README.md) before making changes.** It is the product and implementation plan. [docs/user-flow.md](docs/user-flow.md) is the proposed student journey.
 
-**Status: the rules engine and data pipeline are built; the student-facing advisor is not.** Built: degree audit, prerequisite evaluator and plan validator (`src/engine`, unit-tested), the requirements and course-data pipeline (`data/sheets` → `data/generated`), and a server-side Snowflake data layer (`src/lib/data`). Google sign-in is built (Auth.js, `src/auth.ts`, `src/proxy.ts`). Not built: account and profile persistence, transcripts, the planner UI, advising chat, ElevenLabs, and deployment. Do not describe or build as if those exist. Gemini is only the server client in `src/lib/ai/google.ts`.
+**Status: the rules engine and data pipeline are built; the student-facing advisor is not.** Built: degree audit, prerequisite evaluator and plan validator (`src/engine`, unit-tested), the requirements and course-data pipeline (`data/sheets` → `data/generated`), and a server-side Snowflake data layer (`src/lib/data`). Google sign-in is built (Auth.js, `src/auth.ts`, `src/proxy.ts`). Advisor voice is built: push-to-talk through ElevenLabs (`src/lib/ai/elevenlabs.ts`, `/api/advisor/transcribe`, `/api/advisor/speak`), hidden when `ELEVENLABS_API_KEY` is missing. Not built: account and profile persistence, transcripts, the planner UI, advising chat, and deployment. Do not describe or build as if those exist. Gemini is only the server client in `src/lib/ai/google.ts`.
 
 ## Scope
 
@@ -18,7 +18,7 @@ Other universities, degrees, and requirement terms are out of scope until each h
 
 | Present | Not built |
 | --- | --- |
-| Next.js 16, React 19, TypeScript, Tailwind CSS 4, shadcn/Base UI. Homepage `src/app/page.tsx` is still starter content (plus a badge showing the data source). Gemini client: `src/lib/ai/google.ts` using the Vercel AI SDK and `gemini-2.5-flash`. Rules engine in `src/engine` (degree audit, prerequisite evaluator, plan validator) with Vitest tests. Data pipeline: SFU Course Outlines fetch, requirements CSV validation, prerequisite parser. Snowflake reference-data tables in `myadvisor.app`, read by `src/lib/data`. | Auth, Postgres application database (`db/migrations` has no migrations yet), transcript processing, planner UI, advising chat, ElevenLabs, private file storage, deployment, .tech domain. |
+| Next.js 16, React 19, TypeScript, Tailwind CSS 4, shadcn/Base UI. Homepage `src/app/page.tsx` is still starter content (plus a badge showing the data source). Gemini client: `src/lib/ai/google.ts` using the Vercel AI SDK and `gemini-2.5-flash`. Rules engine in `src/engine` (degree audit, prerequisite evaluator, plan validator) with Vitest tests. Data pipeline: SFU Course Outlines fetch, requirements CSV validation, prerequisite parser. Snowflake reference-data tables in `myadvisor.app`, read by `src/lib/data`. | Auth, Postgres application database (`db/migrations` has no migrations yet), transcript processing, planner UI, advising chat, private file storage, deployment, .tech domain. |
 
 Scripts: `npm ci`, `npm run dev` (http://localhost:3000), `npm run lint`, `npm run build`, `npm run start`, `npm run test` (Vitest), `npm run check` (lint, typecheck, tests), `npm run data:build`, `npm run data:parity`. Full list in [CLAUDE.md](CLAUDE.md) section 8.
 
@@ -69,7 +69,7 @@ Demo: a Finance student uploads a synthetic transcript, corrects an extraction i
 
 ## Decisions still open
 
-Do not lock these in without an explicit decision: SFU SSO (the auth provider is decided: Google sign-in via Auth.js (decided by Stuart, 2026-10-04)), backend framework and hosting, private file storage, ElevenLabs voice and interaction mode, Snowflake instance and the qualifying REST feature, evaluator schema and exception handling, live offerings and graduation estimates, .tech domain and deployment. Gemini is `gemini-2.5-flash` through the Vercel AI SDK.
+Do not lock these in without an explicit decision: SFU SSO (the auth provider is decided: Google sign-in via Auth.js (decided by Stuart, 2026-10-04)), backend framework and hosting, private file storage, ElevenLabs voice choice (push-to-talk is the interaction mode), Snowflake instance and the qualifying REST feature, evaluator schema and exception handling, live offerings and graduation estimates, .tech domain and deployment. Gemini is `gemini-2.5-flash` through the Vercel AI SDK.
 
 If a product, status, or architecture decision changes, update [README.md](README.md) and keep this file aligned with it.
 
