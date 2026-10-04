@@ -344,32 +344,14 @@ export function RecordCard({
 }
 
 /** Calendar pages the advice cites, each a link. */
-export function SourcesList({
-  sources,
-  link = true,
-}: {
-  sources: Source[];
-  link?: boolean;
-}) {
+export function SourcesList({ sources }: { sources: Source[] }) {
   return (
     <section aria-label="Sources used" className={PANEL}>
       <div className="flex items-center justify-between border-b border-line-soft px-4 py-3.5">
         <h2 className={PANEL_TITLE}>Sources used</h2>
-        {link ? (
-          <Link
-            href="/app/sources"
-            className={cn(
-              "text-[12px] text-ink-muted underline-offset-2 hover:underline",
-              FOCUS,
-            )}
-          >
-            {sources.length} calendar {sources.length === 1 ? "page" : "pages"}
-          </Link>
-        ) : (
-          <span className="text-[12px] text-ink-muted">
-            {sources.length} calendar {sources.length === 1 ? "page" : "pages"}
-          </span>
-        )}
+        <span className="text-[12px] text-ink-muted">
+          {sources.length} calendar {sources.length === 1 ? "page" : "pages"}
+        </span>
       </div>
       <ul>
         {sources.map((s) => (
