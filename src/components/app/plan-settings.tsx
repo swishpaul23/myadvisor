@@ -35,6 +35,13 @@ export function PlanSettings({
 }) {
   const [state, formAction] = useActionState(updatePlanSettings, null);
   const errors = state && !state.ok ? (state.fieldErrors ?? {}) : {};
+  const savedKey = [
+    planTerm,
+    courseLoad,
+    summer ?? "",
+    coop.doing,
+    ...coop.workTerms,
+  ].join("|");
   const terms = termOptions.includes(planTerm)
     ? termOptions
     : [planTerm, ...termOptions];
@@ -47,81 +54,86 @@ export function PlanSettings({
     >
       <h2 className={PANEL_TITLE}>Plan settings</h2>
       <FormError message={state && !state.ok ? state.error : null} />
-      <div className="grid grid-cols-[1fr_1fr_1fr_auto] items-end gap-3 max-[900px]:grid-cols-2 max-[640px]:grid-cols-1">
-        <label className="flex flex-col gap-1.5">
-          <span className={LABEL}>Start term</span>
-          <select
-            name="planTerm"
-            defaultValue={planTerm}
-            aria-invalid={Boolean(errors.planTerm)}
-            aria-describedby="planTerm-error"
-            className={FIELD}
-          >
-            {terms.map((t) => (
-              <option key={t} value={t}>
-                {termLabel(t)}
-              </option>
-            ))}
-          </select>
-        </label>
-        <label className="flex flex-col gap-1.5">
-          <span className={LABEL}>Courses per term</span>
-          <select
-            name="courseLoad"
-            defaultValue={courseLoad}
-            aria-invalid={Boolean(errors.courseLoad)}
-            aria-describedby="courseLoad-error"
-            className={FIELD}
-          >
-            {COURSE_LOADS.map((n) => (
-              <option key={n} value={n}>
-                {n} courses
-              </option>
-            ))}
-          </select>
-        </label>
-        <label className="flex flex-col gap-1.5">
-          <span className={LABEL}>Summer terms</span>
-          <select
-            name="summer"
-            defaultValue={
-              summer === "full" || summer === "some" || summer === "no"
-                ? summer
-                : "unsure"
-            }
-            aria-invalid={Boolean(errors.summer)}
-            aria-describedby="summer-error"
-            className={FIELD}
-          >
-            {SUMMER_OPTIONS.map(([value, label]) => (
-              <option key={value} value={value}>
-                {label}
-              </option>
-            ))}
-          </select>
-        </label>
-        <SubmitButton pendingLabel="Updating…" className={BUTTON_SECONDARY}>
-          Update plan
-        </SubmitButton>
-      </div>
-      <FieldError id="planTerm-error" message={errors.planTerm} />
-      <FieldError id="courseLoad-error" message={errors.courseLoad} />
-      <FieldError id="summer-error" message={errors.summer} />
-      <details
-        className="rounded-[10px] border border-line-soft px-3.5 py-3"
-        open={Boolean(errors.coopTerms)}
-      >
-        <summary className="cursor-pointer text-[13px] font-medium">
-          Co-op {coop.doing ? "· yes" : "· no"}
-        </summary>
-        <div className="mt-3">
-          <CoopFields
-            coop={coop}
-            termOptions={coopOptions}
-            error={errors.coopTerms}
-          />
+      {/* Keyed on the saved values: after a save, React resets the form, and a <select>
+          would go back to the value it first rendered with (React does not update a
+          select's default when defaultValue changes). Remounting shows what was saved. */}
+      <div key={savedKey} className="flex flex-col gap-3">
+        <div className="grid grid-cols-[1fr_1fr_1fr_auto] items-end gap-3 max-[900px]:grid-cols-2 max-[640px]:grid-cols-1">
+          <label className="flex flex-col gap-1.5">
+            <span className={LABEL}>Start term</span>
+            <select
+              name="planTerm"
+              defaultValue={planTerm}
+              aria-invalid={Boolean(errors.planTerm)}
+              aria-describedby="planTerm-error"
+              className={FIELD}
+            >
+              {terms.map((t) => (
+                <option key={t} value={t}>
+                  {termLabel(t)}
+                </option>
+              ))}
+            </select>
+          </label>
+          <label className="flex flex-col gap-1.5">
+            <span className={LABEL}>Courses per term</span>
+            <select
+              name="courseLoad"
+              defaultValue={courseLoad}
+              aria-invalid={Boolean(errors.courseLoad)}
+              aria-describedby="courseLoad-error"
+              className={FIELD}
+            >
+              {COURSE_LOADS.map((n) => (
+                <option key={n} value={n}>
+                  {n} courses
+                </option>
+              ))}
+            </select>
+          </label>
+          <label className="flex flex-col gap-1.5">
+            <span className={LABEL}>Summer terms</span>
+            <select
+              name="summer"
+              defaultValue={
+                summer === "full" || summer === "some" || summer === "no"
+                  ? summer
+                  : "unsure"
+              }
+              aria-invalid={Boolean(errors.summer)}
+              aria-describedby="summer-error"
+              className={FIELD}
+            >
+              {SUMMER_OPTIONS.map(([value, label]) => (
+                <option key={value} value={value}>
+                  {label}
+                </option>
+              ))}
+            </select>
+          </label>
+          <SubmitButton pendingLabel="Updating…" className={BUTTON_SECONDARY}>
+            Update plan
+          </SubmitButton>
         </div>
-      </details>
+        <FieldError id="planTerm-error" message={errors.planTerm} />
+        <FieldError id="courseLoad-error" message={errors.courseLoad} />
+        <FieldError id="summer-error" message={errors.summer} />
+        <details
+          className="rounded-[10px] border border-line-soft px-3.5 py-3"
+          open={Boolean(errors.coopTerms)}
+        >
+          <summary className="cursor-pointer text-[13px] font-medium">
+            Co-op {coop.doing ? "· yes" : "· no"}
+          </summary>
+          <div className="mt-3">
+            <CoopFields
+              coop={coop}
+              termOptions={coopOptions}
+              error={errors.coopTerms}
+            />
+          </div>
+        </details>
+      </div>
       {state?.ok && (
         <p role="status" className="text-[12px] text-ink-muted">
           Plan updated.
