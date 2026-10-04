@@ -102,11 +102,39 @@ export const draftSchema = profileSchema.partial().extend({
 });
 export type OnboardingDraft = z.infer<typeof draftSchema>;
 
+/** Most terms and items per term a saved plan may hold (the planner plans up to 24 terms). */
+export const MAX_PLAN_TERMS = 24;
+export const MAX_PLAN_TERM_ITEMS = 20;
+
+/**
+ * The student's edited plan from My plan: course codes per term ("@n" for the generated
+ * plan's n-th placeholder elective). No grades or titles. `basis` is planBasis() of the
+ * profile it was saved against: when it no longer matches, the plan is out of date.
+ */
+export const savedPlanSchema = z.object({
+  basis: z.string().min(1).max(16),
+  terms: z
+    .array(
+      z.object({
+        id: termSchema,
+        kind: z.enum(["study", "coop"]),
+        items: z
+          .array(z.string().regex(/^(@\d{1,3}|[A-Z]{2,5} \d{3}[A-Z]?)$/))
+          .max(MAX_PLAN_TERM_ITEMS),
+      }),
+    )
+    .min(1)
+    .max(MAX_PLAN_TERMS),
+});
+export type SavedPlan = z.infer<typeof savedPlanSchema>;
+
 /** Everything the app keeps for one signed-in student (see store.ts). */
 export const appStateSchema = z.object({
   version: z.literal(1),
   profile: profileSchema.nullable(),
   draft: draftSchema.nullable(),
+  /** Absent in cookies saved before plans could be edited. */
+  plan: savedPlanSchema.nullish(),
 });
 export type AppState = z.infer<typeof appStateSchema>;
 export const EMPTY_STATE: AppState = { version: 1, profile: null, draft: null };

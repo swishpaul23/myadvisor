@@ -4,6 +4,7 @@ import {
   EMPTY_STATE,
   type AppState,
   type RecordCourse,
+  type SavedPlan,
 } from "./types";
 
 // The student's app state, encrypted with Auth.js's JWE helpers (AUTH_SECRET, own salt) and
@@ -18,7 +19,7 @@ export const CHUNK_SIZE = 3800;
 export const MAX_CHUNKS = 3;
 export const MAX_AGE_SECONDS = 60 * 60 * 24 * 30;
 
-/** The state doesn't fit in its cookies. Shown to the student as-is. */
+/** The state doesn't fit in its cookies. Shown to the student as-is (plan saves reword it). */
 export class StateTooLargeError extends Error {
   constructor() {
     super(
@@ -66,9 +67,36 @@ function unpack(value: unknown): unknown {
   });
 }
 
+// A saved plan packs to [basis, "2027-spring:BUS 373,@0", "~2027-summer:", ...]: one string
+// per term, "~" marking a co-op term. Course codes only.
+const packPlan = (plan: SavedPlan) => [
+  plan.basis,
+  ...plan.terms.map(
+    (t) => `${t.kind === "coop" ? "~" : ""}${t.id}:${t.items.join(",")}`,
+  ),
+];
+
+function unpackPlan(value: unknown): unknown {
+  if (!Array.isArray(value)) return value;
+  const [basis, ...terms] = value as string[];
+  return {
+    basis,
+    terms: terms.map((t) => {
+      const coop = t.startsWith("~");
+      const [id, items = ""] = (coop ? t.slice(1) : t).split(":");
+      return {
+        id,
+        kind: coop ? "coop" : "study",
+        items: items ? items.split(",") : [],
+      };
+    }),
+  };
+}
+
 function packState(state: AppState) {
   return {
     ...state,
+    plan: state.plan && packPlan(state.plan),
     profile: state.profile && {
       ...state.profile,
       courses: state.profile.courses.map(pack),
@@ -85,7 +113,12 @@ function unpackState(value: unknown): unknown {
   const v = value as Record<string, Record<string, unknown> | null>;
   const fix = (part: Record<string, unknown> | null | undefined) =>
     part && { ...part, courses: unpack(part.courses) };
-  return { ...v, profile: fix(v.profile), draft: fix(v.draft) };
+  return {
+    ...v,
+    profile: fix(v.profile),
+    draft: fix(v.draft),
+    plan: unpackPlan(v.plan),
+  };
 }
 
 /** Encrypts the state for this user and splits it into cookie values. */

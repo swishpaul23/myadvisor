@@ -9,7 +9,12 @@ import {
   toEngineStudent,
   toPlanOptions,
 } from "./engine-input";
-import type { BoardItem, BoardTerm } from "./plan-board";
+import {
+  boardFromPlan,
+  isElectiveId,
+  type BoardItem,
+  type BoardTerm,
+} from "./plan-board";
 import { presentPlan } from "./present";
 import type { Plan, StudentProfile } from "./types";
 
@@ -40,6 +45,40 @@ export function planFor(
     },
   );
   return { remaining, plan };
+}
+
+/**
+ * Rows for every id on a board: the generated plan's items, plus any a saved plan still
+ * holds that the generated plan no longer has (an out-of-date plan): a course from the
+ * course data, or a generic elective.
+ */
+export function boardItemsFor(
+  plan: Plan,
+  catalog: PlanCatalog,
+  ids: string[],
+): Record<string, BoardItem> {
+  const items = { ...boardFromPlan(plan).items };
+  for (const id of ids) {
+    if (items[id]) continue;
+    items[id] = isElectiveId(id)
+      ? {
+          id,
+          code: null,
+          label: "Elective",
+          note: "Your choice",
+          units: catalog.policy.unknown_course.units,
+          closesGap: false,
+        }
+      : {
+          id,
+          code: id,
+          label: id,
+          note: "From your saved plan",
+          units: catalog.courses.find((c) => c.code === id)?.units ?? null,
+          closesGap: false,
+        };
+  }
+  return items;
 }
 
 /** met / not met by that term, can't be checked automatically, or not checked (co-op term). */
