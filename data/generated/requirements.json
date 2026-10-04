@@ -653,7 +653,8 @@
         "dept BUS",
         "institution SFU",
         "course_units >= 3",
-        "exclude BUS 425|BUS 478|BUS 496"
+        "exclude BUS 425|BUS 478|BUS 496",
+        "within upper-400-courses"
       ],
       "min_grade": null,
       "notes": "Subset of upper-400-courses, not an additional course.",
@@ -2181,7 +2182,9 @@
       "level_min": 300,
       "level_max": 499,
       "designation": [],
-      "filter": [],
+      "filter": [
+        "within marketing-total"
+      ],
       "min_grade": null,
       "notes": "Subset of marketing-total; BUS 490-495 require quantitative marketing topic. UNVERIFIED vs Fall 2026 calendar (concentration page not retrievable); differs from 2025-26 checklist - human check needed.",
       "source_url": "https://www.sfu.ca/students/calendar/2026/fall/programs/business/major/bachelor-of-business-administration.html",
@@ -2215,7 +2218,9 @@
       "level_min": 300,
       "level_max": 499,
       "designation": [],
-      "filter": [],
+      "filter": [
+        "within marketing-total"
+      ],
       "min_grade": null,
       "notes": "Subset of marketing-total; BUS 490-495 require behavioural marketing topic. UNVERIFIED vs Fall 2026 calendar (concentration page not retrievable); differs from 2025-26 checklist - human check needed.",
       "source_url": "https://www.sfu.ca/students/calendar/2026/fall/programs/business/major/bachelor-of-business-administration.html",

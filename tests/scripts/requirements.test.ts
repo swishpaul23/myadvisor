@@ -170,8 +170,15 @@ describe("findUnknownFilterTerms", () => {
         "group Beedie",
         "from_reqs test-group-a|test-group-b",
         "from_reqs test-group-a",
+        "within marketing-total",
       ]),
     ).toEqual([]);
+  });
+
+  test("within names exactly one req_id", () => {
+    expect(
+      findUnknownFilterTerms(["within a|b", "within", "within a b"]),
+    ).toEqual(["within a|b", "within", "within a b"]);
   });
 
   test("reports anything else", () => {
@@ -280,5 +287,58 @@ describe("validateRequirementsCsv", () => {
     expect(result.errors).toEqual([]);
     expect(result.unknownFilterTerms).toEqual([]);
     expect(result.rows[0]?.status).toBe("out-of-scope");
+  });
+});
+
+describe("within (subset rows)", () => {
+  const parent = {
+    ...goodRow,
+    req_id: "test-parent",
+    rule: "n courses",
+    n_or_units: "4",
+    courses: "BUS 345, BUS 441",
+  };
+  const child = (filter: string, req_id = "test-child") => ({
+    ...goodRow,
+    req_id,
+    rule: "n courses",
+    n_or_units: "1",
+    courses: "BUS 345",
+    filter,
+  });
+
+  test("accepts a within term naming an existing row (before or after it)", () => {
+    expect(
+      validateRequirementsCsv(toCsv([parent, child("within test-parent")]))
+        .errors,
+    ).toEqual([]);
+    expect(
+      validateRequirementsCsv(toCsv([child("within test-parent"), parent]))
+        .errors,
+    ).toEqual([]);
+  });
+
+  test("rejects a within term naming a missing req_id", () => {
+    expect(
+      validateRequirementsCsv(toCsv([parent, child("within test-missing")]))
+        .errors,
+    ).toEqual([
+      'sheet row 3 (req_id test-child): filter: within names unknown req_id "test-missing"',
+    ]);
+  });
+
+  test("rejects within naming the row itself, and two within terms", () => {
+    expect(
+      validateRequirementsCsv(toCsv([child("within test-child")])).errors,
+    ).toEqual([
+      "sheet row 2 (req_id test-child): filter: within names the row itself",
+    ]);
+    expect(
+      validateRequirementsCsv(
+        toCsv([parent, child("within test-parent; within test-parent")]),
+      ).errors,
+    ).toContain(
+      "sheet row 3 (req_id test-child): filter: more than one within term",
+    );
   });
 });

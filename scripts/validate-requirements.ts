@@ -3,6 +3,7 @@ import {
   REQUIREMENTS_COLUMNS,
   findUnknownFilterTerms,
   fromReqsIds,
+  withinIds,
   requirementRowSchema,
   splitFilterTerms,
   type RequirementRow,
@@ -64,6 +65,7 @@ export function validateRequirementsCsv(
 
   const firstRowOfId = new Map<string, number>();
   const fromReqsRefs: { where: string; id: string }[] = [];
+  const withinRefs: { where: string; id: string }[] = [];
 
   parsed.data.forEach((record, index) => {
     const sheetRow = index + 2;
@@ -87,6 +89,15 @@ export function validateRequirementsCsv(
       for (const id of fromReqsIds(terms)) {
         fromReqsRefs.push({ where, id });
       }
+      const within = withinIds(terms);
+      if (within.length > 1) {
+        errors.push(`${where}: filter: more than one within term`);
+      }
+      for (const id of within) {
+        if (id === reqId)
+          errors.push(`${where}: filter: within names the row itself`);
+        else withinRefs.push({ where, id });
+      }
     }
 
     const firstRow = firstRowOfId.get(reqId);
@@ -109,10 +120,15 @@ export function validateRequirementsCsv(
     }
   });
 
-  // Checked after the loop so a from_reqs term may name a row further down the sheet.
+  // Checked after the loop so a from_reqs/within term may name a row further down the sheet.
   for (const { where, id } of fromReqsRefs) {
     if (!firstRowOfId.has(id)) {
       errors.push(`${where}: filter: from_reqs names unknown req_id "${id}"`);
+    }
+  }
+  for (const { where, id } of withinRefs) {
+    if (!firstRowOfId.has(id)) {
+      errors.push(`${where}: filter: within names unknown req_id "${id}"`);
     }
   }
 

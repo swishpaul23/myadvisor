@@ -40,5 +40,64 @@
     "text": "A grade of C- or better is required to earn W, Q, or B credit.",
     "source_url": "https://www.sfu.ca/students/calendar/2026/fall/fees-and-regulations/enrolment/WQB.html",
     "status": "beta"
+  },
+  "grade_order": {
+    "letter_grades": [
+      "A+",
+      "A",
+      "A-",
+      "B+",
+      "B",
+      "B-",
+      "C+",
+      "C",
+      "C-",
+      "D",
+      "F",
+      "FD",
+      "N"
+    ],
+    "earns_units": [
+      "A+",
+      "A",
+      "A-",
+      "B+",
+      "B",
+      "B-",
+      "C+",
+      "C",
+      "C-",
+      "D",
+      "P",
+      "CR"
+    ],
+    "text": "Letter grades from best to worst; grades that earn units (D or better, P, transfer CR). F, FD, N and W earn none.",
+    "source_url": "https://www.sfu.ca/students/calendar/2026/fall/fees-and-regulations/grading-policy/grading-systems-and-policies.html",
+    "status": "beta"
+  },
+  "major_subjects": {
+    "subjects": ["BUS"],
+    "text": "ASSUMPTION (Stuart to verify): the BBA major's subject is BUS only, for 'subject in major' / 'subject outside major'. BUEC is treated as outside the major.",
+    "source_url": "https://www.sfu.ca/students/calendar/2026/fall/fees-and-regulations/enrolment/WQB.html",
+    "status": "beta"
+  },
+  "bus_gpa_subjects": {
+    "subjects": ["BUS"],
+    "text": "The BUS GPA (beedie-bus-gpa-*) counts BUS courses only (Stuart, 2026-10-04).",
+    "source_url": "https://www.sfu.ca/students/calendar/2026/fall/programs/business/major/bachelor-of-business-administration.html",
+    "status": "beta"
+  },
+  "pass_fail_courses": {
+    "courses": ["BUS 203", "BUS 300", "BUS 496"],
+    "text": "Pass/fail courses: a P grade satisfies their requirement. A P satisfies no other letter-grade minimum (Stuart, 2026-10-04).",
+    "source_url": "https://www.sfu.ca/students/calendar/2026/fall/programs/business/major/bachelor-of-business-administration.html",
+    "status": "beta"
+  },
+  "admission_gated_courses": {
+    "courses": ["BUS 203", "BUS 300", "BUS 496"],
+    "from_term": "2022-fall",
+    "text": "Required for BBA entrants admitted Fall 2022 onward. Earlier admissions: different requirement set; the audit reports these rows as unknown (Stuart, 2026-10-04).",
+    "source_url": "https://www.sfu.ca/students/calendar/2026/fall/programs/business/major/bachelor-of-business-administration.html",
+    "status": "beta"
   }
 }

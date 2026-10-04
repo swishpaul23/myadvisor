@@ -74,6 +74,7 @@ const COURSE_CODE = /^[A-Z]{2,5} \d{3}[A-Z]?$/;
 
 const GROUP_NAME = `(${GROUPS.join("|")})`;
 const FROM_REQS = /^from_reqs ([^\s|;]+(\|[^\s|;]+)*)$/;
+const WITHIN = /^within ([^\s|;]+)$/;
 
 // Allowed `filter` terms on in-scope rows. Anything else is reported by build-data,
 // never guessed at. Out-of-scope rows are not checked.
@@ -82,6 +83,9 @@ const FILTER_TERM_PATTERNS = [
   new RegExp(`^group ${GROUP_NAME}(\\|${GROUP_NAME})*$`),
   // Course list is the union of these rows' course lists; build-data checks each ID exists.
   FROM_REQS,
+  // This row is a subset of the named row: its courses must also count toward that row
+  // (solved in the same matching; not additional courses). build-data checks the ID exists.
+  WITHIN,
   /^dept [A-Z]{2,5}(,[A-Z]{2,5})*$/,
   /^dept not in [A-Z]{2,5}(,[A-Z]{2,5})*$/,
   /^subject business$/,
@@ -117,6 +121,14 @@ export function findUnknownFilterTerms(terms: readonly string[]): string[] {
 // The req_ids named by any `from_reqs` terms, in order.
 export function fromReqsIds(terms: readonly string[]): string[] {
   return terms.flatMap((term) => FROM_REQS.exec(term)?.[1]?.split("|") ?? []);
+}
+
+// The req_ids named by any `within` terms, in order (a valid row has at most one).
+export function withinIds(terms: readonly string[]): string[] {
+  return terms.flatMap((term) => {
+    const id = WITHIN.exec(term)?.[1];
+    return id ? [id] : [];
+  });
 }
 
 const text = z.string().trim();
