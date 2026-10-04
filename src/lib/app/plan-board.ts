@@ -8,6 +8,8 @@ export type BoardItem = {
   /** The course code, or "@n" for the n-th placeholder elective of the generated plan. */
   id: string;
   code: string | null;
+  /** The course title from the course data (filled in by boardItemsFor); null for electives. */
+  title: string | null;
   label: string;
   note: string;
   units: number | null;
@@ -36,6 +38,7 @@ export function boardFromPlan(plan: Plan): Board {
       items[id] = {
         id,
         code: c.code,
+        title: null,
         label: c.label,
         note: c.note,
         units: c.units,

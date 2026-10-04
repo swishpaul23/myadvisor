@@ -57,13 +57,20 @@ export function boardItemsFor(
   catalog: PlanCatalog,
   ids: string[],
 ): Record<string, BoardItem> {
-  const items = { ...boardFromPlan(plan).items };
+  const courses = new Map(catalog.courses.map((c) => [c.code, c]));
+  const items: Record<string, BoardItem> = {};
+  for (const [id, item] of Object.entries(boardFromPlan(plan).items))
+    items[id] = {
+      ...item,
+      title: item.code ? (courses.get(item.code)?.title ?? null) : null,
+    };
   for (const id of ids) {
     if (items[id]) continue;
     items[id] = isElectiveId(id)
       ? {
           id,
           code: null,
+          title: null,
           label: "Elective",
           note: "Your choice",
           units: catalog.policy.unknown_course.units,
@@ -72,9 +79,10 @@ export function boardItemsFor(
       : {
           id,
           code: id,
+          title: courses.get(id)?.title ?? null,
           label: id,
           note: "From your saved plan",
-          units: catalog.courses.find((c) => c.code === id)?.units ?? null,
+          units: courses.get(id)?.units ?? null,
           closesGap: false,
         };
   }

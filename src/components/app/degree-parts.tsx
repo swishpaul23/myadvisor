@@ -7,14 +7,7 @@ import type {
   UnitsSummary,
 } from "@/lib/app/present";
 import { termLabel } from "@/lib/app/terms";
-import type {
-  Claim,
-  Gap,
-  Plan,
-  PlanCourse,
-  PlanTermView,
-  Source,
-} from "@/lib/app/types";
+import type { Claim, Gap, Plan, PlanCourse, Source } from "@/lib/app/types";
 import { cn } from "@/lib/utils";
 import { ClaimLabel } from "./claim-label";
 import { FOCUS, PANEL, PANEL_TITLE, TAG } from "./styles";
@@ -204,44 +197,6 @@ function CourseRows({ courses }: { courses: PlanCourse[] }) {
 }
 
 const COOP_NOTE = "Co-op work term. No courses planned.";
-
-/** Every planned term, in order, from the selected start term. Co-op terms are empty. */
-export function PlanGrid({ terms }: { terms: PlanTermView[] }) {
-  return (
-    <section aria-label="Plan by term">
-      <ol className="grid grid-cols-2 gap-3 max-[900px]:grid-cols-1">
-        {terms.map((term) => (
-          <li
-            key={term.termId}
-            className={cn(
-              PANEL,
-              "flex flex-col p-4",
-              term.kind === "coop" && "bg-surface-subtle",
-            )}
-          >
-            <div className="flex items-center justify-between gap-3">
-              <h3 className={PANEL_TITLE}>{termLabel(term.termId)}</h3>
-              {term.kind === "coop" ? (
-                <span className={TAG}>Co-op</span>
-              ) : (
-                term.units !== null && (
-                  <span className="font-mono text-[11px] text-ink-body">
-                    {term.units} units
-                  </span>
-                )
-              )}
-            </div>
-            {term.kind === "coop" ? (
-              <p className="mt-2.5 text-ink-muted">{COOP_NOTE}</p>
-            ) : (
-              <CourseRows courses={term.courses} />
-            )}
-          </li>
-        ))}
-      </ol>
-    </section>
-  );
-}
 
 /** Draft next-term plan. Labelled as a plan, not enrolment. */
 export function NextTermCard({
