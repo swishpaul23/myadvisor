@@ -1,8 +1,10 @@
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import { connection } from "next/server";
 import { BUTTON_PRIMARY, PANEL, SCREEN_TITLE } from "@/components/app/styles";
 import { TranscriptUpload } from "@/components/app/transcript-upload";
 import { readGoogleGenerativeAiApiKey } from "@/lib/ai/google";
+import { readState } from "@/lib/app/store";
 import { recordTermOptions } from "@/lib/app/terms";
 import { cn } from "@/lib/utils";
 
@@ -10,6 +12,8 @@ export const metadata = { title: "Upload a transcript · MyAdvisor" };
 
 export default async function UploadPage() {
   await connection(); // the key is checked per request, not frozen at build time
+  // Onboarding is done once; after that, courses are edited in Academic record.
+  if ((await readState()).profile) redirect("/app");
   const available = Boolean(readGoogleGenerativeAiApiKey());
   return (
     <div className={cn(PANEL, "flex flex-col gap-6 p-5 sm:p-7")}>

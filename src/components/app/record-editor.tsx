@@ -3,12 +3,11 @@
 import { useActionState, useState } from "react";
 import { updateRecord } from "@/app/app/(shell)/record/actions";
 import type { ActionResult, RecordCourse } from "@/lib/app/types";
-import { cn } from "@/lib/utils";
 import { CourseEditor } from "./course-editor";
-import { FieldError, FormError, SubmitButton } from "./form-parts";
+import { FormError, SubmitButton } from "./form-parts";
 import { BUTTON_BRAND, BUTTON_PRIMARY, BUTTON_SECONDARY, HINT } from "./styles";
 
-/** "Edit courses" toggle: the shared course editor, re-confirmed before it's saved. */
+/** "Edit courses" toggle: the shared course editor. Saving updates progress and plan. */
 export function RecordEditor({
   courses,
   termOptions,
@@ -53,22 +52,6 @@ export function RecordEditor({
         termOptions={termOptions}
         errors={errors}
       />
-      <label className="flex cursor-pointer items-start gap-3 rounded-[10px] border border-line-soft px-3.5 py-3 text-[14px] has-[:checked]:border-ink has-[:checked]:bg-surface-subtle has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-ink">
-        <input
-          type="checkbox"
-          name="confirm"
-          className="mt-0.5 size-4 flex-none accent-ink"
-          aria-invalid={Boolean(errors.confirm)}
-          aria-describedby="record-confirm-error"
-        />
-        <span>
-          <span className="font-medium">Reviewed and confirmed</span>
-          <span className={cn(HINT, "mt-0.5 block")}>
-            Every course, term and grade above matches my transcript.
-          </span>
-        </span>
-      </label>
-      <FieldError id="record-confirm-error" message={errors.confirm} />
       <div className="flex flex-wrap items-center justify-between gap-3 border-t border-line-soft pt-5">
         <button
           type="button"

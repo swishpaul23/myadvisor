@@ -45,7 +45,9 @@ export default async function StepPage({
 }: PageProps<"/app/start/[step]">) {
   const { step } = await params;
   if (!isStepSlug(step)) notFound();
-  const { draft } = await readState();
+  const { draft, profile } = await readState();
+  // Onboarding is done once; after that, courses are edited in Academic record.
+  if (profile) redirect("/app");
 
   // Steps unlock in order: going back is fine, skipping ahead is not.
   const open = firstOpenStep(draft);
