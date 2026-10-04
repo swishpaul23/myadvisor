@@ -1,0 +1,12 @@
+---
+description: Run a light read-only review after an agent implements a feature
+alwaysApply: true
+---
+
+# Light review after a feature
+
+After you implement a feature, spawn the `light-reviewer` subagent and wait for it before you call the feature done. It is read-only and uses Grok 4.7.
+
+Skip small changes: typos, copy, comments, renames, formatting, one-line fixes, and config tweaks.
+
+Pass the original request, the files touched, and the diff. Fix findings that make the feature wrong, incomplete, or unsafe. Do not restyle from review comments. Do not spawn the reviewer again for that follow-up fix unless the fix is itself a new feature.

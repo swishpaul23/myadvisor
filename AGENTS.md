@@ -72,6 +72,21 @@ Do not lock these in without an explicit decision: auth provider and SFU SSO, ba
 
 If a product, status, or architecture decision changes, update [README.md](README.md) and keep this file aligned with it.
 
+## Light review after a feature
+
+After an agent implements a feature, run one light read-only review before calling it done. Skip small changes: typos, copy, comments, renames, formatting, one-line fixes, and config tweaks.
+
+Pass the request, the files touched, and the diff. Fix findings that make the feature wrong, incomplete, or unsafe. Do not restyle from review comments. Do not review that follow-up fix again unless the fix is itself a new feature.
+
+| Tool | When | Subagent | Model |
+| --- | --- | --- | --- |
+| Cursor | Any feature that is not small | `light-reviewer` | Grok 4.7 |
+| Claude | Any feature that is not small | `light-reviewer` | Claude Sonnet 5.5 |
+| Codex | Big: new flow, subsystem, cross-cutting integration, or a wide multi-file change | `light_reviewer` | GPT-6.1 Sol |
+| Codex | Medium: one screen, one endpoint, or one cohesive module | `light_reviewer_luna` | GPT-6 Luna |
+
+Definitions live in `.cursor/agents/light-reviewer.md`, `.claude/agents/light-reviewer.md`, and `.codex/agents/`.
+
 <!-- BEGIN:nextjs-agent-rules -->
 
 # This is NOT the Next.js you know
