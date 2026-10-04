@@ -125,7 +125,7 @@ function CourseRow({
       className={cn(
         "flex gap-1.5 border-b border-line-soft py-2 last:border-b-0",
         flagged &&
-          "-mx-2 rounded-[8px] border-l-2 border-l-brand bg-brand-wash px-2",
+          "-mx-2 my-0.5 rounded-[8px] border border-brand/30 bg-brand-wash px-2 last:border-b",
         isDragging && "relative z-10 rounded-[8px] bg-white shadow-md",
       )}
     >
