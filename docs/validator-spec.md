@@ -108,6 +108,8 @@ type Violation = {
 | `ENTRY_GPA`                        | error / unknown | a 300- or 400-level BUS course (not in `entryGpaExempt`) while the SFU BUS GPA is below 2.30 (error), or can't be computed (unknown) |
 | `PLAN_TERM_ORDER`                  | error           | plan terms are out of order, duplicated, or not after the student's last term                                                        |
 
+**Placeholder electives** (`options.placeholders`, term id -> units of each elective): they add their units to the term's total, so the unit-load checks see them, and a co-op term with any placeholder is `COURSES_IN_COOP_TERM` ("Co-op term lists courses: BUS 374, 2 electives."). Nothing else is checked for them, and their units don't count toward other courses' unit prerequisites.
+
 **Offering rule (study terms).** For a planned term `Y-season`, look at confirmed offerings in the same season in the two previous years (`Y-1`, `Y-2`), and in `Y` itself if it's confirmed. **ASSUMPTION:** "term kind" in the brief means the season (spring, summer or fall).
 
 - Any of those terms has a section: no violation.

@@ -1,13 +1,18 @@
+import Link from "next/link";
 import { RecordCard, SampleDataTag } from "@/components/app/degree-parts";
 import { RecordEditor } from "@/components/app/record-editor";
+import { RecordUpload } from "@/components/app/record-upload";
 import { EmptyPanel } from "@/components/app/states";
 import {
+  FOCUS,
   KICKER,
   PANEL,
   PANEL_TITLE,
   SCREEN_TITLE,
 } from "@/components/app/styles";
+import { readGoogleGenerativeAiApiKey } from "@/lib/ai/google";
 import { getDegreeView } from "@/lib/app/degree";
+import { isPlanStale } from "@/lib/app/plan-board";
 import { recordTermOptions, termIndex, termLabel } from "@/lib/app/terms";
 import type { RecordCourse } from "@/lib/app/types";
 import { cn } from "@/lib/utils";
@@ -100,7 +105,7 @@ function CourseTable({
 export default async function RecordPage() {
   const view = await getDegreeView();
   if (!view) return null; // the layout redirects to onboarding
-  const { profile, record, catalogUnits, audit } = view;
+  const { profile, record, catalogUnits, audit, savedPlan } = view;
   const electiveUnits = new Map(
     audit.summary.electiveCredit.map((e) => [e.code, e.units]),
   );
@@ -120,6 +125,21 @@ export default async function RecordPage() {
         </div>
         {profile.origin === "sample" && <SampleDataTag />}
       </header>
+      {savedPlan && isPlanStale(savedPlan, profile) && (
+        <p
+          role="status"
+          className="rounded-[10px] border border-brand/30 bg-brand-wash px-3.5 py-2.5 text-[13px] text-brand"
+        >
+          Your record changed, so your saved plan is out of date.{" "}
+          <Link
+            href="/app/plan"
+            className={cn("font-medium underline underline-offset-2", FOCUS)}
+          >
+            Review it on My plan
+          </Link>
+          .
+        </p>
+      )}
 
       {profile.courses.length === 0 ? (
         <EmptyPanel title="No courses on your record yet">
@@ -156,6 +176,12 @@ export default async function RecordPage() {
           />
         </>
       )}
+      <RecordUpload
+        current={profile.courses}
+        sample={profile.origin === "sample"}
+        termOptions={recordTermOptions(new Date())}
+        available={Boolean(readGoogleGenerativeAiApiKey())}
+      />
       <RecordEditor
         courses={profile.courses}
         termOptions={recordTermOptions(new Date())}

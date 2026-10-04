@@ -1,24 +1,43 @@
 import Link from "next/link";
 import {
   DATA_NOTE,
-  PlanGrid,
   SampleDataTag,
   WhyThisPlan,
 } from "@/components/app/degree-parts";
+import { PlanBoard } from "@/components/app/plan-board";
 import { PlanSettings } from "@/components/app/plan-settings";
 import { EmptyPanel } from "@/components/app/states";
 import { FOCUS, HINT, KICKER, SCREEN_TITLE } from "@/components/app/styles";
 import { getDegreeView } from "@/lib/app/degree";
+import {
+  boardFromPlan,
+  fromSavedTerms,
+  isPlanStale,
+  planBasis,
+} from "@/lib/app/plan-board";
+import { boardItemsFor, checkBoard } from "@/lib/app/plan-check";
 import { coopTermOptions, planTermOptions, termLabel } from "@/lib/app/terms";
+import { loadReferenceData } from "@/lib/data/source";
 import { cn } from "@/lib/utils";
 
 export const metadata = { title: "My plan · MyAdvisor" };
 
-/** My plan: every term from the selected start term, why, and the plan's settings. */
+/**
+ * My plan: semester cards from the selected start term (the saved plan if the student saved
+ * one), why, and the plan's settings.
+ */
 export default async function PlanPage() {
   const view = await getDegreeView();
   if (!view) return null; // the layout redirects to onboarding
-  const { profile, plan } = view;
+  const { profile, plan, savedPlan } = view;
+  const data = await loadReferenceData();
+  const generated = boardFromPlan(plan).terms;
+  const initial = savedPlan ? fromSavedTerms(savedPlan.terms) : generated;
+  const items = boardItemsFor(
+    plan,
+    data,
+    initial.flatMap((t) => t.itemIds),
+  );
 
   return (
     <>
@@ -60,13 +79,22 @@ export default async function PlanPage() {
         termOptions={planTermOptions(new Date())}
         coopOptions={coopTermOptions(new Date())}
       />
-      {plan.terms.length === 0 ? (
+      {initial.length === 0 ? (
         <EmptyPanel title="Nothing left to plan">
           Every requirement MyAdvisor can plan is already on your record or in
           progress.
         </EmptyPanel>
       ) : (
-        <PlanGrid terms={plan.terms} />
+        <PlanBoard
+          // New plan settings or a new record: start from the recomputed plan.
+          key={planBasis(profile)}
+          generated={generated}
+          initial={initial}
+          items={items}
+          initialCheck={checkBoard(profile, initial, items, data)}
+          hasSaved={savedPlan !== null}
+          stale={savedPlan !== null && isPlanStale(savedPlan, profile)}
+        />
       )}
       <WhyThisPlan claims={plan.claims} />
       <p className={HINT}>

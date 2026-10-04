@@ -2,18 +2,13 @@ import "server-only";
 import { cache } from "react";
 import { audit } from "@/engine/audit";
 import type { AuditResult } from "@/engine/audit/types";
-import { planRemaining, type RemainingPlan } from "@/engine/plan/remaining";
+import type { RemainingPlan } from "@/engine/plan/remaining";
 import { loadReferenceData, type DataSource } from "@/lib/data/source";
-import {
-  coopTerms,
-  summerChoice,
-  toEngineStudent,
-  toPlanOptions,
-} from "./engine-input";
+import { toEngineStudent } from "./engine-input";
+import { planFor } from "./plan-check";
 import {
   buildChecklist,
   buildGaps,
-  presentPlan,
   recordSummary,
   source,
   uniqueSources,
@@ -23,7 +18,7 @@ import {
   type UnitsSummary,
 } from "./present";
 import { readState } from "./store";
-import type { Gap, Plan, Source, StudentProfile } from "./types";
+import type { Gap, Plan, SavedPlan, Source, StudentProfile } from "./types";
 
 // Everything the signed-in screens show, computed once per request: the stored profile ->
 // the rules engine (audit + multi-term plan) -> presentation. The engine decides; this
@@ -45,30 +40,18 @@ export type DegreeView = {
   dataFallback: boolean;
   /** Units from the course data for the student's own courses (null when unknown). */
   catalogUnits: Record<string, number | null>;
+  /** The student's edited plan from My plan, if they saved one. */
+  savedPlan: SavedPlan | null;
 };
 
 /** null when the student hasn't finished onboarding. */
 export const getDegreeView = cache(async (): Promise<DegreeView | null> => {
-  const { profile } = await readState();
+  const { profile, plan: savedPlan = null } = await readState();
   if (!profile) return null;
   const data = await loadReferenceData();
   const student = toEngineStudent(profile);
   const result = audit(student, data);
-  const remaining = planRemaining(student, data, toPlanOptions(profile));
-  const plan = presentPlan(
-    remaining,
-    data.requirements,
-    result,
-    profile,
-    data.courses,
-    {
-      summer: summerChoice(profile).summer,
-      summerUnsure: summerChoice(profile).unsure,
-      unitLoad: data.policy.unit_load,
-      electiveUnits: data.policy.unknown_course.units,
-      coop: { doing: profile.coop.doing, ...coopTerms(profile) },
-    },
-  );
+  const { remaining, plan } = planFor(profile, data, result);
   const shown = new Set(
     result.results
       .filter((r) => r.status !== "not_applicable")
@@ -91,6 +74,7 @@ export const getDegreeView = cache(async (): Promise<DegreeView | null> => {
     ]),
     dataSource: data.source,
     dataFallback: data.fallbackReason !== null,
+    savedPlan,
     catalogUnits: Object.fromEntries(
       profile.courses.map((c) => [
         c.code,

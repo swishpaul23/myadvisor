@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useActionState, useId, useRef, useState } from "react";
+import { useActionState, useId, useRef, useState, type ReactNode } from "react";
 import { saveTranscriptReview } from "@/app/app/start/actions";
 import type { TranscriptResult } from "@/lib/app/types";
 import { cn } from "@/lib/utils";
@@ -9,17 +9,59 @@ import { CourseEditor } from "./course-editor";
 import { FormError, SubmitButton } from "./form-parts";
 import { BUTTON_BRAND, BUTTON_SECONDARY, FOCUS, HINT, LABEL } from "./styles";
 
+export type TranscriptRead = Extract<TranscriptResult, { ok: true }>;
+
 type Phase =
   | { kind: "pick" }
   | { kind: "reading"; name: string }
-  | { kind: "error"; message: string; manualOnly: boolean }
-  | { kind: "review"; result: Extract<TranscriptResult, { ok: true }> };
+  | { kind: "error"; message: string; manualOnly: boolean };
+
+export const UPLOAD_UNAVAILABLE = "Upload unavailable, enter courses manually.";
 
 export const PRIVACY_NOTICE =
   "Your file is sent to Google's Gemini API to read your courses. It isn't stored: MyAdvisor keeps only the course list you confirm.";
 
 /** Upload a transcript PDF, then review and confirm what was read. */
 export function TranscriptUpload({ termOptions }: { termOptions: string[] }) {
+  const [result, setResult] = useState<TranscriptRead | null>(null);
+  if (result) return <Review result={result} termOptions={termOptions} />;
+  return (
+    <TranscriptPicker
+      onRead={setResult}
+      back={
+        <Link href="/app/start" className={BUTTON_SECONDARY}>
+          Back
+        </Link>
+      }
+      footer={
+        <p className={HINT}>
+          Prefer not to upload?{" "}
+          <Link
+            href="/app/start/courses"
+            className={cn("text-ink underline underline-offset-2", FOCUS)}
+          >
+            Enter your courses manually
+          </Link>
+          .
+        </p>
+      }
+    />
+  );
+}
+
+/**
+ * The privacy notice, file picker and "Reading…" state. Sends the PDF to /api/transcript
+ * (Gemini) and hands what was read to onRead. Shared by onboarding and Academic record.
+ */
+export function TranscriptPicker({
+  onRead,
+  back,
+  footer,
+}: {
+  onRead: (result: TranscriptRead) => void;
+  back: ReactNode;
+  footer?: ReactNode;
+}) {
   const [phase, setPhase] = useState<Phase>({ kind: "pick" });
   const inputRef = useRef<HTMLInputElement>(null);
   const fileId = useId();
@@ -31,7 +73,7 @@ export function TranscriptUpload({ termOptions }: { termOptions: string[] }) {
     try {
       const res = await fetch("/api/transcript", { method: "POST", body });
       const result = (await res.json()) as TranscriptResult;
-      if (result.ok) setPhase({ kind: "review", result });
+      if (result.ok) onRead(result);
       else
         setPhase({
           kind: "error",
@@ -47,9 +89,6 @@ export function TranscriptUpload({ termOptions }: { termOptions: string[] }) {
       });
     }
   }
-
-  if (phase.kind === "review")
-    return <Review result={phase.result} termOptions={termOptions} />;
 
   return (
     <div className="flex flex-col gap-5">
@@ -104,9 +143,7 @@ export function TranscriptUpload({ termOptions }: { termOptions: string[] }) {
             MB.
           </p>
           <div className="mt-3 flex flex-wrap items-center justify-between gap-3 border-t border-line-soft pt-5">
-            <Link href="/app/start" className={BUTTON_SECONDARY}>
-              Back
-            </Link>
+            {back}
             <button type="submit" className={BUTTON_BRAND}>
               Read my transcript
             </button>
@@ -114,16 +151,7 @@ export function TranscriptUpload({ termOptions }: { termOptions: string[] }) {
         </form>
       ) : null}
 
-      <p className={HINT}>
-        Prefer not to upload?{" "}
-        <Link
-          href="/app/start/courses"
-          className={cn("text-ink underline underline-offset-2", FOCUS)}
-        >
-          Enter your courses manually
-        </Link>
-        .
-      </p>
+      {footer}
     </div>
   );
 }
@@ -132,7 +160,7 @@ function Review({
   result,
   termOptions,
 }: {
-  result: Extract<TranscriptResult, { ok: true }>;
+  result: TranscriptRead;
   termOptions: string[];
 }) {
   const [state, formAction] = useActionState(saveTranscriptReview, null);
