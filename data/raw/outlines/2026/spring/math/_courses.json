@@ -1,0 +1,267 @@
+[
+  {
+    "text": "100",
+    "value": "100",
+    "title": "Precalculus"
+  },
+  {
+    "text": "130",
+    "value": "130",
+    "title": "Geometry for Computer Graphics"
+  },
+  {
+    "text": "150",
+    "value": "150",
+    "title": "Calculus I with Review"
+  },
+  {
+    "text": "152",
+    "value": "152",
+    "title": "Calculus II"
+  },
+  {
+    "text": "154",
+    "value": "154",
+    "title": "Mathematics for the Life Sciences I"
+  },
+  {
+    "text": "155",
+    "value": "155",
+    "title": "Mathematics for the Life Sciences II"
+  },
+  {
+    "text": "157",
+    "value": "157",
+    "title": "Calculus I for the Social Sciences"
+  },
+  {
+    "text": "158",
+    "value": "158",
+    "title": "Calculus II for the Social Sciences"
+  },
+  {
+    "text": "190",
+    "value": "190",
+    "title": "Principles of Mathematics for Teachers"
+  },
+  {
+    "text": "208W",
+    "value": "208w",
+    "title": "Introduction to Operations Research"
+  },
+  {
+    "text": "232",
+    "value": "232",
+    "title": "Applied Linear Algebra"
+  },
+  {
+    "text": "240",
+    "value": "240",
+    "title": "Algebra I: Linear Algebra"
+  },
+  {
+    "text": "242",
+    "value": "242",
+    "title": "Introduction to Analysis I"
+  },
+  {
+    "text": "251",
+    "value": "251",
+    "title": "Calculus III"
+  },
+  {
+    "text": "252",
+    "value": "252",
+    "title": "Vector Calculus"
+  },
+  {
+    "text": "260",
+    "value": "260",
+    "title": "Introduction to Ordinary Differential Equations"
+  },
+  {
+    "text": "302",
+    "value": "302",
+    "title": "Mathematical Journeys II"
+  },
+  {
+    "text": "308",
+    "value": "308",
+    "title": "Linear Optimization"
+  },
+  {
+    "text": "314",
+    "value": "314",
+    "title": "Introduction to Fourier Methods and Partial Differential Equations"
+  },
+  {
+    "text": "320",
+    "value": "320",
+    "title": "Introduction to Analysis II"
+  },
+  {
+    "text": "336",
+    "value": "336",
+    "title": "Job Practicum I"
+  },
+  {
+    "text": "337",
+    "value": "337",
+    "title": "Job Practicum II"
+  },
+  {
+    "text": "341",
+    "value": "341",
+    "title": "Algebra III: Groups"
+  },
+  {
+    "text": "348",
+    "value": "348",
+    "title": "Stochastic Modelling and Simulation"
+  },
+  {
+    "text": "380W",
+    "value": "380w",
+    "title": "History of Mathematics"
+  },
+  {
+    "text": "402W",
+    "value": "402w",
+    "title": "Operations Research Clinic"
+  },
+  {
+    "text": "436",
+    "value": "436",
+    "title": "Job Practicum III"
+  },
+  {
+    "text": "437",
+    "value": "437",
+    "title": "Job Practicum IV"
+  },
+  {
+    "text": "441",
+    "value": "441",
+    "title": "Commutative Algebra and Algebraic Geometry"
+  },
+  {
+    "text": "443",
+    "value": "443",
+    "title": "Combinatorial Theory"
+  },
+  {
+    "text": "462",
+    "value": "462",
+    "title": "Fluid Dynamics"
+  },
+  {
+    "text": "468",
+    "value": "468",
+    "title": "Topics in Biomathematics"
+  },
+  {
+    "text": "475",
+    "value": "475",
+    "title": "Mathematical Topics in Data Science"
+  },
+  {
+    "text": "486",
+    "value": "486",
+    "title": "Job Practicum V"
+  },
+  {
+    "text": "741",
+    "value": "741",
+    "title": "Commutative Algebra and Algebraic Geometry"
+  },
+  {
+    "text": "743",
+    "value": "743",
+    "title": "Combinatorial Theory"
+  },
+  {
+    "text": "762",
+    "value": "762",
+    "title": "Fluid Dynamics"
+  },
+  {
+    "text": "768",
+    "value": "768",
+    "title": "Topics in Biomathematics"
+  },
+  {
+    "text": "775",
+    "value": "775",
+    "title": "Mathematical Data Science"
+  },
+  {
+    "text": "800",
+    "value": "800",
+    "title": "Mathematics: Selected Topics"
+  },
+  {
+    "text": "808",
+    "value": "808",
+    "title": "Advanced Linear Programming"
+  },
+  {
+    "text": "842",
+    "value": "842",
+    "title": "Algebraic Number Theory"
+  },
+  {
+    "text": "875",
+    "value": "875",
+    "title": "PhD Preliminary Examination"
+  },
+  {
+    "text": "876",
+    "value": "876",
+    "title": "PhD Comprehensive Examination"
+  },
+  {
+    "text": "877",
+    "value": "877",
+    "title": "Supplementary Reading"
+  },
+  {
+    "text": "879",
+    "value": "879",
+    "title": "PhD Thesis Proposal"
+  },
+  {
+    "text": "880",
+    "value": "880",
+    "title": "MSc Project"
+  },
+  {
+    "text": "890",
+    "value": "890",
+    "title": "Co-op I"
+  },
+  {
+    "text": "891",
+    "value": "891",
+    "title": "Co-op II"
+  },
+  {
+    "text": "894",
+    "value": "894",
+    "title": "Reading"
+  },
+  {
+    "text": "895",
+    "value": "895",
+    "title": "Reading"
+  },
+  {
+    "text": "898",
+    "value": "898",
+    "title": "MSc Thesis"
+  },
+  {
+    "text": "899",
+    "value": "899",
+    "title": "PhD Thesis"
+  }
+]

@@ -1,0 +1,66 @@
+[
+  {
+    "text": "D100",
+    "value": "d100",
+    "title": "Strategy",
+    "classType": "e",
+    "sectionCode": "SEM",
+    "associatedClass": "1"
+  },
+  {
+    "text": "D200",
+    "value": "d200",
+    "title": "Strategy",
+    "classType": "e",
+    "sectionCode": "SEM",
+    "associatedClass": "2"
+  },
+  {
+    "text": "D300",
+    "value": "d300",
+    "title": "Strategy",
+    "classType": "e",
+    "sectionCode": "SEM",
+    "associatedClass": "3"
+  },
+  {
+    "text": "D400",
+    "value": "d400",
+    "title": "Strategy",
+    "classType": "e",
+    "sectionCode": "SEM",
+    "associatedClass": "4"
+  },
+  {
+    "text": "D500",
+    "value": "d500",
+    "title": "Strategy",
+    "classType": "e",
+    "sectionCode": "SEM",
+    "associatedClass": "5"
+  },
+  {
+    "text": "D600",
+    "value": "d600",
+    "title": "Strategy",
+    "classType": "e",
+    "sectionCode": "SEM",
+    "associatedClass": "6"
+  },
+  {
+    "text": "D700",
+    "value": "d700",
+    "title": "Strategy",
+    "classType": "e",
+    "sectionCode": "SEM",
+    "associatedClass": "7"
+  },
+  {
+    "text": "E100",
+    "value": "e100",
+    "title": "Strategy",
+    "classType": "e",
+    "sectionCode": "SEM",
+    "associatedClass": "8"
+  }
+]

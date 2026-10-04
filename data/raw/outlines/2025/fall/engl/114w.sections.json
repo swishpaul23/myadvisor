@@ -1,0 +1,74 @@
+[
+  {
+    "text": "D900",
+    "value": "d900",
+    "title": "Language and Purpose",
+    "classType": "e",
+    "sectionCode": "LEC",
+    "associatedClass": "1"
+  },
+  {
+    "text": "D901",
+    "value": "d901",
+    "title": "Language and Purpose",
+    "classType": "n",
+    "sectionCode": "TUT",
+    "associatedClass": "1"
+  },
+  {
+    "text": "D902",
+    "value": "d902",
+    "title": "Language and Purpose",
+    "classType": "n",
+    "sectionCode": "TUT",
+    "associatedClass": "1"
+  },
+  {
+    "text": "D903",
+    "value": "d903",
+    "title": "Language and Purpose",
+    "classType": "n",
+    "sectionCode": "TUT",
+    "associatedClass": "1"
+  },
+  {
+    "text": "D904",
+    "value": "d904",
+    "title": "Language and Purpose",
+    "classType": "n",
+    "sectionCode": "TUT",
+    "associatedClass": "1"
+  },
+  {
+    "text": "D906",
+    "value": "d906",
+    "title": "Language and Purpose",
+    "classType": "n",
+    "sectionCode": "TUT",
+    "associatedClass": "1"
+  },
+  {
+    "text": "D907",
+    "value": "d907",
+    "title": "Language and Purpose",
+    "classType": "n",
+    "sectionCode": "TUT",
+    "associatedClass": "1"
+  },
+  {
+    "text": "D908",
+    "value": "d908",
+    "title": "Language and Purpose",
+    "classType": "n",
+    "sectionCode": "TUT",
+    "associatedClass": "1"
+  },
+  {
+    "text": "D909",
+    "value": "d909",
+    "title": "Language and Purpose",
+    "classType": "n",
+    "sectionCode": "TUT",
+    "associatedClass": "1"
+  }
+]

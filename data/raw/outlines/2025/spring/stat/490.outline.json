@@ -1,0 +1,24 @@
+{
+  "info": {
+    "dept": "STAT",
+    "number": "490",
+    "notes": "",
+    "deliveryMethod": "In Person",
+    "description": "Topics in areas of probability and statistics not covered in the regular undergraduate curriculum of the department.",
+    "section": "D100",
+    "units": "3",
+    "title": "Selected Topics in Probability and Statistics",
+    "type": "e",
+    "classNumber": "2255",
+    "departmentalUgradNotes": "<strong> Students with Disabilities:<br /></strong>Students requiring accommodations as a result of disability must contact the Centre for Accessible Learning [phone removed] or <a href=\"mailto:[email removed]\">[email removed]</a>. &nbsp; <br /><strong><br /><br />Tutor Requests:<br /></strong>Students looking for a tutor should visit <a href=\"https://www.sfu.ca/stat-actsci/all-students/other-resources/tutoring.html\">https://www.sfu.ca/stat-actsci/all-students/other-resources/tutoring.html</a>. We accept no responsibility for the consequences of any actions taken related to tutors.",
+    "prerequisites": "Dependent on the topic covered.",
+    "registrarNotes": "<p><strong>ACADEMIC INTEGRITY: YOUR WORK, YOUR SUCCESS</strong></p>\r\n<p>SFU&rsquo;s Academic Integrity website <a href=\"http://www.sfu.ca/students/academicintegrity.html\">http://www.sfu.ca/students/academicintegrity.html</a> is filled with information on what is meant by academic dishonesty, where you can find resources to help with your studies and the consequences of cheating. Check out the site for more information and videos that help explain the issues in plain English.</p>\r\n<p>Each student is responsible for his or her conduct as it affects the university community. Academic dishonesty, in whatever form, is ultimately destructive of the values of the university. Furthermore, it is unfair and discouraging to the majority of students who pursue their studies honestly. Scholarly integrity is required of all members of the university. <a href=\"http://www.sfu.ca/policies/gazette/student/s10-01.html\">http://www.sfu.ca/policies/gazette/student/s10-01.html</a><br /><br /><strong>RELIGIOUS ACCOMMODATION</strong></p>\r\n<p>Students with a faith background who may need accommodations during the term are encouraged to assess their needs as soon as possible and review the Multifaith religious accommodations&nbsp;<a href=\"https://www.sfu.ca/students/multifaith/resources/accommodation.html#:~:text=To%20request%20religious%20accommodation%2C%20you,the%20point%20of%20undue%20hardship.\">website</a>. The page outlines ways they begin working toward an accommodation and ensure solutions can be reached in a timely fashion.</p>",
+    "outlinePath": "2025/spring/stat/490/d100",
+    "term": "Spring 2025",
+    "corequisites": "",
+    "degreeLevel": "UGRD",
+    "specialTopic": "Advanced Actuarial Models",
+    "name": "STAT 490 D100",
+    "designation": "N/A"
+  }
+}

@@ -1,0 +1,50 @@
+[
+  {
+    "text": "D300",
+    "value": "d300",
+    "title": "Selected Questions and Issues in Education",
+    "classType": "e",
+    "sectionCode": "SEM",
+    "associatedClass": "3"
+  },
+  {
+    "text": "OL01",
+    "value": "ol01",
+    "title": "Selected Questions and Issues in Education",
+    "classType": "e",
+    "sectionCode": "OLC",
+    "associatedClass": "100"
+  },
+  {
+    "text": "OL02",
+    "value": "ol02",
+    "title": "Selected Questions and Issues in Education",
+    "classType": "e",
+    "sectionCode": "OLC",
+    "associatedClass": "101"
+  },
+  {
+    "text": "OL03",
+    "value": "ol03",
+    "title": "Selected Questions and Issues in Education",
+    "classType": "e",
+    "sectionCode": "OLC",
+    "associatedClass": "300"
+  },
+  {
+    "text": "OL04",
+    "value": "ol04",
+    "title": "Selected Questions and Issues in Education",
+    "classType": "e",
+    "sectionCode": "OLC",
+    "associatedClass": "400"
+  },
+  {
+    "text": "P100",
+    "value": "p100",
+    "title": "Selected Questions and Issues in Education",
+    "classType": "e",
+    "sectionCode": "SEM",
+    "associatedClass": "1"
+  }
+]

@@ -1,0 +1,18 @@
+[
+  {
+    "text": "D100",
+    "value": "d100",
+    "title": "Introduction to Mathematical Proofs and Combinatorics",
+    "classType": "e",
+    "sectionCode": "LEC",
+    "associatedClass": "1"
+  },
+  {
+    "text": "D101",
+    "value": "d101",
+    "title": "Introduction to Mathematical Proofs and Combinatorics",
+    "classType": "n",
+    "sectionCode": "TUT",
+    "associatedClass": "1"
+  }
+]

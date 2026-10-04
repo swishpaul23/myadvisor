@@ -1,0 +1,34 @@
+[
+  {
+    "text": "D100",
+    "value": "d100",
+    "title": "Calculus III",
+    "classType": "e",
+    "sectionCode": "LEC",
+    "associatedClass": "1"
+  },
+  {
+    "text": "D200",
+    "value": "d200",
+    "title": "Calculus III",
+    "classType": "e",
+    "sectionCode": "LEC",
+    "associatedClass": "2"
+  },
+  {
+    "text": "OPO2",
+    "value": "opo2",
+    "title": "Calculus III",
+    "classType": "n",
+    "sectionCode": "OPL",
+    "associatedClass": "200"
+  },
+  {
+    "text": "OP01",
+    "value": "op01",
+    "title": "Calculus III",
+    "classType": "n",
+    "sectionCode": "OPL",
+    "associatedClass": "200"
+  }
+]

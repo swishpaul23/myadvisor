@@ -1,0 +1,26 @@
+[
+  {
+    "text": "B100",
+    "value": "b100",
+    "title": "Analysis of Experimental and Observational Data",
+    "classType": "e",
+    "sectionCode": "LEC",
+    "associatedClass": "1"
+  },
+  {
+    "text": "OL01",
+    "value": "ol01",
+    "title": "Analysis of Experimental and Observational Data",
+    "classType": "e",
+    "sectionCode": "OLC",
+    "associatedClass": "100"
+  },
+  {
+    "text": "OP01",
+    "value": "op01",
+    "title": "Analysis of Experimental and Observational Data",
+    "classType": "n",
+    "sectionCode": "OPL",
+    "associatedClass": "200"
+  }
+]

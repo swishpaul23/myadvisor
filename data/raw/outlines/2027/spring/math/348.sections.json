@@ -1,0 +1,18 @@
+[
+  {
+    "text": "D100",
+    "value": "d100",
+    "title": "Stochastic Modelling and Simulation",
+    "classType": "e",
+    "sectionCode": "LEC",
+    "associatedClass": "2"
+  },
+  {
+    "text": "D101",
+    "value": "d101",
+    "title": "Stochastic Modelling and Simulation",
+    "classType": "n",
+    "sectionCode": "TUT",
+    "associatedClass": "2"
+  }
+]

@@ -1,0 +1,18 @@
+[
+  {
+    "text": "OL01",
+    "value": "ol01",
+    "title": "Principles of Mathematics for Teachers",
+    "classType": "e",
+    "sectionCode": "OLC",
+    "associatedClass": "100"
+  },
+  {
+    "text": "OP01",
+    "value": "op01",
+    "title": "Principles of Mathematics for Teachers",
+    "classType": "n",
+    "sectionCode": "OPL",
+    "associatedClass": "200"
+  }
+]

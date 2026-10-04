@@ -1,0 +1,66 @@
+[
+  {
+    "text": "D100",
+    "value": "d100",
+    "title": "Business Statistics",
+    "classType": "e",
+    "sectionCode": "LEC",
+    "associatedClass": "1"
+  },
+  {
+    "text": "D200",
+    "value": "d200",
+    "title": "Business Statistics",
+    "classType": "e",
+    "sectionCode": "LEC",
+    "associatedClass": "2"
+  },
+  {
+    "text": "E100",
+    "value": "e100",
+    "title": "Business Statistics",
+    "classType": "e",
+    "sectionCode": "LEC",
+    "associatedClass": "3"
+  },
+  {
+    "text": "OP01",
+    "value": "op01",
+    "title": "Business Statistics",
+    "classType": "n",
+    "sectionCode": "OPL",
+    "associatedClass": "200"
+  },
+  {
+    "text": "OP02",
+    "value": "op02",
+    "title": "Business Statistics",
+    "classType": "n",
+    "sectionCode": "OPL",
+    "associatedClass": "201"
+  },
+  {
+    "text": "OP03",
+    "value": "op03",
+    "title": "Business Statistics",
+    "classType": "n",
+    "sectionCode": "OPL",
+    "associatedClass": "202"
+  },
+  {
+    "text": "OP04",
+    "value": "op04",
+    "title": "Business Statistics",
+    "classType": "n",
+    "sectionCode": "OPL",
+    "associatedClass": "203"
+  },
+  {
+    "text": "OP05",
+    "value": "op05",
+    "title": "Business Statistics",
+    "classType": "n",
+    "sectionCode": "OPL",
+    "associatedClass": "204"
+  }
+]

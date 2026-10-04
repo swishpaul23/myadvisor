@@ -1,0 +1,42 @@
+[
+  {
+    "text": "B100",
+    "value": "b100",
+    "title": "The Environmental Imagination",
+    "classType": "e",
+    "sectionCode": "LEC",
+    "associatedClass": "2"
+  },
+  {
+    "text": "B101",
+    "value": "b101",
+    "title": "The Environmental Imagination",
+    "classType": "n",
+    "sectionCode": "TUT",
+    "associatedClass": "2"
+  },
+  {
+    "text": "B102",
+    "value": "b102",
+    "title": "The Environmental Imagination",
+    "classType": "n",
+    "sectionCode": "TUT",
+    "associatedClass": "2"
+  },
+  {
+    "text": "B103",
+    "value": "b103",
+    "title": "The Environmental Imagination",
+    "classType": "n",
+    "sectionCode": "TUT",
+    "associatedClass": "2"
+  },
+  {
+    "text": "B104",
+    "value": "b104",
+    "title": "The Environmental Imagination",
+    "classType": "n",
+    "sectionCode": "TUT",
+    "associatedClass": "2"
+  }
+]

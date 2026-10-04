@@ -1,0 +1,18 @@
+[
+  {
+    "text": "B100",
+    "value": "b100",
+    "title": "Advanced Seminar",
+    "classType": "e",
+    "sectionCode": "SEM",
+    "associatedClass": "1"
+  },
+  {
+    "text": "B101",
+    "value": "b101",
+    "title": "Advanced Seminar",
+    "classType": "n",
+    "sectionCode": "OLC",
+    "associatedClass": "1"
+  }
+]

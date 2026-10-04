@@ -1,0 +1,26 @@
+[
+  {
+    "text": "E100",
+    "value": "e100",
+    "title": "Mathematical Journeys IV",
+    "classType": "e",
+    "sectionCode": "LEC",
+    "associatedClass": "1"
+  },
+  {
+    "text": "E101",
+    "value": "e101",
+    "title": "Mathematical Journeys IV",
+    "classType": "n",
+    "sectionCode": "TUT",
+    "associatedClass": "1"
+  },
+  {
+    "text": "E102",
+    "value": "e102",
+    "title": "Mathematical Journeys IV",
+    "classType": "n",
+    "sectionCode": "TUT",
+    "associatedClass": "1"
+  }
+]

@@ -1,0 +1,26 @@
+[
+  {
+    "text": "D100",
+    "value": "d100",
+    "title": "Business Statistics",
+    "classType": "e",
+    "sectionCode": "LEC",
+    "associatedClass": "1"
+  },
+  {
+    "text": "OP01",
+    "value": "op01",
+    "title": "Business Statistics",
+    "classType": "n",
+    "sectionCode": "OPL",
+    "associatedClass": "200"
+  },
+  {
+    "text": "OP02",
+    "value": "op02",
+    "title": "Business Statistics",
+    "classType": "n",
+    "sectionCode": "OPL",
+    "associatedClass": "201"
+  }
+]

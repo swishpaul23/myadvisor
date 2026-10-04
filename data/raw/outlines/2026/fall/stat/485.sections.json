@@ -1,0 +1,34 @@
+[
+  {
+    "text": "E100",
+    "value": "e100",
+    "title": "Applied Time Series Analysis",
+    "classType": "e",
+    "sectionCode": "LEC",
+    "associatedClass": "1"
+  },
+  {
+    "text": "E101",
+    "value": "e101",
+    "title": "Applied Time Series Analysis",
+    "classType": "n",
+    "sectionCode": "TUT",
+    "associatedClass": "1"
+  },
+  {
+    "text": "E102",
+    "value": "e102",
+    "title": "Applied Time Series Analysis",
+    "classType": "n",
+    "sectionCode": "TUT",
+    "associatedClass": "1"
+  },
+  {
+    "text": "E103",
+    "value": "e103",
+    "title": "Applied Time Series Analysis",
+    "classType": "n",
+    "sectionCode": "TUT",
+    "associatedClass": "1"
+  }
+]

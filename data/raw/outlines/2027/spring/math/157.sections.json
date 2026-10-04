@@ -1,0 +1,90 @@
+[
+  {
+    "text": "D100",
+    "value": "d100",
+    "title": "Calculus I for the Social Sciences",
+    "classType": "e",
+    "sectionCode": "LEC",
+    "associatedClass": "1"
+  },
+  {
+    "text": "D101",
+    "value": "d101",
+    "title": "Calculus I for the Social Sciences",
+    "classType": "n",
+    "sectionCode": "LAB",
+    "associatedClass": "1"
+  },
+  {
+    "text": "D102",
+    "value": "d102",
+    "title": "Calculus I for the Social Sciences",
+    "classType": "n",
+    "sectionCode": "LAB",
+    "associatedClass": "1"
+  },
+  {
+    "text": "D104",
+    "value": "d104",
+    "title": "Calculus I for the Social Sciences",
+    "classType": "n",
+    "sectionCode": "LAB",
+    "associatedClass": "1"
+  },
+  {
+    "text": "D105",
+    "value": "d105",
+    "title": "Calculus I for the Social Sciences",
+    "classType": "n",
+    "sectionCode": "LAB",
+    "associatedClass": "1"
+  },
+  {
+    "text": "D106",
+    "value": "d106",
+    "title": "Calculus I for the Social Sciences",
+    "classType": "n",
+    "sectionCode": "LAB",
+    "associatedClass": "1"
+  },
+  {
+    "text": "D108",
+    "value": "d108",
+    "title": "Calculus I for the Social Sciences",
+    "classType": "n",
+    "sectionCode": "LAB",
+    "associatedClass": "1"
+  },
+  {
+    "text": "D109",
+    "value": "d109",
+    "title": "Calculus I for the Social Sciences",
+    "classType": "n",
+    "sectionCode": "LAB",
+    "associatedClass": "1"
+  },
+  {
+    "text": "D400",
+    "value": "d400",
+    "title": "Calculus I for the Social Sciences",
+    "classType": "e",
+    "sectionCode": "LEC",
+    "associatedClass": "2"
+  },
+  {
+    "text": "OP01",
+    "value": "op01",
+    "title": "Calculus I for the Social Sciences",
+    "classType": "n",
+    "sectionCode": "OPL",
+    "associatedClass": "200"
+  },
+  {
+    "text": "OP02",
+    "value": "op02",
+    "title": "Calculus I for the Social Sciences",
+    "classType": "n",
+    "sectionCode": "OPL",
+    "associatedClass": "210"
+  }
+]

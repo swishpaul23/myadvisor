@@ -1,0 +1,34 @@
+[
+  {
+    "text": "E100",
+    "value": "e100",
+    "title": "Climate Crisis: Understanding a World on Fire",
+    "classType": "e",
+    "sectionCode": "LEC",
+    "associatedClass": "1"
+  },
+  {
+    "text": "E101",
+    "value": "e101",
+    "title": "Climate Crisis: Understanding a World on Fire",
+    "classType": "n",
+    "sectionCode": "TUT",
+    "associatedClass": "1"
+  },
+  {
+    "text": "E102",
+    "value": "e102",
+    "title": "Climate Crisis: Understanding a World on Fire",
+    "classType": "n",
+    "sectionCode": "TUT",
+    "associatedClass": "1"
+  },
+  {
+    "text": "E103",
+    "value": "e103",
+    "title": "Climate Crisis: Understanding a World on Fire",
+    "classType": "n",
+    "sectionCode": "TUT",
+    "associatedClass": "1"
+  }
+]

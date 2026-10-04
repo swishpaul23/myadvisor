@@ -1,0 +1,50 @@
+[
+  {
+    "text": "D100",
+    "value": "d100",
+    "title": "Economics of Natural Resources",
+    "classType": "e",
+    "sectionCode": "LEC",
+    "associatedClass": "1"
+  },
+  {
+    "text": "D101",
+    "value": "d101",
+    "title": "Economics of Natural Resources",
+    "classType": "n",
+    "sectionCode": "TUT",
+    "associatedClass": "1"
+  },
+  {
+    "text": "D102",
+    "value": "d102",
+    "title": "Economics of Natural Resources",
+    "classType": "n",
+    "sectionCode": "TUT",
+    "associatedClass": "1"
+  },
+  {
+    "text": "D103",
+    "value": "d103",
+    "title": "Economics of Natural Resources",
+    "classType": "n",
+    "sectionCode": "TUT",
+    "associatedClass": "1"
+  },
+  {
+    "text": "D104",
+    "value": "d104",
+    "title": "Economics of Natural Resources",
+    "classType": "n",
+    "sectionCode": "TUT",
+    "associatedClass": "1"
+  },
+  {
+    "text": "D105",
+    "value": "d105",
+    "title": "Economics of Natural Resources",
+    "classType": "n",
+    "sectionCode": "TUT",
+    "associatedClass": "1"
+  }
+]

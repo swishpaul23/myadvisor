@@ -1,0 +1,34 @@
+[
+  {
+    "text": "B100",
+    "value": "b100",
+    "title": "Principles of Mathematics for Teachers",
+    "classType": "e",
+    "sectionCode": "LEC",
+    "associatedClass": "1"
+  },
+  {
+    "text": "B101",
+    "value": "b101",
+    "title": "Principles of Mathematics for Teachers",
+    "classType": "n",
+    "sectionCode": "OLC",
+    "associatedClass": "1"
+  },
+  {
+    "text": "OL02",
+    "value": "ol02",
+    "title": "Principles of Mathematics for Teachers",
+    "classType": "e",
+    "sectionCode": "OLC",
+    "associatedClass": "110"
+  },
+  {
+    "text": "OP01",
+    "value": "op01",
+    "title": "Principles of Mathematics for Teachers",
+    "classType": "n",
+    "sectionCode": "OPL",
+    "associatedClass": "200"
+  }
+]

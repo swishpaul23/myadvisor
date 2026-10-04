@@ -1,0 +1,18 @@
+[
+  {
+    "text": "E100",
+    "value": "e100",
+    "title": "Directed Studies A",
+    "classType": "e",
+    "sectionCode": "IND",
+    "associatedClass": "1"
+  },
+  {
+    "text": "E200",
+    "value": "e200",
+    "title": "Directed Studies A",
+    "classType": "e",
+    "sectionCode": "IND",
+    "associatedClass": "2"
+  }
+]

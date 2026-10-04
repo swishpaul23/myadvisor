@@ -1,0 +1,42 @@
+[
+  {
+    "text": "D100",
+    "value": "d100",
+    "title": "Statistics for the Life Sciences",
+    "classType": "e",
+    "sectionCode": "LEC",
+    "associatedClass": "2"
+  },
+  {
+    "text": "D900",
+    "value": "d900",
+    "title": "Statistics for the Life Sciences",
+    "classType": "e",
+    "sectionCode": "LEC",
+    "associatedClass": "1"
+  },
+  {
+    "text": "OL01",
+    "value": "ol01",
+    "title": "Statistics for the Life Sciences",
+    "classType": "e",
+    "sectionCode": "OLC",
+    "associatedClass": "100"
+  },
+  {
+    "text": "OP01",
+    "value": "op01",
+    "title": "Statistics for the Life Sciences",
+    "classType": "n",
+    "sectionCode": "OPL",
+    "associatedClass": "200"
+  },
+  {
+    "text": "OP09",
+    "value": "op09",
+    "title": "Statistics for the Life Sciences",
+    "classType": "n",
+    "sectionCode": "OPL",
+    "associatedClass": "201"
+  }
+]

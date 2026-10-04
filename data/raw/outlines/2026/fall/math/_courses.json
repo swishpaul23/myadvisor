@@ -1,0 +1,252 @@
+[
+  {
+    "text": "100",
+    "value": "100",
+    "title": "Precalculus"
+  },
+  {
+    "text": "110",
+    "value": "110",
+    "title": "Precalculus for the Life Sciences and Social Sciences"
+  },
+  {
+    "text": "141W",
+    "value": "141w",
+    "title": "Introduction to Mathematical Proofs and Combinatorics"
+  },
+  {
+    "text": "150",
+    "value": "150",
+    "title": "Calculus I with Review"
+  },
+  {
+    "text": "151",
+    "value": "151",
+    "title": "Calculus I"
+  },
+  {
+    "text": "152",
+    "value": "152",
+    "title": "Calculus II"
+  },
+  {
+    "text": "154",
+    "value": "154",
+    "title": "Mathematics for the Life Sciences I"
+  },
+  {
+    "text": "157",
+    "value": "157",
+    "title": "Calculus I for the Social Sciences"
+  },
+  {
+    "text": "190",
+    "value": "190",
+    "title": "Principles of Mathematics for Teachers"
+  },
+  {
+    "text": "232",
+    "value": "232",
+    "title": "Applied Linear Algebra"
+  },
+  {
+    "text": "240",
+    "value": "240",
+    "title": "Algebra I: Linear Algebra"
+  },
+  {
+    "text": "251",
+    "value": "251",
+    "title": "Calculus III"
+  },
+  {
+    "text": "260",
+    "value": "260",
+    "title": "Introduction to Ordinary Differential Equations"
+  },
+  {
+    "text": "303",
+    "value": "303",
+    "title": "Mathematical Journeys III"
+  },
+  {
+    "text": "308",
+    "value": "308",
+    "title": "Linear Optimization"
+  },
+  {
+    "text": "309",
+    "value": "309",
+    "title": "Continuous Optimization"
+  },
+  {
+    "text": "322",
+    "value": "322",
+    "title": "Complex Variables"
+  },
+  {
+    "text": "336",
+    "value": "336",
+    "title": "Job Practicum I"
+  },
+  {
+    "text": "337",
+    "value": "337",
+    "title": "Job Practicum II"
+  },
+  {
+    "text": "340",
+    "value": "340",
+    "title": "Algebra II: Rings and Fields"
+  },
+  {
+    "text": "345",
+    "value": "345",
+    "title": "Introduction to Graph Theory"
+  },
+  {
+    "text": "360",
+    "value": "360",
+    "title": "Introduction to Biomathematics"
+  },
+  {
+    "text": "408",
+    "value": "408",
+    "title": "Discrete Optimization"
+  },
+  {
+    "text": "418",
+    "value": "418",
+    "title": "Partial Differential Equations"
+  },
+  {
+    "text": "436",
+    "value": "436",
+    "title": "Job Practicum III"
+  },
+  {
+    "text": "437",
+    "value": "437",
+    "title": "Job Practicum IV"
+  },
+  {
+    "text": "447",
+    "value": "447",
+    "title": "Coding Theory"
+  },
+  {
+    "text": "450",
+    "value": "450",
+    "title": "Introduction to Topology"
+  },
+  {
+    "text": "486",
+    "value": "486",
+    "title": "Job Practicum V"
+  },
+  {
+    "text": "498",
+    "value": "498",
+    "title": "Communication and Research Skills in the Mathematical Sciences"
+  },
+  {
+    "text": "499W",
+    "value": "499w",
+    "title": "Honours Research Project"
+  },
+  {
+    "text": "701",
+    "value": "701",
+    "title": "Computer Algebra"
+  },
+  {
+    "text": "708",
+    "value": "708",
+    "title": "Discrete Optimization"
+  },
+  {
+    "text": "716",
+    "value": "716",
+    "title": "Numerical Analysis II"
+  },
+  {
+    "text": "718",
+    "value": "718",
+    "title": "Partial Differential Equations"
+  },
+  {
+    "text": "747",
+    "value": "747",
+    "title": "Coding Theory"
+  },
+  {
+    "text": "750",
+    "value": "750",
+    "title": "Introduction to Topology"
+  },
+  {
+    "text": "818",
+    "value": "818",
+    "title": "Algebra and Geometry"
+  },
+  {
+    "text": "821",
+    "value": "821",
+    "title": "Combinatorics"
+  },
+  {
+    "text": "875",
+    "value": "875",
+    "title": "PhD Preliminary Examination"
+  },
+  {
+    "text": "876",
+    "value": "876",
+    "title": "PhD Comprehensive Examination"
+  },
+  {
+    "text": "877",
+    "value": "877",
+    "title": "Supplementary Reading"
+  },
+  {
+    "text": "879",
+    "value": "879",
+    "title": "PhD Thesis Proposal"
+  },
+  {
+    "text": "880",
+    "value": "880",
+    "title": "MSc Project"
+  },
+  {
+    "text": "890",
+    "value": "890",
+    "title": "Co-op I"
+  },
+  {
+    "text": "891",
+    "value": "891",
+    "title": "Co-op II"
+  },
+  {
+    "text": "894",
+    "value": "894",
+    "title": "Reading"
+  },
+  {
+    "text": "895",
+    "value": "895",
+    "title": "Reading"
+  },
+  {
+    "text": "898",
+    "value": "898",
+    "title": "MSc Thesis"
+  },
+  {
+    "text": "899",
+    "value": "899",
+    "title": "PhD Thesis"
+  }
+]

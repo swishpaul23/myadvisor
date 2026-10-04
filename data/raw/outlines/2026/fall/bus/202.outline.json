@@ -1,0 +1,24 @@
+{
+  "info": {
+    "dept": "BUS",
+    "number": "202",
+    "notes": "Students with credit for BUS 130 or BUS 201 may not take this course for further credit.",
+    "deliveryMethod": "In Person",
+    "corequisites": "",
+    "description": "Business Administration Major – Transfer Stream. Orients students to the Beedie School of Business and the academic expectations of the program. Students explore the different disciplines and specializations within business and tune their prior business knowledge within the context of a global perspective, social responsibility, and innovation. Students explore the integration of these disciplines through experiential learning projects by engaging with, and further developing interpersonal and collaboration skills in culturally diverse team environments.",
+    "section": "D100",
+    "units": "3",
+    "title": "Foundations of Business",
+    "type": "e",
+    "classNumber": "2351",
+    "departmentalUgradNotes": "",
+    "prerequisites": "This course is only open to approved business administration majors, joint majors, or second degree students admitted to the faculty through the Business Foundation Pathways - Transfer Pathway. Corequisite: BUS 203 with a P grade.",
+    "registrarNotes": "<p><strong>ACADEMIC INTEGRITY: YOUR WORK, YOUR SUCCESS</strong></p>\r\n<p>At SFU, you are expected to act honestly and responsibly in all your academic work. Cheating, plagiarism, or any other form of academic dishonesty harms your own learning, undermines the efforts of your classmates who pursue their studies honestly, and goes against the core values of the university.</p>\r\n<p>To learn more about the academic disciplinary process and relevant academic supports, visit:&nbsp;</p>\r\n<ul>\r\n<li>SFU&rsquo;s Academic Integrity Policy: <u><a href=\"http://www.sfu.ca/policies/gazette/student/s10-01.html\">S10-01 Policy</a></u></li>\r\n<li>SFU&rsquo;s Academic Integrity website, which includes helpful videos and tips in plain language: <u><a href=\"http://www.sfu.ca/students/academicintegrity.html\">Academic Integrity at SFU</a></u></li>\r\n</ul>\r\n<p><br /><strong>RELIGIOUS ACCOMMODATION</strong></p>\r\n<p>Students with a faith background who may need accommodations during the term are encouraged to assess their needs as soon as possible and review the Multifaith religious accommodations&nbsp;<a href=\"https://www.sfu.ca/students/multifaith/resources/accommodation.html#:~:text=To%20request%20religious%20accommodation%2C%20you,the%20point%20of%20undue%20hardship.\">website</a>. The page outlines ways they begin working toward an accommodation and ensure solutions can be reached in a timely fashion.</p>",
+    "degreeLevel": "UGRD",
+    "outlinePath": "2026/fall/bus/202/d100",
+    "specialTopic": "",
+    "name": "BUS 202 D100",
+    "term": "Fall 2026",
+    "designation": "N/A"
+  }
+}

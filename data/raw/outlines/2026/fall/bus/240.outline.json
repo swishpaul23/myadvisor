@@ -1,0 +1,24 @@
+{
+  "info": {
+    "dept": "BUS",
+    "number": "240",
+    "notes": "",
+    "deliveryMethod": "In Person",
+    "corequisites": "",
+    "description": "An introduction to key innovation concepts and processes, and how innovation is organized in established organizations and start-ups. Students will learn their role as agents of innovation by practicing techniques that help them anticipate opportunities, generate innovative concepts, and implement innovation in established organizations, entrepreneurial ventures and society.",
+    "section": "D100",
+    "units": "3",
+    "title": "Introduction to Innovation",
+    "type": "e",
+    "classNumber": "2369",
+    "departmentalUgradNotes": "",
+    "prerequisites": "12 units.",
+    "registrarNotes": "<p><strong>ACADEMIC INTEGRITY: YOUR WORK, YOUR SUCCESS</strong></p>\r\n<p>At SFU, you are expected to act honestly and responsibly in all your academic work. Cheating, plagiarism, or any other form of academic dishonesty harms your own learning, undermines the efforts of your classmates who pursue their studies honestly, and goes against the core values of the university.</p>\r\n<p>To learn more about the academic disciplinary process and relevant academic supports, visit:&nbsp;</p>\r\n<ul>\r\n<li>SFU&rsquo;s Academic Integrity Policy: <u><a href=\"http://www.sfu.ca/policies/gazette/student/s10-01.html\">S10-01 Policy</a></u></li>\r\n<li>SFU&rsquo;s Academic Integrity website, which includes helpful videos and tips in plain language: <u><a href=\"http://www.sfu.ca/students/academicintegrity.html\">Academic Integrity at SFU</a></u></li>\r\n</ul>\r\n<p><br /><strong>RELIGIOUS ACCOMMODATION</strong></p>\r\n<p>Students with a faith background who may need accommodations during the term are encouraged to assess their needs as soon as possible and review the Multifaith religious accommodations&nbsp;<a href=\"https://www.sfu.ca/students/multifaith/resources/accommodation.html#:~:text=To%20request%20religious%20accommodation%2C%20you,the%20point%20of%20undue%20hardship.\">website</a>. The page outlines ways they begin working toward an accommodation and ensure solutions can be reached in a timely fashion.</p>",
+    "degreeLevel": "UGRD",
+    "outlinePath": "2026/fall/bus/240/d100",
+    "specialTopic": "",
+    "name": "BUS 240 D100",
+    "term": "Fall 2026",
+    "designation": "Breadth-Social Sciences"
+  }
+}

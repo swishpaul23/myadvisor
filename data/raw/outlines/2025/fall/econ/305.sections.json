@@ -1,0 +1,34 @@
+[
+  {
+    "text": "D100",
+    "value": "d100",
+    "title": "Intermediate Macroeconomic Theory",
+    "classType": "e",
+    "sectionCode": "LEC",
+    "associatedClass": "1"
+  },
+  {
+    "text": "D101",
+    "value": "d101",
+    "title": "Intermediate Macroeconomic Theory",
+    "classType": "n",
+    "sectionCode": "TUT",
+    "associatedClass": "1"
+  },
+  {
+    "text": "D105",
+    "value": "d105",
+    "title": "Intermediate Macroeconomic Theory",
+    "classType": "n",
+    "sectionCode": "TUT",
+    "associatedClass": "1"
+  },
+  {
+    "text": "D106",
+    "value": "d106",
+    "title": "Intermediate Macroeconomic Theory",
+    "classType": "n",
+    "sectionCode": "TUT",
+    "associatedClass": "1"
+  }
+]

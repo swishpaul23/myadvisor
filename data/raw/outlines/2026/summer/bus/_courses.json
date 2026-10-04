@@ -1,0 +1,647 @@
+[
+  {
+    "text": "200",
+    "value": "200",
+    "title": "Business Fundamentals"
+  },
+  {
+    "text": "207",
+    "value": "207",
+    "title": "Managerial Economics"
+  },
+  {
+    "text": "217W",
+    "value": "217w",
+    "title": "Critical Thinking in Business"
+  },
+  {
+    "text": "225",
+    "value": "225",
+    "title": "Co-op Practicum I"
+  },
+  {
+    "text": "232",
+    "value": "232",
+    "title": "Business Statistics"
+  },
+  {
+    "text": "233",
+    "value": "233",
+    "title": "Introduction to Business Law and Ethics"
+  },
+  {
+    "text": "237",
+    "value": "237",
+    "title": "Introduction to Business Technology Management"
+  },
+  {
+    "text": "238",
+    "value": "238",
+    "title": "Introduction to Entrepreneurship and Innovation"
+  },
+  {
+    "text": "240",
+    "value": "240",
+    "title": "Introduction to Innovation"
+  },
+  {
+    "text": "251",
+    "value": "251",
+    "title": "Financial Accounting I"
+  },
+  {
+    "text": "254",
+    "value": "254",
+    "title": "Managerial Accounting I"
+  },
+  {
+    "text": "272",
+    "value": "272",
+    "title": "Behaviour in Organizations"
+  },
+  {
+    "text": "275",
+    "value": "275",
+    "title": "Business in a Sustainable Society"
+  },
+  {
+    "text": "300",
+    "value": "300",
+    "title": "Professional Development - Planning"
+  },
+  {
+    "text": "303",
+    "value": "303",
+    "title": "Business, Society and Ethics"
+  },
+  {
+    "text": "311",
+    "value": "311",
+    "title": "Financial Decision Making"
+  },
+  {
+    "text": "312",
+    "value": "312",
+    "title": "Introduction to Finance"
+  },
+  {
+    "text": "313",
+    "value": "313",
+    "title": "Corporate Finance"
+  },
+  {
+    "text": "315",
+    "value": "315",
+    "title": "Investments"
+  },
+  {
+    "text": "320",
+    "value": "320",
+    "title": "Financial Accounting:  Assets"
+  },
+  {
+    "text": "321",
+    "value": "321",
+    "title": "Financial Accounting: Equities"
+  },
+  {
+    "text": "322",
+    "value": "322",
+    "title": "Intermediate Managerial Accounting"
+  },
+  {
+    "text": "325",
+    "value": "325",
+    "title": "Co-op Practicum II"
+  },
+  {
+    "text": "326",
+    "value": "326",
+    "title": "Co-op Practicum III"
+  },
+  {
+    "text": "327",
+    "value": "327",
+    "title": "Co-op Practicum IV"
+  },
+  {
+    "text": "330",
+    "value": "330",
+    "title": "Income Taxation for Individuals"
+  },
+  {
+    "text": "331",
+    "value": "331",
+    "title": "Corporate Taxation"
+  },
+  {
+    "text": "336",
+    "value": "336",
+    "title": "Data Analytics and Visualization"
+  },
+  {
+    "text": "340",
+    "value": "340",
+    "title": "International Business Strategy"
+  },
+  {
+    "text": "341",
+    "value": "341",
+    "title": "Fundamentals of Marketing"
+  },
+  {
+    "text": "343",
+    "value": "343",
+    "title": "Introduction to Marketing"
+  },
+  {
+    "text": "345",
+    "value": "345",
+    "title": "Marketing Research"
+  },
+  {
+    "text": "346",
+    "value": "346",
+    "title": "Global Business Environment"
+  },
+  {
+    "text": "347",
+    "value": "347",
+    "title": "Consumer Behaviour"
+  },
+  {
+    "text": "360W",
+    "value": "360w",
+    "title": "Business Communication"
+  },
+  {
+    "text": "361",
+    "value": "361",
+    "title": "Project Management"
+  },
+  {
+    "text": "362",
+    "value": "362",
+    "title": "Business Process Analysis"
+  },
+  {
+    "text": "373",
+    "value": "373",
+    "title": "Operations and Supply Chain Management"
+  },
+  {
+    "text": "381",
+    "value": "381",
+    "title": "Introduction to Human Resource Management"
+  },
+  {
+    "text": "393",
+    "value": "393",
+    "title": "Commercial Law"
+  },
+  {
+    "text": "401",
+    "value": "401",
+    "title": "Developing Organizational Opportunities"
+  },
+  {
+    "text": "410",
+    "value": "410",
+    "title": "Financial Institutions"
+  },
+  {
+    "text": "411",
+    "value": "411",
+    "title": "Fixed Income Security Analysis and Valuation"
+  },
+  {
+    "text": "417",
+    "value": "417",
+    "title": "Equity Security Analysis"
+  },
+  {
+    "text": "418",
+    "value": "418",
+    "title": "International Financial Management"
+  },
+  {
+    "text": "420",
+    "value": "420",
+    "title": "Advanced Accounting"
+  },
+  {
+    "text": "421",
+    "value": "421",
+    "title": "Accounting Theory"
+  },
+  {
+    "text": "424",
+    "value": "424",
+    "title": "Advanced Managerial Accounting"
+  },
+  {
+    "text": "425",
+    "value": "425",
+    "title": "Co-op Practicum V"
+  },
+  {
+    "text": "426",
+    "value": "426",
+    "title": "Auditing and Assurance: Concepts and Methods"
+  },
+  {
+    "text": "430",
+    "value": "430",
+    "title": "Cross-Cultural Management"
+  },
+  {
+    "text": "434",
+    "value": "434",
+    "title": "Foreign Market Entry"
+  },
+  {
+    "text": "437",
+    "value": "437",
+    "title": "Decision Analysis in Business"
+  },
+  {
+    "text": "445",
+    "value": "445",
+    "title": "Customer Analytics"
+  },
+  {
+    "text": "447",
+    "value": "447",
+    "title": "Global Marketing Management"
+  },
+  {
+    "text": "462",
+    "value": "462",
+    "title": "Business Analytics"
+  },
+  {
+    "text": "464",
+    "value": "464",
+    "title": "Business Data Management"
+  },
+  {
+    "text": "466",
+    "value": "466",
+    "title": "Web-Enabled Business and Emerging Technologies"
+  },
+  {
+    "text": "468",
+    "value": "468",
+    "title": "Managing Information Technology for Business Value"
+  },
+  {
+    "text": "473",
+    "value": "473",
+    "title": "Advanced Operations Management"
+  },
+  {
+    "text": "474",
+    "value": "474",
+    "title": "Supply Chain Management"
+  },
+  {
+    "text": "475",
+    "value": "475",
+    "title": "Sustainable Operations"
+  },
+  {
+    "text": "478",
+    "value": "478",
+    "title": "Strategy"
+  },
+  {
+    "text": "481",
+    "value": "481",
+    "title": "Recruitment and Selection"
+  },
+  {
+    "text": "489",
+    "value": "489",
+    "title": "Management Practices for Sustainability"
+  },
+  {
+    "text": "492",
+    "value": "492",
+    "title": "Selected Topics in Business Administration"
+  },
+  {
+    "text": "493",
+    "value": "493",
+    "title": "Selected Topics in Business Administration"
+  },
+  {
+    "text": "496",
+    "value": "496",
+    "title": "Professional Development - Summit"
+  },
+  {
+    "text": "568",
+    "value": "568",
+    "title": "Being in Good Relations with Indigenous Peoples"
+  },
+  {
+    "text": "576",
+    "value": "576",
+    "title": "Responsible Innovation"
+  },
+  {
+    "text": "577",
+    "value": "577",
+    "title": "Platform Power: Business in the Digital Age"
+  },
+  {
+    "text": "578",
+    "value": "578",
+    "title": "New Venture Creation: From Concept to Scale"
+  },
+  {
+    "text": "579",
+    "value": "579",
+    "title": "Professional Development"
+  },
+  {
+    "text": "588",
+    "value": "588",
+    "title": "Strategic Consulting and Advising"
+  },
+  {
+    "text": "603",
+    "value": "603",
+    "title": "Structure and Change in Organizations"
+  },
+  {
+    "text": "607",
+    "value": "607",
+    "title": "Strategy"
+  },
+  {
+    "text": "613",
+    "value": "613",
+    "title": "Human Resources in Indigenous Business"
+  },
+  {
+    "text": "620",
+    "value": "620",
+    "title": "Managerial Accounting for Leaders in Indigenous Business"
+  },
+  {
+    "text": "621",
+    "value": "621",
+    "title": "Information Technology and Organizational Transformation"
+  },
+  {
+    "text": "630",
+    "value": "630",
+    "title": "Data and Decision Making for Indigenous Businesses"
+  },
+  {
+    "text": "632",
+    "value": "632",
+    "title": "Operations Management"
+  },
+  {
+    "text": "655",
+    "value": "655",
+    "title": "Special Topics in Business Administration"
+  },
+  {
+    "text": "668",
+    "value": "668",
+    "title": "Financial Management for Indigenous Leadership"
+  },
+  {
+    "text": "675",
+    "value": "675",
+    "title": "Indigenous Economies"
+  },
+  {
+    "text": "687",
+    "value": "687",
+    "title": "Applied Project Preparation"
+  },
+  {
+    "text": "697",
+    "value": "697",
+    "title": "Applied Project"
+  },
+  {
+    "text": "702",
+    "value": "702",
+    "title": "Marketing Management"
+  },
+  {
+    "text": "705",
+    "value": "705",
+    "title": "Financial/Managerial Accounting"
+  },
+  {
+    "text": "706",
+    "value": "706",
+    "title": "Business Analytics"
+  },
+  {
+    "text": "708",
+    "value": "708",
+    "title": "Financial Management"
+  },
+  {
+    "text": "709",
+    "value": "709",
+    "title": "Managing Information"
+  },
+  {
+    "text": "714",
+    "value": "714",
+    "title": "Innovation and Entrepreneurship"
+  },
+  {
+    "text": "715",
+    "value": "715",
+    "title": "Operations Management"
+  },
+  {
+    "text": "716",
+    "value": "716",
+    "title": "Sustainability"
+  },
+  {
+    "text": "718",
+    "value": "718",
+    "title": "Business Strategy"
+  },
+  {
+    "text": "719",
+    "value": "719",
+    "title": "Managing People and Organizations"
+  },
+  {
+    "text": "725",
+    "value": "725",
+    "title": "International Applied Project"
+  },
+  {
+    "text": "727",
+    "value": "727",
+    "title": "MBA Internship"
+  },
+  {
+    "text": "730",
+    "value": "730",
+    "title": "Indigenous Business Environments in Community"
+  },
+  {
+    "text": "733",
+    "value": "733",
+    "title": "Negotiations"
+  },
+  {
+    "text": "741",
+    "value": "741",
+    "title": "Indigenous Business Environments"
+  },
+  {
+    "text": "759",
+    "value": "759",
+    "title": "Special Topics"
+  },
+  {
+    "text": "774",
+    "value": "774",
+    "title": "Special Topics"
+  },
+  {
+    "text": "783",
+    "value": "783",
+    "title": "Entrepreneurship"
+  },
+  {
+    "text": "785",
+    "value": "785",
+    "title": "Advanced Business Analytics"
+  },
+  {
+    "text": "786",
+    "value": "786",
+    "title": "Data Science for Business"
+  },
+  {
+    "text": "787",
+    "value": "787",
+    "title": "AI in Business"
+  },
+  {
+    "text": "788",
+    "value": "788",
+    "title": "Customer Analytics"
+  },
+  {
+    "text": "794",
+    "value": "794",
+    "title": "Leadership and Managing Teams"
+  },
+  {
+    "text": "795",
+    "value": "795",
+    "title": "Financing the New Venture"
+  },
+  {
+    "text": "796",
+    "value": "796",
+    "title": "Business Plan I"
+  },
+  {
+    "text": "797",
+    "value": "797",
+    "title": "Business Plan II"
+  },
+  {
+    "text": "829",
+    "value": "829",
+    "title": "Investment Banking and Private Equity"
+  },
+  {
+    "text": "840",
+    "value": "840",
+    "title": "Data Mining and Business Intelligence"
+  },
+  {
+    "text": "841",
+    "value": "841",
+    "title": "Predictive Analytics for Business"
+  },
+  {
+    "text": "842",
+    "value": "842",
+    "title": "Advanced Accounting Data Analytics"
+  },
+  {
+    "text": "844",
+    "value": "844",
+    "title": "Forensic Accounting and Data Analytics"
+  },
+  {
+    "text": "880",
+    "value": "880",
+    "title": "Student Investment Advisory Service Practicum"
+  },
+  {
+    "text": "888",
+    "value": "888",
+    "title": "Special Topics"
+  },
+  {
+    "text": "890",
+    "value": "890",
+    "title": "Business Econometrics I"
+  },
+  {
+    "text": "965",
+    "value": "965",
+    "title": "Business Econometrics II"
+  },
+  {
+    "text": "983",
+    "value": "983",
+    "title": "Directed Studies I"
+  },
+  {
+    "text": "984",
+    "value": "984",
+    "title": "Directed Studies II"
+  },
+  {
+    "text": "985",
+    "value": "985",
+    "title": "Directed Studies III"
+  },
+  {
+    "text": "986",
+    "value": "986",
+    "title": "Directed Studies IV"
+  },
+  {
+    "text": "990",
+    "value": "990",
+    "title": "Academic Writing and Research Development"
+  },
+  {
+    "text": "991",
+    "value": "991",
+    "title": "PhD Comprehensive Exam"
+  },
+  {
+    "text": "992",
+    "value": "992",
+    "title": "PhD Thesis"
+  },
+  {
+    "text": "993",
+    "value": "993",
+    "title": "Thesis Proposal"
+  }
+]

@@ -1,0 +1,26 @@
+[
+  {
+    "text": "E100",
+    "value": "e100",
+    "title": "Intermediate Sampling and Experimental Design",
+    "classType": "e",
+    "sectionCode": "LEC",
+    "associatedClass": "1"
+  },
+  {
+    "text": "E101",
+    "value": "e101",
+    "title": "Intermediate Sampling and Experimental Design",
+    "classType": "n",
+    "sectionCode": "TUT",
+    "associatedClass": "1"
+  },
+  {
+    "text": "E102",
+    "value": "e102",
+    "title": "Intermediate Sampling and Experimental Design",
+    "classType": "n",
+    "sectionCode": "TUT",
+    "associatedClass": "1"
+  }
+]

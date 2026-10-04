@@ -1,0 +1,18 @@
+[
+  {
+    "text": "D900",
+    "value": "d900",
+    "title": "Introduction to Global Humanities",
+    "classType": "e",
+    "sectionCode": "LEC",
+    "associatedClass": "1"
+  },
+  {
+    "text": "D901",
+    "value": "d901",
+    "title": "Introduction to Global Humanities",
+    "classType": "n",
+    "sectionCode": "TUT",
+    "associatedClass": "1"
+  }
+]

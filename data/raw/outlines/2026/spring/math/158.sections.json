@@ -1,0 +1,18 @@
+[
+  {
+    "text": "E100",
+    "value": "e100",
+    "title": "Calculus II for the Social Sciences",
+    "classType": "e",
+    "sectionCode": "LEC",
+    "associatedClass": "1"
+  },
+  {
+    "text": "OP01",
+    "value": "op01",
+    "title": "Calculus II for the Social Sciences",
+    "classType": "n",
+    "sectionCode": "OPL",
+    "associatedClass": "200"
+  }
+]

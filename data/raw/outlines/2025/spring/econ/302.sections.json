@@ -1,0 +1,42 @@
+[
+  {
+    "text": "D100",
+    "value": "d100",
+    "title": "Microeconomic Theory II: Strategic Behavior",
+    "classType": "e",
+    "sectionCode": "LEC",
+    "associatedClass": "1"
+  },
+  {
+    "text": "D106",
+    "value": "d106",
+    "title": "Microeconomic Theory II: Strategic Behavior",
+    "classType": "n",
+    "sectionCode": "TUT",
+    "associatedClass": "1"
+  },
+  {
+    "text": "D109",
+    "value": "d109",
+    "title": "Microeconomic Theory II: Strategic Behavior",
+    "classType": "n",
+    "sectionCode": "TUT",
+    "associatedClass": "1"
+  },
+  {
+    "text": "D110",
+    "value": "d110",
+    "title": "Microeconomic Theory II: Strategic Behavior",
+    "classType": "n",
+    "sectionCode": "TUT",
+    "associatedClass": "1"
+  },
+  {
+    "text": "D113",
+    "value": "d113",
+    "title": "Microeconomic Theory II: Strategic Behavior",
+    "classType": "n",
+    "sectionCode": "TUT",
+    "associatedClass": "1"
+  }
+]

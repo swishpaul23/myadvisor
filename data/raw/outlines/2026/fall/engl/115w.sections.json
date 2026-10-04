@@ -1,0 +1,106 @@
+[
+  {
+    "text": "D100",
+    "value": "d100",
+    "title": "Literature and Culture",
+    "classType": "e",
+    "sectionCode": "LEC",
+    "associatedClass": "1"
+  },
+  {
+    "text": "D101",
+    "value": "d101",
+    "title": "Literature and Culture",
+    "classType": "n",
+    "sectionCode": "TUT",
+    "associatedClass": "1"
+  },
+  {
+    "text": "D102",
+    "value": "d102",
+    "title": "Literature and Culture",
+    "classType": "n",
+    "sectionCode": "TUT",
+    "associatedClass": "1"
+  },
+  {
+    "text": "D103",
+    "value": "d103",
+    "title": "Literature and Culture",
+    "classType": "n",
+    "sectionCode": "TUT",
+    "associatedClass": "1"
+  },
+  {
+    "text": "D104",
+    "value": "d104",
+    "title": "Literature and Culture",
+    "classType": "n",
+    "sectionCode": "TUT",
+    "associatedClass": "1"
+  },
+  {
+    "text": "D105",
+    "value": "d105",
+    "title": "Literature and Culture",
+    "classType": "n",
+    "sectionCode": "TUT",
+    "associatedClass": "1"
+  },
+  {
+    "text": "D106",
+    "value": "d106",
+    "title": "Literature and Culture",
+    "classType": "n",
+    "sectionCode": "TUT",
+    "associatedClass": "1"
+  },
+  {
+    "text": "D107",
+    "value": "d107",
+    "title": "Literature and Culture",
+    "classType": "n",
+    "sectionCode": "TUT",
+    "associatedClass": "1"
+  },
+  {
+    "text": "D108",
+    "value": "d108",
+    "title": "Literature and Culture",
+    "classType": "n",
+    "sectionCode": "TUT",
+    "associatedClass": "1"
+  },
+  {
+    "text": "D109",
+    "value": "d109",
+    "title": "Literature and Culture",
+    "classType": "n",
+    "sectionCode": "TUT",
+    "associatedClass": "1"
+  },
+  {
+    "text": "D110",
+    "value": "d110",
+    "title": "Literature and Culture",
+    "classType": "n",
+    "sectionCode": "TUT",
+    "associatedClass": "1"
+  },
+  {
+    "text": "D111",
+    "value": "d111",
+    "title": "Literature and Culture",
+    "classType": "n",
+    "sectionCode": "TUT",
+    "associatedClass": "1"
+  },
+  {
+    "text": "D112",
+    "value": "d112",
+    "title": "Literature and Culture",
+    "classType": "n",
+    "sectionCode": "TUT",
+    "associatedClass": "1"
+  }
+]

@@ -1,0 +1,90 @@
+[
+  {
+    "text": "D100",
+    "value": "d100",
+    "title": "Calculus I with Review",
+    "classType": "e",
+    "sectionCode": "LEC",
+    "associatedClass": "1"
+  },
+  {
+    "text": "D101",
+    "value": "d101",
+    "title": "Calculus I with Review",
+    "classType": "n",
+    "sectionCode": "SEM",
+    "associatedClass": "1"
+  },
+  {
+    "text": "D102",
+    "value": "d102",
+    "title": "Calculus I with Review",
+    "classType": "n",
+    "sectionCode": "SEM",
+    "associatedClass": "1"
+  },
+  {
+    "text": "D105",
+    "value": "d105",
+    "title": "Calculus I with Review",
+    "classType": "n",
+    "sectionCode": "SEM",
+    "associatedClass": "1"
+  },
+  {
+    "text": "D106",
+    "value": "d106",
+    "title": "Calculus I with Review",
+    "classType": "n",
+    "sectionCode": "SEM",
+    "associatedClass": "1"
+  },
+  {
+    "text": "D108",
+    "value": "d108",
+    "title": "Calculus I with Review",
+    "classType": "n",
+    "sectionCode": "SEM",
+    "associatedClass": "1"
+  },
+  {
+    "text": "D400",
+    "value": "d400",
+    "title": "Calculus I with Review",
+    "classType": "e",
+    "sectionCode": "LEC",
+    "associatedClass": "4"
+  },
+  {
+    "text": "D401",
+    "value": "d401",
+    "title": "Calculus I with Review",
+    "classType": "n",
+    "sectionCode": "SEM",
+    "associatedClass": "4"
+  },
+  {
+    "text": "D403",
+    "value": "d403",
+    "title": "Calculus I with Review",
+    "classType": "n",
+    "sectionCode": "SEM",
+    "associatedClass": "4"
+  },
+  {
+    "text": "OP01",
+    "value": "op01",
+    "title": "Calculus I with Review",
+    "classType": "n",
+    "sectionCode": "OPL",
+    "associatedClass": "200"
+  },
+  {
+    "text": "OP02",
+    "value": "op02",
+    "title": "Calculus I with Review",
+    "classType": "n",
+    "sectionCode": "OPL",
+    "associatedClass": "201"
+  }
+]

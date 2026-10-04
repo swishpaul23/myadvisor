@@ -1,0 +1,22 @@
+[
+  {
+    "text": "ALS",
+    "value": "als",
+    "name": "Applied Legal Studies"
+  },
+  {
+    "text": "APMA",
+    "value": "apma",
+    "name": "Applied Mathematics"
+  },
+  {
+    "text": "ARCH",
+    "value": "arch",
+    "name": "Archaeology"
+  },
+  {
+    "text": "BISC",
+    "value": "bisc",
+    "name": "Biological Sciences"
+  }
+]

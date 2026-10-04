@@ -1,0 +1,18 @@
+[
+  {
+    "text": "D100",
+    "value": "d100",
+    "title": "Mathematics Undergraduate Seminar",
+    "classType": "e",
+    "sectionCode": "SEM",
+    "associatedClass": "1"
+  },
+  {
+    "text": "D101",
+    "value": "d101",
+    "title": "Mathematics Undergraduate Seminar",
+    "classType": "n",
+    "sectionCode": "TUT",
+    "associatedClass": "1"
+  }
+]

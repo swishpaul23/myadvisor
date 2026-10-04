@@ -1,0 +1,58 @@
+[
+  {
+    "text": "D100",
+    "value": "d100",
+    "title": "Statistics in Everyday Life",
+    "classType": "e",
+    "sectionCode": "LEC",
+    "associatedClass": "1"
+  },
+  {
+    "text": "D101",
+    "value": "d101",
+    "title": "Statistics in Everyday Life",
+    "classType": "n",
+    "sectionCode": "LAB",
+    "associatedClass": "1"
+  },
+  {
+    "text": "D102",
+    "value": "d102",
+    "title": "Statistics in Everyday Life",
+    "classType": "n",
+    "sectionCode": "LAB",
+    "associatedClass": "1"
+  },
+  {
+    "text": "D103",
+    "value": "d103",
+    "title": "Statistics in Everyday Life",
+    "classType": "n",
+    "sectionCode": "LAB",
+    "associatedClass": "1"
+  },
+  {
+    "text": "D104",
+    "value": "d104",
+    "title": "Statistics in Everyday Life",
+    "classType": "n",
+    "sectionCode": "LAB",
+    "associatedClass": "1"
+  },
+  {
+    "text": "D105",
+    "value": "d105",
+    "title": "Statistics in Everyday Life",
+    "classType": "n",
+    "sectionCode": "LAB",
+    "associatedClass": "1"
+  },
+  {
+    "text": "OP01",
+    "value": "op01",
+    "title": "Statistics in Everyday Life",
+    "classType": "n",
+    "sectionCode": "OPL",
+    "associatedClass": "200"
+  }
+]

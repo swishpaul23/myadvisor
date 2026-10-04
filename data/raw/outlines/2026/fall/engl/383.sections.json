@@ -1,0 +1,34 @@
+[
+  {
+    "text": "D100",
+    "value": "d100",
+    "title": "Studies in Popular Literature and Culture",
+    "classType": "e",
+    "sectionCode": "LEC",
+    "associatedClass": "1"
+  },
+  {
+    "text": "D101",
+    "value": "d101",
+    "title": "Studies in Popular Literature and Culture",
+    "classType": "n",
+    "sectionCode": "TUT",
+    "associatedClass": "1"
+  },
+  {
+    "text": "D102",
+    "value": "d102",
+    "title": "Studies in Popular Literature and Culture",
+    "classType": "n",
+    "sectionCode": "TUT",
+    "associatedClass": "1"
+  },
+  {
+    "text": "D103",
+    "value": "d103",
+    "title": "Studies in Popular Literature and Culture",
+    "classType": "n",
+    "sectionCode": "TUT",
+    "associatedClass": "1"
+  }
+]

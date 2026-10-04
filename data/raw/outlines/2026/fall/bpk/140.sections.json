@@ -1,0 +1,58 @@
+[
+  {
+    "text": "D100",
+    "value": "d100",
+    "title": "Contemporary Health Issues",
+    "classType": "e",
+    "sectionCode": "LEC",
+    "associatedClass": "1"
+  },
+  {
+    "text": "D101",
+    "value": "d101",
+    "title": "Contemporary Health Issues",
+    "classType": "n",
+    "sectionCode": "TUT",
+    "associatedClass": "1"
+  },
+  {
+    "text": "D102",
+    "value": "d102",
+    "title": "Contemporary Health Issues",
+    "classType": "n",
+    "sectionCode": "TUT",
+    "associatedClass": "1"
+  },
+  {
+    "text": "D103",
+    "value": "d103",
+    "title": "Contemporary Health Issues",
+    "classType": "n",
+    "sectionCode": "TUT",
+    "associatedClass": "1"
+  },
+  {
+    "text": "D104",
+    "value": "d104",
+    "title": "Contemporary Health Issues",
+    "classType": "n",
+    "sectionCode": "TUT",
+    "associatedClass": "1"
+  },
+  {
+    "text": "D105",
+    "value": "d105",
+    "title": "Contemporary Health Issues",
+    "classType": "n",
+    "sectionCode": "TUT",
+    "associatedClass": "1"
+  },
+  {
+    "text": "OL01",
+    "value": "ol01",
+    "title": "Contemporary Health Issues",
+    "classType": "e",
+    "sectionCode": "OLC",
+    "associatedClass": "100"
+  }
+]

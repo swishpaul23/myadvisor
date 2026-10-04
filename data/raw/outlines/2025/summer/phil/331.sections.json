@@ -1,0 +1,18 @@
+[
+  {
+    "text": "B100",
+    "value": "b100",
+    "title": "Selected Topics",
+    "classType": "e",
+    "sectionCode": "LEC",
+    "associatedClass": "1"
+  },
+  {
+    "text": "B101",
+    "value": "b101",
+    "title": "Selected Topics",
+    "classType": "n",
+    "sectionCode": "OLC",
+    "associatedClass": "1"
+  }
+]

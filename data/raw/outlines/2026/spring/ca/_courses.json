@@ -1,0 +1,407 @@
+[
+  {
+    "text": "105",
+    "value": "105",
+    "title": "STT-Learning to Listen: Music Theory for Non-Musicians"
+  },
+  {
+    "text": "118",
+    "value": "118",
+    "title": "Contemporary Art History"
+  },
+  {
+    "text": "123",
+    "value": "123",
+    "title": "Dance Training and Movement Systems II"
+  },
+  {
+    "text": "124",
+    "value": "124",
+    "title": "Improvisation Tools and Scores"
+  },
+  {
+    "text": "131",
+    "value": "131",
+    "title": "Filmmaking I"
+  },
+  {
+    "text": "135",
+    "value": "135",
+    "title": "Introduction to Cinema"
+  },
+  {
+    "text": "137",
+    "value": "137",
+    "title": "The History and Aesthetics of Cinema II"
+  },
+  {
+    "text": "140",
+    "value": "140",
+    "title": "Contexts in Creative Music and Sound Practice"
+  },
+  {
+    "text": "142",
+    "value": "142",
+    "title": "Music Appreciation in the 21st Century"
+  },
+  {
+    "text": "144",
+    "value": "144",
+    "title": "Sound Fundamentals II"
+  },
+  {
+    "text": "146",
+    "value": "146",
+    "title": "Creative Sound Studio II"
+  },
+  {
+    "text": "149",
+    "value": "149",
+    "title": "Sound"
+  },
+  {
+    "text": "152",
+    "value": "152",
+    "title": "Live Acts II"
+  },
+  {
+    "text": "161",
+    "value": "161",
+    "title": "Introductory Studio in Visual Art II"
+  },
+  {
+    "text": "171",
+    "value": "171",
+    "title": "Production Lab II"
+  },
+  {
+    "text": "221",
+    "value": "221",
+    "title": "Dance Training and Movement Systems IV"
+  },
+  {
+    "text": "228W",
+    "value": "228w",
+    "title": "Dance Aesthetics"
+  },
+  {
+    "text": "231",
+    "value": "231",
+    "title": "Filmmaking III"
+  },
+  {
+    "text": "242",
+    "value": "242",
+    "title": "Creative Ensemble Lab I"
+  },
+  {
+    "text": "246",
+    "value": "246",
+    "title": "Creative Sound Studio IV"
+  },
+  {
+    "text": "249",
+    "value": "249",
+    "title": "Selected Topics in Music and Sound I"
+  },
+  {
+    "text": "252",
+    "value": "252",
+    "title": "Live Acts IV"
+  },
+  {
+    "text": "256",
+    "value": "256",
+    "title": "Environments I"
+  },
+  {
+    "text": "261",
+    "value": "261",
+    "title": "Studio in Visual Art II"
+  },
+  {
+    "text": "263",
+    "value": "263",
+    "title": "Methods and Concepts: Painting-based Practices"
+  },
+  {
+    "text": "269",
+    "value": "269",
+    "title": "Methods and Concepts: Selected Topics"
+  },
+  {
+    "text": "271",
+    "value": "271",
+    "title": "Production Lab IV"
+  },
+  {
+    "text": "272",
+    "value": "272",
+    "title": "Scale Modelling II"
+  },
+  {
+    "text": "274",
+    "value": "274",
+    "title": "Lighting I"
+  },
+  {
+    "text": "278",
+    "value": "278",
+    "title": "Video and Projection I"
+  },
+  {
+    "text": "285",
+    "value": "285",
+    "title": "Interdisciplinary Studio - Composition/Collaboration"
+  },
+  {
+    "text": "306",
+    "value": "306",
+    "title": "Practicum in Contemporary Arts I"
+  },
+  {
+    "text": "307",
+    "value": "307",
+    "title": "Internship in Contemporary Arts I"
+  },
+  {
+    "text": "316",
+    "value": "316",
+    "title": "Intermediate Selected Topics in Cinema Studies"
+  },
+  {
+    "text": "318",
+    "value": "318",
+    "title": "Theory and Cinema"
+  },
+  {
+    "text": "319W",
+    "value": "319w",
+    "title": "Critical Writing in the Arts"
+  },
+  {
+    "text": "321",
+    "value": "321",
+    "title": "Dance Training and Movement Systems VI"
+  },
+  {
+    "text": "323",
+    "value": "323",
+    "title": "Intermediate Ballet II"
+  },
+  {
+    "text": "331",
+    "value": "331",
+    "title": "Filmmaking V"
+  },
+  {
+    "text": "332",
+    "value": "332",
+    "title": "Film Forms"
+  },
+  {
+    "text": "338W",
+    "value": "338w",
+    "title": "Writing for Film"
+  },
+  {
+    "text": "340",
+    "value": "340",
+    "title": "Creative Ensemble Lab II"
+  },
+  {
+    "text": "346",
+    "value": "346",
+    "title": "Creative Sound Studio VI"
+  },
+  {
+    "text": "347",
+    "value": "347",
+    "title": "Creative Electronics Lab II"
+  },
+  {
+    "text": "349",
+    "value": "349",
+    "title": "Selected Topics in Music II"
+  },
+  {
+    "text": "350",
+    "value": "350",
+    "title": "Performance as Research I"
+  },
+  {
+    "text": "355",
+    "value": "355",
+    "title": "Social II"
+  },
+  {
+    "text": "356",
+    "value": "356",
+    "title": "Environments II"
+  },
+  {
+    "text": "357W",
+    "value": "357w",
+    "title": "Context II"
+  },
+  {
+    "text": "361",
+    "value": "361",
+    "title": "Studio in Visual Art IV"
+  },
+  {
+    "text": "363",
+    "value": "363",
+    "title": "Methods and Concepts: Painting Practices"
+  },
+  {
+    "text": "367",
+    "value": "367",
+    "title": "Seminar in Visual Art II"
+  },
+  {
+    "text": "369",
+    "value": "369",
+    "title": "Methods and Concepts: Selected Topics"
+  },
+  {
+    "text": "371",
+    "value": "371",
+    "title": "Production Lab VI"
+  },
+  {
+    "text": "377",
+    "value": "377",
+    "title": "Sound Design"
+  },
+  {
+    "text": "386",
+    "value": "386",
+    "title": "Film Music: An Overview of the Relationship between Music and Moving Pictures"
+  },
+  {
+    "text": "400",
+    "value": "400",
+    "title": "Directed Studies (Studio)"
+  },
+  {
+    "text": "401",
+    "value": "401",
+    "title": "Directed Studies (Theory/History)"
+  },
+  {
+    "text": "406",
+    "value": "406",
+    "title": "Practicum in Contemporary Arts II"
+  },
+  {
+    "text": "407",
+    "value": "407",
+    "title": "Internship in Contemporary Arts II"
+  },
+  {
+    "text": "414",
+    "value": "414",
+    "title": "Advanced Topic in the History of Art, Performance and Cinema"
+  },
+  {
+    "text": "420",
+    "value": "420",
+    "title": "Dance Training and Movement Systems VII"
+  },
+  {
+    "text": "425",
+    "value": "425",
+    "title": "Intensive Studies in Performance: Senior Projects"
+  },
+  {
+    "text": "428",
+    "value": "428",
+    "title": "Advanced Ballet II"
+  },
+  {
+    "text": "431",
+    "value": "431",
+    "title": "Filmmaking VII"
+  },
+  {
+    "text": "438",
+    "value": "438",
+    "title": "Creative Producing"
+  },
+  {
+    "text": "446",
+    "value": "446",
+    "title": "Senior Project II"
+  },
+  {
+    "text": "452",
+    "value": "452",
+    "title": "Capstone Projects"
+  },
+  {
+    "text": "461",
+    "value": "461",
+    "title": "Studio in Visual Art VI"
+  },
+  {
+    "text": "471",
+    "value": "471",
+    "title": "Production Lab VIII"
+  },
+  {
+    "text": "825",
+    "value": "825",
+    "title": "New Approaches in Digital Art Studies"
+  },
+  {
+    "text": "827",
+    "value": "827",
+    "title": "Practicum in Contemporary Arts"
+  },
+  {
+    "text": "829",
+    "value": "829",
+    "title": "Extended Essay in Contemporary Arts"
+  },
+  {
+    "text": "830",
+    "value": "830",
+    "title": "Internship in Contemporary Arts"
+  },
+  {
+    "text": "883",
+    "value": "883",
+    "title": "Studio in Contemporary Arts I"
+  },
+  {
+    "text": "889",
+    "value": "889",
+    "title": "Directed Study in Contemporary Arts"
+  },
+  {
+    "text": "891",
+    "value": "891",
+    "title": "Professional Practices Seminar II"
+  },
+  {
+    "text": "892",
+    "value": "892",
+    "title": "PhD Qualifying Examinations"
+  },
+  {
+    "text": "895",
+    "value": "895",
+    "title": "PhD Thesis Prospectus"
+  },
+  {
+    "text": "898",
+    "value": "898",
+    "title": "Master of Fine Arts Graduating Project"
+  },
+  {
+    "text": "899",
+    "value": "899",
+    "title": "PhD Thesis"
+  }
+]

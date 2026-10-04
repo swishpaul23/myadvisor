@@ -1,0 +1,24 @@
+{
+  "info": {
+    "dept": "ECON",
+    "number": "222",
+    "notes": "Students who have taken ECON 282 Selected Topics - Intro Game Theory in Fall 2011, Fall 2016, Spring 2017, or Spring 2019 may not take this course for further credit.",
+    "deliveryMethod": "In Person",
+    "description": "An introduction to game theory and strategic thinking. Covers the core concepts and tools for analyzing strategic interactions, as well as various applications in economics and other fields such as business, political science, history, sports, and biology.",
+    "section": "D100",
+    "units": "3",
+    "title": "Introduction to Game Theory",
+    "type": "e",
+    "classNumber": "2700",
+    "departmentalUgradNotes": "<em><strong><strong>Please note that, as per <a href=\"http://www.sfu.ca/policies/gazette/teaching/t20-01.html\">Policy T20.01</a>, the course requirements (and grading scheme) outlined here are subject to change up until the end of the first week of classes.</strong></strong><br /></em>\r\n<p><em><strong><a href=\"https://www.sfu.ca/students/support/academic-policies-and-procedures/fall-classes-2020.html?utm_source=Email_marketing&amp;utm_campaign=Thursday_May_28_2020&amp;cmp=1&amp;utm_medium=HTMLEmail\">Final exam schedules will be released during the second month of classes</a>. If your course has a final exam, please ensure that you are available during the entire final exam period until you receive confirmation of your exam dates.&nbsp;</strong></em></p>\r\n<em><strong>Students requiring accommodations as a result of a disability must contact the Centre for Accessible Learning (CAL) at [phone removed] or [email removed].<br /><br />***NO TUTORIALS DURING THE FIRST WEEK OF CLASSES***</strong></em>",
+    "prerequisites": "ECON 103, MATH 150, MATH 151, MATH 154, or MATH 157, with a minimum grade of C-, or ECON 113 with a minimum grade of A-.",
+    "registrarNotes": "<p><strong>ACADEMIC INTEGRITY: YOUR WORK, YOUR SUCCESS</strong></p>\r\n<p>SFU&rsquo;s Academic Integrity website <a href=\"http://www.sfu.ca/students/academicintegrity.html\">http://www.sfu.ca/students/academicintegrity.html</a> is filled with information on what is meant by academic dishonesty, where you can find resources to help with your studies and the consequences of cheating. Check out the site for more information and videos that help explain the issues in plain English.</p>\r\n<p>Each student is responsible for his or her conduct as it affects the university community. Academic dishonesty, in whatever form, is ultimately destructive of the values of the university. Furthermore, it is unfair and discouraging to the majority of students who pursue their studies honestly. Scholarly integrity is required of all members of the university. <a href=\"http://www.sfu.ca/policies/gazette/student/s10-01.html\">http://www.sfu.ca/policies/gazette/student/s10-01.html</a><br /><br /><strong>RELIGIOUS ACCOMMODATION</strong></p>\r\n<p>Students with a faith background who may need accommodations during the term are encouraged to assess their needs as soon as possible and review the Multifaith religious accommodations&nbsp;<a href=\"https://www.sfu.ca/students/multifaith/resources/accommodation.html#:~:text=To%20request%20religious%20accommodation%2C%20you,the%20point%20of%20undue%20hardship.\">website</a>. The page outlines ways they begin working toward an accommodation and ensure solutions can be reached in a timely fashion.</p>",
+    "outlinePath": "2025/spring/econ/222/d100",
+    "term": "Spring 2025",
+    "corequisites": "",
+    "degreeLevel": "UGRD",
+    "specialTopic": "",
+    "name": "ECON 222 D100",
+    "designation": "N/A"
+  }
+}

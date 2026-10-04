@@ -1,0 +1,26 @@
+[
+  {
+    "text": "D100",
+    "value": "d100",
+    "title": "Professional Development - Launch",
+    "classType": "e",
+    "sectionCode": "SEM",
+    "associatedClass": "1"
+  },
+  {
+    "text": "E100",
+    "value": "e100",
+    "title": "Professional Development - Launch",
+    "classType": "e",
+    "sectionCode": "SEM",
+    "associatedClass": "2"
+  },
+  {
+    "text": "E200",
+    "value": "e200",
+    "title": "Professional Development - Launch",
+    "classType": "e",
+    "sectionCode": "SEM",
+    "associatedClass": "3"
+  }
+]

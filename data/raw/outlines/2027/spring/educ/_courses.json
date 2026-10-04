@@ -1,0 +1,402 @@
+[
+  {
+    "text": "100W",
+    "value": "100w",
+    "title": "Selected Questions and Issues in Education"
+  },
+  {
+    "text": "199",
+    "value": "199",
+    "title": "Foundations of Personal Agency: Finding Voice and Place in Academia"
+  },
+  {
+    "text": "212",
+    "value": "212",
+    "title": "Mathematical Experience II: Shape and Space"
+  },
+  {
+    "text": "220",
+    "value": "220",
+    "title": "Introduction to Educational Psychology"
+  },
+  {
+    "text": "222",
+    "value": "222",
+    "title": "Research Methods in Educational Psychology"
+  },
+  {
+    "text": "230",
+    "value": "230",
+    "title": "Introduction to Philosophy of Education"
+  },
+  {
+    "text": "240",
+    "value": "240",
+    "title": "Social Issues in Education"
+  },
+  {
+    "text": "250",
+    "value": "250",
+    "title": "Studies in the History of Education in the Western World"
+  },
+  {
+    "text": "252",
+    "value": "252",
+    "title": "Introduction to Reflective Practice"
+  },
+  {
+    "text": "311",
+    "value": "311",
+    "title": "Indigenous Knowledges, Languages, and Cultures"
+  },
+  {
+    "text": "315",
+    "value": "315",
+    "title": "Individual and Developmental Differences in Language Acquisition"
+  },
+  {
+    "text": "320",
+    "value": "320",
+    "title": "Instructional Psychology"
+  },
+  {
+    "text": "322",
+    "value": "322",
+    "title": "The Social Lives of School Children"
+  },
+  {
+    "text": "323",
+    "value": "323",
+    "title": "Introduction to Counselling Theories"
+  },
+  {
+    "text": "324",
+    "value": "324",
+    "title": "Foundations of Multicultural Counselling"
+  },
+  {
+    "text": "327",
+    "value": "327",
+    "title": "Self, Psychology and Education"
+  },
+  {
+    "text": "341",
+    "value": "341",
+    "title": "Literacy, Education and Culture"
+  },
+  {
+    "text": "352W",
+    "value": "352w",
+    "title": "Building on Reflective Practice"
+  },
+  {
+    "text": "370",
+    "value": "370",
+    "title": "International and Intercultural Education"
+  },
+  {
+    "text": "376",
+    "value": "376",
+    "title": "Introduction to Educational Leadership"
+  },
+  {
+    "text": "380",
+    "value": "380",
+    "title": "Introduction to Teaching French in Canadian Contexts"
+  },
+  {
+    "text": "398",
+    "value": "398",
+    "title": "Special Topics"
+  },
+  {
+    "text": "401W",
+    "value": "401w",
+    "title": "Introduction to Classroom Teaching"
+  },
+  {
+    "text": "402W",
+    "value": "402w",
+    "title": "Studies of Educational Theory and Practice"
+  },
+  {
+    "text": "403",
+    "value": "403",
+    "title": "Studies in Teaching and Learning"
+  },
+  {
+    "text": "404",
+    "value": "404",
+    "title": "Coursework Semester"
+  },
+  {
+    "text": "405",
+    "value": "405",
+    "title": "Teaching Semester"
+  },
+  {
+    "text": "406",
+    "value": "406",
+    "title": "Supervised Observation and Teaching"
+  },
+  {
+    "text": "407",
+    "value": "407",
+    "title": "Professional Growth Portfolio: Developing a Solid Foundation"
+  },
+  {
+    "text": "408",
+    "value": "408",
+    "title": "Professional Growth Portfolio: Building a Framework for Current Practices"
+  },
+  {
+    "text": "409",
+    "value": "409",
+    "title": "Professional Growth Portfolio: Capstone Project"
+  },
+  {
+    "text": "422",
+    "value": "422",
+    "title": "Learning Disabilities"
+  },
+  {
+    "text": "423",
+    "value": "423",
+    "title": "Helping Relationships"
+  },
+  {
+    "text": "426",
+    "value": "426",
+    "title": "Teaching Children and Youth with Special Needs"
+  },
+  {
+    "text": "427",
+    "value": "427",
+    "title": "Teaching Students with Special Needs in Inclusive Settings."
+  },
+  {
+    "text": "437",
+    "value": "437",
+    "title": "Ethical Issues in Education"
+  },
+  {
+    "text": "443",
+    "value": "443",
+    "title": "Indigenous Literatures and Literacies"
+  },
+  {
+    "text": "458",
+    "value": "458",
+    "title": "Pedagogy and Practice of Arts for Social Change"
+  },
+  {
+    "text": "464",
+    "value": "464",
+    "title": "Early Childhood Education"
+  },
+  {
+    "text": "466",
+    "value": "466",
+    "title": "Early Childhood Education: Curriculum and Instruction"
+  },
+  {
+    "text": "471",
+    "value": "471",
+    "title": "Curriculum Development: Theory and Practice"
+  },
+  {
+    "text": "472",
+    "value": "472",
+    "title": "Designs for Learning: Elementary Language Arts"
+  },
+  {
+    "text": "490",
+    "value": "490",
+    "title": "Directed Study"
+  },
+  {
+    "text": "491",
+    "value": "491",
+    "title": "Directed Study"
+  },
+  {
+    "text": "702",
+    "value": "702",
+    "title": "Directed Readings"
+  },
+  {
+    "text": "703",
+    "value": "703",
+    "title": "Directed Readings"
+  },
+  {
+    "text": "704",
+    "value": "704",
+    "title": "Directed Readings"
+  },
+  {
+    "text": "705",
+    "value": "705",
+    "title": "Directed Readings"
+  },
+  {
+    "text": "719",
+    "value": "719",
+    "title": "Research Approaches in Educational Leadership"
+  },
+  {
+    "text": "800",
+    "value": "800",
+    "title": "Supervised Counselling Clinic II"
+  },
+  {
+    "text": "802",
+    "value": "802",
+    "title": "Counselling Practicum II"
+  },
+  {
+    "text": "806",
+    "value": "806",
+    "title": "Selected Problems in Higher Education"
+  },
+  {
+    "text": "807",
+    "value": "807",
+    "title": "Inquiry into Practice"
+  },
+  {
+    "text": "816",
+    "value": "816",
+    "title": "Developing Educational Programs and Practices for Diverse Educational Settings"
+  },
+  {
+    "text": "820",
+    "value": "820",
+    "title": "Current Issues in Curriculum and Pedagogy"
+  },
+  {
+    "text": "823",
+    "value": "823",
+    "title": "Curriculum and Instruction in an Individual Teaching Speciality"
+  },
+  {
+    "text": "848",
+    "value": "848",
+    "title": "Ideas and Issues in Aesthetic Education"
+  },
+  {
+    "text": "854",
+    "value": "854",
+    "title": "Teachers as Agents of Change"
+  },
+  {
+    "text": "864",
+    "value": "864",
+    "title": "Research Designs in Education"
+  },
+  {
+    "text": "872",
+    "value": "872",
+    "title": "Ethics in Counselling Psychology"
+  },
+  {
+    "text": "874",
+    "value": "874",
+    "title": "Counselling Skills and Strategies"
+  },
+  {
+    "text": "878",
+    "value": "878",
+    "title": "Group Counselling"
+  },
+  {
+    "text": "883",
+    "value": "883",
+    "title": "MEd Comprehensive Examination"
+  },
+  {
+    "text": "886",
+    "value": "886",
+    "title": "MA Thesis"
+  },
+  {
+    "text": "892",
+    "value": "892",
+    "title": "Cognitive Tools and Multimedia Learning"
+  },
+  {
+    "text": "898",
+    "value": "898",
+    "title": "Master's Thesis"
+  },
+  {
+    "text": "899",
+    "value": "899",
+    "title": "Doctoral Thesis"
+  },
+  {
+    "text": "901A",
+    "value": "901a",
+    "title": "Seminar in the History of Educational Theory A"
+  },
+  {
+    "text": "901B",
+    "value": "901b",
+    "title": "Seminar in the History of Educational Theory B"
+  },
+  {
+    "text": "904",
+    "value": "904",
+    "title": "Fieldwork III"
+  },
+  {
+    "text": "910",
+    "value": "910",
+    "title": "Directed Readings"
+  },
+  {
+    "text": "912",
+    "value": "912",
+    "title": "Colloquium in Curriculum Theory (II)"
+  },
+  {
+    "text": "922",
+    "value": "922",
+    "title": "Advanced Seminar in Epistemology and Education"
+  },
+  {
+    "text": "923",
+    "value": "923",
+    "title": "Critical and Sociocultural Approaches to Educational Research"
+  },
+  {
+    "text": "927",
+    "value": "927",
+    "title": "Doctoral Seminar A"
+  },
+  {
+    "text": "943",
+    "value": "943",
+    "title": "Arts-Based Inquiry in Educational Research"
+  },
+  {
+    "text": "946",
+    "value": "946",
+    "title": "Doctoral Seminar in Mathematics Education"
+  },
+  {
+    "text": "975",
+    "value": "975",
+    "title": "Advanced Quantitative Methods in Educational Research"
+  },
+  {
+    "text": "983",
+    "value": "983",
+    "title": "Doctoral Comprehensive Examination"
+  },
+  {
+    "text": "984",
+    "value": "984",
+    "title": "Qualifying Examination"
+  }
+]
