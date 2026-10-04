@@ -2,6 +2,8 @@
 // or Auth.js imports) so src/proxy.ts stays thin and the rules are unit-tested.
 
 export const SIGN_IN_PATH = "/sign-in";
+/** Where signed-in users land: the app's Overview. */
+export const APP_HOME = "/app";
 
 /** Files served as-is: Next build output, the favicon, and anything with a file extension. */
 function isStaticAsset(pathname: string): boolean {
@@ -12,42 +14,58 @@ function isStaticAsset(pathname: string): boolean {
   );
 }
 
-/** Reachable while signed out: the sign-in page, Auth.js endpoints, static assets. */
+const isAuthApi = (pathname: string) =>
+  pathname === "/api/auth" || pathname.startsWith("/api/auth/");
+
+/** Reachable while signed out: the landing page, sign-in, Auth.js endpoints, static assets. */
 export function isPublicPath(pathname: string): boolean {
   return (
+    pathname === "/" ||
     pathname === SIGN_IN_PATH ||
-    pathname === "/api/auth" ||
-    pathname.startsWith("/api/auth/") ||
+    isAuthApi(pathname) ||
     isStaticAsset(pathname)
   );
 }
 
 /**
  * A same-site path to return to after sign-in. Anything else (absolute URLs,
- * protocol-relative "//host", backslash tricks, arrays) becomes "/".
+ * protocol-relative "//host", backslash tricks, arrays) becomes the app home.
  */
 export function safeCallbackUrl(value: unknown): string {
-  if (typeof value !== "string") return "/";
+  if (typeof value !== "string") return APP_HOME;
   if (!value.startsWith("/") || value.startsWith("//") || value.includes("\\"))
-    return "/";
+    return APP_HOME;
   return value;
 }
 
+export type AuthDecision =
+  | { kind: "next" }
+  | { kind: "redirect"; url: URL }
+  /** Signed-out API call: answer 401 JSON, not a redirect to an HTML page. */
+  | { kind: "unauthorized" };
+
 /**
- * The redirect for a request, or null to let it through.
- * - Signed out, protected path: to the sign-in page, remembering where they were going.
- * - Signed in, on the sign-in page: on to their callbackUrl (or home).
+ * What to do with a request.
+ * - Signed in, on the landing page: on to the app.
+ * - Signed in, on the sign-in page: on to their callbackUrl (or the app).
+ * - Signed out, on an API route (other than /api/auth): 401.
+ * - Signed out, on any other protected path: to sign-in, remembering where they were going.
  */
-export function authRedirect(url: URL, signedIn: boolean): URL | null {
+export function authDecision(url: URL, signedIn: boolean): AuthDecision {
   const { pathname } = url;
-  if (signedIn && pathname === SIGN_IN_PATH) {
-    return new URL(
-      safeCallbackUrl(url.searchParams.get("callbackUrl")),
-      url.origin,
-    );
+  if (signedIn) {
+    if (pathname === "/")
+      return { kind: "redirect", url: new URL(APP_HOME, url.origin) };
+    if (pathname === SIGN_IN_PATH) {
+      const back = safeCallbackUrl(url.searchParams.get("callbackUrl"));
+      return { kind: "redirect", url: new URL(back, url.origin) };
+    }
+    return { kind: "next" };
   }
-  if (signedIn || isPublicPath(pathname)) return null;
+  if (isPublicPath(pathname)) return { kind: "next" };
+  if (pathname === "/api" || pathname.startsWith("/api/"))
+    return { kind: "unauthorized" };
   const target = new URL(SIGN_IN_PATH, url.origin);
   target.searchParams.set("callbackUrl", `${pathname}${url.search}`);
-  return target;
+  return { kind: "redirect", url: target };
 }

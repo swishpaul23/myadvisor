@@ -54,6 +54,12 @@ const eslintConfig = defineConfig([
       ],
     },
   },
+  {
+    // The landing page (Vaibhav's) links into the app with plain <a> tags. Its owner keeps
+    // them as <a>; a full page load on these few entry links is fine.
+    files: ["src/components/landing/**"],
+    rules: { "@next/next/no-html-link-for-pages": "off" },
+  },
   // Override default ignores of eslint-config-next.
   globalIgnores([
     // Default ignores of eslint-config-next:

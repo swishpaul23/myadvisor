@@ -1,36 +1,40 @@
 import { describe, expect, test } from "vitest";
 import {
-  authRedirect,
+  APP_HOME,
+  authDecision,
   isPublicPath,
   safeCallbackUrl,
   SIGN_IN_PATH,
 } from "@/lib/auth/routes";
 
 const at = (path: string) => new URL(path, "http://localhost:3000");
-const redirect = (path: string, signedIn: boolean) =>
-  authRedirect(at(path), signedIn)?.toString() ?? null;
+/** "next", "401", or the redirect target as a string. */
+const decide = (path: string, signedIn: boolean) => {
+  const d = authDecision(at(path), signedIn);
+  if (d.kind === "redirect") return d.url.toString();
+  return d.kind === "unauthorized" ? "401" : "next";
+};
 
-describe("authRedirect: signed out", () => {
-  test("a protected page goes to sign-in, remembering path and query", () => {
-    const target = authRedirect(at("/plan?term=2027-spring"), false)!;
-    expect(target.pathname).toBe(SIGN_IN_PATH);
-    expect(target.searchParams.get("callbackUrl")).toBe(
-      "/plan?term=2027-spring",
+describe("authDecision: signed out", () => {
+  test("an app page goes to sign-in, remembering path and query", () => {
+    const d = authDecision(at("/app/plan?term=2027-spring"), false);
+    expect(d.kind).toBe("redirect");
+    if (d.kind !== "redirect") return;
+    expect(d.url.pathname).toBe(SIGN_IN_PATH);
+    expect(d.url.searchParams.get("callbackUrl")).toBe(
+      "/app/plan?term=2027-spring",
     );
-    expect(target.origin).toBe("http://localhost:3000");
+    expect(d.url.origin).toBe("http://localhost:3000");
   });
-  test("the home page and API routes are protected too", () => {
-    expect(redirect("/", false)).toBe(
-      "http://localhost:3000/sign-in?callbackUrl=%2F",
-    );
-    expect(redirect("/api/audit", false)).toMatch(
-      /^http:\/\/localhost:3000\/sign-in\?/,
-    );
+  test("API routes answer 401 instead of redirecting", () => {
+    expect(decide("/api/transcript", false)).toBe("401");
+    expect(decide("/api", false)).toBe("401");
   });
-  test("the sign-in page, /api/auth/* and static assets pass through", () => {
+  test("the landing page, sign-in, /api/auth/* and static assets are public", () => {
     for (const path of [
+      "/",
       "/sign-in",
-      "/sign-in?callbackUrl=%2Fplan",
+      "/sign-in?callbackUrl=%2Fapp",
       "/api/auth/signin/google",
       "/api/auth/callback/google?code=x",
       "/api/auth/session",
@@ -38,26 +42,31 @@ describe("authRedirect: signed out", () => {
       "/favicon.ico",
       "/next.svg",
     ]) {
-      expect(redirect(path, false), path).toBeNull();
+      expect(decide(path, false), path).toBe("next");
     }
   });
   test("lookalike paths are not public", () => {
     expect(isPublicPath("/sign-in-other")).toBe(false);
     expect(isPublicPath("/api/authx")).toBe(false);
     expect(isPublicPath("/api/auth-admin/secret")).toBe(false);
+    expect(isPublicPath("/app")).toBe(false);
   });
 });
 
-describe("authRedirect: signed in", () => {
-  test("protected pages pass through", () => {
-    expect(redirect("/", true)).toBeNull();
-    expect(redirect("/plan?term=2027-spring", true)).toBeNull();
+describe("authDecision: signed in", () => {
+  test("the landing page sends them to the app", () => {
+    expect(decide("/", true)).toBe("http://localhost:3000/app");
   });
-  test("the sign-in page sends them on to their callbackUrl, or home", () => {
-    expect(redirect("/sign-in?callbackUrl=%2Fplan", true)).toBe(
-      "http://localhost:3000/plan",
+  test("app pages and API routes pass through", () => {
+    expect(decide("/app", true)).toBe("next");
+    expect(decide("/app/plan?term=2027-spring", true)).toBe("next");
+    expect(decide("/api/transcript", true)).toBe("next");
+  });
+  test("the sign-in page sends them on to their callbackUrl, or the app", () => {
+    expect(decide("/sign-in?callbackUrl=%2Fapp%2Fplan", true)).toBe(
+      "http://localhost:3000/app/plan",
     );
-    expect(redirect("/sign-in", true)).toBe("http://localhost:3000/");
+    expect(decide("/sign-in", true)).toBe(`http://localhost:3000${APP_HOME}`);
   });
   test("never redirects off-site from a crafted callbackUrl", () => {
     for (const cb of [
@@ -66,20 +75,20 @@ describe("authRedirect: signed in", () => {
       "/\\evil.example",
     ]) {
       expect(
-        redirect(`/sign-in?callbackUrl=${encodeURIComponent(cb)}`, true),
+        decide(`/sign-in?callbackUrl=${encodeURIComponent(cb)}`, true),
         cb,
-      ).toBe("http://localhost:3000/");
+      ).toBe("http://localhost:3000/app");
     }
   });
 });
 
 describe("safeCallbackUrl", () => {
   test("keeps same-site paths", () => {
-    expect(safeCallbackUrl("/plan?term=2027-spring")).toBe(
-      "/plan?term=2027-spring",
+    expect(safeCallbackUrl("/app/plan?term=2027-spring")).toBe(
+      "/app/plan?term=2027-spring",
     );
   });
-  test("anything else becomes /", () => {
+  test("anything else becomes the app home", () => {
     for (const v of [
       undefined,
       null,
@@ -90,7 +99,7 @@ describe("safeCallbackUrl", () => {
       "/\\evil",
       ["/a", "/b"],
     ]) {
-      expect(safeCallbackUrl(v), String(v)).toBe("/");
+      expect(safeCallbackUrl(v), String(v)).toBe(APP_HOME);
     }
   });
 });
@@ -102,9 +111,9 @@ describe("src/proxy.ts matcher", () => {
   test("runs on pages and API routes", () => {
     for (const p of [
       "/",
-      "/plan",
+      "/app",
       "/sign-in",
-      "/api/audit",
+      "/api/transcript",
       "/api/auth/session",
     ]) {
       expect(matcher.test(p), p).toBe(true);

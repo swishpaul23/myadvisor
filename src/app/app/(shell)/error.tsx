@@ -1,0 +1,10 @@
+"use client";
+
+import { ErrorPanel } from "@/components/app/error-panel";
+
+export default function ShellError(props: {
+  error: Error & { digest?: string };
+  reset: () => void;
+}) {
+  return <ErrorPanel {...props} title="We couldn't load this screen." />;
+}

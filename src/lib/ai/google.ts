@@ -107,6 +107,83 @@ export async function generateGeminiObject<T>({
   }
 }
 
+/**
+ * Structured JSON from a file (e.g. a transcript PDF) plus a text prompt. Same contract as
+ * `generateGeminiObject`: returns `fallback` when the key is missing, the call fails or
+ * times out, or the output doesn't pass `isValid`. The file is sent to the Gemini API
+ * with the request and nothing is kept here.
+ */
+export async function generateGeminiObjectFromFile<T>({
+  file,
+  schema,
+  name,
+  description,
+  prompt,
+  system,
+  temperature = 0,
+  timeoutMs = 60_000,
+  fallback,
+  isValid,
+}: {
+  file: { data: Uint8Array; mediaType: string; filename?: string };
+  schema: JsonSchemaInput<T>;
+  name?: string;
+  description?: string;
+  prompt: string;
+  system?: string;
+  temperature?: number;
+  timeoutMs?: number;
+  fallback: T;
+  isValid: (value: unknown) => value is T;
+}): Promise<T> {
+  const model = geminiModel();
+  if (!model) {
+    return fallback;
+  }
+
+  try {
+    const result = await generateText({
+      model,
+      temperature,
+      maxRetries: 1,
+      timeout: timeoutMs,
+      system,
+      messages: [
+        {
+          role: "user",
+          content: [
+            { type: "text", text: prompt },
+            {
+              type: "file",
+              data: file.data,
+              mediaType: file.mediaType,
+              filename: file.filename,
+            },
+          ],
+        },
+      ],
+      output: Output.object({
+        schema: jsonSchema<T>(schema),
+        name,
+        description,
+      }),
+    });
+
+    if (!isValid(result.output)) {
+      return fallback;
+    }
+
+    return result.output;
+  } catch (error) {
+    // The error never includes the file's contents; log only that it failed.
+    console.error(
+      "Gemini file parsing failed.",
+      error instanceof Error ? error.name : "",
+    );
+    return fallback;
+  }
+}
+
 export async function generateGeminiText({
   prompt,
   system,

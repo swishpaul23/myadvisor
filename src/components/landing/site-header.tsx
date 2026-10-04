@@ -48,13 +48,13 @@ export function SiteHeader() {
         </nav>
         <div className="flex items-center gap-1.5 justify-self-end">
           <a
-            href="#"
+            href="/sign-in"
             className={`inline-flex h-11 items-center px-3.5 text-[14px] text-[#3A3A38] transition-colors duration-200 hover:text-ink ${FOCUS}`}
           >
             Log in
           </a>
           <a
-            href="#"
+            href="/app/start"
             className={`group inline-flex h-10 items-center gap-2 rounded-[10px] bg-ink px-4 text-[14px] font-medium text-white transition-[background-color,scale] duration-200 ${EASE} hover:bg-black active:scale-[0.97] motion-reduce:transition-none motion-reduce:active:scale-100 ${FOCUS}`}
           >
             Start planning
