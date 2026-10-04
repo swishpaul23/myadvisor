@@ -1,35 +1,22 @@
 import { cn } from "@/lib/utils";
 
-const SIZES = {
-  md: { box: "size-[26px] rounded-[7px]", icon: 15, stroke: 2.6 },
-  sm: { box: "size-[22px] rounded-[6px]", icon: 13, stroke: 2.8 },
-} as const;
-
 /** The red MyAdvisor logo tile. Decorative: pair it with the visible name. */
-export function BrandMark({
-  size = "md",
-  className,
-}: {
-  size?: keyof typeof SIZES;
-  className?: string;
-}) {
-  const s = SIZES[size];
+export function BrandMark({ className }: { className?: string }) {
   return (
     <span
       aria-hidden="true"
       className={cn(
-        "inline-flex flex-none items-center justify-center bg-brand",
-        s.box,
+        "inline-flex size-[26px] flex-none items-center justify-center rounded-[7px] bg-brand",
         className,
       )}
     >
       <svg
-        width={s.icon}
-        height={s.icon}
+        width={15}
+        height={15}
         viewBox="0 0 24 24"
         fill="none"
         stroke="#fff"
-        strokeWidth={s.stroke}
+        strokeWidth={2.6}
         strokeLinecap="round"
         strokeLinejoin="round"
       >
