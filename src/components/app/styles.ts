@@ -32,3 +32,8 @@ export const FIELD =
 export const LABEL = "text-[13px] font-medium text-ink";
 export const HINT = "text-[12px] leading-[1.45] text-ink-muted";
 export const FIELD_ERROR = "text-[12px] leading-[1.45] font-medium text-brand";
+
+/** A radio or checkbox option drawn as a bordered row (onboarding, record upload). */
+export const CHOICE =
+  "flex cursor-pointer items-center gap-3 rounded-[10px] border border-line-soft px-3.5 py-3 text-[14px] transition-colors hover:border-line has-[:checked]:border-ink has-[:checked]:bg-surface-subtle has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-ink";
+export const CHECK = "size-4 flex-none accent-ink";

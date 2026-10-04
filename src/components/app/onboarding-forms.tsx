@@ -20,8 +20,21 @@ import {
 } from "@/lib/app/types";
 import { cn } from "@/lib/utils";
 import { CourseEditor } from "./course-editor";
-import { FieldError, FormError, SubmitButton } from "./form-parts";
-import { BUTTON_BRAND, BUTTON_SECONDARY, FIELD, HINT, LABEL } from "./styles";
+import {
+  ConfirmCourses,
+  FieldError,
+  FormError,
+  SubmitButton,
+} from "./form-parts";
+import {
+  BUTTON_BRAND,
+  BUTTON_SECONDARY,
+  CHECK,
+  CHOICE,
+  FIELD,
+  HINT,
+  LABEL,
+} from "./styles";
 
 type Action = (
   prev: ActionResult | null,
@@ -49,10 +62,6 @@ function Actions({ back, submit }: { back?: string; submit: React.ReactNode }) {
     </div>
   );
 }
-
-const CHOICE =
-  "flex cursor-pointer items-center gap-3 rounded-[10px] border border-line-soft px-3.5 py-3 text-[14px] transition-colors hover:border-line has-[:checked]:border-ink has-[:checked]:bg-surface-subtle has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-ink";
-const CHECK = "size-4 flex-none accent-ink";
 
 export function ProgramForm({
   admissionTerm,
@@ -431,23 +440,7 @@ export function ReviewForm() {
   return (
     <form action={formAction} className="flex flex-col gap-5" noValidate>
       <FormError message={message} />
-      <label className={cn(CHOICE, "items-start")}>
-        <input
-          type="checkbox"
-          name="confirm"
-          className={cn(CHECK, "mt-0.5")}
-          aria-invalid={Boolean(errors.confirm)}
-          aria-describedby="confirm-error"
-        />
-        <span>
-          I&apos;ve checked my courses, terms and grades, and they&apos;re
-          correct.
-          <span className={cn(HINT, "mt-0.5 block")}>
-            Your degree progress is worked out from this list.
-          </span>
-        </span>
-      </label>
-      <FieldError id="confirm-error" message={errors.confirm} />
+      <ConfirmCourses error={errors.confirm} />
       <Actions
         back="/app/start/questions"
         submit={
