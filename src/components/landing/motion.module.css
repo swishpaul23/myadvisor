@@ -1,0 +1,409 @@
+/*
+ * Landing page motion. Every rule that moves something sits inside
+ * `prefers-reduced-motion: no-preference`, so reduced-motion visitors get the resting layout.
+ * Resting states are the unanimated markup: CSS only offsets elements while an animation
+ * runs. Time-based animations use `backwards` fill, so once they finish the element returns
+ * to its own styles; scroll-linked ones end on `none`.
+ * Easing: cubic-bezier(0.2, 0.7, 0.2, 1) throughout.
+ */
+
+/* ---------- Hero load-in ---------- */
+
+@media (prefers-reduced-motion: no-preference) {
+  .introFade,
+  .introRise,
+  .introBlur,
+  .introFrame {
+    animation-duration: 800ms;
+    animation-timing-function: cubic-bezier(0.2, 0.7, 0.2, 1);
+    animation-delay: var(--motion-delay, 0ms);
+    animation-fill-mode: backwards;
+  }
+
+  .introFade {
+    animation-name: fade-in;
+    animation-duration: 600ms;
+  }
+
+  .introRise {
+    animation-name: rise-in;
+  }
+
+  /* Headline lines rise out of a soft blur. */
+  .introBlur {
+    animation-name: rise-in-blur;
+    animation-duration: 900ms;
+  }
+
+  .introFrame {
+    animation-name: frame-in;
+    animation-duration: 1100ms;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+}
+
+@keyframes rise-in-blur {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+    filter: blur(8px);
+  }
+}
+
+@keyframes frame-in {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+}
+
+/* ---------- Header: gains a translucent, blurred background once the page scrolls ---------- */
+
+@supports (animation-timeline: scroll()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .header {
+      animation-name: header-solidify;
+      animation-duration: auto;
+      animation-timing-function: linear;
+      animation-fill-mode: both;
+      animation-timeline: scroll(root block);
+      animation-range: 0px 96px;
+    }
+  }
+}
+
+@keyframes header-solidify {
+  from {
+    background-color: rgb(241 241 239 / 1);
+    box-shadow: 0 1px 0 rgb(20 20 20 / 0);
+  }
+  to {
+    background-color: rgb(241 241 239 / 0.78);
+    box-shadow: 0 1px 0 rgb(20 20 20 / 0.08);
+    backdrop-filter: blur(14px) saturate(1.5);
+  }
+}
+
+/* ---------- Product preview: scroll-linked ---------- */
+
+/*
+ * As the page scrolls, the dark frame grows from 94% to full size, the app window settles
+ * into it, and the floating cards drift into place at different speeds. Ranges are page
+ * scroll offsets, capped at the full scroll range so very tall viewports still reach the end
+ * state (no transform) by the bottom of the page.
+ * Browsers without scroll-driven animations show the end state.
+ */
+@supports (animation-timeline: scroll()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .frame,
+    .window,
+    .floatGap,
+    .floatVoice {
+      animation-duration: auto;
+      animation-timing-function: cubic-bezier(0.3, 0.5, 0.5, 1);
+      animation-fill-mode: both;
+      animation-timeline: scroll(root block);
+      animation-range: 0px min(560px, 100%);
+    }
+
+    .frame {
+      animation-name: frame-grow;
+      transform-origin: 50% 0;
+    }
+
+    .window {
+      animation-name: window-rise;
+    }
+
+    .floatGap {
+      animation-name: float-gap;
+      animation-range: 0px min(640px, 100%);
+    }
+
+    .floatVoice {
+      animation-name: float-voice;
+      animation-range: 0px min(880px, 100%);
+    }
+  }
+}
+
+@keyframes frame-grow {
+  from {
+    transform: scale(0.94);
+  }
+}
+
+@keyframes window-rise {
+  from {
+    transform: translateY(32px);
+  }
+}
+
+@keyframes float-gap {
+  from {
+    transform: translateY(72px) rotate(2deg);
+  }
+}
+
+@keyframes float-voice {
+  from {
+    transform: translateY(132px) rotate(-2.5deg);
+  }
+}
+
+/* ---------- One-time reveals (state set by scroll-reveal.tsx) ---------- */
+
+/*
+ * `data-reveal` is "" in the server markup (fully visible). scroll-reveal.tsx sets it to
+ * "pending" only for elements below the fold, then to "in" as they enter the viewport.
+ * Parts (.stagger, .fill, .pop, .ping, .sweep) follow the nearest [data-reveal] ancestor.
+ * --motion-base is added by the script when an element animates as part of the hero load-in.
+ */
+
+.stagger > :nth-child(2) {
+  --i: 1;
+}
+.stagger > :nth-child(3) {
+  --i: 2;
+}
+.stagger > :nth-child(4) {
+  --i: 3;
+}
+.stagger > :nth-child(5) {
+  --i: 4;
+}
+.stagger > :nth-child(6) {
+  --i: 5;
+}
+.stagger > :nth-child(7) {
+  --i: 6;
+}
+.stagger > :nth-child(8) {
+  --i: 7;
+}
+.stagger > :nth-child(9) {
+  --i: 8;
+}
+
+/* Hooks for the gap row's one-time accent. Neither changes the resting layout. */
+.ping {
+  position: relative;
+}
+
+.sweep {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .reveal[data-reveal="pending"] {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  .reveal[data-reveal="in"] {
+    animation: reveal-up 750ms cubic-bezier(0.2, 0.7, 0.2, 1) backwards;
+    animation-delay: calc(var(--motion-base, 0ms) + var(--motion-delay, 0ms));
+  }
+
+  [data-reveal="pending"].stagger > *,
+  [data-reveal="pending"] .stagger > * {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  [data-reveal="in"].stagger > *,
+  [data-reveal="in"] .stagger > * {
+    animation: reveal-up 650ms cubic-bezier(0.2, 0.7, 0.2, 1) backwards;
+    animation-delay: calc(
+      var(--motion-base, 0ms) + var(--motion-delay, 0ms) + var(--i, 0) * 70ms
+    );
+  }
+
+  /* Units bar fills left to right. */
+  [data-reveal="pending"] .fill {
+    clip-path: inset(0 100% 0 0);
+  }
+
+  [data-reveal="in"] .fill {
+    animation: fill-bar 1200ms cubic-bezier(0.2, 0.7, 0.2, 1) backwards;
+    animation-delay: calc(
+      var(--motion-base, 0ms) + var(--motion-delay, 0ms) + 300ms
+    );
+  }
+
+  /* Check marks pop in just after their row. --i is inherited from the row. */
+  [data-reveal="pending"] .pop {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+
+  [data-reveal="in"] .pop {
+    animation: pop 520ms cubic-bezier(0.16, 1, 0.3, 1) backwards;
+    animation-delay: calc(
+      var(--motion-base, 0ms) + var(--motion-delay, 0ms) + 280ms + var(--i, 0) *
+        70ms
+    );
+  }
+
+  /* The gap row's ring pings once and a soft red light crosses the row. */
+  [data-reveal="in"] .ping::after {
+    content: "";
+    position: absolute;
+    inset: -2px;
+    border: 2px solid var(--color-brand);
+    border-radius: 9999px;
+    opacity: 0;
+    pointer-events: none;
+    animation: ping 1100ms cubic-bezier(0, 0, 0.2, 1) none;
+    animation-delay: calc(
+      var(--motion-base, 0ms) + var(--motion-delay, 0ms) + 750ms
+    );
+  }
+
+  [data-reveal="in"] .sweep::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgb(200 30 42 / 0.14),
+      transparent
+    );
+    transform: translateX(-100%);
+    pointer-events: none;
+    animation: sweep 1300ms cubic-bezier(0.2, 0.7, 0.2, 1) backwards;
+    animation-delay: calc(
+      var(--motion-base, 0ms) + var(--motion-delay, 0ms) + 650ms
+    );
+  }
+}
+
+@keyframes reveal-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+}
+
+@keyframes fill-bar {
+  from {
+    clip-path: inset(0 100% 0 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@keyframes pop {
+  from {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+}
+
+@keyframes ping {
+  from {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(2.2);
+  }
+}
+
+@keyframes sweep {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
+
+/* ---------- Voice card waveform: a gentle loop ---------- */
+
+@media (prefers-reduced-motion: no-preference) {
+  .wave > * {
+    transform-origin: 50% 50%;
+    animation: wave 1400ms ease-in-out infinite alternate;
+    animation-delay: calc(var(--i, 0) * -130ms);
+  }
+}
+
+@keyframes wave {
+  to {
+    transform: scaleY(0.5);
+  }
+}
+
+/* ---------- Footer wordmark (footer-wordmark.tsx) ---------- */
+
+.letter {
+  display: inline-block;
+}
+
+/* A red copy of the letters, masked to a soft circle that follows the cursor. */
+.spotlight {
+  position: absolute;
+  inset: 0;
+  color: var(--color-brand);
+  pointer-events: none;
+  opacity: 0;
+  mask-image: radial-gradient(
+    circle at var(--spot-x, 50%) var(--spot-y, 50%),
+    #000 0,
+    rgb(0 0 0 / 0.45) 0.45em,
+    transparent 1.1em
+  );
+}
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .wordmark[data-lit] .spotlight {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .letter {
+    transition: translate 550ms cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+
+  .spotlight {
+    transition: opacity 400ms cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+
+  /* Letters rise out of the bottom edge of the footer as it scrolls into view. */
+  [data-reveal="pending"].letters > * {
+    opacity: 0;
+    transform: translateY(0.35em);
+  }
+
+  [data-reveal="in"].letters > * {
+    animation: letter-rise 1000ms cubic-bezier(0.2, 0.7, 0.2, 1) backwards;
+    animation-delay: calc(var(--i, 0) * 50ms);
+  }
+}
+
+@keyframes letter-rise {
+  from {
+    opacity: 0;
+    transform: translateY(0.35em);
+  }
+}

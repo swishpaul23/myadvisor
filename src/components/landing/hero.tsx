@@ -1,4 +1,6 @@
 import { SampleStudentLink, UploadTranscriptLink } from "./cta-links";
+import { motionDelay } from "./motion";
+import styles from "./motion.module.css";
 import {
   AcademicRecordCard,
   GapCard,
@@ -29,16 +31,28 @@ export function Hero() {
     >
       <div className="mx-auto flex w-full max-w-[1200px] flex-none flex-col items-center px-6 pt-20 text-center">
         <h1 className="max-w-[860px] text-[length:clamp(40px,5.4vw,76px)] leading-[1.03] font-semibold tracking-[-0.04em] text-balance">
-          Plan your degree,
-          <br />
-          <span className="text-brand">term by term.</span>
+          <span className={`block ${styles.introBlur}`} style={motionDelay(60)}>
+            Plan your degree,
+          </span>
+          <span
+            className={`block text-brand ${styles.introBlur}`}
+            style={motionDelay(170)}
+          >
+            term by term.
+          </span>
         </h1>
-        <p className="mt-5 max-w-[640px] text-[18px] leading-[1.6] text-balance text-ink-body">
+        <p
+          className={`mt-5 max-w-[640px] text-[18px] leading-[1.6] text-balance text-ink-body ${styles.introRise}`}
+          style={motionDelay(320)}
+        >
           Upload your transcript, see exactly where you stand in your degree,
           and get a next-term plan by text or voice. Every answer shows its
           sources.
         </p>
-        <div className="mt-8 flex flex-wrap justify-center gap-3">
+        <div
+          className={`mt-8 flex flex-wrap justify-center gap-3 ${styles.introRise}`}
+          style={motionDelay(420)}
+        >
           <UploadTranscriptLink />
           <SampleStudentLink />
         </div>
@@ -48,15 +62,16 @@ export function Hero() {
         id="product-preview"
         role="img"
         aria-label="Preview of the MyAdvisor Overview screen with sample data for a fictional BBA Finance student: degree progress and requirement status, a BUS 313 requirement gap with its SFU Calendar source, a voice reply from the advisor, a draft next-term plan with its verified facts, assumptions and unresolved items, the confirmed academic record, and the SFU Calendar pages used as sources."
-        className="relative mx-auto mt-12 flex w-full max-w-[1200px] flex-none px-6 pb-30"
+        className={`relative mx-auto mt-12 flex w-full max-w-[1200px] flex-none px-6 pb-30 ${styles.introFrame}`}
+        style={motionDelay(520)}
       >
         <div
           aria-hidden="true"
-          className="flex flex-1 justify-center overflow-hidden rounded-[20px] bg-[#1C1C1E] py-10 max-[900px]:px-4 max-[900px]:py-5"
+          className={`flex flex-1 justify-center overflow-hidden rounded-[20px] bg-[#1C1C1E] py-10 max-[900px]:px-4 max-[900px]:py-5 ${styles.frame}`}
         >
           <div
             id="product-preview-window"
-            className="mx-4 flex w-full max-w-[840px] overflow-hidden rounded-[12px] bg-white text-left shadow-[0_-1px_0_rgba(255,255,255,0.06)]"
+            className={`mx-4 flex w-full max-w-[840px] overflow-hidden rounded-[12px] bg-white text-left shadow-[0_-1px_0_rgba(255,255,255,0.06)] ${styles.window}`}
           >
             <div className="box-content flex w-[184px] flex-none flex-col gap-0.5 border-r border-line-soft bg-surface-subtle px-3 py-[18px] text-[13px] max-[900px]:hidden">
               <div className="flex items-center gap-2 px-2 pt-0.5 pb-4 font-semibold">
@@ -92,7 +107,10 @@ export function Hero() {
             </div>
 
             <div className="flex min-w-0 flex-1 flex-col gap-4 px-7 py-6">
-              <div className="flex items-start justify-between gap-4">
+              <div
+                data-reveal=""
+                className={`flex items-start justify-between gap-4 ${styles.reveal}`}
+              >
                 <div>
                   <div className="text-[12px] text-ink-muted">
                     BBA · Finance · Fall 2026 requirements
@@ -112,7 +130,10 @@ export function Hero() {
                 }
               />
               <RequirementList />
-              <div className="grid grid-cols-2 gap-3 max-[900px]:grid-cols-1">
+              <div
+                data-reveal=""
+                className={`grid grid-cols-2 gap-3 max-[900px]:grid-cols-1 ${styles.stagger}`}
+              >
                 <NextTermDraftCard />
                 <WhyThisPlanCard />
               </div>
@@ -123,11 +144,11 @@ export function Hero() {
         </div>
 
         <GapCard
-          className={`${FLOATING_CARD} top-26 right-16`}
+          className={`${FLOATING_CARD} top-26 right-16 ${styles.floatGap}`}
           aria-hidden="true"
         />
         <VoiceReplyCard
-          className={`${FLOATING_CARD} top-61 left-16`}
+          className={`${FLOATING_CARD} top-61 left-16 ${styles.floatVoice}`}
           aria-hidden="true"
         />
       </div>
