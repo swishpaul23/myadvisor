@@ -34,15 +34,18 @@ export function UploadTranscriptLink() {
   );
 }
 
-export function SampleStudentLink() {
+const SAMPLE_TONES = {
+  light: "border-line bg-white text-ink focus-visible:outline-ink",
+  dark: "border-[#2A2A2A] bg-[#111111] text-white focus-visible:outline-white",
+} as const;
+
+export function SampleStudentLink({
+  tone = "light",
+}: {
+  tone?: keyof typeof SAMPLE_TONES;
+}) {
   return (
-    <a
-      href="#"
-      className={cn(
-        BASE,
-        "border border-line bg-white text-ink focus-visible:outline-ink",
-      )}
-    >
+    <a href="#" className={cn(BASE, "border", SAMPLE_TONES[tone])}>
       Try the sample student
     </a>
   );
