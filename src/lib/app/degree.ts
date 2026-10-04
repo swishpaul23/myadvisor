@@ -2,18 +2,13 @@ import "server-only";
 import { cache } from "react";
 import { audit } from "@/engine/audit";
 import type { AuditResult } from "@/engine/audit/types";
-import { planRemaining, type RemainingPlan } from "@/engine/plan/remaining";
+import type { RemainingPlan } from "@/engine/plan/remaining";
 import { loadReferenceData, type DataSource } from "@/lib/data/source";
-import {
-  coopTerms,
-  summerChoice,
-  toEngineStudent,
-  toPlanOptions,
-} from "./engine-input";
+import { toEngineStudent } from "./engine-input";
+import { planFor } from "./plan-check";
 import {
   buildChecklist,
   buildGaps,
-  presentPlan,
   recordSummary,
   source,
   uniqueSources,
@@ -54,21 +49,7 @@ export const getDegreeView = cache(async (): Promise<DegreeView | null> => {
   const data = await loadReferenceData();
   const student = toEngineStudent(profile);
   const result = audit(student, data);
-  const remaining = planRemaining(student, data, toPlanOptions(profile));
-  const plan = presentPlan(
-    remaining,
-    data.requirements,
-    result,
-    profile,
-    data.courses,
-    {
-      summer: summerChoice(profile).summer,
-      summerUnsure: summerChoice(profile).unsure,
-      unitLoad: data.policy.unit_load,
-      electiveUnits: data.policy.unknown_course.units,
-      coop: { doing: profile.coop.doing, ...coopTerms(profile) },
-    },
-  );
+  const { remaining, plan } = planFor(profile, data, result);
   const shown = new Set(
     result.results
       .filter((r) => r.status !== "not_applicable")
