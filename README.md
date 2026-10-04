@@ -14,9 +14,26 @@ cp .env.example .env.local   # then fill in the values
 npm run dev                  # http://localhost:3000
 ```
 
-`.env.local` values: `ANTHROPIC_API_KEY` (Claude API key), `ANTHROPIC_MODEL` (default given), `DATABASE_URL` (optional; without it the app uses the JSON snapshot in `data/generated/`), `CONTACT_EMAIL` (sent to SFU's API so they can reach us).
+`.env.local` values: `ANTHROPIC_API_KEY` (Claude API key), `ANTHROPIC_MODEL` (default given), `DATABASE_URL` (optional; without it the app uses the JSON snapshot in `data/generated/`), `CONTACT_EMAIL` (sent to SFU's API so they can reach us). `AUTH_SECRET`, `AUTH_GOOGLE_ID`, `AUTH_GOOGLE_SECRET`: see [Auth setup](#auth-setup).
 
 Run `npm run check` (lint, typecheck, tests) before committing. See `CLAUDE.md` for architecture and the data contract.
+
+## Auth setup
+
+Sign-in is Google via Auth.js (next-auth v5), with sessions in a signed cookie (JWT) and no database. Every page needs a signed-in user except `/sign-in`, `/api/auth/*` and static files.
+
+1. **Google Cloud Console** (console.cloud.google.com): pick or create a project, then **APIs & Services → OAuth consent screen**. Choose **External**, fill in the app name and support email, and keep the default scopes (`openid`, `email`, `profile`). While the app is in **Testing**, add every Google account that should be able to sign in under **Test users**.
+2. **APIs & Services → Credentials → Create credentials → OAuth client ID**, type **Web application**:
+   - Authorized JavaScript origin: `http://localhost:3000`
+   - Authorized redirect URI: `http://localhost:3000/api/auth/callback/google`
+   - When deployed, add `https://<your-domain>` and `https://<your-domain>/api/auth/callback/google` as well.
+3. Put the values in `.env.local` (never commit them):
+   - `AUTH_GOOGLE_ID`: the client ID
+   - `AUTH_GOOGLE_SECRET`: the client secret
+   - `AUTH_SECRET`: run `npx auth secret`, which generates one and writes it to `.env.local`
+4. Restart `npm run dev` and open http://localhost:3000. You should land on `/sign-in`.
+
+In code: `session.user.id` is the Google `sub` (stable per account). API routes and server actions call `requireUser()` from `src/lib/auth/require-user.ts`, which returns `{ id, email, name }` or throws `UnauthorizedError` (status 401). Only verified Google emails can sign in.
 
 ## For my teammate
 
@@ -221,7 +238,7 @@ The intended demo follows a Finance student who uploads a synthetic transcript, 
 
 ### Decisions still open
 
-- Authentication provider and whether official SFU SSO is available.
+- Whether official SFU SSO is available. (Authentication provider decided: Google sign-in via Auth.js (decided by Stuart, 2026-10-04); see [Auth setup](#auth-setup).)
 - Backend framework, hosting and private file storage.
 - ElevenLabs voice and voice interaction mode. Gemini model is `gemini-2.5-flash` through the Vercel AI SDK.
 - Snowflake account/instance access and the qualifying Snowflake REST feature.

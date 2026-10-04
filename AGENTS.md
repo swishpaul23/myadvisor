@@ -4,7 +4,7 @@ StormHacks 2026 academic advisor for degree progress, course choice, and next-se
 
 **Read [README.md](README.md) before making changes.** It is the product and implementation plan. [docs/user-flow.md](docs/user-flow.md) is the proposed student journey.
 
-**Status: the rules engine and data pipeline are built; the student-facing advisor is not.** Built: degree audit, prerequisite evaluator and plan validator (`src/engine`, unit-tested), the requirements and course-data pipeline (`data/sheets` → `data/generated`), and a server-side Snowflake data layer (`src/lib/data`). Not built: accounts, transcripts, the planner UI, advising chat, ElevenLabs, and deployment. Do not describe or build as if those exist. Gemini is only the server client in `src/lib/ai/google.ts`.
+**Status: the rules engine and data pipeline are built; the student-facing advisor is not.** Built: degree audit, prerequisite evaluator and plan validator (`src/engine`, unit-tested), the requirements and course-data pipeline (`data/sheets` → `data/generated`), and a server-side Snowflake data layer (`src/lib/data`). Google sign-in is built (Auth.js, `src/auth.ts`, `src/proxy.ts`). Not built: account and profile persistence, transcripts, the planner UI, advising chat, ElevenLabs, and deployment. Do not describe or build as if those exist. Gemini is only the server client in `src/lib/ai/google.ts`.
 
 ## Scope
 
@@ -69,7 +69,7 @@ Demo: a Finance student uploads a synthetic transcript, corrects an extraction i
 
 ## Decisions still open
 
-Do not lock these in without an explicit decision: auth provider and SFU SSO, backend framework and hosting, private file storage, ElevenLabs voice and interaction mode, Snowflake instance and the qualifying REST feature, evaluator schema and exception handling, live offerings and graduation estimates, .tech domain and deployment. Gemini is `gemini-2.5-flash` through the Vercel AI SDK.
+Do not lock these in without an explicit decision: SFU SSO (the auth provider is decided: Google sign-in via Auth.js (decided by Stuart, 2026-10-04)), backend framework and hosting, private file storage, ElevenLabs voice and interaction mode, Snowflake instance and the qualifying REST feature, evaluator schema and exception handling, live offerings and graduation estimates, .tech domain and deployment. Gemini is `gemini-2.5-flash` through the Vercel AI SDK.
 
 If a product, status, or architecture decision changes, update [README.md](README.md) and keep this file aligned with it.
 
